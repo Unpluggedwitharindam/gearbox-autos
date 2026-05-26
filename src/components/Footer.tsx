@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { Instagram, MessageCircle } from "lucide-react";
 import { Logo } from "./Logo";
 
 export function Footer() {
@@ -34,6 +35,14 @@ export function Footer() {
             <li>gearboxautotechgbat@gmail.com</li>
             <li>4/9 Awas Tower, Sonari, Jamshedpur</li>
           </ul>
+          <div className="mt-4 flex items-center gap-3">
+            <a href="https://www.instagram.com/gearbox_autos_usedcars/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="h-9 w-9 rounded-full border border-border grid place-items-center hover:border-primary hover:text-primary">
+              <Instagram className="h-4 w-4" />
+            </a>
+            <a href="https://wa.me/919065591253" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="h-9 w-9 rounded-full border border-border grid place-items-center hover:border-primary hover:text-primary">
+              <MessageCircle className="h-4 w-4" />
+            </a>
+          </div>
         </div>
       </div>
       <div className="border-t border-border">
