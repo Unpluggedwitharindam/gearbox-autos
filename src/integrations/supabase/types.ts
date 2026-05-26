@@ -22,6 +22,7 @@ export type Database = {
           fuel: string
           id: string
           image_url: string
+          images: string[]
           is_active: boolean
           km: number
           location: string
@@ -40,6 +41,7 @@ export type Database = {
           fuel: string
           id?: string
           image_url: string
+          images?: string[]
           is_active?: boolean
           km: number
           location?: string
@@ -58,6 +60,7 @@ export type Database = {
           fuel?: string
           id?: string
           image_url?: string
+          images?: string[]
           is_active?: boolean
           km?: number
           location?: string
