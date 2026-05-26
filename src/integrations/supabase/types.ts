@@ -14,16 +14,209 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      cars: {
+        Row: {
+          created_at: string
+          description: string | null
+          features: string[]
+          fuel: string
+          id: string
+          image_url: string
+          is_active: boolean
+          km: number
+          location: string
+          name: string
+          price_inr: number
+          rto: string
+          slug: string
+          transmission: string
+          updated_at: string
+          year: number
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          features?: string[]
+          fuel: string
+          id?: string
+          image_url: string
+          is_active?: boolean
+          km: number
+          location?: string
+          name: string
+          price_inr: number
+          rto?: string
+          slug: string
+          transmission: string
+          updated_at?: string
+          year: number
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          features?: string[]
+          fuel?: string
+          id?: string
+          image_url?: string
+          is_active?: boolean
+          km?: number
+          location?: string
+          name?: string
+          price_inr?: number
+          rto?: string
+          slug?: string
+          transmission?: string
+          updated_at?: string
+          year?: number
+        }
+        Relationships: []
+      }
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          full_name: string
+          id: string
+          message: string
+          phone: string | null
+          subject: string | null
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          full_name: string
+          id?: string
+          message: string
+          phone?: string | null
+          subject?: string | null
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          full_name?: string
+          id?: string
+          message?: string
+          phone?: string | null
+          subject?: string | null
+        }
+        Relationships: []
+      }
+      sell_leads: {
+        Row: {
+          car_model: string
+          city: string
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          km: number | null
+          phone: string
+          year: number | null
+        }
+        Insert: {
+          car_model: string
+          city: string
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          km?: number | null
+          phone: string
+          year?: number | null
+        }
+        Update: {
+          car_model?: string
+          city?: string
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          km?: number | null
+          phone?: string
+          year?: number | null
+        }
+        Relationships: []
+      }
+      test_drive_bookings: {
+        Row: {
+          car_id: string | null
+          car_name: string | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          message: string | null
+          phone: string
+          preferred_date: string | null
+        }
+        Insert: {
+          car_id?: string | null
+          car_name?: string | null
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          message?: string | null
+          phone: string
+          preferred_date?: string | null
+        }
+        Update: {
+          car_id?: string | null
+          car_name?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          message?: string | null
+          phone?: string
+          preferred_date?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "test_drive_bookings_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          created_at: string
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +343,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin", "user"],
+    },
   },
 } as const
