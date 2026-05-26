@@ -3,6 +3,11 @@ import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
+function dbFail(scope: string, error: { message: string }): never {
+  console.error(`[DB Error:${scope}]`, error.message);
+  throw new Error("An unexpected error occurred. Please try again.");
+}
+
 async function assertAdmin(userId: string) {
   const { data, error } = await supabaseAdmin
     .from("user_roles")
@@ -10,28 +15,20 @@ async function assertAdmin(userId: string) {
     .eq("user_id", userId)
     .eq("role", "admin")
     .maybeSingle();
-  if (error) throw new Error(error.message);
+  if (error) dbFail("assertAdmin", error);
   if (!data) throw new Error("Forbidden: admin role required");
 }
 
 export const checkIsAdmin = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
-    // Bootstrap: if no admins exist, promote the first signed-in user.
-    const { count } = await supabaseAdmin
-      .from("user_roles")
-      .select("*", { count: "exact", head: true })
-      .eq("role", "admin");
-    if ((count ?? 0) === 0) {
-      await supabaseAdmin.from("user_roles").insert({ user_id: context.userId, role: "admin" });
-      return { isAdmin: true };
-    }
-    const { data } = await supabaseAdmin
+    const { data, error } = await supabaseAdmin
       .from("user_roles")
       .select("role")
       .eq("user_id", context.userId)
       .eq("role", "admin")
       .maybeSingle();
+    if (error) dbFail("checkIsAdmin", error);
     return { isAdmin: !!data };
   });
 
@@ -43,7 +40,7 @@ export const adminListCars = createServerFn({ method: "GET" })
       .from("cars")
       .select("*")
       .order("created_at", { ascending: false });
-    if (error) throw new Error(error.message);
+    if (error) dbFail("adminListCars", error);
     return data;
   });
 
@@ -71,7 +68,7 @@ export const adminUpsertCar = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     await assertAdmin(context.userId);
     const { error } = await supabaseAdmin.from("cars").upsert(data, { onConflict: "id" });
-    if (error) throw new Error(error.message);
+    if (error) dbFail("adminUpsertCar", error);
     return { ok: true as const };
   });
 
@@ -81,7 +78,7 @@ export const adminDeleteCar = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     await assertAdmin(context.userId);
     const { error } = await supabaseAdmin.from("cars").delete().eq("id", data.id);
-    if (error) throw new Error(error.message);
+    if (error) dbFail("adminDeleteCar", error);
     return { ok: true as const };
   });
 
@@ -93,7 +90,7 @@ export const adminListLeads = createServerFn({ method: "GET" })
       .from("sell_leads")
       .select("*")
       .order("created_at", { ascending: false });
-    if (error) throw new Error(error.message);
+    if (error) dbFail("adminListLeads", error);
     return data;
   });
 
@@ -105,7 +102,7 @@ export const adminListBookings = createServerFn({ method: "GET" })
       .from("test_drive_bookings")
       .select("*")
       .order("created_at", { ascending: false });
-    if (error) throw new Error(error.message);
+    if (error) dbFail("adminListBookings", error);
     return data;
   });
 
@@ -117,7 +114,7 @@ export const adminListMessages = createServerFn({ method: "GET" })
       .from("contact_messages")
       .select("*")
       .order("created_at", { ascending: false });
-    if (error) throw new Error(error.message);
+    if (error) dbFail("adminListMessages", error);
     return data;
   });
 
