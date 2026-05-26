@@ -131,7 +131,7 @@ function CarDetail() {
   );
 }
 
-function Input({ icon: Icon, label, value, onChange, placeholder, required }: any) {
+function Input({ icon: Icon, label, value, onChange, placeholder, required }: { icon: any; label: string; value: string; onChange: (v: string) => void; placeholder?: string; required?: boolean }) {
   return (
     <label className="block">
       <div className="text-sm mb-1.5">{label}</div>
