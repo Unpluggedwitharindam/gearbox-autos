@@ -1,13 +1,15 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, Car } from "lucide-react";
 import type { Car as CarType } from "@/lib/cars";
+import { CarImageCarousel } from "@/components/CarImageCarousel";
 
 export function CarCard({ car }: { car: CarType }) {
+  const imgs = (car.images && car.images.length > 0) ? car.images : (car.image ? [car.image] : []);
   return (
     <div className="surface overflow-hidden flex flex-col">
-      <div className="relative aspect-[4/3] bg-secondary/40">
-        <span className="absolute top-3 left-3 z-10 rounded-md bg-background/80 backdrop-blur px-2 py-1 text-xs font-semibold">{car.price}</span>
-        {car.image && <img src={car.image} alt={car.name} className="h-full w-full object-cover" loading="lazy" />}
+      <div className="relative">
+        <span className="absolute top-3 left-3 z-20 rounded-md bg-background/80 backdrop-blur px-2 py-1 text-xs font-semibold">{car.price}</span>
+        <CarImageCarousel images={imgs} alt={car.name} />
       </div>
       <div className="p-5 flex-1 flex flex-col gap-4">
         <h3 className="text-lg font-semibold">{car.name}</h3>
