@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, Car, Tag } from "lucide-react";
-import hero from "@/assets/hero-defender.png";
+import hero from "@/assets/hero-bmw-x5.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
