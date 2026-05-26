@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Plus, Pencil, Trash2, X, Upload, Loader2, GripVertical } from "lucide-react";
 import { adminListCars, adminUpsertCar, adminDeleteCar } from "@/lib/admin.functions";
 import { uploadCarImage } from "@/lib/admin-upload.functions";
+import { WhatsAppShareCarButton } from "@/components/WhatsAppShareCarButton";
 
 export const Route = createFileRoute("/admin/cars")({
   component: AdminCars,
@@ -84,7 +85,8 @@ function AdminCars() {
                 <td className="p-3">{c.year}</td>
                 <td className="p-3">{(c.images?.length ?? 0)}</td>
                 <td className="p-3">{c.is_active ? "Yes" : "No"}</td>
-                <td className="p-3 flex gap-2 justify-end">
+                <td className="p-3 flex gap-2 justify-end items-center">
+                  <WhatsAppShareCarButton carId={c.id} />
                   <button onClick={() => setEditing({ ...c, images: c.images ?? [] })} className="p-1.5 hover:text-primary"><Pencil className="h-4 w-4" /></button>
                   <button onClick={() => confirm("Delete this car?") && del.mutate(c.id)} className="p-1.5 hover:text-primary"><Trash2 className="h-4 w-4" /></button>
                 </td>
