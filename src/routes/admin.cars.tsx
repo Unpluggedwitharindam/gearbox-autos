@@ -4,7 +4,7 @@ import { useState, useRef } from "react";
 import { toast } from "sonner";
 import { Plus, Pencil, Trash2, X, Upload, Loader2, GripVertical } from "lucide-react";
 import { adminListCars, adminUpsertCar, adminDeleteCar } from "@/lib/admin.functions";
-import { supabase } from "@/integrations/supabase/client";
+import { uploadCarImage } from "@/lib/admin-upload.functions";
 
 export const Route = createFileRoute("/admin/cars")({
   component: AdminCars,
@@ -162,16 +162,24 @@ function ImageUploader({ slug, images, onChange }: { slug: string; images: strin
       for (const file of picked) {
         if (!file.type.startsWith("image/")) { toast.error(`${file.name}: not an image`); continue; }
         if (file.size > MAX_BYTES) { toast.error(`${file.name}: exceeds 5MB`); continue; }
-        const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
-        const path = `${slug || "car"}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
-        const { error } = await supabase.storage.from("car-images").upload(path, file, {
-          cacheControl: "3600",
-          upsert: false,
-          contentType: file.type,
-        });
-        if (error) { toast.error(`${file.name}: ${error.message}`); continue; }
-        const { data } = supabase.storage.from("car-images").getPublicUrl(path);
-        uploaded.push(data.publicUrl);
+        const buf = await file.arrayBuffer();
+        // Convert ArrayBuffer → base64 in chunks to avoid call stack overflow
+        let binary = "";
+        const bytes = new Uint8Array(buf);
+        const chunk = 0x8000;
+        for (let i = 0; i < bytes.length; i += chunk) {
+          binary += String.fromCharCode.apply(null, Array.from(bytes.subarray(i, i + chunk)));
+        }
+        const base64 = btoa(binary);
+        try {
+          const { url } = await uploadCarImage({
+            data: { slug: slug || "car", filename: file.name, contentType: file.type, base64 },
+          });
+          uploaded.push(url);
+        } catch (e: any) {
+          toast.error(`${file.name}: ${e?.message || "upload failed"}`);
+          continue;
+        }
       }
       if (uploaded.length) onChange([...images, ...uploaded]);
     } finally {
