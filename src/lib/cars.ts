@@ -6,8 +6,10 @@ import verna from "@/assets/verna.png";
 
 export type Car = {
   id: string;
+  slug: string;
   name: string;
   price: string;
+  price_inr: number;
   year: number;
   km: string;
   rto: string;
@@ -16,13 +18,59 @@ export type Car = {
   transmission: string;
   image: string;
   features?: string[];
+  description?: string | null;
 };
 
-export const cars: Car[] = [
-  { id: "xuv500", name: "Mahindra XUV500", price: "₹6,75,000", year: 2014, km: "36,000", rto: "JH05", location: "Jamshedpur", fuel: "Diesel", transmission: "Manual", image: xuv },
-  { id: "creta", name: "Hyundai Creta 1.6 SX", price: "₹5,25,000", year: 2016, km: "48,500", rto: "JH05", location: "Jamshedpur", fuel: "Petrol", transmission: "Manual", image: creta },
-  { id: "fortuner", name: "Toyota Fortuner 2.8 4x2 AT", price: "₹7,90,000", year: 2017, km: "62,000", rto: "JH05", location: "Jamshedpur", fuel: "Diesel", transmission: "Automatic", image: fortuner },
-  { id: "dzire", name: "Maruti Suzuki Dzire VDI", price: "₹4,10,000", year: 2015, km: "42,000", rto: "JH05", location: "Jamshedpur", fuel: "Diesel", transmission: "Manual", image: dzire },
-  { id: "verna", name: "Hyundai Verna 1.6 SX", price: "₹5,25,000", year: 2016, km: "48,500", rto: "JH05", location: "Jamshedpur", fuel: "Petrol", transmission: "Manual", image: verna,
-    features: ["Touchscreen Infotainment", "Dual Airbags", "ABS with EBD", "Rear Parking Sensors", "Automatic Climate Control", "Alloy Wheels"] },
-];
+// Fallback image map for seeded cars (since storage isn't set up)
+const imageBySlug: Record<string, string> = {
+  xuv500: xuv,
+  creta,
+  fortuner,
+  dzire,
+  verna,
+};
+
+export function formatPriceINR(n: number): string {
+  return "₹" + n.toLocaleString("en-IN");
+}
+
+export function formatKm(n: number): string {
+  return n.toLocaleString("en-IN");
+}
+
+export type CarRow = {
+  id: string;
+  slug: string;
+  name: string;
+  price_inr: number;
+  year: number;
+  km: number;
+  rto: string;
+  location: string;
+  fuel: string;
+  transmission: string;
+  image_url: string;
+  features: string[] | null;
+  description: string | null;
+  is_active?: boolean;
+};
+
+export function rowToCar(r: CarRow): Car {
+  const img = imageBySlug[r.slug] || r.image_url || "";
+  return {
+    id: r.id,
+    slug: r.slug,
+    name: r.name,
+    price: formatPriceINR(r.price_inr),
+    price_inr: r.price_inr,
+    year: r.year,
+    km: formatKm(r.km),
+    rto: r.rto,
+    location: r.location,
+    fuel: r.fuel,
+    transmission: r.transmission,
+    image: img,
+    features: r.features ?? undefined,
+    description: r.description,
+  };
+}

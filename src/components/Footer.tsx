@@ -39,7 +39,7 @@ export function Footer() {
       <div className="border-t border-border">
         <div className="container-page py-5 text-xs text-muted-foreground flex justify-between">
           <span>© {new Date().getFullYear()} Gearbox Autos. All rights reserved.</span>
-          <span>100% Transparent · 0% Commission</span>
+          <span>100% Transparent · 0% Commission · <Link to="/login" className="hover:text-foreground">Admin</Link></span>
         </div>
       </div>
     </footer>

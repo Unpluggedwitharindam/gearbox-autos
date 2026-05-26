@@ -1,11 +1,27 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
+import { useQuery, useMutation } from "@tanstack/react-query";
+import { useState } from "react";
+import { toast } from "sonner";
 import { ArrowLeft, ArrowRight, User, Phone, MapPin, Car as CarIcon, ShieldCheck, Calendar, Gauge, FileText, Fuel, Settings2, Tv, AirVent, Disc, Radar, Wind, CircleDot } from "lucide-react";
-import { cars } from "@/lib/cars";
+import { listPublicCars, getCarBySlug } from "@/lib/cars.functions";
+import { submitTestDrive } from "@/lib/leads.functions";
 
 export const Route = createFileRoute("/car/$id")({
-  head: ({ params }) => ({ meta: [{ title: `${cars.find(c => c.id === params.id)?.name ?? "Car"} — Gearbox Autos` }] }),
+  head: ({ params }) => ({ meta: [{ title: `Car — Gearbox Autos` }] }),
   component: CarDetail,
   notFoundComponent: () => <div className="container-page pt-32"><p>Car not found.</p></div>,
+  loader: async ({ context, params }) => {
+    await Promise.all([
+      context.queryClient.ensureQueryData({
+        queryKey: ["car", params.id],
+        queryFn: () => getCarBySlug({ data: { slug: params.id } }),
+      }),
+      context.queryClient.ensureQueryData({
+        queryKey: ["cars", "public"],
+        queryFn: () => listPublicCars(),
+      }),
+    ]);
+  },
 });
 
 const featureIcons: Record<string, any> = {
@@ -19,9 +35,29 @@ const featureIcons: Record<string, any> = {
 
 function CarDetail() {
   const { id } = Route.useParams();
-  const car = cars.find((c) => c.id === id);
+  const { data: car } = useQuery({ queryKey: ["car", id], queryFn: () => getCarBySlug({ data: { slug: id } }) });
+  const { data: cars = [] } = useQuery({ queryKey: ["cars", "public"], queryFn: () => listPublicCars() });
   if (!car) throw notFound();
   const features = car.features ?? ["Touchscreen Infotainment", "Dual Airbags", "ABS with EBD", "Rear Parking Sensors", "Automatic Climate Control", "Alloy Wheels"];
+
+  const [form, setForm] = useState({ full_name: "", phone: "", email: "", car_id: car.id });
+  const mut = useMutation({
+    mutationFn: () =>
+      submitTestDrive({
+        data: {
+          car_id: form.car_id,
+          car_name: cars.find((c) => c.id === form.car_id)?.name,
+          full_name: form.full_name,
+          phone: form.phone,
+          email: form.email,
+        },
+      }),
+    onSuccess: () => {
+      toast.success("Test drive request submitted! We'll be in touch.");
+      setForm({ full_name: "", phone: "", email: "", car_id: car.id });
+    },
+    onError: (e: Error) => toast.error(e.message || "Submission failed"),
+  });
 
   return (
     <section className="container-page pt-32 pb-12">
@@ -30,16 +66,8 @@ function CarDetail() {
       <div className="mt-6 grid lg:grid-cols-[1.4fr_1fr] gap-8 items-start">
         <div className="surface p-6">
           <div className="rounded-lg overflow-hidden bg-secondary/40 aspect-[4/3]">
-            <img src={car.image} alt={car.name} className="w-full h-full object-cover" />
+            {car.image && <img src={car.image} alt={car.name} className="w-full h-full object-cover" />}
           </div>
-          <div className="mt-4 grid grid-cols-4 gap-3">
-            {[car.image, car.image, car.image, car.image].map((src, i) => (
-              <div key={i} className={`aspect-[4/3] rounded-md overflow-hidden border ${i === 0 ? "border-primary" : "border-border"}`}>
-                <img src={src} alt="" className="w-full h-full object-cover" />
-              </div>
-            ))}
-          </div>
-
           <h1 className="text-3xl font-bold mt-6">{car.name}</h1>
           <div className="text-primary text-2xl font-semibold mt-2">{car.price}</div>
 
@@ -72,50 +100,45 @@ function CarDetail() {
           </div>
         </div>
 
-        <form onSubmit={(e) => e.preventDefault()} className="surface p-6 space-y-4">
+        <form onSubmit={(e) => { e.preventDefault(); mut.mutate(); }} className="surface p-6 space-y-4">
           <div className="flex items-start gap-3">
             <div className="h-12 w-12 rounded-md border border-primary/40 grid place-items-center text-primary"><Calendar className="h-5 w-5" /></div>
             <div>
               <h2 className="text-xl font-semibold">Book a Test Drive</h2>
-              <p className="text-sm text-muted-foreground">Fill in your details and our team will get in touch with you to confirm your test drive.</p>
+              <p className="text-sm text-muted-foreground">Fill in your details and our team will get in touch with you.</p>
             </div>
           </div>
-          {[
-            { Icon: User, p: "Enter your full name", l: "Full Name" },
-            { Icon: Phone, p: "Enter your 10 digit mobile number", l: "Phone Number" },
-            { Icon: MapPin, p: "Enter your city", l: "City" },
-          ].map((f) => (
-            <label key={f.l} className="block">
-              <div className="text-sm mb-1.5">{f.l}</div>
-              <div className="flex items-center gap-2 rounded-md bg-input/60 border border-border/60 px-3 py-2.5">
-                <f.Icon className="h-4 w-4 text-muted-foreground" />
-                <input placeholder={f.p} className="bg-transparent outline-none text-sm flex-1" />
-              </div>
-            </label>
-          ))}
+          <Input icon={User} label="Full Name" placeholder="Enter your full name" value={form.full_name} onChange={(v) => setForm({ ...form, full_name: v })} required />
+          <Input icon={Phone} label="Phone Number" placeholder="Enter your 10 digit mobile number" value={form.phone} onChange={(v) => setForm({ ...form, phone: v })} required />
+          <Input icon={User} label="Email (optional)" placeholder="you@example.com" value={form.email} onChange={(v) => setForm({ ...form, email: v })} />
           <label className="block">
             <div className="text-sm mb-1.5">Which car are you looking to buy?</div>
             <div className="flex items-center gap-2 rounded-md bg-input/60 border border-border/60 px-3 py-2.5">
               <CarIcon className="h-4 w-4 text-muted-foreground" />
-              <select className="bg-transparent outline-none text-sm flex-1" defaultValue={car.id}>
+              <select className="bg-transparent outline-none text-sm flex-1" value={form.car_id} onChange={(e) => setForm({ ...form, car_id: e.target.value })}>
                 {cars.map((c) => <option key={c.id} value={c.id} className="bg-background">{c.name}</option>)}
               </select>
             </div>
           </label>
 
-          <div className="surface p-4 text-sm">
-            <div className="font-semibold flex items-center gap-2 mb-2"><ShieldCheck className="h-4 w-4 text-primary" /> Why Book a Test Drive with Gearbox Autos?</div>
-            <ul className="space-y-1 text-muted-foreground">
-              <li>✓ No obligation, completely free</li>
-              <li>✓ Experience the car before you decide</li>
-              <li>✓ Expert assistance and guidance</li>
-            </ul>
-          </div>
-
-          <button className="btn-primary w-full rounded-md py-3 font-semibold flex items-center justify-center gap-2">Submit Request <ArrowRight className="h-4 w-4" /></button>
+          <button disabled={mut.isPending} className="btn-primary w-full rounded-md py-3 font-semibold flex items-center justify-center gap-2 disabled:opacity-60">
+            {mut.isPending ? "Submitting…" : <>Submit Request <ArrowRight className="h-4 w-4" /></>}
+          </button>
           <p className="text-xs text-muted-foreground text-center">🔒 Your information is safe with us and will never be shared.</p>
         </form>
       </div>
     </section>
+  );
+}
+
+function Input({ icon: Icon, label, value, onChange, placeholder, required }: { icon: any; label: string; value: string; onChange: (v: string) => void; placeholder?: string; required?: boolean }) {
+  return (
+    <label className="block">
+      <div className="text-sm mb-1.5">{label}</div>
+      <div className="flex items-center gap-2 rounded-md bg-input/60 border border-border/60 px-3 py-2.5">
+        <Icon className="h-4 w-4 text-muted-foreground" />
+        <input required={required} value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} className="bg-transparent outline-none text-sm flex-1" />
+      </div>
+    </label>
   );
 }
