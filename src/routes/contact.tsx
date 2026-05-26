@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Phone, Mail, MapPin, Clock, Headphones, Facebook, Instagram, MessageCircle, ShieldCheck, User, ArrowRight } from "lucide-react";
-import contactImg from "@/assets/contact-creta.png";
+import contactImg from "@/assets/car-amaze-black.jpg";
 import { submitContact } from "@/lib/leads.functions";
 
 export const Route = createFileRoute("/contact")({

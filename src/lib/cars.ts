@@ -1,8 +1,10 @@
 import xuv from "@/assets/car-xuv500.jpg";
-import creta from "@/assets/car-creta.jpg";
+import creta from "@/assets/car-creta-front.jpg";
 import fortuner from "@/assets/car-fortuner.jpg";
 import dzire from "@/assets/car-dzire.jpg";
-import verna from "@/assets/verna.png";
+import bmwX5 from "@/assets/hero-bmw-x5.jpg";
+import amazeBlack from "@/assets/car-amaze-black.jpg";
+import amazeBrown from "@/assets/car-amaze-brown.jpg";
 
 export type Car = {
   id: string;
@@ -27,7 +29,9 @@ const imageBySlug: Record<string, string> = {
   creta,
   fortuner,
   dzire,
-  verna,
+  "bmw-x5": bmwX5,
+  "honda-amaze-vx": amazeBlack,
+  "honda-amaze-vx-brown": amazeBrown,
 };
 
 export function formatPriceINR(n: number): string {
