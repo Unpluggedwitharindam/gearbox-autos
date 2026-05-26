@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, User, Phone, MapPin, Car as CarIcon, ShieldCheck
 import { listPublicCars, getCarBySlug } from "@/lib/cars.functions";
 import { submitTestDrive } from "@/lib/leads.functions";
 import { CarImageCarousel } from "@/components/CarImageCarousel";
+import { ShareButton } from "@/components/ShareButton";
 
 export const Route = createFileRoute("/car/$id")({
   head: ({ params }) => ({ meta: [{ title: `Car — Gearbox Autos` }] }),
@@ -67,8 +68,14 @@ function CarDetail() {
       <div className="mt-6 grid lg:grid-cols-[1.4fr_1fr] gap-8 items-start">
         <div className="surface p-6">
           <CarImageCarousel images={car.images} alt={car.name} />
-          <h1 className="text-3xl font-bold mt-6">{car.name}</h1>
-          <div className="text-primary text-2xl font-semibold mt-2">{car.price}</div>
+          <div className="mt-6 flex items-start justify-between gap-4">
+            <div>
+              <h1 className="text-3xl font-bold">{car.name}</h1>
+              <div className="text-primary text-2xl font-semibold mt-2">{car.price}</div>
+            </div>
+            <ShareButton title={car.name} text={`Check out this ${car.name} on Gearbox Autos`} path={`/car/${car.slug}`} />
+          </div>
+
 
           <div className="mt-5 grid grid-cols-3 md:grid-cols-6 gap-4 text-xs border-t border-border pt-5">
             {[
