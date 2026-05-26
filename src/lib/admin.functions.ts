@@ -17,6 +17,15 @@ async function assertAdmin(userId: string) {
 export const checkIsAdmin = createServerFn({ method: "GET" })
   .middleware([requireSupabaseAuth])
   .handler(async ({ context }) => {
+    // Bootstrap: if no admins exist, promote the first signed-in user.
+    const { count } = await supabaseAdmin
+      .from("user_roles")
+      .select("*", { count: "exact", head: true })
+      .eq("role", "admin");
+    if ((count ?? 0) === 0) {
+      await supabaseAdmin.from("user_roles").insert({ user_id: context.userId, role: "admin" });
+      return { isAdmin: true };
+    }
     const { data } = await supabaseAdmin
       .from("user_roles")
       .select("role")
