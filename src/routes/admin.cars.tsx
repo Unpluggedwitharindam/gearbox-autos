@@ -42,9 +42,12 @@ function AdminCars() {
   const { data: cars = [] } = useQuery({ queryKey: ["admin", "cars"], queryFn: () => adminListCars() });
   const [editing, setEditing] = useState<(CarRow | (Omit<CarRow, "id"> & { id?: string })) | null>(null);
 
+  const slugify = (s: string) => s.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 100);
+
   const save = useMutation({
     mutationFn: (c: any) => adminUpsertCar({ data: {
       ...c,
+      slug: slugify(c.slug || c.name || ""),
       images: Array.isArray(c.images) ? c.images : [],
       image_url: (c.images?.[0] ?? c.image_url ?? ""),
       features: typeof c.features === "string" ? c.features.split(",").map((s: string) => s.trim()).filter(Boolean) : (c.features ?? []),
