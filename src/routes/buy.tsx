@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Search, SlidersHorizontal, ChevronDown, ArrowDown } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import hero from "@/assets/inventory-hero.png";
+import hero from "@/assets/car-creta-front.jpg";
 import { CarCard } from "@/components/CarCard";
 import { TrustBar } from "@/components/TrustBar";
 import { listPublicCars } from "@/lib/cars.functions";

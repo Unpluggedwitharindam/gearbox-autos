@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { User, Phone, MapPin, Car as CarIcon, Calendar, Gauge, ArrowRight, ChevronDown, Mail } from "lucide-react";
-import sellBg from "@/assets/sell-bg.png";
+import sellBg from "@/assets/car-amaze-brown.jpg";
 import { submitSellLead } from "@/lib/leads.functions";
 
 export const Route = createFileRoute("/sell")({
