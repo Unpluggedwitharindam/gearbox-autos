@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { ArrowLeft, ArrowRight, User, Phone, MapPin, Car as CarIcon, ShieldCheck, Calendar, Gauge, FileText, Fuel, Settings2, Tv, AirVent, Disc, Radar, Wind, CircleDot } from "lucide-react";
 import { listPublicCars, getCarBySlug } from "@/lib/cars.functions";
 import { submitTestDrive } from "@/lib/leads.functions";
+import { CarImageCarousel } from "@/components/CarImageCarousel";
 
 export const Route = createFileRoute("/car/$id")({
   head: ({ params }) => ({ meta: [{ title: `Car — Gearbox Autos` }] }),
@@ -65,9 +66,7 @@ function CarDetail() {
 
       <div className="mt-6 grid lg:grid-cols-[1.4fr_1fr] gap-8 items-start">
         <div className="surface p-6">
-          <div className="rounded-lg overflow-hidden bg-secondary/40 aspect-[4/3]">
-            {car.image && <img src={car.image} alt={car.name} className="w-full h-full object-cover" />}
-          </div>
+          <CarImageCarousel images={car.images} alt={car.name} />
           <h1 className="text-3xl font-bold mt-6">{car.name}</h1>
           <div className="text-primary text-2xl font-semibold mt-2">{car.price}</div>
 
