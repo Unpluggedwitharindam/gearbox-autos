@@ -19,11 +19,11 @@ export type Car = {
   fuel: string;
   transmission: string;
   image: string;
+  images: string[];
   features?: string[];
   description?: string | null;
 };
 
-// Fallback image map for seeded cars (since storage isn't set up)
 const imageBySlug: Record<string, string> = {
   xuv500: xuv,
   creta,
@@ -54,13 +54,16 @@ export type CarRow = {
   fuel: string;
   transmission: string;
   image_url: string;
+  images?: string[] | null;
   features: string[] | null;
   description: string | null;
   is_active?: boolean;
 };
 
 export function rowToCar(r: CarRow): Car {
-  const img = imageBySlug[r.slug] || r.image_url || "";
+  const uploaded = (r.images ?? []).filter(Boolean);
+  const fallback = imageBySlug[r.slug] || r.image_url || "";
+  const images = uploaded.length > 0 ? uploaded : (fallback ? [fallback] : []);
   return {
     id: r.id,
     slug: r.slug,
@@ -73,7 +76,8 @@ export function rowToCar(r: CarRow): Car {
     location: r.location,
     fuel: r.fuel,
     transmission: r.transmission,
-    image: img,
+    image: images[0] ?? "",
+    images,
     features: r.features ?? undefined,
     description: r.description,
   };
