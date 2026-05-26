@@ -2,6 +2,11 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 
+function dbFail(scope: string, error: { message: string }): never {
+  console.error(`[DB Error:${scope}]`, error.message);
+  throw new Error("Submission failed. Please try again later.");
+}
+
 const phoneRe = /^[0-9+\-\s()]{7,20}$/;
 
 const sellSchema = z.object({
@@ -21,7 +26,7 @@ export const submitSellLead = createServerFn({ method: "POST" })
       ...data,
       email: data.email || null,
     });
-    if (error) throw new Error(error.message);
+    if (error) dbFail("submitSellLead", error);
     return { ok: true as const };
   });
 
@@ -47,7 +52,7 @@ export const submitTestDrive = createServerFn({ method: "POST" })
       preferred_date: data.preferred_date || null,
       message: data.message || null,
     });
-    if (error) throw new Error(error.message);
+    if (error) dbFail("submitTestDrive", error);
     return { ok: true as const };
   });
 
@@ -69,6 +74,6 @@ export const submitContact = createServerFn({ method: "POST" })
       subject: data.subject || null,
       message: data.message,
     });
-    if (error) throw new Error(error.message);
+    if (error) dbFail("submitContact", error);
     return { ok: true as const };
   });
