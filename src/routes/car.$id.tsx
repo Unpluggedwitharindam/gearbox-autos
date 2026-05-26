@@ -6,6 +6,7 @@ import { ArrowLeft, ArrowRight, User, Phone, MapPin, Car as CarIcon, ShieldCheck
 import { listPublicCars, getCarBySlug } from "@/lib/cars.functions";
 import { submitTestDrive } from "@/lib/leads.functions";
 import { CarImageCarousel } from "@/components/CarImageCarousel";
+import { ShareButton } from "@/components/ShareButton";
 
 export const Route = createFileRoute("/car/$id")({
   head: ({ params }) => ({ meta: [{ title: `Car — Gearbox Autos` }] }),
