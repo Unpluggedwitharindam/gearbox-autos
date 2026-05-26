@@ -126,6 +126,7 @@ function RootComponent() {
         <Outlet />
       </main>
       <Footer />
+      <SocialFloat />
       <Toaster />
     </QueryClientProvider>
   );
