@@ -1,5 +1,5 @@
 import { createFileRoute, Link, notFound, useNavigate } from "@tanstack/react-router";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import { useQuery, useSuspenseQuery, useMutation } from "@tanstack/react-query";
 import { useState } from "react";
 import { toast } from "sonner";
 import { ArrowLeft, ArrowRight, User, Phone, MapPin, Car as CarIcon, ShieldCheck, Calendar, Gauge, FileText, Fuel, Settings2, Tv, AirVent, Disc, Radar, Wind, CircleDot } from "lucide-react";
@@ -37,7 +37,7 @@ const featureIcons: Record<string, any> = {
 
 function CarDetail() {
   const { id } = Route.useParams();
-  const { data: car } = useQuery({ queryKey: ["car", id], queryFn: () => getCarBySlug({ data: { slug: id } }) });
+  const { data: car } = useSuspenseQuery({ queryKey: ["car", id], queryFn: () => getCarBySlug({ data: { slug: id } }) });
   const { data: cars = [] } = useQuery({ queryKey: ["cars", "public"], queryFn: () => listPublicCars() });
   if (!car) throw notFound();
   const features = car.features ?? ["Touchscreen Infotainment", "Dual Airbags", "ABS with EBD", "Rear Parking Sensors", "Automatic Climate Control", "Alloy Wheels"];
