@@ -54,7 +54,7 @@ function Contact() {
         </div>
 
         <form onSubmit={(e) => { e.preventDefault(); mut.mutate(); }} className="surface p-6 space-y-4">
-          <h2 className="text-xl font-semibold">Send us a message</h2>
+          <h2 className="font-head text-3xl tracking-wide">Send us a message</h2>
           <Row icon={User} placeholder="Full name" value={form.full_name} onChange={set("full_name")} required />
           <Row icon={Mail} type="email" placeholder="Email" value={form.email} onChange={set("email")} required />
           <Row icon={Phone} placeholder="Phone (optional)" value={form.phone} onChange={set("phone")} />
