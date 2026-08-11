@@ -17,7 +17,7 @@ function About() {
           <p className="mt-5 text-muted-foreground max-w-md">Gearbox Autos is a used car marketplace based out of Jamshedpur, India. We connect buyers and sellers directly, making car transactions simple, transparent and hassle-free.</p>
           <div className="mt-8 inline-flex items-center gap-2 surface px-4 py-3 text-sm"><MapPin className="h-4 w-4 text-primary" /> Proudly Based in Jamshedpur, India</div>
         </div>
-        <div className="relative h-[380px] rounded-2xl overflow-hidden border border-border">
+        <div className="relative h-[380px] rounded-none overflow-hidden border border-border">
           <img src={aboutImg} alt="Jamshedpur skyline" className="absolute inset-0 h-full w-full object-cover" />
         </div>
       </div>
