@@ -13,8 +13,8 @@ export function CarCard({ car }: { car: CarType }) {
           <ShareButton compact title={car.name} text={`Check out this ${car.name} on Gearbox Autos`} path={`/car/${car.slug}`} />
         </div>
         <CarImageCarousel images={imgs} alt={car.name} />
-        <div className="absolute bottom-0 left-0 z-20 bg-primary text-primary-foreground px-3 py-1 font-head text-sm tracking-widest">
-          {car.price}
+        <div className="absolute bottom-0 left-0 z-20 bg-primary text-primary-foreground px-3 py-1 font-head text-xs tracking-[0.2em]">
+          {car.year}
         </div>
       </div>
       <div className="p-6 flex-1 flex flex-col">
