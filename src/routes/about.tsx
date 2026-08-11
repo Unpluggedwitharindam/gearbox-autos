@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Eye, Handshake, ShieldCheck, MapPin, Car as CarIcon, CarFront, Users } from "lucide-react";
-import aboutImg from "@/assets/about-jsr.png";
+import aboutImg from "@/assets/hero-bmw-x5.jpg";
 
 export const Route = createFileRoute("/about")({
   head: () => ({ meta: [{ title: "About Us — Gearbox Autos" }, { name: "description", content: "Driven by trust. Built on transparency. Gearbox Autos is a used car marketplace based out of Jamshedpur." }]}),
@@ -18,7 +18,7 @@ function About() {
           <div className="mt-8 inline-flex items-center gap-2 surface px-4 py-3 text-sm"><MapPin className="h-4 w-4 text-primary" /> Proudly Based in Jamshedpur, India</div>
         </div>
         <div className="relative h-[380px] rounded-none overflow-hidden border border-border">
-          <img src={aboutImg} alt="Jamshedpur skyline" className="absolute inset-0 h-full w-full object-cover" />
+          <img src={aboutImg} alt="Gearbox Autos showroom car in Jamshedpur" className="absolute inset-0 h-full w-full object-cover" />
         </div>
       </div>
 
