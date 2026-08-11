@@ -11,7 +11,7 @@ import { ShareButton } from "@/components/ShareButton";
 export const Route = createFileRoute("/car/$id")({
   head: ({ params }) => ({ meta: [{ title: `Car — Gearbox Autos` }] }),
   component: CarDetail,
-  notFoundComponent: () => <div className="container-page pt-32"><p>Car not found.</p></div>,
+  notFoundComponent: () => <div className="container-page pt-12"><p>Car not found.</p></div>,
   loader: async ({ context, params }) => {
     await Promise.all([
       context.queryClient.ensureQueryData({
@@ -62,7 +62,7 @@ function CarDetail() {
   });
 
   return (
-    <section className="container-page pt-32 pb-12">
+    <section className="container-page pt-12 pb-12">
       <Link to="/buy" className="text-sm text-muted-foreground inline-flex items-center gap-2 hover:text-foreground"><ArrowLeft className="h-4 w-4" /> Back to Inventory</Link>
 
       <div className="mt-6 grid lg:grid-cols-[1.4fr_1fr] gap-8 items-start">

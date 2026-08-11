@@ -26,12 +26,12 @@ function AdminLayout() {
   }, [session, loading, navigate]);
 
   if (loading || isAdmin === null) {
-    return <div className="container-page pt-32"><p className="text-muted-foreground">Loading…</p></div>;
+    return <div className="container-page pt-12"><p className="text-muted-foreground">Loading…</p></div>;
   }
 
   if (!isAdmin) {
     return (
-      <div className="container-page pt-32 pb-12">
+      <div className="container-page pt-12 pb-12">
         <div className="surface p-10 max-w-md mx-auto text-center">
           <h1 className="text-2xl font-bold">Access denied</h1>
           <p className="text-muted-foreground mt-3 text-sm">

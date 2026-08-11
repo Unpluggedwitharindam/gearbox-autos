@@ -10,7 +10,7 @@ export const Route = createFileRoute("/about")({
 function About() {
   return (
     <section className="relative">
-      <div className="container-page pt-32 grid lg:grid-cols-2 gap-10 items-center">
+      <div className="container-page pt-12 grid lg:grid-cols-2 gap-10 items-center">
         <div>
           <div className="eyebrow">About us</div>
           <h1 className="display-h1 mt-4">Driven by Trust.<br/>Built on Transparency<span className="text-primary">.</span></h1>

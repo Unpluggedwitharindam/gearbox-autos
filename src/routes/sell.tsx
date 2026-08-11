@@ -55,7 +55,7 @@ function Sell() {
     <section className="relative min-h-screen">
       <img src={sellBg} alt="" className="absolute inset-0 h-full w-full object-cover opacity-60" />
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
-      <div className="relative container-page pt-32 pb-20 grid lg:grid-cols-2 gap-10 items-start">
+      <div className="relative container-page pt-12 pb-20 grid lg:grid-cols-2 gap-10 items-start">
         <div>
           <div className="eyebrow">Sell your car</div>
           <h1 className="display-h1 mt-4">Get the best value <br/>for your car<span className="text-primary">.</span></h1>

@@ -23,7 +23,7 @@ function Contact() {
   });
 
   return (
-    <section className="container-page pt-32 pb-12">
+    <section className="container-page pt-12 pb-12">
       <div className="grid lg:grid-cols-2 gap-10 items-start">
         <div>
           <div className="eyebrow">Contact us</div>
