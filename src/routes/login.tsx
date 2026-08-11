@@ -35,7 +35,7 @@ function Login() {
   };
 
   return (
-    <section className="container-page pt-32 pb-12 min-h-screen flex items-center justify-center">
+    <section className="container-page pt-12 pb-12 min-h-screen flex items-center justify-center">
       <div className="surface p-10 max-w-md w-full text-center">
         <ShieldCheck className="h-10 w-10 text-primary mx-auto" />
         <h1 className="text-2xl font-bold mt-4">Admin Login</h1>

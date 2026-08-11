@@ -16,7 +16,7 @@ export const Route = createFileRoute("/inventory")({
 function Inventory() {
   const { data: cars = [] } = useQuery({ queryKey: ["cars", "public"], queryFn: () => listPublicCars() });
   return (
-    <section className="container-page pt-32 pb-12">
+    <section className="container-page pt-12 pb-12">
       <div className="eyebrow">Our Inventory</div>
       <h1 className="display-h1 mt-4">Every car<span className="text-primary">.</span> <br/><span className="text-muted-foreground">One trusted place.</span></h1>
       <p className="mt-5 text-muted-foreground max-w-xl">Quality assured, fully verified used cars — handpicked for Jamshedpur drivers.</p>

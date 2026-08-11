@@ -33,7 +33,7 @@ function Buy() {
   return (
     <section className="relative">
       <img src={hero} alt="" className="absolute right-0 top-0 w-3/5 h-[520px] object-cover opacity-70 [mask-image:linear-gradient(to_left,black,transparent)]" />
-      <div className="relative container-page pt-32 pb-10">
+      <div className="relative container-page pt-12 pb-10">
         <div className="eyebrow">Inventory</div>
         <h1 className="display-h1 mt-4">Find your <br /><span className="text-muted-foreground">perfect drive<span className="text-primary">.</span></span></h1>
         <p className="mt-5 text-muted-foreground max-w-md">Explore a wide range of quality used cars at the best value.</p>

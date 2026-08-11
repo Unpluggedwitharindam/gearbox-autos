@@ -55,7 +55,7 @@ function Sell() {
     <section className="relative min-h-screen">
       <img src={sellBg} alt="" className="absolute inset-0 h-full w-full object-cover opacity-60" />
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
-      <div className="relative container-page pt-32 pb-20 grid lg:grid-cols-2 gap-10 items-start">
+      <div className="relative container-page pt-12 pb-20 grid lg:grid-cols-2 gap-10 items-start">
         <div>
           <div className="eyebrow">Sell your car</div>
           <h1 className="display-h1 mt-4">Get the best value <br/>for your car<span className="text-primary">.</span></h1>
@@ -78,7 +78,7 @@ function Sell() {
 
         <form onSubmit={(e) => { e.preventDefault(); mut.mutate(); }} className="surface p-8 space-y-4">
           <div>
-            <h2 className="text-2xl font-semibold">Tell us about your car</h2>
+            <h2 className="font-head text-3xl tracking-wide">Tell us about your car</h2>
             <p className="text-muted-foreground"><span className="text-foreground">We'll handle the rest.</span></p>
             <div className="mt-2 h-0.5 w-12 bg-primary" />
           </div>
@@ -90,7 +90,7 @@ function Sell() {
           <Field label="Year of Registration">
             <div className="flex items-center gap-2 rounded-md bg-input/60 border border-border/60 px-3 py-2.5">
               <Calendar className="h-4 w-4 text-muted-foreground" />
-              <select value={form.year} onChange={set("year")} className="bg-transparent outline-none text-sm flex-1 text-muted-foreground">
+              <select value={form.year} onChange={set("year")} className="bg-transparent outline-none text-sm flex-1 text-muted-foreground appearance-none">
                 <option value="">Select year of registration</option>
                 {Array.from({ length: 30 }, (_, i) => 2026 - i).map((y) => <option key={y} value={y} className="bg-background">{y}</option>)}
               </select>
