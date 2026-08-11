@@ -70,8 +70,8 @@ function CarDetail() {
           <CarImageCarousel images={car.images} alt={car.name} />
           <div className="mt-6 flex items-start justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold">{car.name}</h1>
-              <div className="text-primary text-2xl font-semibold mt-2">{car.price}</div>
+              <h1 className="font-head text-4xl md:text-5xl tracking-wide">{car.name}</h1>
+              <div className="font-head text-primary text-3xl tracking-wide mt-1">{car.price}</div>
             </div>
             <ShareButton title={car.name} text={`Check out this ${car.name} on Gearbox Autos`} path={`/car/${car.slug}`} />
           </div>
@@ -91,7 +91,7 @@ function CarDetail() {
           </div>
 
           <div className="mt-6 border-t border-border pt-5">
-            <div className="font-semibold mb-4">Key Features</div>
+            <div className="eyebrow mb-4">Key Features</div>
             <div className="grid grid-cols-3 md:grid-cols-6 gap-4 text-xs text-center">
               {features.map((f) => {
                 const I = featureIcons[f] ?? AirVent;
@@ -110,7 +110,7 @@ function CarDetail() {
           <div className="flex items-start gap-3">
             <div className="h-12 w-12 rounded-md border border-primary/40 grid place-items-center text-primary"><Calendar className="h-5 w-5" /></div>
             <div>
-              <h2 className="text-xl font-semibold">Book a Test Drive</h2>
+              <h2 className="font-head text-2xl tracking-wide">Book a Test Drive</h2>
               <p className="text-sm text-muted-foreground">Fill in your details and our team will get in touch with you.</p>
             </div>
           </div>
@@ -121,7 +121,7 @@ function CarDetail() {
             <div className="text-sm mb-1.5">Which car are you looking to buy?</div>
             <div className="flex items-center gap-2 rounded-md bg-input/60 border border-border/60 px-3 py-2.5">
               <CarIcon className="h-4 w-4 text-muted-foreground" />
-              <select className="bg-transparent outline-none text-sm flex-1" value={form.car_id} onChange={(e) => setForm({ ...form, car_id: e.target.value })}>
+              <select className="bg-transparent outline-none text-sm flex-1 appearance-none" value={form.car_id} onChange={(e) => setForm({ ...form, car_id: e.target.value })}>
                 {cars.map((c) => <option key={c.id} value={c.id} className="bg-background">{c.name}</option>)}
               </select>
             </div>
