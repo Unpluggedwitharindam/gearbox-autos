@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { ArrowLeft, ArrowRight, User, Phone, MapPin, Car as CarIcon, ShieldCheck, Calendar, Gauge, FileText, Fuel, Settings2, Tv, AirVent, Disc, Radar, Wind, CircleDot } from "lucide-react";
 import { listPublicCars, getCarBySlug } from "@/lib/cars.functions";
+import type { Car } from "@/lib/cars";
 import { submitTestDrive } from "@/lib/leads.functions";
 import { CarImageCarousel } from "@/components/CarImageCarousel";
 import { ShareButton } from "@/components/ShareButton";
