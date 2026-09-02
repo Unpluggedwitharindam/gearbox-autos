@@ -10,7 +10,8 @@ import { ShareButton } from "@/components/ShareButton";
 
 export const Route = createFileRoute("/car/$id")({
   head: ({ params, loaderData }) => {
-    const car = loaderData?.car ?? null;
+    const car = (loaderData as { car: Car | null } | undefined)?.car ?? null;
+
     const url = `https://gearboxautos.in/car/${params.id}`;
     if (!car) {
       return {
