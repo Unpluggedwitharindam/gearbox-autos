@@ -4,7 +4,17 @@ import { CarCard } from "@/components/CarCard";
 import { listPublicCars } from "@/lib/cars.functions";
 
 export const Route = createFileRoute("/inventory")({
-  head: () => ({ meta: [{ title: "Our Inventory — Gearbox Autos" }, { name: "description", content: "Browse all verified used cars in our inventory." }]}),
+  head: () => ({
+    meta: [
+      { title: "Used Car Inventory in Jamshedpur — Gearbox Autos" },
+      { name: "description", content: "Full inventory of verified used cars available in Jamshedpur, Jharkhand — hatchbacks, sedans and SUVs with transparent pricing." },
+      { property: "og:title", content: "Used Car Inventory in Jamshedpur — Gearbox Autos" },
+      { property: "og:description", content: "Every verified second hand car we have in stock in Jamshedpur." },
+      { property: "og:url", content: "https://gearboxautos.in/inventory" },
+    ],
+    links: [{ rel: "canonical", href: "https://gearboxautos.in/inventory" }],
+  }),
+
   component: Inventory,
   loader: async ({ context }) =>
     context.queryClient.ensureQueryData({

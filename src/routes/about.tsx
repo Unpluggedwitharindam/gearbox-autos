@@ -3,7 +3,17 @@ import { Eye, Handshake, ShieldCheck, MapPin, Car as CarIcon, CarFront, Users } 
 import aboutImg from "@/assets/hero-bmw-x5.jpg";
 
 export const Route = createFileRoute("/about")({
-  head: () => ({ meta: [{ title: "About Us — Gearbox Autos" }, { name: "description", content: "Driven by trust. Built on transparency. Gearbox Autos is a used car marketplace based out of Jamshedpur." }]}),
+  head: () => ({
+    meta: [
+      { title: "About Gearbox Autos — Trusted Used Car Marketplace in Jamshedpur" },
+      { name: "description", content: "Gearbox Autos is a Jamshedpur-based used car marketplace connecting buyers and sellers directly with transparent, zero-commission deals." },
+      { property: "og:title", content: "About Gearbox Autos — Jamshedpur" },
+      { property: "og:description", content: "Driven by trust, built on transparency — used cars in Jamshedpur." },
+      { property: "og:url", content: "https://gearboxautos.in/about" },
+    ],
+    links: [{ rel: "canonical", href: "https://gearboxautos.in/about" }],
+  }),
+
   component: About,
 });
 

@@ -7,7 +7,17 @@ import contactImg from "@/assets/car-amaze-black.jpg";
 import { submitContact } from "@/lib/leads.functions";
 
 export const Route = createFileRoute("/contact")({
-  head: () => ({ meta: [{ title: "Contact Us — Gearbox Autos" }, { name: "description", content: "Get in touch with Gearbox Autos. We're here to help with your buying or selling journey." }]}),
+  head: () => ({
+    meta: [
+      { title: "Contact Gearbox Autos — Used Car Dealer in Jamshedpur" },
+      { name: "description", content: "Call or message Gearbox Autos in Jamshedpur, Jharkhand for buying or selling a used car. Phone +91 90655 91253." },
+      { property: "og:title", content: "Contact Gearbox Autos — Jamshedpur" },
+      { property: "og:description", content: "Talk to our Jamshedpur team about buying or selling your car." },
+      { property: "og:url", content: "https://gearboxautos.in/contact" },
+    ],
+    links: [{ rel: "canonical", href: "https://gearboxautos.in/contact" }],
+  }),
+
   component: Contact,
 });
 
