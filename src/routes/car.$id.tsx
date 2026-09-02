@@ -4,16 +4,70 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { ArrowLeft, ArrowRight, User, Phone, MapPin, Car as CarIcon, ShieldCheck, Calendar, Gauge, FileText, Fuel, Settings2, Tv, AirVent, Disc, Radar, Wind, CircleDot } from "lucide-react";
 import { listPublicCars, getCarBySlug } from "@/lib/cars.functions";
+import type { Car } from "@/lib/cars";
 import { submitTestDrive } from "@/lib/leads.functions";
 import { CarImageCarousel } from "@/components/CarImageCarousel";
 import { ShareButton } from "@/components/ShareButton";
 
 export const Route = createFileRoute("/car/$id")({
-  head: ({ params }) => ({ meta: [{ title: `Car — Gearbox Autos` }] }),
+  head: ({ params, loaderData }) => {
+    const car = (loaderData as { car: Car | null } | undefined)?.car ?? null;
+
+    const url = `https://gearboxautos.in/car/${params.id}`;
+    if (!car) {
+      return {
+        meta: [{ title: "Used Car — Gearbox Autos Jamshedpur" }],
+        links: [{ rel: "canonical", href: url }],
+      };
+    }
+    const title = `${car.year} ${car.name} for Sale in Jamshedpur — ${car.price} | Gearbox Autos`;
+    const description = `Buy this ${car.year} ${car.name} in ${car.location} at ${car.price}. ${car.km} km, ${car.fuel}, ${car.transmission}. Book a free test drive — 0% commission.`;
+    const image = car.images?.[0]?.startsWith("http") ? car.images[0] : undefined;
+    return {
+      meta: [
+        { title },
+        { name: "description", content: description },
+        { property: "og:title", content: title },
+        { property: "og:description", content: description },
+        { property: "og:type", content: "product" },
+        { property: "og:url", content: url },
+        ...(image
+          ? [
+              { property: "og:image", content: image },
+              { name: "twitter:image", content: image },
+            ]
+          : []),
+      ],
+      links: [{ rel: "canonical", href: url }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Car",
+            name: car.name,
+            vehicleModelDate: String(car.year),
+            fuelType: car.fuel,
+            vehicleTransmission: car.transmission,
+            mileageFromOdometer: { "@type": "QuantitativeValue", value: car.km, unitCode: "KMT" },
+            ...(image ? { image } : {}),
+            offers: {
+              "@type": "Offer",
+              price: car.price_inr,
+              priceCurrency: "INR",
+              availability: "https://schema.org/InStock",
+              areaServed: "Jamshedpur, Jharkhand, India",
+              seller: { "@type": "AutoDealer", name: "Gearbox Autos" },
+            },
+          }),
+        },
+      ],
+    };
+  },
   component: CarDetail,
   notFoundComponent: () => <div className="container-page pt-12"><p>Car not found.</p></div>,
   loader: async ({ context, params }) => {
-    await Promise.all([
+    const [car] = await Promise.all([
       context.queryClient.ensureQueryData({
         queryKey: ["car", params.id],
         queryFn: () => getCarBySlug({ data: { slug: params.id } }),
@@ -23,8 +77,10 @@ export const Route = createFileRoute("/car/$id")({
         queryFn: () => listPublicCars(),
       }),
     ]);
+    return { car };
   },
 });
+
 
 const featureIcons: Record<string, any> = {
   "Touchscreen Infotainment": Tv,

@@ -2,7 +2,17 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { CalendarCheck, Users, MessagesSquare, Car as CarIcon, FileCheck, ShieldCheck, Handshake, ArrowRight } from "lucide-react";
 
 export const Route = createFileRoute("/how-it-works")({
-  head: () => ({ meta: [{ title: "How It Works — Gearbox Autos" }, { name: "description", content: "Simple, transparent, fair. The Gearbox Autos process for buying and selling used cars." }]}),
+  head: () => ({
+    meta: [
+      { title: "How to Buy or Sell a Used Car in Jamshedpur — Gearbox Autos" },
+      { name: "description", content: "Our simple 5-step process: book a test drive, meet the owner, negotiate directly, drive home your car and get help with RC transfer in Jamshedpur." },
+      { property: "og:title", content: "How It Works — Gearbox Autos Jamshedpur" },
+      { property: "og:description", content: "Simple, transparent, fair — buying and selling used cars in Jamshedpur." },
+      { property: "og:url", content: "https://gearboxautos.in/how-it-works" },
+    ],
+    links: [{ rel: "canonical", href: "https://gearboxautos.in/how-it-works" }],
+  }),
+
   component: HowItWorks,
 });
 

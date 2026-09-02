@@ -76,18 +76,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Your Website Maker creates identical websites from existing URLs." },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Your Website Maker creates identical websites from existing URLs." },
+      { title: "Gearbox Autos — Used Cars in Jamshedpur" },
+      {
+        name: "description",
+        content:
+          "Buy and sell second hand cars in Jamshedpur at 0% commission. Verified used cars, direct owner deals and free RC transfer help.",
+      },
+      { name: "author", content: "Gearbox Autos" },
+      { name: "robots", content: "index, follow" },
+      { name: "geo.region", content: "IN-JH" },
+      { name: "geo.placename", content: "Jamshedpur" },
+      { property: "og:site_name", content: "Gearbox Autos" },
+      { property: "og:locale", content: "en_IN" },
       { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "Lovable App" },
-      { name: "twitter:description", content: "Your Website Maker creates identical websites from existing URLs." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0558a0f6-9ed0-421e-978e-9e74c0609ff8/id-preview-f43597fc--1406dad9-9280-43ae-8894-1eb8be55a558.lovable.app-1779778229622.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/0558a0f6-9ed0-421e-978e-9e74c0609ff8/id-preview-f43597fc--1406dad9-9280-43ae-8894-1eb8be55a558.lovable.app-1779778229622.png" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -101,7 +103,34 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "AutoDealer",
+          name: "Gearbox Autos",
+          description:
+            "Used car marketplace in Jamshedpur — buy and sell second hand cars at 0% commission.",
+          url: "https://gearboxautos.in",
+          telephone: "+91-90655-91253",
+          priceRange: "₹₹",
+          areaServed: [
+            { "@type": "City", name: "Jamshedpur" },
+            { "@type": "State", name: "Jharkhand" },
+          ],
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: "Jamshedpur",
+            addressRegion: "Jharkhand",
+            addressCountry: "IN",
+          },
+          sameAs: ["https://www.instagram.com/gearbox_autos"],
+        }),
+      },
+    ],
   }),
+
   shellComponent: RootShell,
   component: RootComponent,
   notFoundComponent: NotFoundComponent,

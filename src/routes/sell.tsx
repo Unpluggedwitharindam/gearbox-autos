@@ -7,7 +7,17 @@ import sellBg from "@/assets/car-amaze-brown.jpg";
 import { submitSellLead } from "@/lib/leads.functions";
 
 export const Route = createFileRoute("/sell")({
-  head: () => ({ meta: [{ title: "Sell Your Car — Gearbox Autos" }, { name: "description", content: "Get the best value for your car. Fill in the details and our experts will get in touch." }]}),
+  head: () => ({
+    meta: [
+      { title: "Sell Your Car in Jamshedpur — Best Price, 0% Commission | Gearbox Autos" },
+      { name: "description", content: "Sell your used car in Jamshedpur at the best price. Share your car details and our team calls you back — free listing, 0% commission, RC transfer help." },
+      { property: "og:title", content: "Sell Your Used Car in Jamshedpur — Gearbox Autos" },
+      { property: "og:description", content: "Get the best value for your car in Jamshedpur with zero commission." },
+      { property: "og:url", content: "https://gearboxautos.in/sell" },
+    ],
+    links: [{ rel: "canonical", href: "https://gearboxautos.in/sell" }],
+  }),
+
   component: Sell,
 });
 

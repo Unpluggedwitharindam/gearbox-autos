@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SellRouteImport } from './routes/sell'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as InventoryRouteImport } from './routes/inventory'
@@ -25,6 +26,11 @@ import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as AdminCarsRouteImport } from './routes/admin.cars'
 import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
 
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SellRoute = SellRouteImport.update({
   id: '/sell',
   path: '/sell',
@@ -111,6 +117,7 @@ export interface FileRoutesByFullPath {
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
   '/sell': typeof SellRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/cars': typeof AdminCarsRoute
   '/admin/leads': typeof AdminLeadsRoute
@@ -127,6 +134,7 @@ export interface FileRoutesByTo {
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
   '/sell': typeof SellRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/cars': typeof AdminCarsRoute
   '/admin/leads': typeof AdminLeadsRoute
@@ -145,6 +153,7 @@ export interface FileRoutesById {
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
   '/sell': typeof SellRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/cars': typeof AdminCarsRoute
   '/admin/leads': typeof AdminLeadsRoute
@@ -164,6 +173,7 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/login'
     | '/sell'
+    | '/sitemap.xml'
     | '/admin/bookings'
     | '/admin/cars'
     | '/admin/leads'
@@ -180,6 +190,7 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/login'
     | '/sell'
+    | '/sitemap.xml'
     | '/admin/bookings'
     | '/admin/cars'
     | '/admin/leads'
@@ -197,6 +208,7 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/login'
     | '/sell'
+    | '/sitemap.xml'
     | '/admin/bookings'
     | '/admin/cars'
     | '/admin/leads'
@@ -215,11 +227,19 @@ export interface RootRouteChildren {
   InventoryRoute: typeof InventoryRoute
   LoginRoute: typeof LoginRoute
   SellRoute: typeof SellRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   CarIdRoute: typeof CarIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sell': {
       id: '/sell'
       path: '/sell'
@@ -356,6 +376,7 @@ const rootRouteChildren: RootRouteChildren = {
   InventoryRoute: InventoryRoute,
   LoginRoute: LoginRoute,
   SellRoute: SellRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   CarIdRoute: CarIdRoute,
 }
 export const routeTree = rootRouteImport

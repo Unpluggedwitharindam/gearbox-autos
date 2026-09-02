@@ -8,10 +8,17 @@ import { TrustBar } from "@/components/TrustBar";
 import { listPublicCars } from "@/lib/cars.functions";
 
 export const Route = createFileRoute("/buy")({
-  head: () => ({ meta: [
-    { title: "Buy a Used Car — Gearbox Autos" },
-    { name: "description", content: "Explore a wide range of quality used cars at the best value in Jamshedpur." },
-  ]}),
+  head: () => ({
+    meta: [
+      { title: "Buy Second Hand Cars in Jamshedpur — Verified Used Cars | Gearbox Autos" },
+      { name: "description", content: "Browse verified second hand cars for sale in Jamshedpur. Compare price, KMs, fuel and RTO, then book a free test drive — 0% commission." },
+      { property: "og:title", content: "Buy Second Hand Cars in Jamshedpur — Gearbox Autos" },
+      { property: "og:description", content: "Verified used cars for sale in Jamshedpur at 0% commission. Book a test drive today." },
+      { property: "og:url", content: "https://gearboxautos.in/buy" },
+    ],
+    links: [{ rel: "canonical", href: "https://gearboxautos.in/buy" }],
+  }),
+
   component: Buy,
   loader: async ({ context }) =>
     context.queryClient.ensureQueryData({

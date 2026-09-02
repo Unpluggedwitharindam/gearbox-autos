@@ -9,12 +9,26 @@ import { listPublicCars } from "@/lib/cars.functions";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Gearbox Autos — Buy & Sell Used Cars at 0% Commission" },
-      { name: "description", content: "Jamshedpur's trusted used car marketplace. Drive home your dream car at 0% commission with no hidden charges." },
-      { property: "og:title", content: "Gearbox Autos — Drive home your dream car at 0% Commission" },
-      { property: "og:description", content: "Buy and sell quality used cars with full transparency." },
+      { title: "Used Cars in Jamshedpur — Buy & Sell at 0% Commission | Gearbox Autos" },
+      { name: "description", content: "Jamshedpur's trusted used car marketplace. Buy verified second hand cars or sell your car in Jamshedpur at 0% commission — no hidden charges, free RC transfer help." },
+      { property: "og:title", content: "Used Cars in Jamshedpur — Gearbox Autos" },
+      { property: "og:description", content: "Buy and sell quality second hand cars in Jamshedpur with full transparency and 0% commission." },
+      { property: "og:url", content: "https://gearboxautos.in/" },
+    ],
+    links: [{ rel: "canonical", href: "https://gearboxautos.in/" }],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Gearbox Autos",
+          url: "https://gearboxautos.in",
+        }),
+      },
     ],
   }),
+
   component: Index,
   loader: async ({ context }) =>
     context.queryClient.ensureQueryData({
