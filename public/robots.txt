@@ -2,7 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /login
+Disallow: /inspection-tool.html
 
 Sitemap: https://gearboxautos.in/sitemap.xml
-
-Disallow: /inspection-tool.html
