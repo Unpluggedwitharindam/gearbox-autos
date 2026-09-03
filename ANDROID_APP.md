@@ -1,88 +1,91 @@
-# Gearbox Autos — Android App
+# Gearbox Autos — Mobile Apps (Android + iOS)
 
 This project is wired up with **Capacitor** to package the live website
-(`https://www.gearboxautos.in`) as a native Android APK.
+(`https://www.gearboxautos.in`) as native **Android (APK/AAB)** and
+**iOS (IPA)** apps.
 
 - App name: **Gearbox Autos**
-- Package ID: **com.gearboxautos.app**
-- Mode: **Live wrapper** — the APK loads the published site, so any
-  change you publish on Lovable appears in the app instantly without
-  rebuilding the APK.
+- Bundle / package ID: **com.gearboxautos.app**
+- Mode: **Live wrapper** — the app loads the published site, so anything
+  you publish on Lovable appears in the app instantly without rebuilding.
 
-> APKs cannot be built inside Lovable's sandbox — Android Studio and the
-> Android SDK only run on your local machine. Follow the steps below
-> once on your computer; after that you only re-run them when you want
-> to ship a new APK version (e.g. for a Play Store update).
+> Native builds cannot run inside Lovable's sandbox. Android Studio (any
+> OS) and Xcode (macOS only) run on your machine. Do the setup once; after
+> that you only rebuild when you change icons, name, or native config.
 
 ## One-time setup on your computer
 
-1. Install [Node.js 20+](https://nodejs.org/) and
-   [Android Studio](https://developer.android.com/studio) (includes the
-   Android SDK).
-2. In Lovable, click **GitHub → Export to GitHub** (top right) and
-   create a repository.
+1. Install [Node.js 20+](https://nodejs.org/).
+   - Android: [Android Studio](https://developer.android.com/studio)
+   - iOS: macOS + [Xcode](https://developer.apple.com/xcode/) + CocoaPods (`sudo gem install cocoapods`)
+2. In Lovable, click **GitHub → Export to GitHub** and create a repository.
 3. Clone it locally and install dependencies:
    ```bash
    git clone <your-repo-url> gearbox-autos
    cd gearbox-autos
    npm install
    ```
-4. Add the Android platform (creates an `android/` folder):
+4. Add the platforms you need:
    ```bash
-   npx cap add android
+   npx cap add android   # creates android/
+   npx cap add ios       # creates ios/  (macOS only)
    ```
 
-## Build the APK
+## Build — Android
 
 ```bash
-npm run build          # builds the web app into /dist
-npx cap sync android   # copies config + web assets into the Android project
-npx cap open android   # opens Android Studio
+npm run build
+npx cap sync android
+npx cap open android
 ```
 
 In Android Studio:
 
-1. Wait for Gradle to finish syncing (first time can take a few minutes).
+1. Wait for Gradle sync to finish.
 2. **Build → Build Bundle(s) / APK(s) → Build APK(s)**.
-3. Click **locate** in the popup — the APK is in
+3. Click **locate** — the APK is at
    `android/app/build/outputs/apk/debug/app-debug.apk`.
-4. Transfer to your phone, enable "Install from unknown sources", tap to
-   install.
+4. Transfer to your phone, allow "Install from unknown sources", install.
 
-## Publishing to the Play Store
+Play Store: **Build → Generate Signed Bundle / APK → Android App Bundle
+(.aab)**, create a keystore the first time (keep the file + passwords
+safe), then upload to the [Play Console](https://play.google.com/console).
 
-1. In Android Studio: **Build → Generate Signed Bundle / APK → Android App
-   Bundle (.aab)**.
-2. Create a new keystore the first time (keep the file + passwords safe —
-   you'll need them for every future update).
-3. Upload the `.aab` to the [Play Console](https://play.google.com/console).
+## Build — iOS (macOS only)
 
-## Updating the app later
-
-Because this is a **live wrapper**, you usually don't need to rebuild
-the APK. Just publish changes on Lovable — users see them instantly.
-
-You only need a new APK when you change:
-- The app icon, splash screen, or name
-- The `capacitor.config.ts` file
-- Native capabilities (camera, push notifications, etc.)
-
-To rebuild after such a change:
 ```bash
-git pull
-npm install
 npm run build
-npx cap sync android
-# then Build → Build APK in Android Studio
+npx cap sync ios
+npx cap open ios
+```
+
+In Xcode:
+
+1. Select the **App** target → **Signing & Capabilities**, choose your
+   Apple Developer team (a free account works for installing on your own
+   device; a paid $99/yr account is required for the App Store).
+2. Pick your connected iPhone (or a simulator) and press **Run** to install.
+3. For the App Store: **Product → Archive → Distribute App → App Store
+   Connect**, then submit in
+   [App Store Connect](https://appstoreconnect.apple.com).
+
+## Updating the apps later
+
+Because this is a **live wrapper**, you usually don't rebuild. Publish on
+Lovable and users see changes instantly.
+
+Rebuild only when you change:
+- app icon, splash screen, or app name
+- `capacitor.config.ts`
+- native capabilities (camera, push notifications, etc.)
+
+```bash
+git pull && npm install && npm run build
+npx cap sync android   # and/or: npx cap sync ios
 ```
 
 ## Switching to a bundled offline app
 
-If you'd rather ship the website inside the APK (works offline, but
-every change needs a new APK), edit `capacitor.config.ts`:
-
-```ts
-// Remove the `server` block entirely. webDir stays as 'dist'.
-```
-
-Then `npm run build && npx cap sync android` and rebuild.
+Remove the `server` block from `capacitor.config.ts` (keep
+`webDir: 'dist'`), then `npm run build && npx cap sync` and rebuild.
+Every content change then needs a new app release.

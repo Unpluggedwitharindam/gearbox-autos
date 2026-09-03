@@ -11,9 +11,15 @@ const config: CapacitorConfig = {
     url: 'https://www.gearboxautos.in',
     cleartext: false,
     androidScheme: 'https',
+    iosScheme: 'https',
   },
   android: {
     allowMixedContent: false,
+  },
+  ios: {
+    contentInset: 'always',
+    limitsNavigationsToAppBoundDomains: false,
+    backgroundColor: '#0a0a0a',
   },
   plugins: {
     SplashScreen: {
@@ -23,6 +29,10 @@ const config: CapacitorConfig = {
       showSpinner: false,
       splashFullScreen: true,
       splashImmersive: true,
+    },
+    StatusBar: {
+      style: 'DARK',
+      backgroundColor: '#0a0a0a',
     },
   },
 };
