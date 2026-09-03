@@ -26,6 +26,7 @@ import { Route as UsedCarsInJamshedpurBrandRouteImport } from './routes/used-car
 import { Route as CarIdRouteImport } from './routes/car.$id'
 import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as AdminInspectionRouteImport } from './routes/admin.inspection'
 import { Route as AdminCarsRouteImport } from './routes/admin.cars'
 import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
 
@@ -115,6 +116,11 @@ const AdminLeadsRoute = AdminLeadsRouteImport.update({
   path: '/leads',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminInspectionRoute = AdminInspectionRouteImport.update({
+  id: '/inspection',
+  path: '/inspection',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminCarsRoute = AdminCarsRouteImport.update({
   id: '/cars',
   path: '/cars',
@@ -141,6 +147,7 @@ export interface FileRoutesByFullPath {
   '/used-cars-in-jamshedpur': typeof UsedCarsInJamshedpurRouteWithChildren
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/cars': typeof AdminCarsRoute
+  '/admin/inspection': typeof AdminInspectionRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/car/$id': typeof CarIdRoute
@@ -161,6 +168,7 @@ export interface FileRoutesByTo {
   '/used-cars-in-jamshedpur': typeof UsedCarsInJamshedpurRouteWithChildren
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/cars': typeof AdminCarsRoute
+  '/admin/inspection': typeof AdminInspectionRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/car/$id': typeof CarIdRoute
@@ -183,6 +191,7 @@ export interface FileRoutesById {
   '/used-cars-in-jamshedpur': typeof UsedCarsInJamshedpurRouteWithChildren
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/cars': typeof AdminCarsRoute
+  '/admin/inspection': typeof AdminInspectionRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/car/$id': typeof CarIdRoute
@@ -206,6 +215,7 @@ export interface FileRouteTypes {
     | '/used-cars-in-jamshedpur'
     | '/admin/bookings'
     | '/admin/cars'
+    | '/admin/inspection'
     | '/admin/leads'
     | '/admin/messages'
     | '/car/$id'
@@ -226,6 +236,7 @@ export interface FileRouteTypes {
     | '/used-cars-in-jamshedpur'
     | '/admin/bookings'
     | '/admin/cars'
+    | '/admin/inspection'
     | '/admin/leads'
     | '/admin/messages'
     | '/car/$id'
@@ -247,6 +258,7 @@ export interface FileRouteTypes {
     | '/used-cars-in-jamshedpur'
     | '/admin/bookings'
     | '/admin/cars'
+    | '/admin/inspection'
     | '/admin/leads'
     | '/admin/messages'
     | '/car/$id'
@@ -391,6 +403,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLeadsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/inspection': {
+      id: '/admin/inspection'
+      path: '/inspection'
+      fullPath: '/admin/inspection'
+      preLoaderRoute: typeof AdminInspectionRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/cars': {
       id: '/admin/cars'
       path: '/cars'
@@ -411,6 +430,7 @@ declare module '@tanstack/react-router' {
 interface AdminRouteChildren {
   AdminBookingsRoute: typeof AdminBookingsRoute
   AdminCarsRoute: typeof AdminCarsRoute
+  AdminInspectionRoute: typeof AdminInspectionRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
   AdminMessagesRoute: typeof AdminMessagesRoute
   AdminIndexRoute: typeof AdminIndexRoute
@@ -419,6 +439,7 @@ interface AdminRouteChildren {
 const AdminRouteChildren: AdminRouteChildren = {
   AdminBookingsRoute: AdminBookingsRoute,
   AdminCarsRoute: AdminCarsRoute,
+  AdminInspectionRoute: AdminInspectionRoute,
   AdminLeadsRoute: AdminLeadsRoute,
   AdminMessagesRoute: AdminMessagesRoute,
   AdminIndexRoute: AdminIndexRoute,
