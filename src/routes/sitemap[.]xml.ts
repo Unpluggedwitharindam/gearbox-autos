@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { listPublicCars } from "@/lib/cars.functions";
+import { brandOf } from "@/lib/seo-areas";
 
 const BASE_URL = "https://gearboxautos.in";
 
@@ -30,7 +31,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           const cars = await listPublicCars();
           const brands = new Set<string>();
           for (const car of cars) {
-            const brand = (car.name.trim().split(/\s+/)[0] || "").toLowerCase();
+            const brand = brandOf(car.name);
             if (brand) brands.add(brand);
           }
           for (const brand of brands) {

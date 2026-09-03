@@ -15,8 +15,26 @@ export const BRAND_NAMES: Record<string, string> = {
   mg: "MG",
 };
 
+const MODEL_TO_BRAND: Record<string, string> = {
+  creta: "hyundai", venue: "hyundai", i10: "hyundai", i20: "hyundai", verna: "hyundai",
+  fortuner: "toyota", innova: "toyota", glanza: "toyota",
+  amaze: "honda", city: "honda", jazz: "honda", "wr-v": "honda",
+  swift: "maruti", dzire: "maruti", baleno: "maruti", wagonr: "maruti", alto: "maruti", ertiga: "maruti", brezza: "maruti",
+  nexon: "tata", harrier: "tata", punch: "tata", altroz: "tata",
+  xuv: "mahindra", scorpio: "mahindra", thar: "mahindra", bolero: "mahindra",
+  seltos: "kia", sonet: "kia", carens: "kia",
+  kwid: "renault", kiger: "renault", captur: "renault", duster: "renault",
+};
+
 export function brandOf(name: string): string {
-  return (name.trim().split(/\s+/)[0] || "").toLowerCase();
+  const words = name.trim().toLowerCase().split(/[\s-]+/).filter(Boolean);
+  for (const w of words) {
+    if (BRAND_NAMES[w]) return w;
+  }
+  for (const w of words) {
+    if (MODEL_TO_BRAND[w]) return MODEL_TO_BRAND[w];
+  }
+  return words[0] ?? "";
 }
 
 export function brandLabel(brand: string): string {
