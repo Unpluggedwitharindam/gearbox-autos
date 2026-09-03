@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { listPublicCars } from "@/lib/cars.functions";
+import { brandOf } from "@/lib/seo-areas";
 
 const BASE_URL = "https://gearboxautos.in";
 
@@ -19,6 +20,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/buy", changefreq: "daily", priority: "0.9" },
           { path: "/inventory", changefreq: "daily", priority: "0.9" },
           { path: "/sell", changefreq: "weekly", priority: "0.9" },
+          { path: "/used-cars-in-jamshedpur", changefreq: "daily", priority: "0.9" },
+          { path: "/sell-car-jamshedpur", changefreq: "weekly", priority: "0.9" },
           { path: "/how-it-works", changefreq: "monthly", priority: "0.6" },
           { path: "/about", changefreq: "monthly", priority: "0.5" },
           { path: "/contact", changefreq: "monthly", priority: "0.6" },
@@ -26,6 +29,18 @@ export const Route = createFileRoute("/sitemap.xml")({
 
         try {
           const cars = await listPublicCars();
+          const brands = new Set<string>();
+          for (const car of cars) {
+            const brand = brandOf(car.name);
+            if (brand) brands.add(brand);
+          }
+          for (const brand of brands) {
+            entries.push({
+              path: `/used-cars-in-jamshedpur/${encodeURIComponent(brand)}`,
+              changefreq: "weekly",
+              priority: "0.8",
+            });
+          }
           for (const car of cars) {
             entries.push({
               path: `/car/${encodeURIComponent(car.slug)}`,
