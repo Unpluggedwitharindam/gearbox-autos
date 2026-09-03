@@ -2,7 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { adminListLeads } from "@/lib/admin.functions";
 
-export const Route = createFileRoute("/admin/leads")({ component: Leads });
+export const Route = createFileRoute("/admin/leads")({
+  head: () => ({
+    meta: [
+      { title: "Sell Leads — Admin — Gearbox Autos" },
+      { name: "description", content: "View and manage sell-your-car leads submitted by sellers to Gearbox Autos in Jamshedpur." },
+    ],
+    links: [{ rel: "canonical", href: "/admin/leads" }],
+  }),
+  component: Leads,
+});
 
 function Leads() {
   const { data = [] } = useQuery({ queryKey: ["admin", "leads"], queryFn: () => adminListLeads() });

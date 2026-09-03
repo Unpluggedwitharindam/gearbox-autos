@@ -8,6 +8,13 @@ import { uploadCarImage } from "@/lib/admin-upload.functions";
 import { WhatsAppShareCarButton } from "@/components/WhatsAppShareCarButton";
 
 export const Route = createFileRoute("/admin/cars")({
+  head: () => ({
+    meta: [
+      { title: "Manage Inventory — Admin — Gearbox Autos" },
+      { name: "description", content: "Admin inventory management for Gearbox Autos used cars in Jamshedpur. Add, edit, activate, and publish car listings with photos and pricing." },
+    ],
+    links: [{ rel: "canonical", href: "/admin/cars" }],
+  }),
   component: AdminCars,
 });
 

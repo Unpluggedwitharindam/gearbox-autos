@@ -2,7 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { adminListMessages } from "@/lib/admin.functions";
 
-export const Route = createFileRoute("/admin/messages")({ component: Messages });
+export const Route = createFileRoute("/admin/messages")({
+  head: () => ({
+    meta: [
+      { title: "Contact Messages — Admin — Gearbox Autos" },
+      { name: "description", content: "Read and manage customer contact messages and enquiries sent to Gearbox Autos." },
+    ],
+    links: [{ rel: "canonical", href: "/admin/messages" }],
+  }),
+  component: Messages,
+});
 
 function Messages() {
   const { data = [] } = useQuery({ queryKey: ["admin", "messages"], queryFn: () => adminListMessages() });

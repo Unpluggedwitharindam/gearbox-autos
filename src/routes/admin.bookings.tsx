@@ -2,7 +2,16 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { adminListBookings } from "@/lib/admin.functions";
 
-export const Route = createFileRoute("/admin/bookings")({ component: Bookings });
+export const Route = createFileRoute("/admin/bookings")({
+  head: () => ({
+    meta: [
+      { title: "Test Drive Bookings — Admin — Gearbox Autos" },
+      { name: "description", content: "Manage test drive booking requests for Gearbox Autos used car inventory in Jamshedpur." },
+    ],
+    links: [{ rel: "canonical", href: "/admin/bookings" }],
+  }),
+  component: Bookings,
+});
 
 function Bookings() {
   const { data = [] } = useQuery({ queryKey: ["admin", "bookings"], queryFn: () => adminListBookings() });
