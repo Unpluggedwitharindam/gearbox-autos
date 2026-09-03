@@ -26,9 +26,9 @@ export const Route = createFileRoute("/used-cars-in-jamshedpur/$brand")({
     };
   },
 
-  loader: async ({ context, params }) => {
+  loader: async ({ context, params }): Promise<{ cars: Car[] }> => {
     const cars = await context.queryClient.ensureQueryData(carsQuery);
-    const matches = cars.filter((c) => brandOf(c.name) === params.brand.toLowerCase());
+    const matches = (cars ?? []).filter((c: Car) => brandOf(c.name) === params.brand.toLowerCase());
     if (matches.length === 0) throw notFound();
     return { cars: matches };
   },
