@@ -28,7 +28,8 @@ export const Route = createFileRoute("/buy")({
 });
 
 function Buy() {
-  const { data: cars = [] } = useQuery({ queryKey: ["cars", "public"], queryFn: () => listPublicCars() });
+  const initialCars = Route.useLoaderData();
+  const { data: cars = [] } = useQuery({ queryKey: ["cars", "public"], queryFn: () => listPublicCars(), initialData: initialCars });
   const [q, setQ] = useState("");
 
   const filtered = useMemo(() => {

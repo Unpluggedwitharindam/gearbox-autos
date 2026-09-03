@@ -38,7 +38,8 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  const { data: cars = [] } = useQuery({ queryKey: ["cars", "public"], queryFn: () => listPublicCars() });
+  const initialCars = Route.useLoaderData();
+  const { data: cars = [] } = useQuery({ queryKey: ["cars", "public"], queryFn: () => listPublicCars(), initialData: initialCars });
   const trayRef = useRef<HTMLDivElement>(null);
 
   const scrollToInventory = () => {
