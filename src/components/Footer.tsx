@@ -34,7 +34,9 @@ export function Footer() {
             <h4 className="text-xs font-bold uppercase tracking-[0.2em] mb-6">Navigation</h4>
             <ul className="space-y-3 text-sm text-muted-foreground uppercase font-semibold tracking-wide">
               <li><Link to="/buy" className="hover:text-primary">Buy a Used Car</Link></li>
+              <li><Link to="/used-cars-in-jamshedpur" className="hover:text-primary">Used Cars in Jamshedpur</Link></li>
               <li><Link to="/sell" className="hover:text-primary">Sell Your Car</Link></li>
+              <li><Link to="/sell-car-jamshedpur" className="hover:text-primary">Sell Car in Jamshedpur</Link></li>
               <li><Link to="/inventory" className="hover:text-primary">Our Inventory</Link></li>
               <li><Link to="/how-it-works" className="hover:text-primary">How It Works</Link></li>
               <li><Link to="/about" className="hover:text-primary">About Us</Link></li>
