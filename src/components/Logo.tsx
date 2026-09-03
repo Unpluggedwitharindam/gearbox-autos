@@ -1,7 +1,12 @@
+import logo from "@/assets/gearbox-logo.png.asset.json";
+
 export function Logo({ className = "" }: { className?: string }) {
   return (
-    <span className={`font-head text-3xl tracking-wider leading-none text-foreground ${className}`}>
-      GEARBOX <span className="text-primary">AUTOS</span>
-    </span>
+    <img
+      src={logo.url}
+      alt="Gearbox Autos"
+      className={`h-9 w-auto object-contain ${className}`}
+      loading="eager"
+    />
   );
 }
