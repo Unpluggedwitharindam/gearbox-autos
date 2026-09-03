@@ -4,3 +4,5 @@ Disallow: /admin
 Disallow: /login
 
 Sitemap: https://gearboxautos.in/sitemap.xml
+
+Disallow: /inspection-tool.html
