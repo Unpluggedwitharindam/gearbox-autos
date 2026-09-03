@@ -9,7 +9,9 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as UsedCarsInJamshedpurRouteImport } from './routes/used-cars-in-jamshedpur'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SellCarJamshedpurRouteImport } from './routes/sell-car-jamshedpur'
 import { Route as SellRouteImport } from './routes/sell'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as InventoryRouteImport } from './routes/inventory'
@@ -20,15 +22,26 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as UsedCarsInJamshedpurBrandRouteImport } from './routes/used-cars-in-jamshedpur.$brand'
 import { Route as CarIdRouteImport } from './routes/car.$id'
 import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
 import { Route as AdminCarsRouteImport } from './routes/admin.cars'
 import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
 
+const UsedCarsInJamshedpurRoute = UsedCarsInJamshedpurRouteImport.update({
+  id: '/used-cars-in-jamshedpur',
+  path: '/used-cars-in-jamshedpur',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   id: '/sitemap.xml',
   path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SellCarJamshedpurRoute = SellCarJamshedpurRouteImport.update({
+  id: '/sell-car-jamshedpur',
+  path: '/sell-car-jamshedpur',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SellRoute = SellRouteImport.update({
@@ -81,6 +94,12 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
+const UsedCarsInJamshedpurBrandRoute =
+  UsedCarsInJamshedpurBrandRouteImport.update({
+    id: '/$brand',
+    path: '/$brand',
+    getParentRoute: () => UsedCarsInJamshedpurRoute,
+  } as any)
 const CarIdRoute = CarIdRouteImport.update({
   id: '/car/$id',
   path: '/car/$id',
@@ -117,12 +136,15 @@ export interface FileRoutesByFullPath {
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
   '/sell': typeof SellRoute
+  '/sell-car-jamshedpur': typeof SellCarJamshedpurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/used-cars-in-jamshedpur': typeof UsedCarsInJamshedpurRouteWithChildren
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/cars': typeof AdminCarsRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/car/$id': typeof CarIdRoute
+  '/used-cars-in-jamshedpur/$brand': typeof UsedCarsInJamshedpurBrandRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
@@ -134,12 +156,15 @@ export interface FileRoutesByTo {
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
   '/sell': typeof SellRoute
+  '/sell-car-jamshedpur': typeof SellCarJamshedpurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/used-cars-in-jamshedpur': typeof UsedCarsInJamshedpurRouteWithChildren
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/cars': typeof AdminCarsRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/car/$id': typeof CarIdRoute
+  '/used-cars-in-jamshedpur/$brand': typeof UsedCarsInJamshedpurBrandRoute
   '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
@@ -153,12 +178,15 @@ export interface FileRoutesById {
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
   '/sell': typeof SellRoute
+  '/sell-car-jamshedpur': typeof SellCarJamshedpurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/used-cars-in-jamshedpur': typeof UsedCarsInJamshedpurRouteWithChildren
   '/admin/bookings': typeof AdminBookingsRoute
   '/admin/cars': typeof AdminCarsRoute
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/car/$id': typeof CarIdRoute
+  '/used-cars-in-jamshedpur/$brand': typeof UsedCarsInJamshedpurBrandRoute
   '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
@@ -173,12 +201,15 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/login'
     | '/sell'
+    | '/sell-car-jamshedpur'
     | '/sitemap.xml'
+    | '/used-cars-in-jamshedpur'
     | '/admin/bookings'
     | '/admin/cars'
     | '/admin/leads'
     | '/admin/messages'
     | '/car/$id'
+    | '/used-cars-in-jamshedpur/$brand'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -190,12 +221,15 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/login'
     | '/sell'
+    | '/sell-car-jamshedpur'
     | '/sitemap.xml'
+    | '/used-cars-in-jamshedpur'
     | '/admin/bookings'
     | '/admin/cars'
     | '/admin/leads'
     | '/admin/messages'
     | '/car/$id'
+    | '/used-cars-in-jamshedpur/$brand'
     | '/admin'
   id:
     | '__root__'
@@ -208,12 +242,15 @@ export interface FileRouteTypes {
     | '/inventory'
     | '/login'
     | '/sell'
+    | '/sell-car-jamshedpur'
     | '/sitemap.xml'
+    | '/used-cars-in-jamshedpur'
     | '/admin/bookings'
     | '/admin/cars'
     | '/admin/leads'
     | '/admin/messages'
     | '/car/$id'
+    | '/used-cars-in-jamshedpur/$brand'
     | '/admin/'
   fileRoutesById: FileRoutesById
 }
@@ -227,17 +264,33 @@ export interface RootRouteChildren {
   InventoryRoute: typeof InventoryRoute
   LoginRoute: typeof LoginRoute
   SellRoute: typeof SellRoute
+  SellCarJamshedpurRoute: typeof SellCarJamshedpurRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  UsedCarsInJamshedpurRoute: typeof UsedCarsInJamshedpurRouteWithChildren
   CarIdRoute: typeof CarIdRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/used-cars-in-jamshedpur': {
+      id: '/used-cars-in-jamshedpur'
+      path: '/used-cars-in-jamshedpur'
+      fullPath: '/used-cars-in-jamshedpur'
+      preLoaderRoute: typeof UsedCarsInJamshedpurRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sitemap.xml': {
       id: '/sitemap.xml'
       path: '/sitemap.xml'
       fullPath: '/sitemap.xml'
       preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sell-car-jamshedpur': {
+      id: '/sell-car-jamshedpur'
+      path: '/sell-car-jamshedpur'
+      fullPath: '/sell-car-jamshedpur'
+      preLoaderRoute: typeof SellCarJamshedpurRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sell': {
@@ -310,6 +363,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/used-cars-in-jamshedpur/$brand': {
+      id: '/used-cars-in-jamshedpur/$brand'
+      path: '/$brand'
+      fullPath: '/used-cars-in-jamshedpur/$brand'
+      preLoaderRoute: typeof UsedCarsInJamshedpurBrandRouteImport
+      parentRoute: typeof UsedCarsInJamshedpurRoute
+    }
     '/car/$id': {
       id: '/car/$id'
       path: '/car/$id'
@@ -366,6 +426,17 @@ const AdminRouteChildren: AdminRouteChildren = {
 
 const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
 
+interface UsedCarsInJamshedpurRouteChildren {
+  UsedCarsInJamshedpurBrandRoute: typeof UsedCarsInJamshedpurBrandRoute
+}
+
+const UsedCarsInJamshedpurRouteChildren: UsedCarsInJamshedpurRouteChildren = {
+  UsedCarsInJamshedpurBrandRoute: UsedCarsInJamshedpurBrandRoute,
+}
+
+const UsedCarsInJamshedpurRouteWithChildren =
+  UsedCarsInJamshedpurRoute._addFileChildren(UsedCarsInJamshedpurRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
@@ -376,7 +447,9 @@ const rootRouteChildren: RootRouteChildren = {
   InventoryRoute: InventoryRoute,
   LoginRoute: LoginRoute,
   SellRoute: SellRoute,
+  SellCarJamshedpurRoute: SellCarJamshedpurRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  UsedCarsInJamshedpurRoute: UsedCarsInJamshedpurRouteWithChildren,
   CarIdRoute: CarIdRoute,
 }
 export const routeTree = rootRouteImport

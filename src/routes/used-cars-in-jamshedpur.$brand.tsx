@@ -3,9 +3,13 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowRight } from "lucide-react";
 import { CarCard } from "@/components/CarCard";
 import { listPublicCars } from "@/lib/cars.functions";
+import type { Car } from "@/lib/cars";
 import { brandOf, brandLabel } from "@/lib/seo-areas";
 
-const carsQuery = { queryKey: ["cars", "public"], queryFn: () => listPublicCars() } as const;
+const carsQuery = {
+  queryKey: ["cars", "public"],
+  queryFn: (): Promise<Car[]> => listPublicCars(),
+};
 
 export const Route = createFileRoute("/used-cars-in-jamshedpur/$brand")({
   head: ({ params }) => {
