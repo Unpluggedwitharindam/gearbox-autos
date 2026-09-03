@@ -37,9 +37,9 @@ export const Route = createFileRoute("/used-cars-in-jamshedpur/$brand")({
 });
 
 function BrandPage() {
-  const { cars } = Route.useLoaderData();
-  useSuspenseQuery(carsQuery); // keep client cache warm
   const { brand } = Route.useParams();
+  const { data: allCars = [] } = useSuspenseQuery(carsQuery);
+  const cars = allCars.filter((c: Car) => brandOf(c.name) === brand.toLowerCase());
   const label = brandLabel(brand);
 
   return (
