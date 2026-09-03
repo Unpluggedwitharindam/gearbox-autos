@@ -6,7 +6,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { checkIsAdmin } from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/admin")({
-  head: () => ({ meta: [{ title: "Admin — Gearbox Autos" }] }),
+  head: () => ({
+    meta: [
+      { title: "Admin Dashboard — Gearbox Autos" },
+      { name: "description", content: "Gearbox Autos admin dashboard. Manage used car inventory, sell leads, test drive bookings, and customer messages for the Jamshedpur dealership." },
+    ],
+    links: [{ rel: "canonical", href: "/admin" }],
+  }),
   component: AdminLayout,
 });
 
