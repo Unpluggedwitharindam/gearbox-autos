@@ -9,7 +9,11 @@
     "build:dev": "vite build --mode development",
     "preview": "vite preview",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "app:setup": "cap add android",
+    "app:icons": "capacitor-assets generate --android",
+    "app:sync": "npm run build && cap sync android",
+    "app:open": "cap open android"
   },
   "dependencies": {
     "@capacitor/android": "^8.3.4",
@@ -76,6 +80,7 @@
     "zod": "^3.24.2"
   },
   "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
     "@eslint/js": "^9.32.0",
     "@lovable.dev/vite-tanstack-config": "2.13.1",
     "@types/node": "^22.16.5",
