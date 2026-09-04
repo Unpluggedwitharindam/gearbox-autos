@@ -124,6 +124,7 @@ https://play.google.com/console (one-time $25 Google developer account).
 
 | Problem | Fix |
 |---|---|
+| `npm error Missing script: "app:sync"` | Your copy of the code is old. In the command window run `git pull` and try again. If that fails, delete the folder and repeat Step 5 to clone fresh. |
 | `npm is not recognized` | Close and reopen the command window. If still broken, reinstall Node.js (Step 1) and restart the PC. |
 | `git is not recognized` | Reinstall Git (Step 2), restart the command window. |
 | Android Studio shows errors on open | Wait — it's still downloading components. Look at the bottom progress bar. |
