@@ -67,25 +67,13 @@ npm install
 ```
 (Wait 2–5 minutes. Warnings in yellow are normal.)
 
-### Step 7: Create the Android app files
-
-```
-npm run app:setup
-```
-
-### Step 8: Add the app icon and splash screen
-
-```
-npm run app:icons
-```
-
-### Step 9: Sync everything
+### Step 7: Sync everything
 
 ```
 npm run app:sync
 ```
 
-### Step 10: Open the app in Android Studio
+### Step 8: Open the app in Android Studio
 
 ```
 npm run app:open
@@ -94,7 +82,7 @@ npm run app:open
 Android Studio opens. **Wait** until the bar at the bottom says nothing is
 running anymore ("Gradle sync" finished — can take 5–15 minutes the first time).
 
-### Step 11: Build the APK file
+### Step 9: Build the APK file
 
 In Android Studio's top menu:
 
