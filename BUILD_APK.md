@@ -127,5 +127,5 @@ https://play.google.com/console (one-time $25 Google developer account).
 | `npm is not recognized` | Close and reopen the command window. If still broken, reinstall Node.js (Step 1) and restart the PC. |
 | `git is not recognized` | Reinstall Git (Step 2), restart the command window. |
 | Android Studio shows errors on open | Wait — it's still downloading components. Look at the bottom progress bar. |
-| "SDK location not found" | In Android Studio: File → Settings → search "SDK" → install Android SDK, then try Step 11 again. |
+| "SDK location not found" | In Android Studio: File → Settings → search "SDK" → install Android SDK, then try Step 9 again. |
 | App shows old website | The app loads the live site — publish your changes on Lovable and reopen the app. |
