@@ -81,8 +81,8 @@ function Index() {
         <div className="md:col-span-2 bg-card relative overflow-hidden group min-h-[220px]">
           <img
             src={hero}
-            alt="Premium used car from the Gearbox Autos inventory"
-            className="h-full w-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-90 transition-all duration-700"
+            alt="Gearbox Autos showroom in Sonari, Jamshedpur with cars parked outside"
+            className="h-full w-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
           <div className="absolute bottom-6 left-6">
