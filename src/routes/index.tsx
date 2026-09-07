@@ -2,7 +2,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { useRef } from "react";
 import { useQuery } from "@tanstack/react-query";
-import hero from "@/assets/hero-bmw-x5.jpg";
+import heroAsset from "@/assets/showroom-hero.jpg.asset.json";
+const hero = heroAsset.url;
 import { CarCard } from "@/components/CarCard";
 import { listPublicCars } from "@/lib/cars.functions";
 
