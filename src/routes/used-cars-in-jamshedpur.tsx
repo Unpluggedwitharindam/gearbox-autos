@@ -29,7 +29,7 @@ export const Route = createFileRoute("/used-cars-in-jamshedpur")({
           telephone: "+91-90655-91253",
           address: {
             "@type": "PostalAddress",
-            streetAddress: "4/9 Awas Tower, Sonari",
+            streetAddress: "Near Golden Town, opp. BSS School, Adarsh Nagar, Sonari",
             addressLocality: "Jamshedpur",
             addressRegion: "Jharkhand",
             addressCountry: "IN",
@@ -57,7 +57,7 @@ function UsedCarsJamshedpur() {
       <p className="mt-5 text-muted-foreground max-w-2xl leading-relaxed">
         Looking to buy a second hand car in Jamshedpur? Gearbox Autos lists fully verified used cars from local
         owners — every vehicle is inspected, documents are checked, and you deal directly with the owner at{" "}
-        <strong className="text-foreground">0% commission</strong>. Visit our showroom at 4/9 Awas Tower, Sonari, or
+        <strong className="text-foreground">0% commission</strong>. Visit our showroom near Golden Town, opp. BSS School, Adarsh Nagar, Sonari, or
         book a free test drive on any listing below.
       </p>
 
