@@ -25,7 +25,7 @@ export function Footer() {
           <div>
             <h4 className="text-xs font-bold uppercase tracking-[0.2em] mb-6">Showroom</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              <li className="flex items-start gap-2"><span className="text-primary font-bold">A:</span><span>4/9 Awas Tower, Sonari,<br />Jamshedpur, Jharkhand</span></li>
+              <li className="flex items-start gap-2"><span className="text-primary font-bold">A:</span><span>GEARBOX AUTOS, Near Golden Town, opp. BSS School,<br />Adarsh Nagar, Sonari, Jamshedpur, Jharkhand 831011</span></li>
               <li className="flex items-center gap-2"><span className="text-primary font-bold">T:</span><span>+91 90655 91253</span></li>
               <li className="flex items-start gap-2"><span className="text-primary font-bold">E:</span><span className="break-all">gearboxautotechgbat@gmail.com</span></li>
             </ul>

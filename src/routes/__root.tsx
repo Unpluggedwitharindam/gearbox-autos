@@ -127,8 +127,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           ],
           address: {
             "@type": "PostalAddress",
+            streetAddress: "GEARBOX AUTOS, Near Golden Town, opp. BSS School, Adarsh Nagar, Sonari",
             addressLocality: "Jamshedpur",
             addressRegion: "Jharkhand",
+            postalCode: "831011",
             addressCountry: "IN",
           },
           sameAs: ["https://www.instagram.com/gearbox_autos"],

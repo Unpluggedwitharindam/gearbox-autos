@@ -44,7 +44,7 @@ function Contact() {
             {[
               { Icon: Phone, label: "Phone", value: "+91 90655 91253" },
               { Icon: Mail, label: "Email", value: "gearboxautotechgbat@gmail.com" },
-              { Icon: MapPin, label: "Address", value: "4/9 Awas Tower, Sonari, Jamshedpur" },
+              { Icon: MapPin, label: "Address", value: "GEARBOX AUTOS, Near Golden Town, opp. BSS School, Adarsh Nagar, Sonari, Jamshedpur, Jharkhand 831011" },
             ].map((r) => (
               <div key={r.label} className="surface p-4 flex items-center gap-4">
                 <r.Icon className="h-5 w-5 text-primary" />
