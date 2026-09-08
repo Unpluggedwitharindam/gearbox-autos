@@ -1,0 +1,546 @@
+{
+  "meta": {
+    "name": "gearbox autos",
+    "package": "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558",
+    "version": "1.0.0",
+    "framework": "react",
+    "css_framework": "tailwind",
+    "starter_template": "custom_design_system_tailwind",
+    "theme_files": [
+      "src/styles.css"
+    ],
+    "source_type": "local",
+    "source_manifest": {
+      "#enrichment": "5cbf5dc51d6753a6b54757a71e40876205e112dc33026cf9be19581dd71b3a0e",
+      ".gitignore": "6d9e901a692b46a83707c245fb03bc91",
+      ".lovable/plan.md": "ba25eb33f81b48d59271ee5692bc1afe",
+      ".lovable/project.json": "b60a4e3c0d4cde0e87e00b1d1b82a55b",
+      ".prettierignore": "7279a476f196a2da5f7edd18db568dc6",
+      ".prettierrc": "185ef0234746ab738ac1ab6cec5e2bd9",
+      "BUILD_APK.md": "acefb5ee49fa3a9774e31e122bc8a1cf",
+      "MOBILE_APP.md": "e7cb5d1f96d0012f0dd68df0ca97f5f8",
+      "README.md": "4260b874ff768fd35fea34935980e5e9",
+      "android/.gitignore": "3b32d4444aec69367c207fac5a7a7c21",
+      "android/app/.gitignore": "9b42dc175edf959773d592d02297bf8d",
+      "android/app/build.gradle": "0bcda99ed50719f60509ab7193f3ad48",
+      "android/app/proguard-rules.pro": "adf6f233b18261975991f1825834afc7",
+      "android/app/src/androidTest/java/com/getcapacitor/myapp/ExampleInstrumentedTest.java": "fbaf7cc870c663eb52dcf218531c439d",
+      "android/app/src/main/AndroidManifest.xml": "d1d8f9b0a3c0c486539c9a00b92c5677",
+      "android/app/src/main/java/com/gearboxautos/app/MainActivity.java": "92463a94d2082ea21cf81babda3918b1",
+      "android/app/src/main/res/drawable-land-hdpi/splash.png": "fa39c499efb7672925b7e661ac9c11ac",
+      "android/app/src/main/res/drawable-land-ldpi/splash.png": "d532aca83cbcf1a766e8ed2f8d9a28bb",
+      "android/app/src/main/res/drawable-land-mdpi/splash.png": "e0541ccc38694e626cfcaa93bd05a5cb",
+      "android/app/src/main/res/drawable-land-night-hdpi/splash.png": "fa39c499efb7672925b7e661ac9c11ac",
+      "android/app/src/main/res/drawable-land-night-ldpi/splash.png": "d532aca83cbcf1a766e8ed2f8d9a28bb",
+      "android/app/src/main/res/drawable-land-night-mdpi/splash.png": "e0541ccc38694e626cfcaa93bd05a5cb",
+      "android/app/src/main/res/drawable-land-night-xhdpi/splash.png": "3ecf77e6d77dc2bbdb27282689774e47",
+      "android/app/src/main/res/drawable-land-night-xxhdpi/splash.png": "ec303cc2e83082001f7ebe4c88654c29",
+      "android/app/src/main/res/drawable-land-night-xxxhdpi/splash.png": "7cf57b47730262a79b41cbe3660e615d",
+      "android/app/src/main/res/drawable-land-xhdpi/splash.png": "3ecf77e6d77dc2bbdb27282689774e47",
+      "android/app/src/main/res/drawable-land-xxhdpi/splash.png": "ec303cc2e83082001f7ebe4c88654c29",
+      "android/app/src/main/res/drawable-land-xxxhdpi/splash.png": "7cf57b47730262a79b41cbe3660e615d",
+      "android/app/src/main/res/drawable-night/splash.png": "d532aca83cbcf1a766e8ed2f8d9a28bb",
+      "android/app/src/main/res/drawable-port-hdpi/splash.png": "7808299a7a10534df62d27875d3ad723",
+      "android/app/src/main/res/drawable-port-ldpi/splash.png": "f202d69ccf11eb71ae50f6dfbbbe1532",
+      "android/app/src/main/res/drawable-port-mdpi/splash.png": "b3c9ebee6cad72e8edd1235032866702",
+      "android/app/src/main/res/drawable-port-night-hdpi/splash.png": "7808299a7a10534df62d27875d3ad723",
+      "android/app/src/main/res/drawable-port-night-ldpi/splash.png": "f202d69ccf11eb71ae50f6dfbbbe1532",
+      "android/app/src/main/res/drawable-port-night-mdpi/splash.png": "b3c9ebee6cad72e8edd1235032866702",
+      "android/app/src/main/res/drawable-port-night-xhdpi/splash.png": "96490e6ce519c60ee10583b70fb8f6fc",
+      "android/app/src/main/res/drawable-port-night-xxhdpi/splash.png": "0aecd2d7d6724aa0f48de4fa7aca2a24",
+      "android/app/src/main/res/drawable-port-night-xxxhdpi/splash.png": "05301e1851879ac7a0e4d79651893af9",
+      "android/app/src/main/res/drawable-port-xhdpi/splash.png": "96490e6ce519c60ee10583b70fb8f6fc",
+      "android/app/src/main/res/drawable-port-xxhdpi/splash.png": "0aecd2d7d6724aa0f48de4fa7aca2a24",
+      "android/app/src/main/res/drawable-port-xxxhdpi/splash.png": "05301e1851879ac7a0e4d79651893af9",
+      "android/app/src/main/res/drawable-v24/ic_launcher_foreground.xml": "53a6c064d1f26ae56bf3803c51c7af2e",
+      "android/app/src/main/res/drawable/ic_launcher_background.xml": "04116413bdb242080a5cb731e7c192e5",
+      "android/app/src/main/res/drawable/splash.png": "b3c9ebee6cad72e8edd1235032866702",
+      "android/app/src/main/res/layout/activity_main.xml": "e90567494113cdcc5c7375afaa5c5c6a",
+      "android/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml": "8959ca1d4dfb7851bbc880baae36d7d1",
+      "android/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml": "8959ca1d4dfb7851bbc880baae36d7d1",
+      "android/app/src/main/res/mipmap-hdpi/ic_launcher.png": "b188dca3cd507ad6ac31247540795fd2",
+      "android/app/src/main/res/mipmap-hdpi/ic_launcher_background.png": "bc7c934a61eae7bcc611704b0c5b2d5f",
+      "android/app/src/main/res/mipmap-hdpi/ic_launcher_foreground.png": "965530cac9f71c15f7933b875ded0cac",
+      "android/app/src/main/res/mipmap-hdpi/ic_launcher_round.png": "04232150f982a3d0c9aefa7899f42556",
+      "android/app/src/main/res/mipmap-ldpi/ic_launcher.png": "528587837709a068d0904f10d275a016",
+      "android/app/src/main/res/mipmap-ldpi/ic_launcher_background.png": "3d6b120d600c303583d5269332817c91",
+      "android/app/src/main/res/mipmap-ldpi/ic_launcher_foreground.png": "359ca27cb4d6faacce7e190595b5c7b2",
+      "android/app/src/main/res/mipmap-ldpi/ic_launcher_round.png": "c0d525f08d69bd31f4a83edc15bb88d0",
+      "android/app/src/main/res/mipmap-mdpi/ic_launcher.png": "b895b3b1886a14cb14ae08a75b27b092",
+      "android/app/src/main/res/mipmap-mdpi/ic_launcher_background.png": "615b60ec33c56761f38852305c1b8e47",
+      "android/app/src/main/res/mipmap-mdpi/ic_launcher_foreground.png": "3564d535b127a62c6c427d2a156e5774",
+      "android/app/src/main/res/mipmap-mdpi/ic_launcher_round.png": "bf60e9df397d82d436afa6a4bf6f0332",
+      "android/app/src/main/res/mipmap-xhdpi/ic_launcher.png": "a7c619272ff9a11970a385537a24b21b",
+      "android/app/src/main/res/mipmap-xhdpi/ic_launcher_background.png": "9e1ec3df60917bce2c31aa8665afe21e",
+      "android/app/src/main/res/mipmap-xhdpi/ic_launcher_foreground.png": "a7377e8f3e1c0df0b09a4f1f7fe2ee55",
+      "android/app/src/main/res/mipmap-xhdpi/ic_launcher_round.png": "06c4a4e37ceb6c0b7d75e9870c1afd44",
+      "android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png": "e5c6cb3067004fc12e40ba64138acb28",
+      "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_background.png": "5e809f15c5299495e990916334965946",
+      "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_foreground.png": "4208011a90ac1774bb413fedb34414ac",
+      "android/app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png": "d66f5f909484466ff12d09c8f6e75ea5",
+      "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png": "c998bce404b0d73c1d41a95b2429fba7",
+      "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_background.png": "2a2b548e7cb1ac0c3b0b2019cde4c5b7",
+      "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_foreground.png": "323051cb176e5950f717c212f17b4915",
+      "android/app/src/main/res/mipmap-xxxhdpi/ic_launcher_round.png": "27c4f3dc8046436e50459f7c12752687",
+      "android/app/src/main/res/values/ic_launcher_background.xml": "5be7ddce2ded77e31bf239689008eb7b",
+      "android/app/src/main/res/values/strings.xml": "555ede930a8673248cc530ddd305e848",
+      "android/app/src/main/res/values/styles.xml": "27f54b0c2231b4b9111b295e52c7c26f",
+      "android/app/src/main/res/xml/file_paths.xml": "7d26940811a3a4901e3ae59629b36242",
+      "android/app/src/test/java/com/getcapacitor/myapp/ExampleUnitTest.java": "e91b4501c14da821682fa5c26a16d616",
+      "android/build.gradle": "682315a426653617c6a74fc12bef55b6",
+      "android/gradle.properties": "f98c2b8e37a22f1c24b47bea9c90fed1",
+      "android/gradle/wrapper/gradle-wrapper.jar": "15a2cd45cb049056c465b481d6eabb3c",
+      "android/gradle/wrapper/gradle-wrapper.properties": "b36518772e2fbdd2ea85192b1d327884",
+      "android/gradlew": "794669d78aef1dd5c7d889ef618b311a",
+      "android/gradlew.bat": "7dd1a1fde1043efef3d624e3cb720522",
+      "android/settings.gradle": "f6cd925b3f859e23c3d819fe2459e0e4",
+      "android/variables.gradle": "4b3fce8ea2a515a9d2e47e74757172ec",
+      "assets/icon.png": "839de37894f0ed2768ca3bfa6a75535b",
+      "assets/splash-dark.png": "ed3f2f1a90454b80824e559e90346903",
+      "assets/splash.png": "ed3f2f1a90454b80824e559e90346903",
+      "bunfig.toml": "609312c3234a5d0450187b5bf8a1daf8",
+      "capacitor.config.ts": "09d240d1333470b9f7f8dc8498f1879b",
+      "components.json": "30d3d035361ce807021f5c54620962e9",
+      "eslint.config.js": "345bdd57e188e0e4525edcd00e5003f5",
+      "gearbox-autos-main.zip": "f1802f05ca2731eca60278117c80bdbf",
+      "package.json": "b8b7502c9dd09f647e1f601b9e976689",
+      "public/favicon.png": "1c97abf0e1509f41a5024d51fc3f60e2",
+      "public/inspection-tool.html": "4e8dec89c3b755525a12f0759751802f",
+      "public/robots.txt": "68c309344b77bf111c74792ca17efd56",
+      "src/assets/about-jsr.png": "d1a4f91e0ec6ecb94a28018d90ee4035",
+      "src/assets/car-amaze-black.jpg": "ea0165c375b0e91fa9c7183247049d24",
+      "src/assets/car-amaze-brown.jpg": "ef66fb10318c21dfecd7b185ea4251d3",
+      "src/assets/car-creta-front.jpg": "c5b6832dc6f1dc4b361a78132e492707",
+      "src/assets/car-creta.jpg": "74f87495dc10f701d727a2cc4f12b3bd",
+      "src/assets/car-dzire.jpg": "d69090e5381502545508d079d62cd49c",
+      "src/assets/car-fortuner.jpg": "44790e67da3ca490fca59636350fa3d0",
+      "src/assets/car-xuv500.jpg": "52b0701e64f7a85067a6bf1e406af587",
+      "src/assets/contact-creta.png": "6882bcaca45dcb90fb8b744e0a53c4e8",
+      "src/assets/gearbox-logo.png.asset.json": "267bfd1025ac935876e021dac154e87a",
+      "src/assets/hero-bmw-x5.jpg": "7b3d6203421d0acfd5fea82704937f2c",
+      "src/assets/hero-defender.png": "1723b1d15aa75b1019cf595db8966fe7",
+      "src/assets/inventory-hero.png": "146f4e589976aadeae3845f530c238eb",
+      "src/assets/sell-bg.png": "f6c83b4411df6a3e6686382ea8030790",
+      "src/assets/showroom-hero.jpg.asset.json": "9dfdf63369316bb705906bfb5ab6c0dd",
+      "src/assets/verna.png": "5f32ad72ee6e7b949c08359c224c4aba",
+      "src/components/CarCard.tsx": "3433500f59377157e68396c9740cf551",
+      "src/components/CarImageCarousel.tsx": "212ded107144117d203ddf987e0b9901",
+      "src/components/Footer.tsx": "54b883ed03fbf03cc9c808e64db13697",
+      "src/components/Header.tsx": "fedd73164b550bfba3515718ada88584",
+      "src/components/Logo.tsx": "2a15d938086a02c634e5643a509e8ebd",
+      "src/components/ShareButton.tsx": "6c668875da86f52bccded9f9f17f8df4",
+      "src/components/SocialFloat.tsx": "eac02905836758ece73d9ade7af38f96",
+      "src/components/TrustBar.tsx": "8f5929c7278d5e3778c79b7ed94cd5db",
+      "src/components/WhatsAppShareCarButton.tsx": "2fdce76be0b53a2a9d0e50329e3cd654",
+      "src/components/ui/accordion.tsx": "55f9dda62b4e3913c9b23e5015a86aef",
+      "src/components/ui/alert-dialog.tsx": "96350e949e9b7b674545430a410ab89c",
+      "src/components/ui/alert.tsx": "f993d7e96b1e25ce50e68ed97e11d2a8",
+      "src/components/ui/aspect-ratio.tsx": "c5c364545e1b25a94e9e752cd67ad048",
+      "src/components/ui/avatar.tsx": "72989cd32f72c4122802540ef32525a5",
+      "src/components/ui/badge.tsx": "81cade001fc4260f9943e18dcd79449b",
+      "src/components/ui/breadcrumb.tsx": "bb9ac254f12662b20d5d50b84308bf3a",
+      "src/components/ui/button.tsx": "7d07d520f486b12bd47373d694ecd2ee",
+      "src/components/ui/calendar.tsx": "415d91d7006d4cc654e27620fca340f6",
+      "src/components/ui/card.tsx": "d6c48ea36221b9cdc3576d305d12d5d5",
+      "src/components/ui/carousel.tsx": "e324c68ae00cd5aed49317638abd429a",
+      "src/components/ui/chart.tsx": "6a3baf94f2e89f1f97d4d7a28f3622d2",
+      "src/components/ui/checkbox.tsx": "f78aac270ca482c8c2cb907ef6260462",
+      "src/components/ui/collapsible.tsx": "767631bbc344945c236f185f4078d71d",
+      "src/components/ui/command.tsx": "014782599cc838b021ec68b07ad4ea02",
+      "src/components/ui/context-menu.tsx": "e9d689beb53d9adb63165bfe64838bf6",
+      "src/components/ui/dialog.tsx": "ef4fe8e7de8675730afe3d633b260e09",
+      "src/components/ui/drawer.tsx": "8be333e8fd8e42576b1b5f72f07f4337",
+      "src/components/ui/dropdown-menu.tsx": "32156e221f3473280114c80fdb818829",
+      "src/components/ui/form.tsx": "1b0aa6302b9017ea2a1307c22a1d2983",
+      "src/components/ui/hover-card.tsx": "1442794c5ca2a78d69e4e613b315ed3d",
+      "src/components/ui/input-otp.tsx": "58cff10c8942cac8483c0bcd65d39d3c",
+      "src/components/ui/input.tsx": "1d4cc52a4cd8afb3e18e45bda942bb8a",
+      "src/components/ui/label.tsx": "7e35df4ca8edd0835efd97ca7937ef92",
+      "src/components/ui/menubar.tsx": "5870465653e12c3d0e35a2fad6f9faa9",
+      "src/components/ui/navigation-menu.tsx": "e85351147a02b29577ff83d188b63c24",
+      "src/components/ui/pagination.tsx": "fac6cdbb4bbf78b273d85cd36d6cbb49",
+      "src/components/ui/popover.tsx": "f18aa1da2144f25ee60795c539c51bcd",
+      "src/components/ui/progress.tsx": "55c462e5c9dd678dcf2c0c510b014ac4",
+      "src/components/ui/radio-group.tsx": "0e1ace237a5da3197e3eb1e6683faba9",
+      "src/components/ui/resizable.tsx": "d9fcb9203c749fcab4e125a99bb12a86",
+      "src/components/ui/scroll-area.tsx": "87b65d3eb26f2b02ff35a7acea585ba5",
+      "src/components/ui/select.tsx": "31ea1bbd6671833b010b2e852c8a55d0",
+      "src/components/ui/separator.tsx": "433d163c4ffa00b59398a0c293198b5e",
+      "src/components/ui/sheet.tsx": "0221fbf97b69611b47fcbc10bb27669a",
+      "src/components/ui/sidebar.tsx": "83c1623eb50ebc370d7b1b84a542e369",
+      "src/components/ui/skeleton.tsx": "41b182e6e2fc3805960d41e767d4a972",
+      "src/components/ui/slider.tsx": "4752f1bfa26426988d325599e01c335b",
+      "src/components/ui/sonner.tsx": "97f59f60be3413196d095fcbf7383216",
+      "src/components/ui/switch.tsx": "82f5d8b0c59bb7ff305caa9f502e79ff",
+      "src/components/ui/table.tsx": "7cc889989d53894b659903c73aded96e",
+      "src/components/ui/tabs.tsx": "56e725558c2ce72c18243bf51717f385",
+      "src/components/ui/textarea.tsx": "c7aad96fb9545210d53135a96c76ed6b",
+      "src/components/ui/toggle-group.tsx": "ac26383acf721d116ca8e3ab5c5355d5",
+      "src/components/ui/toggle.tsx": "ee8c5adac74e7242b85b544db1a8fbad",
+      "src/components/ui/tooltip.tsx": "67d71db5a1ab935695d1def497f5b8a6",
+      "src/hooks/use-auth.ts": "905c6e6415997c64a4a4050c57596da0",
+      "src/hooks/use-mobile.tsx": "c0a0bdd4638c391a1dd06ac82074e60b",
+      "src/integrations/lovable/index.ts": "2b281422ef62231e654f8668addb90a5",
+      "src/integrations/supabase/auth-attacher.ts": "dad043cda134d909e52de0346c16625e",
+      "src/integrations/supabase/auth-middleware.ts": "07a7c39fd62f38075d67d5aa0cb189ae",
+      "src/integrations/supabase/client.server.ts": "24c2f9d3dadbb91e13970a31918bc153",
+      "src/integrations/supabase/client.ts": "3a64714432051d16e6cacf8c69945f67",
+      "src/integrations/supabase/previewAuthStorage.ts": "bc45a76c9242c4b85d6d4345625c46e9",
+      "src/integrations/supabase/types.ts": "10b29d21526b0fc8eb12914537de97b6",
+      "src/lib/admin-upload.functions.ts": "e72c291d21f139ce7e954990d268ec49",
+      "src/lib/admin.functions.ts": "c619c3b555cf9fcb7d622c08dee94b64",
+      "src/lib/cars.functions.ts": "c5af9693d0278c0ee0ebab5903dbc30b",
+      "src/lib/cars.ts": "8f1554d412cd0cd2b16aa2af4644291d",
+      "src/lib/error-capture.ts": "00e77bfacfb2d79c0816361e678f1b65",
+      "src/lib/error-page.ts": "8da0ddd7569bac2676b9a5c8edff8a36",
+      "src/lib/leads.functions.ts": "71242b022045af8988bbccb635a59b6b",
+      "src/lib/seo-areas.ts": "6e3c5ae87c43131f6c9abc7ea12b18d1",
+      "src/lib/social.functions.ts": "fd0d15147f18d918b768c5ae25679409",
+      "src/lib/utils.ts": "d9837f38cc05303254571985e3164050",
+      "src/routeTree.gen.ts": "4ac1df727462277884a7265371e8b375",
+      "src/router.tsx": "8f905e713b0eba7fa8148b7995a708c9",
+      "src/routes/__root.tsx": "0c6766c1ded1f67399a4c30a53196a6b",
+      "src/routes/about.tsx": "6d08d982d8fce4255889819e8e50442a",
+      "src/routes/admin.bookings.tsx": "133e9495e2f1413eddf9379bcf5f9a11",
+      "src/routes/admin.cars.tsx": "67b6d9c4876b0da067e34dcdb9199d57",
+      "src/routes/admin.index.tsx": "ee7a059e4f74b0b981159e117d1d95fa",
+      "src/routes/admin.inspection.tsx": "ce1a952b2e7db7c6d8ef44cf66f52877",
+      "src/routes/admin.leads.tsx": "05fad8be34c93e129fa602c29e3824b1",
+      "src/routes/admin.messages.tsx": "efdeeffdd0fa7ec7262476c527695033",
+      "src/routes/admin.tsx": "a0e8e402b7e599a711e631609a2094be",
+      "src/routes/buy.tsx": "da885be2b0224857725ef92b6ff69ca1",
+      "src/routes/car.$id.tsx": "4cb05dbbeaa61eeaa639fee20819f66b",
+      "src/routes/contact.tsx": "cefe4529b0eee26487720f2adfea80ca",
+      "src/routes/garage.tsx": "1d3b025ab9cdee47cfbc800468d6ee9f",
+      "src/routes/how-it-works.tsx": "088cc2e24fdb9e2ee1b662ef245a9d4e",
+      "src/routes/index.tsx": "650a45baf44addfa99c04092cb9965e5",
+      "src/routes/inventory.tsx": "98ed4f20ae4bffe69d72f1362ac54caa",
+      "src/routes/login.tsx": "444e913a4a7246a13185a4dce52bb535",
+      "src/routes/sell-car-jamshedpur.tsx": "0f41750747449849f096aef503ae5141",
+      "src/routes/sell.tsx": "353cf213b6f853224b2467b4f252a978",
+      "src/routes/sitemap[.]xml.ts": "ae3ce8e33ba72e6dbd04994e77c8fd3c",
+      "src/routes/used-cars-in-jamshedpur.$brand.tsx": "e2eab23b04767a5f5b5868e29e5b8fcc",
+      "src/routes/used-cars-in-jamshedpur.tsx": "12cbab78d241a0b7cbdfc611ba1ee20a",
+      "src/server.ts": "edf79441f61250912b741dca91b0adb0",
+      "src/start.ts": "5095495bc44763efe9c3f3ecd394d2b9",
+      "src/styles.css": "607525ad65da95f2dc3fc0ab9f34d12c",
+      "supabase/config.toml": "fc44f59026fb9d10b0a4fe3df3ff4319",
+      "supabase/migrations/20260526071915_3f243e14-6d97-48e6-9094-2ea0c6b801cc.sql": "7461b1617c3b0aed49de8ba9b17a58b8",
+      "supabase/migrations/20260526072004_eec22fa9-2c80-402e-926d-2d4fdfcfa71b.sql": "1f0e9e5072059d6f85defcd61b92fb33",
+      "supabase/migrations/20260526072026_7de54be8-af0b-41c3-ab4c-dba40c3b808b.sql": "9e74cf2cd1c8786b2908e659307f89bb",
+      "supabase/migrations/20260526095226_edfe35c3-a4c3-4c54-a095-0a9b46329fc8.sql": "8264e3b007271923a6ba97a136bd7611",
+      "supabase/migrations/20260526095748_454b9444-6d48-46eb-8055-b066b82b0291.sql": "83a635eaf82544d919a8ed022b3b0860",
+      "supabase/migrations/20260526095808_c32ff012-3fa9-437b-be26-c65556fcd222.sql": "00d1a635f8c3b2e757ed8dbf7621e0f6",
+      "supabase/migrations/20260526103303_3cc96eed-4996-44f7-acac-41689e47ad04.sql": "4a76826f1ad80e2d1fe6da766064caa7",
+      "supabase/migrations/20260526103324_3bf6987a-1129-41df-a329-c153c8cada2b.sql": "324ca171b7025e711fc4f449c3f064ff",
+      "tsconfig.json": "994abf64c2b9f78b568879f80ed0170e",
+      "vite.config.ts": "b34d45c1ec804af27126cb2a0af9d295",
+      "wrangler.jsonc": "7ebf8621e6c6742973656e13b1f95abe"
+    },
+    "pipeline_version": 8
+  },
+  "tokens": {
+    "color": [
+      {
+        "name": "--background",
+        "raw": "oklch(0.145 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--foreground",
+        "raw": "oklch(0.965 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--card",
+        "raw": "oklch(0.198 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--card-foreground",
+        "raw": "oklch(0.965 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--popover",
+        "raw": "oklch(0.213 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--popover-foreground",
+        "raw": "oklch(0.965 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--primary",
+        "raw": "oklch(0.795 0.163 82.5)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--primary-foreground",
+        "raw": "oklch(0.145 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--secondary",
+        "raw": "oklch(0.248 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--secondary-foreground",
+        "raw": "oklch(0.965 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--muted",
+        "raw": "oklch(0.213 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--muted-foreground",
+        "raw": "oklch(0.63 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--accent",
+        "raw": "oklch(0.795 0.163 82.5)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--accent-foreground",
+        "raw": "oklch(0.145 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--destructive",
+        "raw": "oklch(0.585 0.216 27.5)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--destructive-foreground",
+        "raw": "oklch(0.99 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--border",
+        "raw": "oklch(0.30 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--input",
+        "raw": "oklch(0.21 0 0)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--ring",
+        "raw": "oklch(0.795 0.163 82.5)",
+        "source": "src/styles.css"
+      }
+    ],
+    "typography": [
+      {
+        "name": "--font-display",
+        "raw": "\"Anton\", \"Oswald\", ui-sans-serif, system-ui, sans-serif",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--font-head",
+        "raw": "\"Oswald\", ui-sans-serif, system-ui, sans-serif",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--font-sans",
+        "raw": "\"Montserrat\", ui-sans-serif, system-ui, sans-serif",
+        "source": "src/styles.css"
+      }
+    ],
+    "radius": [
+      {
+        "name": "--radius-sm",
+        "raw": "calc(var(--radius) - 4px)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--radius-md",
+        "raw": "calc(var(--radius) - 2px)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--radius-xl",
+        "raw": "calc(var(--radius) + 4px)",
+        "source": "src/styles.css"
+      },
+      {
+        "name": "--radius",
+        "raw": "0.3rem",
+        "source": "src/styles.css"
+      }
+    ]
+  },
+  "components": [
+    {
+      "name": "CarCard",
+      "file": "src/components/CarCard",
+      "import_path": ""
+    },
+    {
+      "name": "CarImageCarousel",
+      "file": "src/components/CarImageCarousel",
+      "import_path": ""
+    },
+    {
+      "name": "Footer",
+      "file": "src/components/Footer",
+      "import_path": ""
+    },
+    {
+      "name": "Header",
+      "file": "src/components/Header",
+      "import_path": ""
+    },
+    {
+      "name": "Logo",
+      "file": "src/components/Logo",
+      "import_path": ""
+    },
+    {
+      "name": "ShareButton",
+      "file": "src/components/ShareButton",
+      "import_path": "",
+      "props": [
+        {
+          "name": "title",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "text",
+          "type": "string"
+        },
+        {
+          "name": "path",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "className",
+          "type": "string"
+        },
+        {
+          "name": "label",
+          "type": "string",
+          "default": "Share"
+        },
+        {
+          "name": "compact",
+          "type": "boolean",
+          "default": "false"
+        }
+      ]
+    },
+    {
+      "name": "SocialFloat",
+      "file": "src/components/SocialFloat",
+      "import_path": ""
+    },
+    {
+      "name": "TrustBar",
+      "file": "src/components/TrustBar",
+      "import_path": ""
+    },
+    {
+      "name": "WhatsAppShareCarButton",
+      "file": "src/components/WhatsAppShareCarButton",
+      "import_path": ""
+    },
+    {
+      "name": "Constants",
+      "file": "src/integrations/supabase/types",
+      "import_path": ""
+    }
+  ],
+  "assets": [
+    {
+      "file": "src/assets/about-jsr.png",
+      "kind": "image",
+      "format": "png"
+    },
+    {
+      "file": "src/assets/car-amaze-black.jpg",
+      "kind": "image",
+      "format": "jpg"
+    },
+    {
+      "file": "src/assets/car-amaze-brown.jpg",
+      "kind": "image",
+      "format": "jpg"
+    },
+    {
+      "file": "src/assets/car-creta-front.jpg",
+      "kind": "image",
+      "format": "jpg"
+    },
+    {
+      "file": "src/assets/car-creta.jpg",
+      "kind": "image",
+      "format": "jpg"
+    },
+    {
+      "file": "src/assets/car-dzire.jpg",
+      "kind": "image",
+      "format": "jpg"
+    },
+    {
+      "file": "src/assets/car-fortuner.jpg",
+      "kind": "image",
+      "format": "jpg"
+    },
+    {
+      "file": "src/assets/car-xuv500.jpg",
+      "kind": "image",
+      "format": "jpg"
+    },
+    {
+      "file": "src/assets/contact-creta.png",
+      "kind": "image",
+      "format": "png"
+    },
+    {
+      "file": "src/assets/gearbox-logo.png.asset.json",
+      "kind": "logo",
+      "format": "png",
+      "pointer": true
+    },
+    {
+      "file": "src/assets/hero-bmw-x5.jpg",
+      "kind": "image",
+      "format": "jpg"
+    },
+    {
+      "file": "src/assets/hero-defender.png",
+      "kind": "image",
+      "format": "png"
+    },
+    {
+      "file": "src/assets/inventory-hero.png",
+      "kind": "image",
+      "format": "png"
+    },
+    {
+      "file": "src/assets/sell-bg.png",
+      "kind": "image",
+      "format": "png"
+    },
+    {
+      "file": "src/assets/showroom-hero.jpg.asset.json",
+      "kind": "image",
+      "format": "jpg",
+      "pointer": true
+    },
+    {
+      "file": "src/assets/verna.png",
+      "kind": "image",
+      "format": "png"
+    }
+  ]
+}
