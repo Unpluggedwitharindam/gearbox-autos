@@ -22,6 +22,7 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/sell", changefreq: "weekly", priority: "0.9" },
           { path: "/used-cars-in-jamshedpur", changefreq: "daily", priority: "0.9" },
           { path: "/sell-car-jamshedpur", changefreq: "weekly", priority: "0.9" },
+          { path: "/garage", changefreq: "weekly", priority: "0.8" },
           { path: "/how-it-works", changefreq: "monthly", priority: "0.6" },
           { path: "/about", changefreq: "monthly", priority: "0.5" },
           { path: "/contact", changefreq: "monthly", priority: "0.6" },
