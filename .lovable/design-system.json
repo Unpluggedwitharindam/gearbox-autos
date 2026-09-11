@@ -2,7 +2,7 @@
   "meta": {
     "name": "gearbox autos",
     "package": "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "framework": "react",
     "css_framework": "tailwind",
     "starter_template": "custom_design_system_tailwind",
@@ -109,6 +109,7 @@
       "public/favicon.png": "1c97abf0e1509f41a5024d51fc3f60e2",
       "public/inspection-tool.html": "4e8dec89c3b755525a12f0759751802f",
       "public/robots.txt": "68c309344b77bf111c74792ca17efd56",
+      "roadmap.md": "41faa757cc2e1bb5af82fba2b60b31fc",
       "src/assets/about-jsr.png": "d1a4f91e0ec6ecb94a28018d90ee4035",
       "src/assets/car-amaze-black.jpg": "ea0165c375b0e91fa9c7183247049d24",
       "src/assets/car-amaze-brown.jpg": "ef66fb10318c21dfecd7b185ea4251d3",
