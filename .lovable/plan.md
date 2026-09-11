@@ -1,15 +1,16 @@
-## Add Instagram + WhatsApp quick-contact buttons
+# Publish Google Tag and Gearbox Garage
 
-Add a small floating action stack (bottom-right, fixed) visible on every page, with two circular icon buttons:
+## Changes
+- Add `/garage` to the public sitemap so Google can discover the page.
+- Keep the existing Garage title, description, canonical URL, social metadata, and indexable robots settings.
+- Keep the Google Ads tag loaded once from the shared site head so it appears on every page.
 
-1. **Instagram** → opens `https://www.instagram.com/gearbox_autos_usedcars/` in new tab
-2. **WhatsApp** → opens `https://wa.me/919065591253` in new tab (E.164 format, India +91)
+## Release and verification
+- Run a fresh security scan because the available scan is stale, and review any critical findings before release.
+- Publish the latest project to the connected `gearboxautos.in` domain.
+- Confirm the live homepage contains Google tag `AW-18444054806`.
+- Confirm `https://gearboxautos.in/garage` loads publicly with indexable metadata.
+- Confirm `https://gearboxautos.in/sitemap.xml` includes `/garage`, then resubmit the sitemap to Google Search Console if the connection permits it.
 
-Both open with `target="_blank"` and `rel="noopener noreferrer"`, with accessible `aria-label`s.
-
-### Implementation
-- New component: `src/components/SocialFloat.tsx` — fixed `bottom-6 right-6 z-40`, vertical stack of two buttons. WhatsApp uses brand green (`#25D366`), Instagram uses a pink→orange gradient. Lucide `Instagram` icon + Lucide `MessageCircle` (or inline WhatsApp SVG) for WhatsApp. Subtle hover scale, shadow.
-- Mount once in `src/routes/__root.tsx` inside `RootComponent` so it appears on every route (including admin — confirm OK, otherwise hide on `/admin*`).
-- Also add the same two links to the Footer "Contact" column so they're discoverable in-flow.
-
-No backend changes.
+## Expected result
+The Google tag will be detectable on the live website, and Gearbox Garage will be publicly crawlable and submitted for indexing. Google controls crawl timing, so immediate search-result appearance cannot be guaranteed.
