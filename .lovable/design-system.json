@@ -2,7 +2,7 @@
   "meta": {
     "name": "gearbox autos",
     "package": "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "framework": "react",
     "css_framework": "tailwind",
     "starter_template": "custom_design_system_tailwind",
@@ -202,7 +202,7 @@
       "src/lib/utils.ts": "d9837f38cc05303254571985e3164050",
       "src/routeTree.gen.ts": "4ac1df727462277884a7265371e8b375",
       "src/router.tsx": "8f905e713b0eba7fa8148b7995a708c9",
-      "src/routes/__root.tsx": "0c6766c1ded1f67399a4c30a53196a6b",
+      "src/routes/__root.tsx": "8ccfbd90d3ec05d4bd609a3e0bb47a04",
       "src/routes/about.tsx": "6d08d982d8fce4255889819e8e50442a",
       "src/routes/admin.bookings.tsx": "133e9495e2f1413eddf9379bcf5f9a11",
       "src/routes/admin.cars.tsx": "67b6d9c4876b0da067e34dcdb9199d57",
