@@ -1,7 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { calculateValuation, deduplicateComparables, marketStatistics, rankComparables, relevanceScore } from "./engine";
 import { UNKNOWN, type ComparableListing, type VehicleProfile } from "./types";
-import { parseVehicleQuestion } from "./parser";
+import { parseVehicleConversation, parseVehicleQuestion } from "./parser";
 
 const target: VehicleProfile = { make: "Hyundai", model: "Creta", variant: "SX", manufacturingYear: 2021, registrationYear: 2021, fuel: "Diesel", transmission: "Automatic", ownerCount: 1, km: 48_000, location: "Jamshedpur", registrationState: "Jharkhand" };
 const listing = (id: string, overrides: Partial<ComparableListing> = {}): ComparableListing => ({ id, source: "verified", sourceListingId: id, listingUrl: `https://example.com/${id}`, make: "Hyundai", model: "Creta", variant: "SX", manufacturingYear: 2021, registrationYear: 2021, fuel: "Diesel", transmission: "Automatic", ownerCount: 1, km: 50_000, askingPriceInr: 1_550_000, location: "Jamshedpur", registrationState: "Jharkhand", sellerType: "dealer", listedAt: UNKNOWN, observedAt: "2026-09-12T00:00:00Z", accidentHistory: UNKNOWN, serviceHistory: UNKNOWN, insuranceStatus: UNKNOWN, conditionNotes: UNKNOWN, ...overrides });
@@ -28,5 +28,13 @@ describe("Garage valuation engine", () => {
   it("extracts a vehicle without including the question prefix", () => {
     const parsed = parseVehicleQuestion("What should I pay for a 2021 Hyundai Creta SX diesel automatic with 42,000 km, 1st owner, Jamshedpur?");
     expect(parsed).toMatchObject({ make: "Hyundai", model: "Creta", variant: "SX", manufacturingYear: 2021, fuel: "DIESEL", transmission: "AUTOMATIC", ownerCount: 1, km: 42000, location: "Jamshedpur" });
+  });
+  it("keeps vehicle facts across follow-up questions", () => {
+    const parsed = parseVehicleConversation([
+      { role: "user", content: "I have a 2021 Hyundai Creta SX diesel" },
+      { role: "assistant", content: "How far has it run?" },
+      { role: "user", content: "42,000 km, automatic, first owner in Jamshedpur" },
+    ]);
+    expect(parsed).toMatchObject({ make: "Hyundai", model: "Creta", manufacturingYear: 2021, km: 42000, transmission: "AUTOMATIC", ownerCount: 1, location: "Jamshedpur" });
   });
 });

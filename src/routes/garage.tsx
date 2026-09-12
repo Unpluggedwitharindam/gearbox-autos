@@ -52,13 +52,13 @@ function GaragePage() {
     setMessages(next); setInput(""); setLoading(true); setError(""); setAnalysis(null);
     const controller = new AbortController(); abortRef.current = controller;
     try {
-      const analysisPromise = analyze({ data: { question } });
       const response = await fetch("/api/garage-chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: next }), signal: controller.signal });
       if (!response.ok) {
         const body = await response.json().catch(() => ({ message: "Garage could not answer right now." }));
         throw new Error(body.message ?? "Garage could not answer right now.");
       }
       if (!response.body) throw new Error("Garage returned an empty response.");
+      setAnalysis(await analyze({ data: { messages: next } }));
       const reader = response.body.getReader(); const decoder = new TextDecoder(); let answer = "";
       setMessages([...next, { role: "assistant", content: "" }]);
       while (true) {
@@ -66,7 +66,6 @@ function GaragePage() {
         answer += decoder.decode(chunk.value, { stream: true });
         setMessages([...next, { role: "assistant", content: answer }]);
       }
-      setAnalysis(await analysisPromise);
     } catch (caught) {
       if ((caught as Error).name !== "AbortError") setError(caught instanceof Error ? caught.message : "Garage could not answer right now.");
     } finally { setLoading(false); abortRef.current = null; }
@@ -126,7 +125,7 @@ function ValuationPanel({ analysis }: { analysis: GarageAnalysis }) {
   const valuation = analysis.valuation;
   if (valuation.status === "unavailable") return <div className="border border-zinc-300 p-5"><div className="flex items-start gap-3"><Sparkles className="mt-0.5 h-5 w-5 text-red-600" /><div><h3 className="font-bold">Market valuation not yet available</h3><p className="mt-1 text-sm leading-6 text-zinc-600">No verified external listing feed currently contains enough relevant evidence. Garage will not invent a median, score or price range. The AI answer above can still use actual Gearbox inventory and provide practical inspection or negotiation guidance.</p></div></div></div>;
   const chart = [{ name: "Low", value: valuation.statistics.minimum }, { name: "Q1", value: valuation.statistics.lowerQuartile }, { name: "Median", value: valuation.statistics.median }, { name: "Q3", value: valuation.statistics.upperQuartile }, { name: "High", value: valuation.statistics.maximum }];
-  return <div className="grid gap-5 border border-zinc-200 p-5 lg:grid-cols-2"><div><p className="text-xs font-bold uppercase tracking-[0.15em] text-zinc-500">Garage Score</p><p className="mt-2 text-5xl font-black">{valuation.garageScore}<span className="text-xl text-zinc-400">/100</span></p><p className="mt-1 font-bold text-red-600">{valuation.label}</p><dl className="mt-5 grid grid-cols-2 gap-4 text-sm"><Metric label="Fair market value" value={`${money(valuation.fairMarketValue.low)}–${money(valuation.fairMarketValue.high)}`} /><Metric label="Dealer buy price" value={`${money(valuation.dealerBuyingPrice.low)}–${money(valuation.dealerBuyingPrice.high)}`} /><Metric label="Listing price" value={money(valuation.recommendedSellingPrice)} /><Metric label="Expected close" value={money(valuation.expectedClosingPrice)} /></dl></div><div className="h-64"><ResponsiveContainer width="100%" height="100%"><BarChart data={chart}><CartesianGrid strokeDasharray="3 3" vertical={false} /><XAxis dataKey="name" /><YAxis tickFormatter={(value) => `${(Number(value) / 100_000).toFixed(0)}L`} /><Tooltip formatter={(value) => money(Number(value))} /><Bar dataKey="value" fill="#dc2626" /></BarChart></ResponsiveContainer></div></div>;
+  return <div className="border border-zinc-200 p-5"><div className="grid gap-5 lg:grid-cols-2"><div><p className="text-xs font-bold uppercase tracking-[0.15em] text-zinc-500">Garage Score</p><p className="mt-2 text-5xl font-black">{valuation.garageScore}<span className="text-xl text-zinc-400">/100</span></p><p className="mt-1 font-bold text-red-600">{valuation.label}</p><dl className="mt-5 grid grid-cols-2 gap-4 text-sm"><Metric label="Average listed price" value={money(valuation.statistics.mean)} /><Metric label="Median listed price" value={money(valuation.statistics.median)} /><Metric label="Fair market value" value={`${money(valuation.fairMarketValue.low)}–${money(valuation.fairMarketValue.high)}`} /><Metric label="Dealer buy price" value={`${money(valuation.dealerBuyingPrice.low)}–${money(valuation.dealerBuyingPrice.high)}`} /><Metric label="Listing price" value={money(valuation.recommendedSellingPrice)} /><Metric label="Expected close" value={money(valuation.expectedClosingPrice)} /></dl></div><div className="h-64"><ResponsiveContainer width="100%" height="100%"><BarChart data={chart}><CartesianGrid strokeDasharray="3 3" vertical={false} /><XAxis dataKey="name" /><YAxis tickFormatter={(value) => `${(Number(value) / 100_000).toFixed(0)}L`} /><Tooltip formatter={(value) => money(Number(value))} /><Bar dataKey="value" fill="#dc2626" /></BarChart></ResponsiveContainer></div></div><div className="mt-5 border-t border-zinc-200 pt-4"><p className="text-xs font-bold uppercase text-zinc-500">Marketplace evidence</p><div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-4">{analysis.sourceStatuses.map((source) => { const stats = valuation.statistics.sourceBreakdown.find((item) => item.source === source.source); return <div key={source.source} className="border border-zinc-200 p-3"><div className="flex items-center justify-between"><strong>{source.source}</strong><span className="text-xs text-zinc-500">{source.status}</span></div><p className="mt-1 text-xs text-zinc-500">{stats ? `${stats.count} matched · avg ${money(stats.mean)}` : `${source.listingCount} retrieved`}</p></div>; })}</div><p className="mt-3 text-xs text-zinc-500">Based on {valuation.statistics.count} comparable asking prices after removing {valuation.statistics.outlierCount} outlier{valuation.statistics.outlierCount === 1 ? "" : "s"}. Asking prices are not completed sale prices.</p></div></div>;
 }
 
 function Metric({ label, value }: { label: string; value: string }) { return <div><dt className="text-xs text-zinc-500">{label}</dt><dd className="mt-1 font-bold">{value}</dd></div>; }

@@ -3,7 +3,7 @@ import { streamText, type ModelMessage } from "ai";
 import { z } from "zod";
 import { createGarageAi, withGarageRunId } from "@/lib/ai-gateway.server";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
-import { parseVehicleQuestion } from "@/lib/garage/parser";
+import { parseVehicleConversation } from "@/lib/garage/parser";
 import { buildAnalysis } from "@/lib/garage/engine";
 import { loadVerifiedMarketListings } from "@/lib/garage/provider.server";
 import { UNKNOWN, type InventoryComparable } from "@/lib/garage/types";
@@ -26,11 +26,11 @@ async function anonymousSessionId(request: Request) {
   return Array.from(new Uint8Array(digest)).map((byte) => byte.toString(16).padStart(2, "0")).join("");
 }
 
-async function evidenceFor(question: string) {
-  const vehicle = parseVehicleQuestion(question);
+async function evidenceFor(messages: z.infer<typeof Body>["messages"]) {
+  const vehicle = parseVehicleConversation(messages);
   const [{ data: rows }, market] = await Promise.all([
     supabaseAdmin.from("cars").select("*").eq("is_active", true).order("created_at", { ascending: false }),
-    loadVerifiedMarketListings(),
+    loadVerifiedMarketListings(vehicle, true),
   ]);
   const inventory = (rows ?? []).map((car): InventoryComparable => ({
     id: car.id, name: car.name, slug: car.slug, make: car.make ?? UNKNOWN, model: car.model ?? car.name, variant: car.variant ?? UNKNOWN,
@@ -43,7 +43,7 @@ async function evidenceFor(question: string) {
     const model = vehicle.model === UNKNOWN ? "" : vehicle.model.toLowerCase();
     return (!make || car.name.toLowerCase().includes(make)) && (!model || car.name.toLowerCase().includes(model));
   }).slice(0, 20);
-  return buildAnalysis(vehicle, inventory, market.listings, market.connected);
+  return buildAnalysis(vehicle, inventory, market.listings, market.connected, market.sourceStatuses);
 }
 
 export const Route = createFileRoute("/api/garage-chat")({
@@ -58,7 +58,7 @@ export const Route = createFileRoute("/api/garage-chat")({
           const oneHourAgo = new Date(Date.now() - 3_600_000).toISOString();
           const { count } = await supabaseAdmin.from("garage_queries").select("id", { count: "exact", head: true }).eq("session_id", sessionId).gte("created_at", oneHourAgo);
           if ((count ?? 0) >= 15) return Response.json({ message: "Garage has reached its hourly question limit. Please try again later." }, { status: 429, headers: { "Retry-After": "3600" } });
-          const evidence = await evidenceFor(latest);
+           const evidence = await evidenceFor(body.messages);
           const key = process.env["LOVABLE_API_KEY"];
           if (!key) return Response.json({ message: "Garage AI is not configured." }, { status: 500 });
           const gateway = createGarageAi(key, request.headers.get("X-Lovable-AIG-Run-ID") ?? undefined);

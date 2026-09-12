@@ -73,6 +73,7 @@ export const getGarageDashboard = createServerFn({ method: "GET" })
     });
     return {
       providerConnected: market.connected,
+      sourceStatuses: market.sourceStatuses,
       metrics: {
         totalInventory: rows.length,
         inStock: inStock.length,
