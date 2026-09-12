@@ -2,7 +2,7 @@
   "meta": {
     "name": "gearbox autos",
     "package": "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558",
-    "version": "6.2.0",
+    "version": "6.3.0",
     "framework": "react",
     "css_framework": "tailwind",
     "starter_template": "custom_design_system",
@@ -19,6 +19,7 @@
       ".lovable/plan/fix-garage-price-output-2026-09-12.md": "73df0a9494b5c5c4403af82c0b2aca94",
       ".lovable/plan/full-site-seo-and-aeo-repair-2026-09-12.md": "1d1f32dfa36eec7af80433ee24de9f10",
       ".lovable/plan/publish-google-tag-and-gearbox-garage-2026-09-11.md": "06a0fdaf35975fe6d65b30b7780a5962",
+      ".lovable/plan/restore-gearbox-garage-on-the-live-website-2026-09-12.md": "b66aaffa2fbf263885ee70cf499d47f8",
       ".lovable/project.json": "b60a4e3c0d4cde0e87e00b1d1b82a55b",
       ".lovable/sources.yaml": "5fd6523c145638df3f2fcfd110718f4d",
       ".lovable/system.md": "03c345b84888b30881cb04b62c49d999",
