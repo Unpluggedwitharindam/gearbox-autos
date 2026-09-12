@@ -29,6 +29,24 @@ type CarRow = {
   location: string;
   fuel: string;
   transmission: string;
+  make: string | null;
+  model: string | null;
+  variant: string | null;
+  manufacturing_year: number | null;
+  registration_year: number | null;
+  owner_count: number | null;
+  seller_type: "dealer" | "private" | "unknown" | null;
+  registration_state: string | null;
+  accident_history: string | null;
+  service_history: string | null;
+  insurance_status: string | null;
+  condition_notes: string | null;
+  acquisition_price_inr: number | null;
+  acquisition_date: string | null;
+  listed_at: string | null;
+  inventory_status: "in_stock" | "reserved" | "sold" | "inactive";
+  sold_at: string | null;
+  sold_price_inr: number | null;
   image_url: string;
   images: string[];
   features: string[] | null;
@@ -39,6 +57,10 @@ type CarRow = {
 const empty: Omit<CarRow, "id"> = {
   slug: "", name: "", price_inr: 0, year: new Date().getFullYear(), km: 0,
   rto: "JH-05", location: "Jamshedpur", fuel: "Petrol", transmission: "Manual",
+  make: null, model: null, variant: null, manufacturing_year: null, registration_year: null,
+  owner_count: null, seller_type: "dealer", registration_state: "Jharkhand", accident_history: null,
+  service_history: null, insurance_status: null, condition_notes: null, acquisition_price_inr: null,
+  acquisition_date: null, listed_at: new Date().toISOString(), inventory_status: "in_stock", sold_at: null, sold_price_inr: null,
   image_url: "", images: [], features: [], description: "", is_active: true,
 };
 
@@ -60,6 +82,11 @@ function AdminCars() {
       image_url: (c.images?.[0] ?? c.image_url ?? ""),
       features: typeof c.features === "string" ? c.features.split(",").map((s: string) => s.trim()).filter(Boolean) : (c.features ?? []),
       price_inr: Number(c.price_inr), year: Number(c.year), km: Number(c.km),
+      manufacturing_year: c.manufacturing_year ? Number(c.manufacturing_year) : null,
+      registration_year: c.registration_year ? Number(c.registration_year) : null,
+      owner_count: c.owner_count ? Number(c.owner_count) : null,
+      acquisition_price_inr: c.acquisition_price_inr ? Number(c.acquisition_price_inr) : null,
+      sold_price_inr: c.sold_price_inr ? Number(c.sold_price_inr) : null,
     } }),
     onSuccess: () => { toast.success("Saved"); qc.invalidateQueries({ queryKey: ["admin", "cars"] }); qc.invalidateQueries({ queryKey: ["cars", "public"] }); setEditing(null); },
     onError: (e: Error) => toast.error(e.message),
@@ -119,6 +146,11 @@ function AdminCars() {
                 ["name","Name"],["slug","Slug"],["price_inr","Price (INR)","number"],["year","Year","number"],
                 ["km","KMs","number"],["rto","RTO"],["location","Location"],["fuel","Fuel"],
                 ["transmission","Transmission"],
+                ["make","Make"],["model","Model"],["variant","Variant"],
+                ["manufacturing_year","Manufacturing year","number"],["registration_year","Registration year","number"],
+                ["owner_count","Owner count","number"],["registration_state","Registration state"],
+                ["acquisition_price_inr","Buying price (INR)","number"],["acquisition_date","Buying date","date"],
+                ["sold_price_inr","Sold price (INR)","number"],["sold_at","Sold date","date"],
               ].map(([k,l,t]) => (
                 <label key={k} className="block">
                   <div className="text-xs text-muted-foreground mb-1">{l}</div>
@@ -138,6 +170,19 @@ function AdminCars() {
                 <div className="text-xs text-muted-foreground mb-1">Features (comma separated)</div>
                 <input value={Array.isArray((editing as any).features) ? ((editing as any).features ?? []).join(", ") : (editing as any).features} onChange={(e) => setEditing({ ...(editing as any), features: e.target.value })} className="w-full rounded-md bg-input/60 border border-border/60 px-3 py-2 outline-none" />
               </label>
+              <label className="block">
+                <div className="text-xs text-muted-foreground mb-1">Inventory status</div>
+                <select value={(editing as any).inventory_status ?? "in_stock"} onChange={(e) => setEditing({ ...(editing as any), inventory_status: e.target.value })} className="w-full rounded-md bg-input/60 border border-border/60 px-3 py-2 outline-none">
+                  <option value="in_stock">In stock</option><option value="reserved">Reserved</option><option value="sold">Sold</option><option value="inactive">Inactive</option>
+                </select>
+              </label>
+              <label className="block">
+                <div className="text-xs text-muted-foreground mb-1">Seller type</div>
+                <select value={(editing as any).seller_type ?? "unknown"} onChange={(e) => setEditing({ ...(editing as any), seller_type: e.target.value })} className="w-full rounded-md bg-input/60 border border-border/60 px-3 py-2 outline-none">
+                  <option value="dealer">Dealer</option><option value="private">Private</option><option value="unknown">Unknown</option>
+                </select>
+              </label>
+              {[["accident_history","Accident / damage information"],["service_history","Service history"],["insurance_status","Insurance status"],["condition_notes","Condition notes"]].map(([key, label]) => <label key={key} className="block sm:col-span-2"><div className="text-xs text-muted-foreground mb-1">{label}</div><textarea rows={2} value={(editing as any)[key] ?? ""} onChange={(e) => setEditing({ ...(editing as any), [key]: e.target.value || null })} className="w-full rounded-md bg-input/60 border border-border/60 px-3 py-2 outline-none" /></label>)}
               <label className="block sm:col-span-2">
                 <div className="text-xs text-muted-foreground mb-1">Description</div>
                 <textarea rows={3} value={(editing as any).description ?? ""} onChange={(e) => setEditing({ ...(editing as any), description: e.target.value })} className="w-full rounded-md bg-input/60 border border-border/60 px-3 py-2 outline-none" />

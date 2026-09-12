@@ -16,6 +16,10 @@ export type Database = {
     Tables: {
       cars: {
         Row: {
+          accident_history: string | null
+          acquisition_date: string | null
+          acquisition_price_inr: number | null
+          condition_notes: string | null
           created_at: string
           description: string | null
           features: string[]
@@ -23,18 +27,36 @@ export type Database = {
           id: string
           image_url: string
           images: string[]
+          insurance_status: string | null
+          inventory_status: string
           is_active: boolean
           km: number
+          listed_at: string | null
           location: string
+          make: string | null
+          manufacturing_year: number | null
+          model: string | null
           name: string
+          owner_count: number | null
           price_inr: number
+          registration_state: string | null
+          registration_year: number | null
           rto: string
+          seller_type: string | null
+          service_history: string | null
           slug: string
+          sold_at: string | null
+          sold_price_inr: number | null
           transmission: string
           updated_at: string
+          variant: string | null
           year: number
         }
         Insert: {
+          accident_history?: string | null
+          acquisition_date?: string | null
+          acquisition_price_inr?: number | null
+          condition_notes?: string | null
           created_at?: string
           description?: string | null
           features?: string[]
@@ -42,18 +64,36 @@ export type Database = {
           id?: string
           image_url: string
           images?: string[]
+          insurance_status?: string | null
+          inventory_status?: string
           is_active?: boolean
           km: number
+          listed_at?: string | null
           location?: string
+          make?: string | null
+          manufacturing_year?: number | null
+          model?: string | null
           name: string
+          owner_count?: number | null
           price_inr: number
+          registration_state?: string | null
+          registration_year?: number | null
           rto?: string
+          seller_type?: string | null
+          service_history?: string | null
           slug: string
+          sold_at?: string | null
+          sold_price_inr?: number | null
           transmission: string
           updated_at?: string
+          variant?: string | null
           year: number
         }
         Update: {
+          accident_history?: string | null
+          acquisition_date?: string | null
+          acquisition_price_inr?: number | null
+          condition_notes?: string | null
           created_at?: string
           description?: string | null
           features?: string[]
@@ -61,15 +101,29 @@ export type Database = {
           id?: string
           image_url?: string
           images?: string[]
+          insurance_status?: string | null
+          inventory_status?: string
           is_active?: boolean
           km?: number
+          listed_at?: string | null
           location?: string
+          make?: string | null
+          manufacturing_year?: number | null
+          model?: string | null
           name?: string
+          owner_count?: number | null
           price_inr?: number
+          registration_state?: string | null
+          registration_year?: number | null
           rto?: string
+          seller_type?: string | null
+          service_history?: string | null
           slug?: string
+          sold_at?: string | null
+          sold_price_inr?: number | null
           transmission?: string
           updated_at?: string
+          variant?: string | null
           year?: number
         }
         Relationships: []
@@ -101,6 +155,135 @@ export type Database = {
           message?: string
           phone?: string | null
           subject?: string | null
+        }
+        Relationships: []
+      }
+      external_market_listings: {
+        Row: {
+          accident_history: string | null
+          asking_price_inr: number
+          condition_notes: string | null
+          created_at: string
+          fuel: string
+          id: string
+          insurance_status: string | null
+          km: number
+          listed_at: string | null
+          listing_url: string | null
+          location: string
+          make: string
+          manufacturing_year: number | null
+          model: string
+          observed_at: string
+          owner_count: number | null
+          raw_data: Json | null
+          registration_state: string | null
+          registration_year: number | null
+          seller_type: string | null
+          service_history: string | null
+          source: string
+          source_listing_id: string | null
+          transmission: string | null
+          updated_at: string
+          variant: string | null
+        }
+        Insert: {
+          accident_history?: string | null
+          asking_price_inr: number
+          condition_notes?: string | null
+          created_at?: string
+          fuel: string
+          id?: string
+          insurance_status?: string | null
+          km: number
+          listed_at?: string | null
+          listing_url?: string | null
+          location: string
+          make: string
+          manufacturing_year?: number | null
+          model: string
+          observed_at?: string
+          owner_count?: number | null
+          raw_data?: Json | null
+          registration_state?: string | null
+          registration_year?: number | null
+          seller_type?: string | null
+          service_history?: string | null
+          source: string
+          source_listing_id?: string | null
+          transmission?: string | null
+          updated_at?: string
+          variant?: string | null
+        }
+        Update: {
+          accident_history?: string | null
+          asking_price_inr?: number
+          condition_notes?: string | null
+          created_at?: string
+          fuel?: string
+          id?: string
+          insurance_status?: string | null
+          km?: number
+          listed_at?: string | null
+          listing_url?: string | null
+          location?: string
+          make?: string
+          manufacturing_year?: number | null
+          model?: string
+          observed_at?: string
+          owner_count?: number | null
+          raw_data?: Json | null
+          registration_state?: string | null
+          registration_year?: number | null
+          seller_type?: string | null
+          service_history?: string | null
+          source?: string
+          source_listing_id?: string | null
+          transmission?: string | null
+          updated_at?: string
+          variant?: string | null
+        }
+        Relationships: []
+      }
+      garage_queries: {
+        Row: {
+          created_at: string
+          error_code: string | null
+          external_match_count: number
+          id: string
+          internal_match_count: number
+          latency_ms: number | null
+          parsed_vehicle: Json | null
+          question: string
+          session_id: string | null
+          status: string
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          error_code?: string | null
+          external_match_count?: number
+          id?: string
+          internal_match_count?: number
+          latency_ms?: number | null
+          parsed_vehicle?: Json | null
+          question: string
+          session_id?: string | null
+          status: string
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          error_code?: string | null
+          external_match_count?: number
+          id?: string
+          internal_match_count?: number
+          latency_ms?: number | null
+          parsed_vehicle?: Json | null
+          question?: string
+          session_id?: string | null
+          status?: string
+          user_id?: string | null
         }
         Relationships: []
       }

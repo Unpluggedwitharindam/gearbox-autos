@@ -13,12 +13,12 @@
 
 # Garage intelligence roadmap
 
-- [ ] Replace the Garage prototype response with live, streaming Indian used-car AI
-- [ ] Add structured vehicle parsing and missing-detail follow-ups
-- [ ] Build deterministic comparable ranking, deduplication, outlier, valuation, and Garage Score modules
-- [ ] Connect real Gearbox Autos inventory and separate it from external evidence
-- [ ] Add a pluggable external-listing provider boundary with honest unavailable/partial-data states
-- [ ] Build valuation evidence, price distribution, comparable sorting, source links, and disclosure UI
-- [ ] Extend inventory records for variant, ownership, acquisition, status, and days-in-stock analytics
-- [ ] Add the protected Garage dealer intelligence dashboard
-- [ ] Test AI calls, valuation math, public Garage flows, admin analytics, and mobile layouts
+- [x] Replace the Garage prototype response with live, streaming Indian used-car AI
+- [x] Add structured vehicle parsing and missing-detail follow-ups
+- [x] Build deterministic comparable ranking, deduplication, outlier, valuation, and Garage Score modules
+- [x] Connect real Gearbox Autos inventory and separate it from external evidence
+- [x] Add a pluggable external-listing provider boundary with honest unavailable/partial-data states
+- [x] Build valuation evidence, price distribution, comparable sorting, source links, and disclosure UI
+- [x] Extend inventory records for variant, ownership, acquisition, status, and days-in-stock analytics
+- [x] Add the protected Garage dealer intelligence dashboard
+- [x] Test AI calls, valuation math, public Garage flows, admin analytics, and mobile layouts
