@@ -2,7 +2,7 @@
   "meta": {
     "name": "gearbox autos",
     "package": "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558",
-    "version": "3.0.0",
+    "version": "4.0.0",
     "framework": "react",
     "css_framework": "tailwind",
     "starter_template": "custom_design_system_tailwind",
@@ -14,6 +14,7 @@
       "#enrichment": "5cbf5dc51d6753a6b54757a71e40876205e112dc33026cf9be19581dd71b3a0e",
       ".gitignore": "6d9e901a692b46a83707c245fb03bc91",
       ".lovable/meta.yaml": "954a981e8847ec1692669dbb04ae9ae9",
+      ".lovable/plan.md": "1d1f32dfa36eec7af80433ee24de9f10",
       ".lovable/plan/publish-google-tag-and-gearbox-garage-2026-09-11.md": "06a0fdaf35975fe6d65b30b7780a5962",
       ".lovable/project.json": "b60a4e3c0d4cde0e87e00b1d1b82a55b",
       ".lovable/sources.yaml": "ee6247f6fe77fe1387244cd3c757e6a3",
