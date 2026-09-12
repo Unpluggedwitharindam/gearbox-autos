@@ -18,6 +18,16 @@ export const Route = createFileRoute("/contact")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/contact" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        name: "Contact Gearbox Autos",
+        url: "https://gearboxautos.in/contact",
+        about: { "@id": "https://gearboxautos.in/#dealership" },
+      }),
+    }],
   }),
 
   component: Contact,
@@ -91,7 +101,6 @@ function Contact() {
         <div className="flex md:justify-end items-center gap-6">
           <div className="text-sm text-muted-foreground">Follow us for the latest deals</div>
           <div className="flex items-center gap-2">
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="h-9 w-9 rounded-full border border-border grid place-items-center hover:border-primary hover:text-primary"><Facebook className="h-4 w-4" /></a>
             <a href="https://www.instagram.com/gearbox_autos_usedcars/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="h-9 w-9 rounded-full border border-border grid place-items-center hover:border-primary hover:text-primary"><Instagram className="h-4 w-4" /></a>
             <a href="https://wa.me/919065591253" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="h-9 w-9 rounded-full border border-border grid place-items-center hover:border-primary hover:text-primary"><MessageCircle className="h-4 w-4" /></a>
           </div>

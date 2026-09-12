@@ -9,7 +9,15 @@ interface SitemapEntry {
   path: string;
   changefreq?: "always" | "hourly" | "daily" | "weekly" | "monthly" | "yearly" | "never";
   priority?: string;
+  lastmod?: string;
 }
+
+const xmlEscape = (value: string) => value
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;")
+  .replaceAll("'", "&apos;");
 
 export const Route = createFileRoute("/sitemap.xml")({
   server: {
@@ -47,10 +55,15 @@ export const Route = createFileRoute("/sitemap.xml")({
               path: `/car/${encodeURIComponent(car.slug)}`,
               changefreq: "weekly",
               priority: "0.8",
+              lastmod: car.updated_at ? new Date(car.updated_at).toISOString() : undefined,
             });
           }
         } catch (error) {
           console.error("[sitemap] failed to load cars", error);
+          return new Response("Unable to generate sitemap", {
+            status: 503,
+            headers: { "Content-Type": "text/plain; charset=utf-8", "Cache-Control": "no-store" },
+          });
         }
 
         const xml = [
@@ -59,7 +72,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           ...entries.map((e) =>
             [
               `  <url>`,
-              `    <loc>${BASE_URL}${e.path}</loc>`,
+              `    <loc>${xmlEscape(`${BASE_URL}${e.path}`)}</loc>`,
+              e.lastmod ? `    <lastmod>${xmlEscape(e.lastmod)}</lastmod>` : null,
               e.changefreq ? `    <changefreq>${e.changefreq}</changefreq>` : null,
               e.priority ? `    <priority>${e.priority}</priority>` : null,
               `  </url>`,

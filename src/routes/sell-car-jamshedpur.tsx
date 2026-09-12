@@ -14,6 +14,22 @@ export const Route = createFileRoute("/sell-car-jamshedpur")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/sell-car-jamshedpur" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: "How to sell your car in Jamshedpur",
+        description: "List, verify, meet buyers, and complete the sale with RC transfer assistance.",
+        step: steps.map((step, index) => ({
+          "@type": "HowToStep",
+          position: index + 1,
+          name: step.title,
+          text: step.text,
+          url: `https://gearboxautos.in/sell-car-jamshedpur#step-${index + 1}`,
+        })),
+      }),
+    }],
   }),
 
   component: SellCarJamshedpur,
@@ -52,7 +68,7 @@ function SellCarJamshedpur() {
         <h2 className="display-h2">How it <span className="text-primary">works</span></h2>
         <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {steps.map((s, i) => (
-            <div key={s.title} className="bg-card p-6 border-l-4 border-primary">
+            <div id={`step-${i + 1}`} key={s.title} className="bg-card p-6 border-l-4 border-primary">
               <div className="flex items-center justify-between mb-4">
                 <s.icon className="h-6 w-6 text-primary" />
                 <span className="font-head text-3xl text-muted-foreground/40">{i + 1}</span>

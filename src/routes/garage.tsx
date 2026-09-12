@@ -34,6 +34,17 @@ export const Route = createFileRoute("/garage")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/garage" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        name: "Gearbox Garage",
+        description: "Automotive buying, selling, comparison, and inspection guidance from Gearbox Autos.",
+        url: "https://gearboxautos.in/garage",
+        isPartOf: { "@type": "WebSite", name: "Gearbox Autos", url: "https://gearboxautos.in" },
+      }),
+    }],
   }),
   component: GaragePage,
 });

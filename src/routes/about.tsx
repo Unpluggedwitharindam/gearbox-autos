@@ -14,6 +14,16 @@ export const Route = createFileRoute("/about")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/about" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        name: "About Gearbox Autos",
+        url: "https://gearboxautos.in/about",
+        about: { "@id": "https://gearboxautos.in/#dealership" },
+      }),
+    }],
   }),
 
   component: About,
