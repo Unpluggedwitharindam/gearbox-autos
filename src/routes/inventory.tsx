@@ -11,6 +11,8 @@ export const Route = createFileRoute("/inventory")({
       { property: "og:title", content: "Used Car Inventory in Jamshedpur — Gearbox Autos" },
       { property: "og:description", content: "Every verified second hand car we have in stock in Jamshedpur." },
       { property: "og:url", content: "https://gearboxautos.in/inventory" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/inventory" }],
   }),

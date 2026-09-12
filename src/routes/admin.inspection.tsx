@@ -10,9 +10,8 @@ export const Route = createFileRoute("/admin/inspection")({
         content:
           "Run the Gearbox Autos verified car inspection checklist and export the inspection report as a PDF.",
       },
-      { name: "robots", content: "noindex, nofollow" },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
     ],
-    links: [{ rel: "canonical", href: "/admin/inspection" }],
   }),
   component: InspectionTool,
 });

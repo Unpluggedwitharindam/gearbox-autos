@@ -10,6 +10,8 @@ export const Route = createFileRoute("/sell-car-jamshedpur")({
       { property: "og:title", content: "Sell Your Car in Jamshedpur — Gearbox Autos" },
       { property: "og:description", content: "List your car free, meet verified buyers directly and pay 0% commission." },
       { property: "og:url", content: "https://gearboxautos.in/sell-car-jamshedpur" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/sell-car-jamshedpur" }],
   }),

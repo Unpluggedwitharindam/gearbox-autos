@@ -15,6 +15,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "Used Cars in Jamshedpur — Gearbox Autos" },
       { property: "og:description", content: "Buy and sell quality second hand cars in Jamshedpur with full transparency and 0% commission." },
       { property: "og:url", content: "https://gearboxautos.in/" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/" }],
     scripts: [
