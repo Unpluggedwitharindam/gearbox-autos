@@ -9,8 +9,27 @@ export const Route = createFileRoute("/how-it-works")({
       { property: "og:title", content: "How It Works — Gearbox Autos Jamshedpur" },
       { property: "og:description", content: "Simple, transparent, fair — buying and selling used cars in Jamshedpur." },
       { property: "og:url", content: "https://gearboxautos.in/how-it-works" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/how-it-works" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        name: "How to buy a used car through Gearbox Autos",
+        description: "A five-step process for buying a used car in Jamshedpur.",
+        totalTime: "P1D",
+        step: steps.map((step, index) => ({
+          "@type": "HowToStep",
+          position: index + 1,
+          name: step.title,
+          text: step.desc,
+          url: `https://gearboxautos.in/how-it-works#step-${index + 1}`,
+        })),
+      }),
+    }],
   }),
 
   component: HowItWorks,
@@ -29,11 +48,11 @@ function HowItWorks() {
     <section className="container-page pt-12 pb-12">
       <div className="eyebrow">How it works</div>
       <h1 className="display-h1 mt-4">The Gearbox Autos Process<span className="text-primary">.</span></h1>
-      <p className="mt-5 text-muted-foreground max-w-2xl">We make buying and selling cars simple, transparent and fair for everyone.<br/>No hidden charges. No middlemen. Just great cars and honest deals.</p>
+      <p className="mt-5 text-muted-foreground max-w-2xl">We make buying and selling cars simple, transparent and fair for everyone.<br /> No hidden charges. No middlemen. Just great cars and honest deals.</p>
 
       <div className="mt-12 grid gap-5 md:grid-cols-5 relative">
         {steps.map((s, i) => (
-          <div key={s.title} className="surface p-6 text-center relative">
+          <div id={`step-${i + 1}`} key={s.title} className="surface p-6 text-center relative">
             <div className="absolute -top-3 left-1/2 -translate-x-1/2 h-7 w-7 rounded-full bg-background border border-primary text-primary text-sm grid place-items-center font-semibold">{i+1}</div>
             <s.Icon className="h-10 w-10 mx-auto text-foreground/80 mt-3" />
             <div className="font-semibold mt-4">{s.title}</div>

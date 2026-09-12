@@ -6,18 +6,39 @@ import hero from "@/assets/car-creta-front.jpg";
 import { CarCard } from "@/components/CarCard";
 import { TrustBar } from "@/components/TrustBar";
 import { listPublicCars } from "@/lib/cars.functions";
+import type { Car as CarListing } from "@/lib/cars";
 
 export const Route = createFileRoute("/buy")({
-  head: () => ({
+  head: ({ loaderData }) => {
+    const cars = (loaderData as unknown as CarListing[] | undefined) ?? [];
+    return {
     meta: [
       { title: "Buy Second Hand Cars in Jamshedpur — Verified Used Cars | Gearbox Autos" },
       { name: "description", content: "Browse verified second hand cars for sale in Jamshedpur. Compare price, KMs, fuel and RTO, then book a free test drive — 0% commission." },
       { property: "og:title", content: "Buy Second Hand Cars in Jamshedpur — Gearbox Autos" },
       { property: "og:description", content: "Verified used cars for sale in Jamshedpur at 0% commission. Book a test drive today." },
       { property: "og:url", content: "https://gearboxautos.in/buy" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/buy" }],
-  }),
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Used cars for sale in Jamshedpur",
+        numberOfItems: cars.length,
+        itemListElement: cars.map((car, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: `${car.year} ${car.name}`,
+          url: `https://gearboxautos.in/car/${car.slug}`,
+        })),
+      }),
+    }],
+    };
+  },
 
   component: Buy,
   loader: async ({ context }) =>

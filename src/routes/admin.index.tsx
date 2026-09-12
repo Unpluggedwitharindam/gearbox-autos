@@ -4,6 +4,13 @@ import { Car, Inbox, Calendar, MessageSquare } from "lucide-react";
 import { adminGetCounts } from "@/lib/admin.functions";
 
 export const Route = createFileRoute("/admin/")({
+  head: () => ({
+    meta: [
+      { title: "Dashboard Overview — Admin — Gearbox Autos" },
+      { name: "description", content: "Private Gearbox Autos administration overview." },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
+    ],
+  }),
   component: Dashboard,
 });
 

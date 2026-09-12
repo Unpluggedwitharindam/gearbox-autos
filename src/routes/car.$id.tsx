@@ -8,6 +8,7 @@ import type { Car } from "@/lib/cars";
 import { submitTestDrive } from "@/lib/leads.functions";
 import { CarImageCarousel } from "@/components/CarImageCarousel";
 import { ShareButton } from "@/components/ShareButton";
+import { breadcrumbSchema, SITE_URL } from "@/lib/seo";
 
 export const Route = createFileRoute("/car/$id")({
   head: ({ params, loaderData }) => {
@@ -16,7 +17,11 @@ export const Route = createFileRoute("/car/$id")({
     const url = `https://gearboxautos.in/car/${params.id}`;
     if (!car) {
       return {
-        meta: [{ title: "Used Car — Gearbox Autos Jamshedpur" }],
+        meta: [
+          { title: "Car Not Found — Gearbox Autos" },
+          { name: "description", content: "This car listing is no longer available. Browse the latest verified used cars in Jamshedpur." },
+          { name: "robots", content: "noindex, follow" },
+        ],
         links: [{ rel: "canonical", href: url }],
       };
     }
@@ -31,6 +36,7 @@ export const Route = createFileRoute("/car/$id")({
         { property: "og:description", content: description },
         { property: "og:type", content: "product" },
         { property: "og:url", content: url },
+        { name: "twitter:card", content: "summary_large_image" },
         ...(image
           ? [
               { property: "og:image", content: image },
@@ -57,9 +63,18 @@ export const Route = createFileRoute("/car/$id")({
               priceCurrency: "INR",
               availability: "https://schema.org/InStock",
               areaServed: "Jamshedpur, Jharkhand, India",
-              seller: { "@type": "AutoDealer", name: "Gearbox Autos" },
+              url,
+              seller: { "@id": `${SITE_URL}/#dealership` },
             },
           }),
+        },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(breadcrumbSchema([
+            { name: "Home", url: SITE_URL },
+            { name: "Used Cars in Jamshedpur", url: `${SITE_URL}/used-cars-in-jamshedpur` },
+            { name: `${car.year} ${car.name}`, url },
+          ])),
         },
       ],
     };

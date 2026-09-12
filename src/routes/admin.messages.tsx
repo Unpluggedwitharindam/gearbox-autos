@@ -7,8 +7,8 @@ export const Route = createFileRoute("/admin/messages")({
     meta: [
       { title: "Contact Messages — Admin — Gearbox Autos" },
       { name: "description", content: "Read and manage customer contact messages and enquiries sent to Gearbox Autos." },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
     ],
-    links: [{ rel: "canonical", href: "/admin/messages" }],
   }),
   component: Messages,
 });

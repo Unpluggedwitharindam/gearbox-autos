@@ -7,8 +7,8 @@ export const Route = createFileRoute("/admin/leads")({
     meta: [
       { title: "Sell Leads — Admin — Gearbox Autos" },
       { name: "description", content: "View and manage sell-your-car leads submitted by sellers to Gearbox Autos in Jamshedpur." },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
     ],
-    links: [{ rel: "canonical", href: "/admin/leads" }],
   }),
   component: Leads,
 });

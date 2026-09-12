@@ -14,6 +14,8 @@ export const Route = createFileRoute("/sell")({
       { property: "og:title", content: "Sell Your Used Car in Jamshedpur — Gearbox Autos" },
       { property: "og:description", content: "Get the best value for your car in Jamshedpur with zero commission." },
       { property: "og:url", content: "https://gearboxautos.in/sell" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/sell" }],
   }),
@@ -68,7 +70,7 @@ function Sell() {
       <div className="relative container-page pt-12 pb-20 grid lg:grid-cols-2 gap-10 items-start">
         <div>
           <div className="eyebrow">Sell your car</div>
-          <h1 className="display-h1 mt-4">Get the best value <br/>for your car<span className="text-primary">.</span></h1>
+          <h1 className="display-h1 mt-4">Get the best value <br /> for your car<span className="text-primary">.</span></h1>
           <p className="mt-5 text-muted-foreground max-w-md">Fill in the details below and our experts will get in touch with you for the best offer.</p>
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl">
             {[

@@ -13,6 +13,7 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import { SocialFloat } from "@/components/SocialFloat";
+import { DEALER_SCHEMA } from "@/lib/seo";
 
 function NotFoundComponent() {
   return (
@@ -122,29 +123,7 @@ gtag('config', 'AW-18444054806');`,
       },
       {
         type: "application/ld+json",
-        children: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "AutoDealer",
-          name: "Gearbox Autos",
-          description:
-            "Used car marketplace in Jamshedpur — buy and sell second hand cars at 0% commission.",
-          url: "https://gearboxautos.in",
-          telephone: "+91-90655-91253",
-          priceRange: "₹₹",
-          areaServed: [
-            { "@type": "City", name: "Jamshedpur" },
-            { "@type": "State", name: "Jharkhand" },
-          ],
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "GEARBOX AUTOS, Near Golden Town, opp. BSS School, Adarsh Nagar, Sonari",
-            addressLocality: "Jamshedpur",
-            addressRegion: "Jharkhand",
-            postalCode: "831011",
-            addressCountry: "IN",
-          },
-          sameAs: ["https://www.instagram.com/gearbox_autos"],
-        }),
+        children: JSON.stringify(DEALER_SCHEMA),
       },
     ],
   }),

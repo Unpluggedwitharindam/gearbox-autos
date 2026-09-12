@@ -39,6 +39,7 @@ export function Footer() {
               <li><Link to="/sell-car-jamshedpur" className="hover:text-primary">Sell Car in Jamshedpur</Link></li>
               <li><Link to="/inventory" className="hover:text-primary">Our Inventory</Link></li>
               <li><Link to="/how-it-works" className="hover:text-primary">How It Works</Link></li>
+              <li><Link to="/garage" className="hover:text-primary">Gearbox Garage</Link></li>
               <li><Link to="/about" className="hover:text-primary">About Us</Link></li>
               <li><Link to="/contact" className="hover:text-primary">Contact Us</Link></li>
             </ul>
@@ -46,7 +47,7 @@ export function Footer() {
         </div>
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
           <span>© {new Date().getFullYear()} Gearbox Autos. All rights reserved.</span>
-          <span>100% Transparent · 0% Commission · <Link to="/login" className="hover:text-primary">Admin</Link></span>
+          <span>100% Transparent · 0% Commission</span>
         </div>
       </div>
     </footer>

@@ -10,8 +10,20 @@ export const Route = createFileRoute("/about")({
       { property: "og:title", content: "About Gearbox Autos — Jamshedpur" },
       { property: "og:description", content: "Driven by trust, built on transparency — used cars in Jamshedpur." },
       { property: "og:url", content: "https://gearboxautos.in/about" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/about" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        name: "About Gearbox Autos",
+        url: "https://gearboxautos.in/about",
+        about: { "@id": "https://gearboxautos.in/#dealership" },
+      }),
+    }],
   }),
 
   component: About,
@@ -23,7 +35,7 @@ function About() {
       <div className="container-page pt-12 grid lg:grid-cols-2 gap-10 items-center">
         <div>
           <div className="eyebrow">About us</div>
-          <h1 className="display-h1 mt-4">Driven by Trust.<br/>Built on Transparency<span className="text-primary">.</span></h1>
+          <h1 className="display-h1 mt-4">Driven by Trust.<br /> Built on Transparency<span className="text-primary">.</span></h1>
           <p className="mt-5 text-muted-foreground max-w-md">Gearbox Autos is a used car marketplace based out of Jamshedpur, India. We connect buyers and sellers directly, making car transactions simple, transparent and hassle-free.</p>
           <div className="mt-8 inline-flex items-center gap-2 surface px-4 py-3 text-sm"><MapPin className="h-4 w-4 text-primary" /> Proudly Based in Jamshedpur, India</div>
         </div>

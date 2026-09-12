@@ -7,8 +7,8 @@ export const Route = createFileRoute("/admin/bookings")({
     meta: [
       { title: "Test Drive Bookings — Admin — Gearbox Autos" },
       { name: "description", content: "Manage test drive booking requests for Gearbox Autos used car inventory in Jamshedpur." },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
     ],
-    links: [{ rel: "canonical", href: "/admin/bookings" }],
   }),
   component: Bookings,
 });

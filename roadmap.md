@@ -1,4 +1,12 @@
-# Roadmap
+# SEO and AEO roadmap
 
-- [x] Confirm the Google Ads tag is present in the project but absent from the published website.
-- [ ] Publish the latest website version so Google can detect the tag. Blocked until the user publishes or asks Lovable to publish.
+- [x] Audit live public routes and crawler behavior
+- [x] Consolidate dealership structured data
+- [x] Repair brand-page canonicals, headings, breadcrumbs, and private-page indexing controls
+- [x] Complete per-route metadata and structured data
+- [x] Improve sitemap freshness and failure handling
+- [x] Add AI-readable public-site guide
+- [x] Correct inventory URL/data mismatch
+- [x] Validate SSR pages, metadata, schema, sitemap, and crawl files
+- [x] Validate design-library wiring and exports
+- [ ] Re-run SEO scan and publish verified changes

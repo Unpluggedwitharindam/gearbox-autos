@@ -12,8 +12,8 @@ export const Route = createFileRoute("/admin/cars")({
     meta: [
       { title: "Manage Inventory — Admin — Gearbox Autos" },
       { name: "description", content: "Admin inventory management for Gearbox Autos used cars in Jamshedpur. Add, edit, activate, and publish car listings with photos and pricing." },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
     ],
-    links: [{ rel: "canonical", href: "/admin/cars" }],
   }),
   component: AdminCars,
 });
