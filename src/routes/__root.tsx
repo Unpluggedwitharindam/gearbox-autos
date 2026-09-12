@@ -12,6 +12,7 @@ import appCss from "../styles.css?url";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { SocialFloat } from "@/components/SocialFloat";
 import { DEALER_SCHEMA } from "@/lib/seo";
 
@@ -153,13 +154,15 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Header />
-      <main className="min-h-screen">
-        <Outlet />
-      </main>
-      <Footer />
-      <SocialFloat />
-      <Toaster />
+      <TooltipProvider>
+        <Header />
+        <main className="min-h-screen">
+          <Outlet />
+        </main>
+        <Footer />
+        <SocialFloat />
+        <Toaster />
+      </TooltipProvider>
     </QueryClientProvider>
   );
 }
