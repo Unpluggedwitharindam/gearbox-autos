@@ -1,500 +1,138 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { motion, AnimatePresence } from "framer-motion";
-import { useRef, useState } from "react";
-import {
-  ArrowUp,
-  Car,
-  Mic,
-  Paperclip,
-  PlayCircle,
-  Repeat,
-  ShieldCheck,
-  Tag,
-  Users,
-  X,
-} from "lucide-react";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { FormEvent, useMemo, useRef, useState } from "react";
+import { ArrowUp, Bot, Car, ExternalLink, Gauge, Loader2, Search, ShieldCheck, Sparkles, X } from "lucide-react";
+import ReactMarkdown from "react-markdown";
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { analyzeGarageQuestion } from "@/lib/garage.functions";
+import { UNKNOWN, type GarageAnalysis, type RankedComparable } from "@/lib/garage/types";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/garage")({
   head: () => ({
     meta: [
-      { title: "Gearbox Garage — Ask. Drive. Decide. | Gearbox Autos" },
-      {
-        name: "description",
-        content:
-          "Gearbox Garage is India's car knowledge space — ask about buying, selling or comparing cars and get a clear Gearbox verdict with price, condition and risk scores.",
-      },
-      { property: "og:title", content: "Gearbox Garage — Ask. Drive. Decide." },
-      {
-        property: "og:description",
-        content:
-          "Real questions. Real answers. India's most trusted car knowledge space, by Gearbox Autos Jamshedpur.",
-      },
+      { title: "Garage AI Used Car Valuation | Gearbox Autos" },
+      { name: "description", content: "Ask Garage for Indian used-car analysis, Jamshedpur inventory comparisons, transparent valuation evidence and dealer-aware buying or selling guidance." },
+      { property: "og:title", content: "Garage AI Used Car Intelligence" },
+      { property: "og:description", content: "Indian used-car analysis grounded in verified market evidence and Gearbox Autos Jamshedpur inventory." },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "https://gearboxautos.in/garage" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/garage" }],
-    scripts: [{
-      type: "application/ld+json",
-      children: JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        name: "Gearbox Garage",
-        description: "Automotive buying, selling, comparison, and inspection guidance from Gearbox Autos.",
-        url: "https://gearboxautos.in/garage",
-        isPartOf: { "@type": "WebSite", name: "Gearbox Autos", url: "https://gearboxautos.in" },
-      }),
-    }],
   }),
   component: GaragePage,
 });
 
-type Mode = "buy" | "sell" | "compare";
-
-const MODES: { id: Mode; label: string; icon: typeof Car; placeholder: string }[] = [
-  { id: "buy", label: "Buying a Car", icon: Car, placeholder: "Ask anything about a car..." },
-  { id: "sell", label: "Selling a Car", icon: Tag, placeholder: "How much should I sell my car for..." },
-  { id: "compare", label: "Compare Cars", icon: Repeat, placeholder: "Which two cars should I compare..." },
+type ChatMessage = { role: "user" | "assistant"; content: string };
+type SortKey = "relevance" | "price" | "km" | "year" | "distance";
+const STARTERS = [
+  "What should I pay for a 2021 Hyundai Creta SX diesel automatic with 42,000 km, 1st owner, Jamshedpur?",
+  "Should I buy this 2019 Mahindra XUV500 diesel manual with 80,000 km?",
+  "Which is better for Jamshedpur, Tata Nexon or Hyundai Venue?",
+  "What should I sell my car for?",
 ];
 
-const CHIPS: Record<Mode, string[]> = {
-  buy: [
-    "Is ₹8.5 lakh a fair price for a 2020 Creta?",
-    "What is my car worth?",
-    "Should I buy a diesel in 2026?",
-    "Compare City vs Verna",
-    "How to sell my car for the best price?",
-  ],
-  sell: [
-    "What is my 2018 Swift worth today?",
-    "Best month to sell a car in India?",
-    "Should I sell privately or to a dealer?",
-    "How do I transfer the RC quickly?",
-  ],
-  compare: [
-    "Compare City vs Verna",
-    "Creta or Seltos for city driving?",
-    "Nexon petrol vs Punch petrol",
-    "Fortuner vs Endeavour resale value",
-  ],
-};
-
-const VIDEOS = [
-  { title: "Used Car Inspection Checklist", lines: ["PRE-OWNED CAR", "INSPECTION", "CHECKLIST"], time: "12:34", views: "12K views", age: "3 days ago", tone: "from-[#1b1f24] to-[#3a4148]" },
-  { title: "Diesel vs Petrol — Which One Should You Buy?", lines: ["DIESEL OR PETROL?", "WHICH ONE SHOULD YOU BUY?"], time: "8:21", views: "18K views", age: "5 days ago", tone: "from-[#8fb6d6] to-[#dfe8ef]" },
-  { title: "Real Car Case — Good Deal or Trap?", lines: ["REAL CAR CASE", "GOOD DEAL OR TRAP?"], time: "10:02", views: "9.4K views", age: "7 days ago", tone: "from-[#20242a] to-[#4a5158]" },
-  { title: "Mercedes C250d — Full Review", lines: ["MERCEDES C250d", "FULL REVIEW"], time: "14:26", views: "22K views", age: "10 days ago", tone: "from-[#0d1013] to-[#343a41]" },
-  { title: "How to Sell Your Car for the Best Price", lines: ["HOW TO", "SELL YOUR CAR", "FOR THE BEST PRICE"], time: "9:18", views: "11K views", age: "2 weeks ago", tone: "from-[#161a1e] to-[#464d55]" },
-];
-
-const FILTERS = ["Latest", "Buying Tips", "Car Reviews", "Inspection"];
-
-function SteeringWheel({ angle }: { angle: number }) {
-  return (
-    <motion.svg
-      viewBox="0 0 240 240"
-      className="h-56 w-56 md:h-64 md:w-64 drop-shadow-[0_28px_40px_rgba(14,18,23,0.22)]"
-      animate={{ rotate: angle }}
-      transition={{ type: "spring", stiffness: 90, damping: 12 }}
-      aria-hidden="true"
-    >
-      <defs>
-        <radialGradient id="rim" cx="35%" cy="25%">
-          <stop offset="0%" stopColor="#4a4f55" />
-          <stop offset="60%" stopColor="#22262b" />
-          <stop offset="100%" stopColor="#0c0e11" />
-        </radialGradient>
-        <linearGradient id="spoke" x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0%" stopColor="#3b4046" />
-          <stop offset="100%" stopColor="#15181c" />
-        </linearGradient>
-      </defs>
-      <circle cx="120" cy="120" r="108" fill="none" stroke="url(#rim)" strokeWidth="24" />
-      <circle cx="120" cy="120" r="118" fill="none" stroke="#000" strokeOpacity="0.15" strokeWidth="2" />
-      <circle cx="120" cy="120" r="96" fill="none" stroke="#000" strokeOpacity="0.35" strokeWidth="2" />
-      {/* thumb grips */}
-      <rect x="16" y="88" width="26" height="64" rx="13" fill="#2b3036" />
-      <rect x="198" y="88" width="26" height="64" rx="13" fill="#2b3036" />
-      {/* spokes */}
-      <path d="M40 128 H200 V150 Q120 176 40 150 Z" fill="url(#spoke)" />
-      <rect x="108" y="150" width="24" height="60" rx="10" fill="url(#spoke)" />
-      {/* hub */}
-      <ellipse cx="120" cy="140" rx="52" ry="34" fill="#1a1e22" />
-      <ellipse cx="120" cy="138" rx="46" ry="29" fill="#23282e" />
-      <g transform="translate(120 138)">
-        <path d="M-16 -9 L2 -9 L-4 0 L10 0 L-10 12 L-5 1 L-18 1 Z" fill="#E5252F" />
-      </g>
-      <circle cx="86" cy="132" r="8" fill="#31363c" />
-      <circle cx="154" cy="132" r="8" fill="#31363c" />
-    </motion.svg>
-  );
-}
-
-function Pedal({
-  kind,
-  onClick,
-  pressed,
-}: {
-  kind: "clutch" | "brake" | "accel";
-  onClick: () => void;
-  pressed: boolean;
-}) {
-  const wide = kind === "brake";
-  return (
-    <motion.button
-      type="button"
-      onClick={onClick}
-      animate={{ scale: pressed ? 0.95 : 1, y: pressed ? 4 : 0 }}
-      whileHover={{ y: -2 }}
-      transition={{ type: "spring", stiffness: 400, damping: 20 }}
-      className={`relative flex items-center justify-center rounded-[10px] bg-gradient-to-b from-[#d5d9dd] to-[#9ba2a9] shadow-[0_14px_22px_rgba(14,18,23,0.22),inset_0_1px_0_#ffffff] ring-1 ring-[#8b9298] ${
-        wide ? "h-[72px] w-[76px]" : "h-[86px] w-[62px]"
-      }`}
-      aria-label={kind}
-    >
-      {kind === "brake" ? (
-        <span className="flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-[#2b3036] text-[15px] font-bold text-[#2b3036]">
-          !
-        </span>
-      ) : (
-        <span className={`flex ${kind === "clutch" ? "flex-col gap-[7px]" : "flex-row gap-[7px]"}`}>
-          {[0, 1, 2, 3].map((i) => (
-            <span
-              key={i}
-              className={`rounded-full bg-[#3a4046] ${kind === "clutch" ? "h-[5px] w-9" : "h-11 w-[5px]"}`}
-            />
-          ))}
-        </span>
-      )}
-    </motion.button>
-  );
-}
+const money = (value: number) => `₹${(value / 100_000).toFixed(value % 100_000 === 0 ? 1 : 2)}L`;
+const known = (value: string | number) => value === UNKNOWN ? "Unknown" : String(value);
 
 function GaragePage() {
-  const [mode, setMode] = useState<Mode>("buy");
-  const [angle, setAngle] = useState(0);
-  const [pressed, setPressed] = useState<string | null>(null);
-  const [query, setQuery] = useState("");
-  const [verdict, setVerdict] = useState<string | null>(null);
-  const [filter, setFilter] = useState("Latest");
-  const inputRef = useRef<HTMLInputElement>(null);
+  const analyze = useServerFn(analyzeGarageQuestion);
+  const [input, setInput] = useState("");
+  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const [analysis, setAnalysis] = useState<GarageAnalysis | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [sort, setSort] = useState<SortKey>("relevance");
+  const abortRef = useRef<AbortController | null>(null);
 
-  const press = (k: string) => {
-    setPressed(k);
-    window.setTimeout(() => setPressed(null), 240);
+  const submit = async (text?: string) => {
+    const question = (text ?? input).trim();
+    if (!question || loading) return;
+    const next = [...messages, { role: "user" as const, content: question }];
+    setMessages(next); setInput(""); setLoading(true); setError(""); setAnalysis(null);
+    const controller = new AbortController(); abortRef.current = controller;
+    try {
+      const analysisPromise = analyze({ data: { question } });
+      const response = await fetch("/api/garage-chat", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ messages: next }), signal: controller.signal });
+      if (!response.ok) {
+        const body = await response.json().catch(() => ({ message: "Garage could not answer right now." }));
+        throw new Error(body.message ?? "Garage could not answer right now.");
+      }
+      if (!response.body) throw new Error("Garage returned an empty response.");
+      const reader = response.body.getReader(); const decoder = new TextDecoder(); let answer = "";
+      setMessages([...next, { role: "assistant", content: "" }]);
+      while (true) {
+        const chunk = await reader.read(); if (chunk.done) break;
+        answer += decoder.decode(chunk.value, { stream: true });
+        setMessages([...next, { role: "assistant", content: answer }]);
+      }
+      setAnalysis(await analysisPromise);
+    } catch (caught) {
+      if ((caught as Error).name !== "AbortError") setError(caught instanceof Error ? caught.message : "Garage could not answer right now.");
+    } finally { setLoading(false); abortRef.current = null; }
   };
-
-  const onClutch = () => {
-    press("clutch");
-    setAngle(-15);
-    setMode("sell");
-  };
-  const onBrake = () => {
-    press("brake");
-    setAngle(0);
-    setQuery("");
-    setVerdict(null);
-  };
-  const onAccel = () => {
-    press("accel");
-    setAngle(15);
-    setMode("buy");
-    window.setTimeout(() => inputRef.current?.focus(), 120);
-  };
-
-  const submit = (text?: string) => {
-    const q = (text ?? query).trim();
-    if (!q) return;
-    setQuery(q);
-    setVerdict(q);
-  };
-
-  const active = MODES.find((m) => m.id === mode)!;
 
   return (
-    <div className="min-h-screen bg-white text-[#0E1217]" style={{ fontFamily: "Inter, Montserrat, sans-serif" }}>
-      <div className="mx-auto flex max-w-[1500px] flex-col lg:flex-row">
-        {/* LEFT RAIL */}
-        <aside className="w-full shrink-0 border-b border-[#ECEEF1] px-5 py-6 lg:sticky lg:top-0 lg:h-screen lg:w-[22%] lg:overflow-y-auto lg:border-b-0 lg:border-r">
-          <div className="flex items-center justify-between">
-            <h2 className="flex items-center gap-2 text-[17px] font-bold">
-              <PlayCircle className="h-6 w-6" strokeWidth={1.8} />
-              Videos
-            </h2>
-            <button className="text-[12px] font-medium text-[#6B737C] hover:text-[#0E1217]">See all →</button>
+    <div className="min-h-screen bg-white text-zinc-950">
+      <section className="border-b border-zinc-200 px-4 pb-10 pt-12 md:px-8 md:pt-16">
+        <div className="mx-auto max-w-5xl">
+          <div className="flex items-center justify-between gap-4">
+            <div><p className="text-xs font-bold uppercase tracking-[0.2em] text-red-600">Ask Garage</p><h1 className="mt-2 text-4xl font-extrabold md:text-6xl">Know the car. Know the deal.</h1></div>
+            <div className="hidden items-center gap-2 border border-zinc-200 px-3 py-2 text-xs font-semibold text-zinc-600 md:flex"><ShieldCheck className="h-4 w-4 text-emerald-600" /> Evidence-first analysis</div>
           </div>
+          <p className="mt-4 max-w-3xl text-base leading-7 text-zinc-600">Indian used-car intelligence for valuations, comparisons, buying, selling and Gearbox Autos inventory in Jamshedpur.</p>
+          <form onSubmit={(event: FormEvent) => { event.preventDefault(); submit(); }} className="mt-8 flex items-end gap-3 border border-zinc-300 bg-white p-3 shadow-[0_18px_45px_rgba(0,0,0,0.08)]">
+            <Search className="mb-3 ml-2 h-5 w-5 shrink-0 text-zinc-400" />
+            <textarea value={input} onChange={(event) => setInput(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter" && !event.shiftKey) { event.preventDefault(); submit(); } }} rows={2} placeholder="Ask anything about a used car…" className="min-h-14 flex-1 resize-none bg-transparent py-2 text-base outline-none placeholder:text-zinc-400" />
+            {loading ? <Button type="button" variant="outline" size="icon" aria-label="Stop" onClick={() => abortRef.current?.abort()}><X /></Button> : <Button type="submit" size="icon" aria-label="Ask Garage" disabled={!input.trim()}><ArrowUp /></Button>}
+          </form>
+          {messages.length === 0 && <div className="mt-4 flex flex-wrap gap-2">{STARTERS.map((item) => <button key={item} type="button" onClick={() => submit(item)} className="border border-zinc-200 px-3 py-2 text-left text-xs text-zinc-600 transition hover:border-red-500 hover:text-red-600">{item}</button>)}</div>}
+        </div>
+      </section>
 
-          <div className="mt-4 flex flex-wrap gap-2">
-            {FILTERS.map((f) => (
-              <button
-                key={f}
-                onClick={() => setFilter(f)}
-                className={`rounded-full px-3 py-1.5 text-[11.5px] font-semibold transition-colors ${
-                  filter === f
-                    ? "bg-[#0E1217] text-white"
-                    : "border border-[#ECEEF1] bg-white text-[#4A525A] hover:border-[#d8dce0]"
-                }`}
-              >
-                {f}
-              </button>
-            ))}
-          </div>
-
-          <div className="mt-5 space-y-5">
-            {VIDEOS.map((v) => (
-              <article key={v.title} className="group cursor-pointer">
-                <div className={`relative aspect-video overflow-hidden rounded-[10px] bg-gradient-to-br ${v.tone}`}>
-                  <div className="absolute inset-0 flex flex-col justify-center gap-0.5 p-3">
-                    {v.lines.map((l, i) => (
-                      <span
-                        key={l}
-                        className="text-[13px] font-extrabold uppercase leading-tight tracking-tight"
-                        style={{ color: i === 1 ? "#F5B301" : "#ffffff", textShadow: "0 2px 6px rgba(0,0,0,.5)" }}
-                      >
-                        {l}
-                      </span>
-                    ))}
-                  </div>
-                  <span className="absolute bottom-2 right-2 rounded bg-black/75 px-1.5 py-0.5 text-[10px] font-semibold text-white">
-                    {v.time}
-                  </span>
-                </div>
-                <h3 className="mt-2 text-[13.5px] font-semibold leading-snug group-hover:text-[#E5252F]">
-                  {v.title}
-                </h3>
-                <p className="mt-1 text-[11.5px] text-[#8A9199]">
-                  Gearbox Autos · {v.views} · {v.age}
-                </p>
-              </article>
-            ))}
-          </div>
+      <main className="mx-auto grid max-w-7xl gap-8 px-4 py-10 md:px-8 lg:grid-cols-[minmax(0,1fr)_360px]">
+        <div className="min-w-0 space-y-6">
+          {messages.length === 0 ? <EmptyState /> : <Conversation messages={messages} loading={loading} error={error} onRetry={() => { const question = [...messages].reverse().find((message) => message.role === "user")?.content; if (question) submit(question); }} />}
+          {analysis && <Evidence analysis={analysis} sort={sort} onSort={setSort} />}
+        </div>
+        <aside className="space-y-4">
+          <div className="border border-zinc-200 bg-zinc-50 p-5"><p className="text-xs font-bold uppercase tracking-[0.16em] text-zinc-500">Garage principles</p><ul className="mt-4 space-y-3 text-sm leading-6 text-zinc-700"><li>Verified listings only</li><li>Jamshedpur and Jharkhand first</li><li>Fuel types never mixed in primary comparisons</li><li>Every relaxed match is disclosed</li><li>Estimates are ranges, never exact promises</li></ul></div>
+          <div className="border border-zinc-200 p-5"><Gauge className="h-5 w-5 text-red-600" /><h2 className="mt-3 font-bold">Dealer intelligence</h2><p className="mt-2 text-sm leading-6 text-zinc-600">Gearbox Autos staff can review stock age, margin inputs and pricing opportunities in the protected dashboard.</p><Button asChild variant="outline" className="mt-4"><Link to="/admin">Open dashboard</Link></Button></div>
         </aside>
-
-        {/* MAIN */}
-        <main className="relative flex-1 px-6 py-10 md:px-12 lg:py-14">
-          <span
-            className="pointer-events-none absolute right-6 top-8 hidden text-[22px] leading-tight text-[#B9C0C7] md:block"
-            style={{ fontFamily: "Caveat, cursive", transform: "rotate(8deg)" }}
-          >
-            Better<br />Cars<br />Brighter<br />People
-          </span>
-
-          <div className="mx-auto max-w-[900px]">
-            <div className="flex items-center justify-center gap-4">
-              <span className="h-px w-16 bg-[#ECEEF1]" />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-[#8A9199]">
-                Gearbox Garage
-              </p>
-              <span className="h-px w-16 bg-[#ECEEF1]" />
-            </div>
-
-            <h1 className="mt-4 text-center text-[42px] font-extrabold tracking-tight md:text-[54px]">
-              Ask. Drive. Decide.
-            </h1>
-            <p className="mt-3 text-center text-[16px] text-[#4A525A] md:text-[18px]">
-              Real questions. Real answers. India’s most trusted car knowledge space.
-            </p>
-
-            {/* WHEEL */}
-            <div className="mt-8 flex justify-center">
-              <SteeringWheel angle={angle} />
-            </div>
-
-            {/* PEDALS */}
-            <div className="relative mt-6 flex items-end justify-center gap-8 md:gap-14">
-              <span
-                className="pointer-events-none absolute left-0 top-0 hidden text-[19px] leading-tight text-[#9AA2AA] lg:block"
-                style={{ fontFamily: "Caveat, cursive", transform: "rotate(-6deg)" }}
-              >
-                Change<br />Mode ↘
-              </span>
-              <span
-                className="pointer-events-none absolute right-0 top-0 hidden text-[19px] leading-tight text-[#9AA2AA] lg:block"
-                style={{ fontFamily: "Caveat, cursive", transform: "rotate(6deg)" }}
-              >
-                Get<br />Answers ↙
-              </span>
-
-              {[
-                { k: "clutch" as const, t: "Clutch", s: "Change Mode", fn: onClutch },
-                { k: "brake" as const, t: "Brake", s: "Refine / Stop", fn: onBrake },
-                { k: "accel" as const, t: "Accelerator", s: "Ask / Go", fn: onAccel },
-              ].map((p) => (
-                <div key={p.k} className="flex flex-col items-center">
-                  <Pedal kind={p.k} onClick={p.fn} pressed={pressed === p.k} />
-                  <span className="mt-3 text-[14px] font-semibold">{p.t}</span>
-                  <span className="text-[12.5px] text-[#8A9199]">{p.s}</span>
-                </div>
-              ))}
-            </div>
-
-            {/* MODE SELECTOR */}
-            <div className="mt-10 flex justify-center">
-              <div className="flex w-full max-w-[680px] items-center justify-between gap-1 rounded-full border border-[#ECEEF1] bg-white p-1.5 shadow-[0_6px_20px_rgba(14,18,23,0.05)]">
-                {MODES.map((m) => {
-                  const Icon = m.icon;
-                  const on = mode === m.id;
-                  return (
-                    <button
-                      key={m.id}
-                      onClick={() => setMode(m.id)}
-                      className={`flex flex-1 items-center justify-center gap-2 rounded-full px-4 py-3 text-[14px] font-medium transition-colors ${
-                        on ? "bg-[#FFF0F1] text-[#E5252F]" : "bg-white text-[#4A525A] hover:bg-[#F7F8F9]"
-                      }`}
-                    >
-                      <Icon className="h-[18px] w-[18px]" strokeWidth={1.8} />
-                      {m.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-
-            {/* PROMPT */}
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                submit();
-              }}
-              className="mt-6 flex items-center gap-3 rounded-full border border-[#ECEEF1] bg-white px-4 py-3 shadow-[0_10px_30px_rgba(14,18,23,0.07)]"
-            >
-              <button type="button" aria-label="Attach" className="p-1.5 text-[#8A9199] hover:text-[#0E1217]">
-                <Paperclip className="h-5 w-5" strokeWidth={1.7} />
-              </button>
-              <input
-                ref={inputRef}
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder={active.placeholder}
-                className="flex-1 bg-transparent text-[16px] outline-none placeholder:text-[#9AA2AA]"
-              />
-              <button type="button" aria-label="Voice" className="p-1.5 text-[#8A9199] hover:text-[#0E1217]">
-                <Mic className="h-5 w-5" strokeWidth={1.7} />
-              </button>
-              <button
-                type="submit"
-                aria-label="Send"
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-[#EDEFF1] text-[#6B737C] transition-colors hover:bg-[#E5252F] hover:text-white"
-              >
-                <ArrowUp className="h-5 w-5" />
-              </button>
-            </form>
-
-            {/* CHIPS */}
-            <div className="mt-5 flex flex-wrap items-center gap-2">
-              <span className="text-[13px] text-[#8A9199]">Try asking:</span>
-              {CHIPS[mode].map((c) => (
-                <button
-                  key={c}
-                  onClick={() => submit(c)}
-                  className="rounded-full border border-[#ECEEF1] bg-white px-3.5 py-2 text-[12.5px] text-[#4A525A] transition-colors hover:border-[#E5252F] hover:text-[#E5252F]"
-                >
-                  {c}
-                </button>
-              ))}
-            </div>
-
-            {/* VERDICT */}
-            <AnimatePresence>
-              {verdict && (
-                <motion.section
-                  initial={{ opacity: 0, height: 0, y: -8 }}
-                  animate={{ opacity: 1, height: "auto", y: 0 }}
-                  exit={{ opacity: 0, height: 0, y: -8 }}
-                  transition={{ duration: 0.35, ease: "easeOut" }}
-                  className="mt-8 overflow-hidden"
-                >
-                  <div className="rounded-2xl border border-[#ECEEF1] bg-white p-6 shadow-[0_12px_40px_rgba(14,18,23,0.06)]">
-                    <div className="flex items-start justify-between gap-4">
-                      <p className="text-[15px] font-semibold">{verdict}</p>
-                      <button
-                        onClick={() => setVerdict(null)}
-                        className="flex items-center gap-1 text-[12px] text-[#8A9199] hover:text-[#0E1217]"
-                      >
-                        <X className="h-4 w-4" /> Close
-                      </button>
-                    </div>
-
-                    <div className="mt-5 flex flex-wrap items-center gap-4 border-t border-[#F2F4F6] pt-5">
-                      <span className="rounded-full bg-[#FFF0F1] px-3 py-1 text-[10.5px] font-bold uppercase tracking-[0.14em] text-[#E5252F]">
-                        Gearbox Verdict
-                      </span>
-                      <span className="text-[26px] font-extrabold tracking-tight">
-                        82 <span className="text-[#9AA2AA]">/ 100</span>
-                        <span className="ml-2 text-[15px] font-medium text-[#4A525A]">• Worth considering</span>
-                      </span>
-                      <span className="ml-auto text-[14px] text-[#4A525A]">
-                        Recommended buying range{" "}
-                        <strong className="text-[#0E1217]">₹11.6–12.1L</strong>
-                      </span>
-                    </div>
-
-                    <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                      {[
-                        { l: "Price Score", v: "86", t: "Good" },
-                        { l: "Condition Score", v: "84", t: "Good" },
-                        { l: "Risk Factor", v: "76", t: "Verify" },
-                      ].map((m) => (
-                        <div key={m.l} className="rounded-xl border border-[#ECEEF1] px-4 py-3">
-                          <p className="text-[11.5px] uppercase tracking-wide text-[#8A9199]">{m.l}</p>
-                          <p className="mt-1 text-[19px] font-bold">
-                            {m.v} <span className="text-[13px] font-medium text-[#4A525A]">· {m.t}</span>
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <p className="mt-5 text-[14.5px] leading-relaxed text-[#4A525A]">
-                      At this price the car sits slightly under the Jamshedpur market average for a well-kept
-                      example, so the deal is workable if the paperwork is clean. Insist on an OBD-II diagnostic
-                      scan before payment — stored engine and airbag codes are the most common hidden cost on cars
-                      of this age. Check the steering rack for play and listen for a knock over speed breakers, as
-                      rack replacement is expensive. Confirm the RC transfer, insurance history and pending
-                      challans in writing, and budget roughly ₹18,000–24,000 for a fresh set of tyres if the
-                      current ones are past four years old.
-                    </p>
-
-                    <div className="mt-6 flex flex-wrap gap-3">
-                      <button className="rounded-full bg-[#0E1217] px-5 py-2.5 text-[13px] font-semibold text-white hover:bg-[#22272d]">
-                        Ask a follow-up
-                      </button>
-                      <button className="rounded-full border border-[#ECEEF1] px-5 py-2.5 text-[13px] font-semibold text-[#4A525A] hover:border-[#d8dce0]">
-                        View calculation
-                      </button>
-                      <button className="rounded-full border border-[#ECEEF1] px-5 py-2.5 text-[13px] font-semibold text-[#4A525A] hover:border-[#d8dce0]">
-                        Share verdict
-                      </button>
-                    </div>
-                  </div>
-                </motion.section>
-              )}
-            </AnimatePresence>
-
-            {/* STATS */}
-            <div className="relative mt-14 flex flex-wrap items-center gap-10 border-t border-[#ECEEF1] pt-8">
-              {[
-                { Icon: Users, v: "12K+", l: "Questions answered" },
-                { Icon: ShieldCheck, v: "50+", l: "Auto experts" },
-                { Icon: Users, v: "1.8K+", l: "Active members" },
-              ].map((s) => (
-                <div key={s.l} className="flex items-center gap-3">
-                  <s.Icon className="h-6 w-6 text-[#6B737C]" strokeWidth={1.4} />
-                  <div>
-                    <p className="text-[15px] font-bold">{s.v}</p>
-                    <p className="text-[12.5px] text-[#8A9199]">{s.l}</p>
-                  </div>
-                </div>
-              ))}
-              <span
-                className="ml-auto hidden text-[24px] text-[#B9C0C7] md:block"
-                style={{ fontFamily: "Caveat, cursive", transform: "rotate(-6deg)" }}
-              >
-                Drive Smarter
-              </span>
-            </div>
-          </div>
-        </main>
-      </div>
+      </main>
     </div>
   );
 }
+
+function EmptyState() { return <div className="grid min-h-80 place-items-center border border-dashed border-zinc-300 p-8 text-center"><div><Bot className="mx-auto h-10 w-10 text-red-600" /><h2 className="mt-4 text-2xl font-bold">Ask a real used-car question</h2><p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-zinc-600">Include year, make, model, variant, fuel, transmission, kilometres, ownership and location for the strongest analysis.</p></div></div>; }
+
+function Conversation({ messages, loading, error, onRetry }: { messages: ChatMessage[]; loading: boolean; error: string; onRetry: () => void }) {
+  return <section aria-live="polite" className="space-y-4">{messages.map((message, index) => <div key={`${message.role}-${index}`} className={message.role === "user" ? "ml-auto max-w-2xl bg-zinc-950 p-4 text-sm leading-6 text-white" : "max-w-3xl border-l-4 border-red-600 bg-zinc-50 p-5 text-sm leading-7 text-zinc-800"}>{message.role === "assistant" ? <div className="prose prose-sm max-w-none"><ReactMarkdown>{message.content || "Analysing…"}</ReactMarkdown></div> : message.content}</div>)}{loading && <p className="flex items-center gap-2 text-sm text-zinc-500"><Loader2 className="h-4 w-4 animate-spin" /> Garage is checking the vehicle and inventory…</p>}{error && <div className="border border-red-200 bg-red-50 p-4 text-sm text-red-800"><p>{error}</p><Button variant="outline" size="sm" className="mt-3" onClick={onRetry}>Try again</Button></div>}</section>;
+}
+
+function Evidence({ analysis, sort, onSort }: { analysis: GarageAnalysis; sort: SortKey; onSort: (sort: SortKey) => void }) {
+  const vehicle = analysis.vehicle;
+  const sorted = useMemo(() => [...analysis.externalComparables].sort(sorter(sort)), [analysis.externalComparables, sort]);
+  return <section className="space-y-6 border-t border-zinc-200 pt-8">
+    <div className="flex flex-wrap items-end justify-between gap-4"><div><p className="text-xs font-bold uppercase tracking-[0.18em] text-red-600">Structured analysis</p><h2 className="mt-2 text-2xl font-extrabold">{known(vehicle.manufacturingYear)} {known(vehicle.make)} {known(vehicle.model)} {known(vehicle.variant)}</h2><p className="mt-1 text-sm text-zinc-500">{known(vehicle.km)} km · {known(vehicle.ownerCount)} owner · {known(vehicle.fuel)} · {known(vehicle.transmission)} · {known(vehicle.location)}</p></div></div>
+    {analysis.missingFields.length > 0 && <div className="border border-amber-300 bg-amber-50 p-4 text-sm text-amber-950"><strong>Needed for a reliable valuation:</strong> {analysis.missingFields.join(", ")}.</div>}
+    <ValuationPanel analysis={analysis} />
+    <InventoryMatches matches={analysis.inventoryComparables} />
+    <ComparableTable items={sorted} sort={sort} onSort={onSort} providerStatus={analysis.providerStatus} relaxations={analysis.relaxations} />
+  </section>;
+}
+
+function ValuationPanel({ analysis }: { analysis: GarageAnalysis }) {
+  const valuation = analysis.valuation;
+  if (valuation.status === "unavailable") return <div className="border border-zinc-300 p-5"><div className="flex items-start gap-3"><Sparkles className="mt-0.5 h-5 w-5 text-red-600" /><div><h3 className="font-bold">Market valuation not yet available</h3><p className="mt-1 text-sm leading-6 text-zinc-600">No verified external listing feed currently contains enough relevant evidence. Garage will not invent a median, score or price range. The AI answer above can still use actual Gearbox inventory and provide practical inspection or negotiation guidance.</p></div></div></div>;
+  const chart = [{ name: "Low", value: valuation.statistics.minimum }, { name: "Q1", value: valuation.statistics.lowerQuartile }, { name: "Median", value: valuation.statistics.median }, { name: "Q3", value: valuation.statistics.upperQuartile }, { name: "High", value: valuation.statistics.maximum }];
+  return <div className="grid gap-5 border border-zinc-200 p-5 lg:grid-cols-2"><div><p className="text-xs font-bold uppercase tracking-[0.15em] text-zinc-500">Garage Score</p><p className="mt-2 text-5xl font-black">{valuation.garageScore}<span className="text-xl text-zinc-400">/100</span></p><p className="mt-1 font-bold text-red-600">{valuation.label}</p><dl className="mt-5 grid grid-cols-2 gap-4 text-sm"><Metric label="Fair market value" value={`${money(valuation.fairMarketValue.low)}–${money(valuation.fairMarketValue.high)}`} /><Metric label="Dealer buy price" value={`${money(valuation.dealerBuyingPrice.low)}–${money(valuation.dealerBuyingPrice.high)}`} /><Metric label="Listing price" value={money(valuation.recommendedSellingPrice)} /><Metric label="Expected close" value={money(valuation.expectedClosingPrice)} /></dl></div><div className="h-64"><ResponsiveContainer width="100%" height="100%"><BarChart data={chart}><CartesianGrid strokeDasharray="3 3" vertical={false} /><XAxis dataKey="name" /><YAxis tickFormatter={(value) => `${(Number(value) / 100_000).toFixed(0)}L`} /><Tooltip formatter={(value) => money(Number(value))} /><Bar dataKey="value" fill="#dc2626" /></BarChart></ResponsiveContainer></div></div>;
+}
+
+function Metric({ label, value }: { label: string; value: string }) { return <div><dt className="text-xs text-zinc-500">{label}</dt><dd className="mt-1 font-bold">{value}</dd></div>; }
+
+function InventoryMatches({ matches }: { matches: GarageAnalysis["inventoryComparables"] }) { return <div><div className="flex items-center gap-2"><Car className="h-5 w-5 text-red-600" /><h3 className="text-lg font-bold">Gearbox Autos inventory</h3><span className="text-sm text-zinc-500">{matches.length} match{matches.length === 1 ? "" : "es"}</span></div>{matches.length === 0 ? <p className="mt-3 border border-zinc-200 p-4 text-sm text-zinc-600">No similar current Gearbox inventory was found.</p> : <div className="mt-3 grid gap-3 md:grid-cols-2">{matches.map((car) => <Link key={car.id} to="/car/$id" params={{ id: car.slug }} className="border border-zinc-200 p-4 transition hover:border-red-500"><p className="font-bold">{car.name}</p><p className="mt-1 text-sm text-zinc-500">{known(car.manufacturingYear)} · {known(car.km)} km · {known(car.fuel)} · {known(car.ownerCount)} owner</p><p className="mt-3 font-bold">{money(car.askingPriceInr)}</p></Link>)}</div>}</div>; }
+
+function ComparableTable({ items, sort, onSort, providerStatus, relaxations }: { items: RankedComparable[]; sort: SortKey; onSort: (value: SortKey) => void; providerStatus: GarageAnalysis["providerStatus"]; relaxations: string[] }) { return <div><div className="flex flex-wrap items-center justify-between gap-3"><div><h3 className="text-lg font-bold">External comparable cars</h3><p className="text-sm text-zinc-500">{items.length} verified relevant listing{items.length === 1 ? "" : "s"} analysed</p></div><label className="flex items-center gap-2 text-xs font-semibold">Sort<select value={sort} onChange={(event) => onSort(event.target.value as SortKey)} className="border border-zinc-300 bg-white px-3 py-2"><option value="relevance">Relevance</option><option value="price">Price</option><option value="km">KM</option><option value="year">Year</option><option value="distance">Distance</option></select></label></div>{relaxations.length > 0 && items.length > 0 && <div className="mt-3 border border-blue-200 bg-blue-50 p-4 text-sm text-blue-950">{relaxations.map((item) => <p key={item}>{item}</p>)}</div>}{providerStatus !== "connected" ? <div className="mt-3 border border-zinc-200 p-5 text-sm leading-6 text-zinc-600">A verified external Indian listing provider is not connected yet. Garage will show listings here only after their source, URL and vehicle facts can be verified.</div> : items.length === 0 ? <div className="mt-3 border border-zinc-200 p-5 text-sm text-zinc-600">No genuinely relevant comparable listings were found.</div> : <div className="mt-3 overflow-x-auto border border-zinc-200"><table className="w-full min-w-[900px] text-left text-sm"><thead className="bg-zinc-50 text-xs uppercase text-zinc-500"><tr>{["Vehicle", "Year", "KM", "Owner", "Fuel", "Variant", "Location", "Price", "Relevance", "Source"].map((head) => <th key={head} className="p-3">{head}</th>)}</tr></thead><tbody>{items.map((item) => <tr key={item.id} className="border-t border-zinc-200"><td className="p-3 font-semibold">{known(item.make)} {known(item.model)}</td><td className="p-3">{known(item.manufacturingYear)}</td><td className="p-3">{known(item.km)}</td><td className="p-3">{known(item.ownerCount)}</td><td className="p-3">{known(item.fuel)}</td><td className="p-3">{known(item.variant)}</td><td className="p-3">{known(item.location)}</td><td className="p-3 font-bold">{money(item.askingPriceInr)}</td><td className="p-3">{item.relevance}%</td><td className="p-3">{item.listingUrl === UNKNOWN ? item.source : <a href={item.listingUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 text-red-600">View <ExternalLink className="h-3 w-3" /></a>}</td></tr>)}</tbody></table></div>}</div>; }
+
+function sorter(key: SortKey) { return (a: RankedComparable, b: RankedComparable) => { if (key === "price") return a.askingPriceInr - b.askingPriceInr; if (key === "km") return (a.km === UNKNOWN ? Infinity : a.km) - (b.km === UNKNOWN ? Infinity : b.km); if (key === "year") return (b.manufacturingYear === UNKNOWN ? 0 : b.manufacturingYear) - (a.manufacturingYear === UNKNOWN ? 0 : a.manufacturingYear); if (key === "distance") return a.distanceTier - b.distanceTier; return b.relevance - a.relevance; }; }
