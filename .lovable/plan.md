@@ -29,10 +29,14 @@ Make Garage return a useful, clearly sourced used-car price range whenever suffi
    - Display evidence count, match quality, location coverage, and confidence beside every range.
    - If evidence is insufficient, explain exactly what is missing instead of showing a misleading price.
 
-4. **Make the market-data gap manageable**
-   - Add an admin workflow to enter or import verified comparable listings with source URL, observed date, vehicle details, location, and asking price.
-   - Reject incomplete, duplicate, stale, or unverifiable rows.
-   - Do not scrape or fabricate listings. A third-party live market feed can be connected later if one is supplied.
+4. **Aggregate Cars24, Spinny, CarDekho, and OLX listings**
+   - Connect a licensed marketplace-data API that covers these four sources; direct unapproved scraping will not be used.
+   - Search each source using the parsed make, model, variant, year, fuel, transmission, kilometres, ownership, and location.
+   - Store the source name, original listing URL, observed date, vehicle facts, location, and listed price for traceability.
+   - Refresh relevant results on demand with a short cache, then discard stale listings and deduplicate cars repeated across sources.
+   - Show each marketplace separately and calculate an overall average, median, and trimmed price range only from genuinely comparable cars.
+   - Add an admin import option as a fallback for verified listing data when a source is temporarily unavailable.
+   - Before implementation, connect the selected licensed data provider and securely add its API credential. Provider fees and coverage depend on the selected service.
 
 5. **Improve current inventory data quality**
    - Backfill structured make/model/year fields from existing listing names where unambiguous.
@@ -45,10 +49,11 @@ Make Garage return a useful, clearly sourced used-car price range whenever suffi
    - Verify that Garage produces a visible range only when its evidence and confidence rules pass.
 
 ## Expected outcome
-Garage will stop appearing broken: it will retain the car details, explain its evidence, and return the best defensible price range available. A genuinely current market valuation still requires verified comparable listings or a connected licensed market-data provider; the system will not manufacture one.
+Garage will retain the car details and return an evidence-backed listed-price average from Cars24, Spinny, CarDekho, and OLX when enough comparable listings are available. It will display source links, per-source counts, the median, the trimmed range, and confidence instead of presenting one unexplained number.
 
 ## Technical details
 - Keep the deterministic valuation engine authoritative; AI explains results but cannot override calculated values.
 - Introduce explicit valuation source and confidence fields in the response model.
 - Require a minimum number of comparable records and retain fuel isolation, locality tiers, deduplication, and outlier removal.
+- Do not treat a simple arithmetic mean as the final valuation: calculate it for transparency, but use median and outlier-trimmed evidence to reduce distortion from unrealistic asking prices.
 - Preserve the existing Garage page, inventory features, admin security, and all other website routes.
