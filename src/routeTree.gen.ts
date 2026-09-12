@@ -24,6 +24,7 @@ import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as UsedCarsInJamshedpurBrandRouteImport } from './routes/used-cars-in-jamshedpur.$brand'
+import { Route as CarUsedCarsInJamshedpurHondaAmaze2026RouteImport } from './routes/car.used-cars-in-jamshedpur-honda-amaze-2026'
 import { Route as CarIdRouteImport } from './routes/car.$id'
 import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
@@ -107,6 +108,12 @@ const UsedCarsInJamshedpurBrandRoute =
     path: '/$brand',
     getParentRoute: () => UsedCarsInJamshedpurRoute,
   } as any)
+const CarUsedCarsInJamshedpurHondaAmaze2026Route =
+  CarUsedCarsInJamshedpurHondaAmaze2026RouteImport.update({
+    id: '/car/used-cars-in-jamshedpur-honda-amaze-2026',
+    path: '/car/used-cars-in-jamshedpur-honda-amaze-2026',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CarIdRoute = CarIdRouteImport.update({
   id: '/car/$id',
   path: '/car/$id',
@@ -158,6 +165,7 @@ export interface FileRoutesByFullPath {
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/car/$id': typeof CarIdRoute
+  '/car/used-cars-in-jamshedpur-honda-amaze-2026': typeof CarUsedCarsInJamshedpurHondaAmaze2026Route
   '/used-cars-in-jamshedpur/$brand': typeof UsedCarsInJamshedpurBrandRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -180,6 +188,7 @@ export interface FileRoutesByTo {
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/car/$id': typeof CarIdRoute
+  '/car/used-cars-in-jamshedpur-honda-amaze-2026': typeof CarUsedCarsInJamshedpurHondaAmaze2026Route
   '/used-cars-in-jamshedpur/$brand': typeof UsedCarsInJamshedpurBrandRoute
   '/admin': typeof AdminIndexRoute
 }
@@ -204,6 +213,7 @@ export interface FileRoutesById {
   '/admin/leads': typeof AdminLeadsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/car/$id': typeof CarIdRoute
+  '/car/used-cars-in-jamshedpur-honda-amaze-2026': typeof CarUsedCarsInJamshedpurHondaAmaze2026Route
   '/used-cars-in-jamshedpur/$brand': typeof UsedCarsInJamshedpurBrandRoute
   '/admin/': typeof AdminIndexRoute
 }
@@ -229,6 +239,7 @@ export interface FileRouteTypes {
     | '/admin/leads'
     | '/admin/messages'
     | '/car/$id'
+    | '/car/used-cars-in-jamshedpur-honda-amaze-2026'
     | '/used-cars-in-jamshedpur/$brand'
     | '/admin/'
   fileRoutesByTo: FileRoutesByTo
@@ -251,6 +262,7 @@ export interface FileRouteTypes {
     | '/admin/leads'
     | '/admin/messages'
     | '/car/$id'
+    | '/car/used-cars-in-jamshedpur-honda-amaze-2026'
     | '/used-cars-in-jamshedpur/$brand'
     | '/admin'
   id:
@@ -274,6 +286,7 @@ export interface FileRouteTypes {
     | '/admin/leads'
     | '/admin/messages'
     | '/car/$id'
+    | '/car/used-cars-in-jamshedpur-honda-amaze-2026'
     | '/used-cars-in-jamshedpur/$brand'
     | '/admin/'
   fileRoutesById: FileRoutesById
@@ -293,6 +306,7 @@ export interface RootRouteChildren {
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   UsedCarsInJamshedpurRoute: typeof UsedCarsInJamshedpurRouteWithChildren
   CarIdRoute: typeof CarIdRoute
+  CarUsedCarsInJamshedpurHondaAmaze2026Route: typeof CarUsedCarsInJamshedpurHondaAmaze2026Route
 }
 
 declare module '@tanstack/react-router' {
@@ -402,6 +416,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsedCarsInJamshedpurBrandRouteImport
       parentRoute: typeof UsedCarsInJamshedpurRoute
     }
+    '/car/used-cars-in-jamshedpur-honda-amaze-2026': {
+      id: '/car/used-cars-in-jamshedpur-honda-amaze-2026'
+      path: '/car/used-cars-in-jamshedpur-honda-amaze-2026'
+      fullPath: '/car/used-cars-in-jamshedpur-honda-amaze-2026'
+      preLoaderRoute: typeof CarUsedCarsInJamshedpurHondaAmaze2026RouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/car/$id': {
       id: '/car/$id'
       path: '/car/$id'
@@ -493,6 +514,8 @@ const rootRouteChildren: RootRouteChildren = {
   SitemapDotxmlRoute: SitemapDotxmlRoute,
   UsedCarsInJamshedpurRoute: UsedCarsInJamshedpurRouteWithChildren,
   CarIdRoute: CarIdRoute,
+  CarUsedCarsInJamshedpurHondaAmaze2026Route:
+    CarUsedCarsInJamshedpurHondaAmaze2026Route,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

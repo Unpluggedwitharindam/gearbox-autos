@@ -8,7 +8,7 @@ import { TrustBar } from "@/components/TrustBar";
 import { listPublicCars } from "@/lib/cars.functions";
 
 export const Route = createFileRoute("/buy")({
-  head: () => ({
+  head: ({ loaderData }) => ({
     meta: [
       { title: "Buy Second Hand Cars in Jamshedpur — Verified Used Cars | Gearbox Autos" },
       { name: "description", content: "Browse verified second hand cars for sale in Jamshedpur. Compare price, KMs, fuel and RTO, then book a free test drive — 0% commission." },
@@ -19,6 +19,21 @@ export const Route = createFileRoute("/buy")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/buy" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Used cars for sale in Jamshedpur",
+        numberOfItems: loaderData?.length ?? 0,
+        itemListElement: (loaderData ?? []).map((car, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: `${car.year} ${car.name}`,
+          url: `https://gearboxautos.in/car/${car.slug}`,
+        })),
+      }),
+    }],
   }),
 
   component: Buy,

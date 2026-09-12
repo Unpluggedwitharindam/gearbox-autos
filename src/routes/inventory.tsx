@@ -4,7 +4,7 @@ import { CarCard } from "@/components/CarCard";
 import { listPublicCars } from "@/lib/cars.functions";
 
 export const Route = createFileRoute("/inventory")({
-  head: () => ({
+  head: ({ loaderData }) => ({
     meta: [
       { title: "Used Car Inventory in Jamshedpur — Gearbox Autos" },
       { name: "description", content: "Full inventory of verified used cars available in Jamshedpur, Jharkhand — hatchbacks, sedans and SUVs with transparent pricing." },
@@ -15,6 +15,21 @@ export const Route = createFileRoute("/inventory")({
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/inventory" }],
+    scripts: [{
+      type: "application/ld+json",
+      children: JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: "Gearbox Autos used car inventory",
+        numberOfItems: loaderData?.length ?? 0,
+        itemListElement: (loaderData ?? []).map((car, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          name: `${car.year} ${car.name}`,
+          url: `https://gearboxautos.in/car/${car.slug}`,
+        })),
+      }),
+    }],
   }),
 
   component: Inventory,
@@ -30,7 +45,7 @@ function Inventory() {
   return (
     <section className="container-page pt-12 pb-12">
       <div className="eyebrow">Our Inventory</div>
-      <h1 className="display-h1 mt-4">Every car<span className="text-primary">.</span> <br/><span className="text-muted-foreground">One trusted place.</span></h1>
+      <h1 className="display-h1 mt-4">Every car<span className="text-primary">.</span> <br /><span className="text-muted-foreground"> One trusted place.</span></h1>
       <p className="mt-5 text-muted-foreground max-w-xl">Quality assured, fully verified used cars — handpicked for Jamshedpur drivers.</p>
       <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {cars.map((c) => <CarCard key={c.id} car={c} />)}

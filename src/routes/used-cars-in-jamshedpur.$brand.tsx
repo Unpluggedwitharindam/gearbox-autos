@@ -13,7 +13,7 @@ const carsQuery = {
 };
 
 export const Route = createFileRoute("/used-cars-in-jamshedpur/$brand")({
-  head: ({ params }) => {
+  head: ({ params, loaderData }) => {
     const label = brandLabel(params.brand);
     return {
       meta: [
@@ -26,14 +26,31 @@ export const Route = createFileRoute("/used-cars-in-jamshedpur/$brand")({
         { name: "twitter:card", content: "summary_large_image" },
       ],
       links: [{ rel: "canonical", href: `https://gearboxautos.in/used-cars-in-jamshedpur/${params.brand}` }],
-      scripts: [{
-        type: "application/ld+json",
-        children: JSON.stringify(breadcrumbSchema([
-          { name: "Home", url: SITE_URL },
-          { name: "Used Cars in Jamshedpur", url: `${SITE_URL}/used-cars-in-jamshedpur` },
-          { name: `Used ${label} Cars in Jamshedpur`, url: `${SITE_URL}/used-cars-in-jamshedpur/${params.brand}` },
-        ])),
-      }],
+      scripts: [
+        {
+          type: "application/ld+json",
+          children: JSON.stringify(breadcrumbSchema([
+            { name: "Home", url: SITE_URL },
+            { name: "Used Cars in Jamshedpur", url: `${SITE_URL}/used-cars-in-jamshedpur` },
+            { name: `Used ${label} Cars in Jamshedpur`, url: `${SITE_URL}/used-cars-in-jamshedpur/${params.brand}` },
+          ])),
+        },
+        {
+          type: "application/ld+json",
+          children: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: `Used ${label} cars in Jamshedpur`,
+            numberOfItems: loaderData?.cars.length ?? 0,
+            itemListElement: (loaderData?.cars ?? []).map((car, index) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              name: `${car.year} ${car.name}`,
+              url: `${SITE_URL}/car/${car.slug}`,
+            })),
+          }),
+        },
+      ],
     };
   },
 

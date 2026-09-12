@@ -10,7 +10,7 @@ import { breadcrumbSchema, SITE_URL } from "@/lib/seo";
 const carsQuery = { queryKey: ["cars", "public"], queryFn: () => listPublicCars() } as const;
 
 export const Route = createFileRoute("/used-cars-in-jamshedpur")({
-  head: () => ({
+  head: ({ loaderData }) => ({
     meta: [
       { title: "Used Cars in Jamshedpur — Verified Second Hand Cars | Gearbox Autos" },
       { name: "description", content: "Buy verified second hand cars in Jamshedpur at 0% commission. Compare prices, KMs, fuel & RTO (JH-05), inspect the car yourself, and get free RC transfer help from Gearbox Autos, Sonari." },
@@ -38,6 +38,21 @@ export const Route = createFileRoute("/used-cars-in-jamshedpur")({
           { name: "Home", url: SITE_URL },
           { name: "Used Cars in Jamshedpur", url: `${SITE_URL}/used-cars-in-jamshedpur` },
         ])),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Verified used cars in Jamshedpur",
+          numberOfItems: loaderData?.length ?? 0,
+          itemListElement: (loaderData ?? []).map((car, index) => ({
+            "@type": "ListItem",
+            position: index + 1,
+            name: `${car.year} ${car.name}`,
+            url: `${SITE_URL}/car/${car.slug}`,
+          })),
+        }),
       },
     ],
   }),
