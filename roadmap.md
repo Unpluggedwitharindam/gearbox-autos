@@ -25,4 +25,4 @@
 - [x] Connect Cars24, Spinny, CarDekho, and OLX listing collectors through managed Apify
 - [x] Fix multi-turn vehicle parsing
 - [x] Show source-level average, median, trimmed range, and evidence counts
-- [ ] Validate live marketplace pricing and Garage valuation output
+- [x] Validate live marketplace pricing and Garage valuation output
