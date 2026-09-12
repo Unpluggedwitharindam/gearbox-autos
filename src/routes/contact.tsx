@@ -14,6 +14,8 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: "Contact Gearbox Autos — Jamshedpur" },
       { property: "og:description", content: "Talk to our Jamshedpur team about buying or selling your car." },
       { property: "og:url", content: "https://gearboxautos.in/contact" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/contact" }],
   }),
@@ -37,7 +39,7 @@ function Contact() {
       <div className="grid lg:grid-cols-2 gap-10 items-start">
         <div>
           <div className="eyebrow">Contact us</div>
-          <h1 className="display-h1 mt-4">We're Here to Help.<br/>Let's Talk<span className="text-primary">.</span></h1>
+          <h1 className="display-h1 mt-4">We're Here to Help.<br /> Let's Talk<span className="text-primary">.</span></h1>
           <p className="mt-5 text-muted-foreground max-w-md">Have questions or need assistance? We're just a call or message away.</p>
 
           <div className="mt-8 space-y-4 max-w-md">
@@ -89,11 +91,9 @@ function Contact() {
         <div className="flex md:justify-end items-center gap-6">
           <div className="text-sm text-muted-foreground">Follow us for the latest deals</div>
           <div className="flex items-center gap-2">
-            {[Facebook, Instagram, MessageCircle].map((I, i) => (
-              <a key={i} href="#" className="h-9 w-9 rounded-full border border-border grid place-items-center hover:border-primary hover:text-primary">
-                <I className="h-4 w-4" />
-              </a>
-            ))}
+            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="h-9 w-9 rounded-full border border-border grid place-items-center hover:border-primary hover:text-primary"><Facebook className="h-4 w-4" /></a>
+            <a href="https://www.instagram.com/gearbox_autos_usedcars/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="h-9 w-9 rounded-full border border-border grid place-items-center hover:border-primary hover:text-primary"><Instagram className="h-4 w-4" /></a>
+            <a href="https://wa.me/919065591253" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" className="h-9 w-9 rounded-full border border-border grid place-items-center hover:border-primary hover:text-primary"><MessageCircle className="h-4 w-4" /></a>
           </div>
         </div>
       </div>

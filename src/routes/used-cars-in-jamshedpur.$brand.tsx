@@ -5,6 +5,7 @@ import { CarCard } from "@/components/CarCard";
 import { listPublicCars } from "@/lib/cars.functions";
 import type { Car } from "@/lib/cars";
 import { brandOf, brandLabel } from "@/lib/seo-areas";
+import { breadcrumbSchema, SITE_URL } from "@/lib/seo";
 
 const carsQuery = {
   queryKey: ["cars", "public"],
@@ -21,8 +22,18 @@ export const Route = createFileRoute("/used-cars-in-jamshedpur/$brand")({
         { property: "og:title", content: `Used ${label} Cars in Jamshedpur — Gearbox Autos` },
         { property: "og:description", content: `Second hand ${label} cars for sale in Jamshedpur, fully verified at 0% commission.` },
         { property: "og:url", content: `https://gearboxautos.in/used-cars-in-jamshedpur/${params.brand}` },
+        { property: "og:type", content: "website" },
+        { name: "twitter:card", content: "summary_large_image" },
       ],
       links: [{ rel: "canonical", href: `https://gearboxautos.in/used-cars-in-jamshedpur/${params.brand}` }],
+      scripts: [{
+        type: "application/ld+json",
+        children: JSON.stringify(breadcrumbSchema([
+          { name: "Home", url: SITE_URL },
+          { name: "Used Cars in Jamshedpur", url: `${SITE_URL}/used-cars-in-jamshedpur` },
+          { name: `Used ${label} Cars in Jamshedpur`, url: `${SITE_URL}/used-cars-in-jamshedpur/${params.brand}` },
+        ])),
+      }],
     };
   },
 

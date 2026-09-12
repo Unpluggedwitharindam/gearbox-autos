@@ -6,7 +6,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { ShieldCheck } from "lucide-react";
 
 export const Route = createFileRoute("/login")({
-  head: () => ({ meta: [{ title: "Admin Login — Gearbox Autos" }] }),
+  head: () => ({
+    meta: [
+      { title: "Admin Login — Gearbox Autos" },
+      { name: "description", content: "Secure sign-in for authorised Gearbox Autos administrators." },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
+    ],
+  }),
   component: Login,
 });
 

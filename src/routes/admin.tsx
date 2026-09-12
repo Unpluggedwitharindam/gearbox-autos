@@ -10,8 +10,8 @@ export const Route = createFileRoute("/admin")({
     meta: [
       { title: "Admin Dashboard — Gearbox Autos" },
       { name: "description", content: "Gearbox Autos admin dashboard. Manage used car inventory, sell leads, test drive bookings, and customer messages for the Jamshedpur dealership." },
+      { name: "robots", content: "noindex, nofollow, noarchive" },
     ],
-    links: [{ rel: "canonical", href: "/admin" }],
   }),
   component: AdminLayout,
 });

@@ -5,6 +5,7 @@ import { CarCard } from "@/components/CarCard";
 import { TrustBar } from "@/components/TrustBar";
 import { listPublicCars } from "@/lib/cars.functions";
 import { brandOf, brandLabel, NEARBY_AREAS } from "@/lib/seo-areas";
+import { breadcrumbSchema, SITE_URL } from "@/lib/seo";
 
 const carsQuery = { queryKey: ["cars", "public"], queryFn: () => listPublicCars() } as const;
 
@@ -16,6 +17,8 @@ export const Route = createFileRoute("/used-cars-in-jamshedpur")({
       { property: "og:title", content: "Used Cars in Jamshedpur — Gearbox Autos" },
       { property: "og:description", content: "Verified second hand cars for sale in Jamshedpur at 0% commission. Book a free test drive today." },
       { property: "og:url", content: "https://gearboxautos.in/used-cars-in-jamshedpur" },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/used-cars-in-jamshedpur" }],
     scripts: [
@@ -23,19 +26,18 @@ export const Route = createFileRoute("/used-cars-in-jamshedpur")({
         type: "application/ld+json",
         children: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "AutoDealer",
-          name: "Gearbox Autos",
+          "@type": "CollectionPage",
+          name: "Used Cars in Jamshedpur",
           url: "https://gearboxautos.in/used-cars-in-jamshedpur",
-          telephone: "+91-90655-91253",
-          address: {
-            "@type": "PostalAddress",
-            streetAddress: "Near Golden Town, opp. BSS School, Adarsh Nagar, Sonari",
-            addressLocality: "Jamshedpur",
-            addressRegion: "Jharkhand",
-            addressCountry: "IN",
-          },
-          areaServed: ["Jamshedpur", "Adityapur", "Ghatshila", "Chaibasa", "Saraikela-Kharsawan"],
+          about: { "@id": `${SITE_URL}/#dealership` },
         }),
+      },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify(breadcrumbSchema([
+          { name: "Home", url: SITE_URL },
+          { name: "Used Cars in Jamshedpur", url: `${SITE_URL}/used-cars-in-jamshedpur` },
+        ])),
       },
     ],
   }),

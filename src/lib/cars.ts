@@ -22,6 +22,7 @@ export type Car = {
   images: string[];
   features?: string[];
   description?: string | null;
+  updated_at?: string;
 };
 
 const imageBySlug: Record<string, string> = {
@@ -58,6 +59,7 @@ export type CarRow = {
   features: string[] | null;
   description: string | null;
   is_active?: boolean;
+  updated_at?: string;
 };
 
 export function rowToCar(r: CarRow): Car {
@@ -80,5 +82,6 @@ export function rowToCar(r: CarRow): Car {
     images,
     features: r.features ?? undefined,
     description: r.description,
+    updated_at: r.updated_at,
   };
 }

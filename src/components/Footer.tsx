@@ -46,7 +46,7 @@ export function Footer() {
         </div>
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
           <span>© {new Date().getFullYear()} Gearbox Autos. All rights reserved.</span>
-          <span>100% Transparent · 0% Commission · <Link to="/login" className="hover:text-primary">Admin</Link></span>
+          <span>100% Transparent · 0% Commission</span>
         </div>
       </div>
     </footer>
