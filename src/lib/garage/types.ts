@@ -60,6 +60,19 @@ export type MarketStatistics = {
   interquartileRange: number;
   medianKm: number;
   outlierCount: number;
+  sourceBreakdown: Array<{
+    source: string;
+    count: number;
+    mean: number;
+    median: number;
+  }>;
+};
+
+export type MarketSourceStatus = {
+  source: "Cars24" | "Spinny" | "CarDekho" | "OLX";
+  status: "live" | "cached" | "empty" | "failed";
+  listingCount: number;
+  message?: string;
 };
 
 export type ValuationResult =
@@ -88,4 +101,5 @@ export type GarageAnalysis = {
   relaxations: string[];
   valuation: ValuationResult;
   providerStatus: "connected" | "unavailable" | "failed";
+  sourceStatuses: MarketSourceStatus[];
 };

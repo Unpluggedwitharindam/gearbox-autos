@@ -22,7 +22,7 @@
 - [x] Extend inventory records for variant, ownership, acquisition, status, and days-in-stock analytics
 - [x] Add the protected Garage dealer intelligence dashboard
 - [x] Test AI calls, valuation math, public Garage flows, admin analytics, and mobile layouts
-- [ ] Connect licensed Cars24, Spinny, CarDekho, and OLX listing data
-- [ ] Fix multi-turn vehicle parsing and guided valuation inputs
-- [ ] Show source-level average, median, trimmed range, and confidence
-- [ ] Validate live marketplace pricing and Garage valuation output
+- [x] Connect Cars24, Spinny, CarDekho, and OLX listing collectors through managed Apify
+- [x] Fix multi-turn vehicle parsing
+- [x] Show source-level average, median, trimmed range, and evidence counts
+- [x] Validate live marketplace pricing and Garage valuation output

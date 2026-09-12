@@ -123,6 +123,15 @@ export function marketStatistics(comparables: RankedComparable[]): MarketStatist
   const accepted = trimmed.length >= 3 ? trimmed : comparables;
   const acceptedPrices = accepted.map((item) => item.askingPriceInr).sort((a, b) => a - b);
   const knownKm = accepted.flatMap((item) => item.km === UNKNOWN ? [] : [item.km]).sort((a, b) => a - b);
+  const sourceBreakdown = [...new Set(accepted.map((item) => item.source))].map((source) => {
+    const sourcePrices = accepted.filter((item) => item.source === source).map((item) => item.askingPriceInr);
+    return {
+      source,
+      count: sourcePrices.length,
+      mean: Math.round(sourcePrices.reduce((sum, value) => sum + value, 0) / sourcePrices.length),
+      median: Math.round(percentile(sourcePrices, 0.5)),
+    };
+  });
   return {
     count: accepted.length,
     minimum: acceptedPrices[0] ?? 0,
@@ -134,6 +143,7 @@ export function marketStatistics(comparables: RankedComparable[]): MarketStatist
     interquartileRange: Math.round(interquartileRange),
     medianKm: Math.round(percentile(knownKm, 0.5)),
     outlierCount: comparables.length - accepted.length,
+    sourceBreakdown,
   };
 }
 
@@ -169,7 +179,7 @@ export function missingVehicleFields(vehicle: VehicleProfile) {
     .filter((key) => vehicle[key] === UNKNOWN);
 }
 
-export function buildAnalysis(vehicle: VehicleProfile, inventoryComparables: InventoryComparable[], external: ComparableListing[], providerConnected: boolean): GarageAnalysis {
+export function buildAnalysis(vehicle: VehicleProfile, inventoryComparables: InventoryComparable[], external: ComparableListing[], providerConnected: boolean, sourceStatuses: GarageAnalysis["sourceStatuses"] = []): GarageAnalysis {
   const ranked = rankComparables(vehicle, external);
   return {
     vehicle,
@@ -179,5 +189,6 @@ export function buildAnalysis(vehicle: VehicleProfile, inventoryComparables: Inv
     relaxations: ranked.relaxations,
     valuation: calculateValuation(null, ranked.comparables, providerConnected),
     providerStatus: providerConnected ? "connected" : "unavailable",
+    sourceStatuses,
   };
 }

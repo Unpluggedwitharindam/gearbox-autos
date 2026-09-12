@@ -2,14 +2,14 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { buildAnalysis } from "./garage/engine";
-import { parseVehicleQuestion } from "./garage/parser";
+import { parseVehicleConversation } from "./garage/parser";
 import { loadVerifiedMarketListings } from "./garage/provider.server";
 import { UNKNOWN, type InventoryComparable } from "./garage/types";
 
 export const analyzeGarageQuestion = createServerFn({ method: "POST" })
-  .inputValidator((input: unknown) => z.object({ question: z.string().trim().min(3).max(2000) }).parse(input))
+  .inputValidator((input: unknown) => z.object({ messages: z.array(z.object({ role: z.enum(["user", "assistant"]), content: z.string().max(8000) })).min(1).max(30) }).parse(input))
   .handler(async ({ data }) => {
-    const vehicle = parseVehicleQuestion(data.question);
+    const vehicle = parseVehicleConversation(data.messages);
     const { data: cars, error } = await supabaseAdmin.from("cars").select("*").eq("is_active", true).order("created_at", { ascending: false });
     if (error) throw new Error("Garage could not read the current inventory.");
     const normalizedMake = vehicle.make === UNKNOWN ? "" : vehicle.make.toLowerCase();
@@ -25,6 +25,6 @@ export const analyzeGarageQuestion = createServerFn({ method: "POST" })
       status: car.inventory_status ?? (car.is_active ? "in_stock" : "inactive"), listedAt: car.listed_at ?? car.created_at ?? UNKNOWN,
       daysInInventory: car.listed_at || car.created_at ? Math.max(0, Math.floor((Date.now() - new Date(car.listed_at ?? car.created_at).getTime()) / 86_400_000)) : UNKNOWN,
     }));
-    const market = await loadVerifiedMarketListings();
-    return buildAnalysis(vehicle, inventory, market.listings, market.connected);
+    const market = await loadVerifiedMarketListings(vehicle, false);
+    return buildAnalysis(vehicle, inventory, market.listings, market.connected, market.sourceStatuses);
   });
