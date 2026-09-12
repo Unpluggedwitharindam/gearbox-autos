@@ -48,7 +48,7 @@ function HowItWorks() {
     <section className="container-page pt-12 pb-12">
       <div className="eyebrow">How it works</div>
       <h1 className="display-h1 mt-4">The Gearbox Autos Process<span className="text-primary">.</span></h1>
-      <p className="mt-5 text-muted-foreground max-w-2xl">We make buying and selling cars simple, transparent and fair for everyone.<br/>No hidden charges. No middlemen. Just great cars and honest deals.</p>
+      <p className="mt-5 text-muted-foreground max-w-2xl">We make buying and selling cars simple, transparent and fair for everyone.<br /> No hidden charges. No middlemen. Just great cars and honest deals.</p>
 
       <div className="mt-12 grid gap-5 md:grid-cols-5 relative">
         {steps.map((s, i) => (

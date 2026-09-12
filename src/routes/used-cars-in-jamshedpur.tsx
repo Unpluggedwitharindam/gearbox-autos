@@ -6,11 +6,14 @@ import { TrustBar } from "@/components/TrustBar";
 import { listPublicCars } from "@/lib/cars.functions";
 import { brandOf, brandLabel, NEARBY_AREAS } from "@/lib/seo-areas";
 import { breadcrumbSchema, SITE_URL } from "@/lib/seo";
+import type { Car } from "@/lib/cars";
 
 const carsQuery = { queryKey: ["cars", "public"], queryFn: () => listPublicCars() } as const;
 
 export const Route = createFileRoute("/used-cars-in-jamshedpur")({
-  head: ({ loaderData }) => ({
+  head: ({ loaderData }) => {
+    const cars = (loaderData as unknown as Car[] | undefined) ?? [];
+    return {
     meta: [
       { title: "Used Cars in Jamshedpur — Verified Second Hand Cars | Gearbox Autos" },
       { name: "description", content: "Buy verified second hand cars in Jamshedpur at 0% commission. Compare prices, KMs, fuel & RTO (JH-05), inspect the car yourself, and get free RC transfer help from Gearbox Autos, Sonari." },
@@ -45,8 +48,8 @@ export const Route = createFileRoute("/used-cars-in-jamshedpur")({
           "@context": "https://schema.org",
           "@type": "ItemList",
           name: "Verified used cars in Jamshedpur",
-          numberOfItems: loaderData?.length ?? 0,
-          itemListElement: (loaderData ?? []).map((car, index) => ({
+          numberOfItems: cars.length,
+          itemListElement: cars.map((car, index) => ({
             "@type": "ListItem",
             position: index + 1,
             name: `${car.year} ${car.name}`,
@@ -55,7 +58,8 @@ export const Route = createFileRoute("/used-cars-in-jamshedpur")({
         }),
       },
     ],
-  }),
+    };
+  },
 
   component: UsedCarsJamshedpur,
   loader: async ({ context }) => context.queryClient.ensureQueryData(carsQuery),

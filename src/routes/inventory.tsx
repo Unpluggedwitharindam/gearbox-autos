@@ -2,9 +2,12 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
 import { CarCard } from "@/components/CarCard";
 import { listPublicCars } from "@/lib/cars.functions";
+import type { Car } from "@/lib/cars";
 
 export const Route = createFileRoute("/inventory")({
-  head: ({ loaderData }) => ({
+  head: ({ loaderData }) => {
+    const cars = (loaderData as unknown as Car[] | undefined) ?? [];
+    return {
     meta: [
       { title: "Used Car Inventory in Jamshedpur — Gearbox Autos" },
       { name: "description", content: "Full inventory of verified used cars available in Jamshedpur, Jharkhand — hatchbacks, sedans and SUVs with transparent pricing." },
@@ -21,8 +24,8 @@ export const Route = createFileRoute("/inventory")({
         "@context": "https://schema.org",
         "@type": "ItemList",
         name: "Gearbox Autos used car inventory",
-        numberOfItems: loaderData?.length ?? 0,
-        itemListElement: (loaderData ?? []).map((car, index) => ({
+        numberOfItems: cars.length,
+        itemListElement: cars.map((car, index) => ({
           "@type": "ListItem",
           position: index + 1,
           name: `${car.year} ${car.name}`,
@@ -30,7 +33,8 @@ export const Route = createFileRoute("/inventory")({
         })),
       }),
     }],
-  }),
+    };
+  },
 
   component: Inventory,
   loader: async ({ context }) =>

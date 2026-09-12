@@ -6,9 +6,12 @@ import hero from "@/assets/car-creta-front.jpg";
 import { CarCard } from "@/components/CarCard";
 import { TrustBar } from "@/components/TrustBar";
 import { listPublicCars } from "@/lib/cars.functions";
+import type { Car as CarListing } from "@/lib/cars";
 
 export const Route = createFileRoute("/buy")({
-  head: ({ loaderData }) => ({
+  head: ({ loaderData }) => {
+    const cars = (loaderData as unknown as CarListing[] | undefined) ?? [];
+    return {
     meta: [
       { title: "Buy Second Hand Cars in Jamshedpur — Verified Used Cars | Gearbox Autos" },
       { name: "description", content: "Browse verified second hand cars for sale in Jamshedpur. Compare price, KMs, fuel and RTO, then book a free test drive — 0% commission." },
@@ -25,8 +28,8 @@ export const Route = createFileRoute("/buy")({
         "@context": "https://schema.org",
         "@type": "ItemList",
         name: "Used cars for sale in Jamshedpur",
-        numberOfItems: loaderData?.length ?? 0,
-        itemListElement: (loaderData ?? []).map((car, index) => ({
+        numberOfItems: cars.length,
+        itemListElement: cars.map((car, index) => ({
           "@type": "ListItem",
           position: index + 1,
           name: `${car.year} ${car.name}`,
@@ -34,7 +37,8 @@ export const Route = createFileRoute("/buy")({
         })),
       }),
     }],
-  }),
+    };
+  },
 
   component: Buy,
   loader: async ({ context }) =>

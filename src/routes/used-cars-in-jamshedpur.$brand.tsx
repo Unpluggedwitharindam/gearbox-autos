@@ -15,6 +15,7 @@ const carsQuery = {
 export const Route = createFileRoute("/used-cars-in-jamshedpur/$brand")({
   head: ({ params, loaderData }) => {
     const label = brandLabel(params.brand);
+    const cars = ((loaderData as unknown as { cars: Car[] } | undefined)?.cars) ?? [];
     return {
       meta: [
         { title: `Used ${label} Cars in Jamshedpur — Second Hand ${label} | Gearbox Autos` },
@@ -41,8 +42,8 @@ export const Route = createFileRoute("/used-cars-in-jamshedpur/$brand")({
             "@context": "https://schema.org",
             "@type": "ItemList",
             name: `Used ${label} cars in Jamshedpur`,
-            numberOfItems: loaderData?.cars.length ?? 0,
-            itemListElement: (loaderData?.cars ?? []).map((car, index) => ({
+            numberOfItems: cars.length,
+            itemListElement: cars.map((car, index) => ({
               "@type": "ListItem",
               position: index + 1,
               name: `${car.year} ${car.name}`,
