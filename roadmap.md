@@ -8,4 +8,5 @@
 - [x] Add AI-readable public-site guide
 - [x] Correct inventory URL/data mismatch
 - [x] Validate SSR pages, metadata, schema, sitemap, and crawl files
+- [x] Validate design-library wiring and exports
 - [ ] Re-run SEO scan and publish verified changes
