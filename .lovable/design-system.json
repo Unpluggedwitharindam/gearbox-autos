@@ -2,7 +2,7 @@
   "meta": {
     "name": "gearbox autos",
     "package": "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558",
-    "version": "6.0.0",
+    "version": "6.1.0",
     "framework": "react",
     "css_framework": "tailwind",
     "starter_template": "custom_design_system",
@@ -13,7 +13,7 @@
     "source_manifest": {
       "#enrichment": "68a977190cf94d0086b5c875fac5807e4935147ef968a40f5e3171a254edb913",
       ".gitignore": "6d9e901a692b46a83707c245fb03bc91",
-      ".lovable/meta.yaml": "6e7aa463354ab62f30fe40a936a54b6f",
+      ".lovable/meta.yaml": "8794970d6049858cc148d2b86f7a2b22",
       ".lovable/plan/build-garage-used-car-intelligence-2026-09-12.md": "324830919b2d11257868abc62a36a95f",
       ".lovable/plan/connect-garage-to-live-indian-car-listings-without-manual-ap-2026-09-12.md": "7b0d6d45fbcec45c2aeeb891419198f2",
       ".lovable/plan/fix-garage-price-output-2026-09-12.md": "73df0a9494b5c5c4403af82c0b2aca94",
