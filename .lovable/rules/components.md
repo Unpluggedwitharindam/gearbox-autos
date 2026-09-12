@@ -2,6 +2,32 @@
 
 Component catalog for **gearbox autos**. Import all components from `@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558`.
 
+### Badge
+
+```ts
+import { Badge } from "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558"
+```
+
+**Props:**
+
+| Prop | Type | Default |
+|---|---|---|
+| `variant` | default · secondary · destructive · outline | `default` |
+
+### Button
+
+```ts
+import { Button } from "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558"
+```
+
+**Props:**
+
+| Prop | Type | Default |
+|---|---|---|
+| `variant` | default · destructive · outline · secondary · ghost · link | `default` |
+| `size` | default · sm · lg · icon | `default` |
+| `asChild` | boolean | `false` |
+
 ### CarCard
 
 ```ts
@@ -14,10 +40,40 @@ import { CarCard } from "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be
 import { CarImageCarousel } from "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558"
 ```
 
-### Constants
+### Card
 
 ```ts
-import { Constants } from "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558"
+import { Card } from "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558"
+```
+
+### CardContent
+
+```ts
+import { CardContent } from "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558"
+```
+
+### CardDescription
+
+```ts
+import { CardDescription } from "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558"
+```
+
+### CardFooter
+
+```ts
+import { CardFooter } from "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558"
+```
+
+### CardHeader
+
+```ts
+import { CardHeader } from "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558"
+```
+
+### CardTitle
+
+```ts
+import { CardTitle } from "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558"
 ```
 
 ### Footer
@@ -30,6 +86,12 @@ import { Footer } from "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be5
 
 ```ts
 import { Header } from "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558"
+```
+
+### Input
+
+```ts
+import { Input } from "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558"
 ```
 
 ### Logo

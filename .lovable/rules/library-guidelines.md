@@ -4,7 +4,7 @@
 
 The design system exports these components — import them from `@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558` and compose them before building anything from scratch:
 
-`CarCard`, `CarImageCarousel`, `Constants`, `Footer`, `Header`, `Logo`, `ShareButton`, `SocialFloat`, `TrustBar`, `WhatsAppShareCarButton`
+`Badge`, `Button`, `CarCard`, `CarImageCarousel`, `CardContent`, `CardDescription`, `CardFooter`, `CardHeader`, `CardTitle`, `Card`, `Footer`, `Header`, `Input`, `Logo`, `ShareButton`, `SocialFloat`, `TrustBar`, `WhatsAppShareCarButton`
 
 Per-component details (import stanzas, props, variants, examples) live in `.lovable/rules/libraries/{slug}/components.md` — on disk, not auto-loaded. Read that file or the component source when the name alone isn't enough.
 
