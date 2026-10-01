@@ -3,7 +3,7 @@ import { streamText, type ModelMessage } from "ai";
 import { z } from "zod";
 import { createGarageAi, withGarageRunId } from "@/lib/ai-gateway.server";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
-import { parseVehicleConversation } from "@/lib/garage/parser";
+import { parseAskingPrice, parseVehicleConversation } from "@/lib/garage/parser";
 import { buildAnalysis } from "@/lib/garage/engine";
 import { loadVerifiedMarketListings } from "@/lib/garage/provider.server";
 import { UNKNOWN, type InventoryComparable } from "@/lib/garage/types";
@@ -16,6 +16,7 @@ Never invent a listing, price, kilometre figure, owner count, source, market sta
 The deterministic evidence JSON below is authoritative. Never override its valuation or claim external evidence when providerStatus is unavailable.
 If required vehicle facts are missing, ask only for the missing facts before giving a valuation.
 Clearly distinguish asking price, fair market value, dealer buying price, recommended listing price and expected closing price.
+ Never call a car a fair deal, strong buy, or overpriced without an explicit user-supplied asking price; when absent, ask for the asking price before assessing the deal.
 When external evidence is unavailable, say so plainly and still help with inspection, ownership, negotiation and inventory-grounded advice without quoting a market value.
 Use Indian rupees and lakh formatting. Keep answers concise but explain every conclusion.`;
 
@@ -43,7 +44,7 @@ async function evidenceFor(messages: z.infer<typeof Body>["messages"]) {
     const model = vehicle.model === UNKNOWN ? "" : vehicle.model.toLowerCase();
     return (!make || car.name.toLowerCase().includes(make)) && (!model || car.name.toLowerCase().includes(model));
   }).slice(0, 20);
-  return buildAnalysis(vehicle, inventory, market.listings, market.connected, market.sourceStatuses);
+  return buildAnalysis(vehicle, inventory, market.listings, market.connected, market.sourceStatuses, parseAskingPrice(messages));
 }
 
 export const Route = createFileRoute("/api/garage-chat")({

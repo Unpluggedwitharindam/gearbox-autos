@@ -51,3 +51,20 @@ export function parseVehicleConversation(messages: Array<{ role: "user" | "assis
     })) as VehicleProfile;
   }, EMPTY_PROFILE);
 }
+
+/** Only explicit asking/deal prices count; years, mileage and market estimates do not. */
+export function parseAskingPrice(messages: Array<{ role: "user" | "assistant"; content: string }>): number | null {
+  for (const message of [...messages].reverse()) {
+    if (message.role !== "user") continue;
+    const text = message.content;
+    const priced = text.match(/(?:₹|\b(?:rs\.?|inr)\s*|\b(?:asking|quoted|offered|offer|deal|price(?:d)?)\s*(?:price\s*)?(?:of|at|is|for|:)?\s*)(\d[\d,]*(?:\.\d+)?)\s*(lakh(?:s)?|lac(?:s)?|l\b|crore(?:s)?|cr\b)?/i)
+      ?? text.match(/\b(\d[\d,]*(?:\.\d+)?)\s*(lakh(?:s)?|lac(?:s)?|l\b|crore(?:s)?|cr\b)\b/i);
+    if (!priced) continue;
+    const amount = Number(priced[1]?.replace(/,/g, ""));
+    const unit = priced[2]?.toLowerCase();
+    const multiplier = unit?.startsWith("cr") ? 10_000_000 : unit ? 100_000 : 1;
+    const price = amount * multiplier;
+    if (Number.isFinite(price) && price >= 10_000 && price <= 100_000_000) return Math.round(price);
+  }
+  return null;
+}

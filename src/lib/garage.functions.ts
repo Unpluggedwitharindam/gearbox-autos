@@ -2,7 +2,7 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { buildAnalysis } from "./garage/engine";
-import { parseVehicleConversation } from "./garage/parser";
+import { parseAskingPrice, parseVehicleConversation } from "./garage/parser";
 import { loadVerifiedMarketListings } from "./garage/provider.server";
 import { UNKNOWN, type InventoryComparable } from "./garage/types";
 
@@ -26,5 +26,5 @@ export const analyzeGarageQuestion = createServerFn({ method: "POST" })
       daysInInventory: car.listed_at || car.created_at ? Math.max(0, Math.floor((Date.now() - new Date(car.listed_at ?? car.created_at).getTime()) / 86_400_000)) : UNKNOWN,
     }));
     const market = await loadVerifiedMarketListings(vehicle, false);
-    return buildAnalysis(vehicle, inventory, market.listings, market.connected, market.sourceStatuses);
+    return buildAnalysis(vehicle, inventory, market.listings, market.connected, market.sourceStatuses, parseAskingPrice(data.messages));
   });
