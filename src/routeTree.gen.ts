@@ -9,85 +9,35 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as AboutRouteImport } from './routes/about'
-import { Route as AdminRouteImport } from './routes/admin'
-import { Route as BuyRouteImport } from './routes/buy'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as GarageRouteImport } from './routes/garage'
-import { Route as HowItWorksRouteImport } from './routes/how-it-works'
-import { Route as InventoryRouteImport } from './routes/inventory'
-import { Route as LoginRouteImport } from './routes/login'
-import { Route as SellRouteImport } from './routes/sell'
-import { Route as SellCarJamshedpurRouteImport } from './routes/sell-car-jamshedpur'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as UsedCarsInJamshedpurRouteImport } from './routes/used-cars-in-jamshedpur'
-import { Route as AdminIndexRouteImport } from './routes/admin.index'
-import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
-import { Route as AdminCarsRouteImport } from './routes/admin.cars'
-import { Route as AdminGarageRouteImport } from './routes/admin.garage'
-import { Route as AdminInspectionRouteImport } from './routes/admin.inspection'
-import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
-import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
-import { Route as ApiGarageChatRouteImport } from './routes/api.garage-chat'
-import { Route as CarIdRouteImport } from './routes/car.$id'
-import { Route as CarUsedCarsInJamshedpurHondaAmaze2026RouteImport } from './routes/car.used-cars-in-jamshedpur-honda-amaze-2026'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SellCarJamshedpurRouteImport } from './routes/sell-car-jamshedpur'
+import { Route as SellRouteImport } from './routes/sell'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as InventoryRouteImport } from './routes/inventory'
+import { Route as HowItWorksRouteImport } from './routes/how-it-works'
+import { Route as GarageRouteImport } from './routes/garage'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BuyRouteImport } from './routes/buy'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as UsedCarsInJamshedpurIndexRouteImport } from './routes/used-cars-in-jamshedpur.index'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as UsedCarsInJamshedpurBrandRouteImport } from './routes/used-cars-in-jamshedpur.$brand'
+import { Route as CarUsedCarsInJamshedpurHondaAmaze2026RouteImport } from './routes/car.used-cars-in-jamshedpur-honda-amaze-2026'
+import { Route as CarIdRouteImport } from './routes/car.$id'
+import { Route as ApiGarageChatRouteImport } from './routes/api.garage-chat'
+import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
+import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as AdminInspectionRouteImport } from './routes/admin.inspection'
+import { Route as AdminGarageRouteImport } from './routes/admin.garage'
+import { Route as AdminCarsRouteImport } from './routes/admin.cars'
+import { Route as AdminBookingsRouteImport } from './routes/admin.bookings'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminRoute = AdminRouteImport.update({
-  id: '/admin',
-  path: '/admin',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BuyRoute = BuyRouteImport.update({
-  id: '/buy',
-  path: '/buy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const GarageRoute = GarageRouteImport.update({
-  id: '/garage',
-  path: '/garage',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const HowItWorksRoute = HowItWorksRouteImport.update({
-  id: '/how-it-works',
-  path: '/how-it-works',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InventoryRoute = InventoryRouteImport.update({
-  id: '/inventory',
-  path: '/inventory',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LoginRoute = LoginRouteImport.update({
-  id: '/login',
-  path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SellRoute = SellRouteImport.update({
-  id: '/sell',
-  path: '/sell',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SellCarJamshedpurRoute = SellCarJamshedpurRouteImport.update({
-  id: '/sell-car-jamshedpur',
-  path: '/sell-car-jamshedpur',
+const UsedCarsInJamshedpurRoute = UsedCarsInJamshedpurRouteImport.update({
+  id: '/used-cars-in-jamshedpur',
+  path: '/used-cars-in-jamshedpur',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
@@ -95,34 +45,97 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
-const UsedCarsInJamshedpurRoute = UsedCarsInJamshedpurRouteImport.update({
-  id: '/used-cars-in-jamshedpur',
-  path: '/used-cars-in-jamshedpur',
+const SellCarJamshedpurRoute = SellCarJamshedpurRouteImport.update({
+  id: '/sell-car-jamshedpur',
+  path: '/sell-car-jamshedpur',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SellRoute = SellRouteImport.update({
+  id: '/sell',
+  path: '/sell',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InventoryRoute = InventoryRouteImport.update({
+  id: '/inventory',
+  path: '/inventory',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HowItWorksRoute = HowItWorksRouteImport.update({
+  id: '/how-it-works',
+  path: '/how-it-works',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GarageRoute = GarageRouteImport.update({
+  id: '/garage',
+  path: '/garage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BuyRoute = BuyRouteImport.update({
+  id: '/buy',
+  path: '/buy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UsedCarsInJamshedpurIndexRoute =
+  UsedCarsInJamshedpurIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => UsedCarsInJamshedpurRoute,
+  } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminBookingsRoute = AdminBookingsRouteImport.update({
-  id: '/bookings',
-  path: '/bookings',
-  getParentRoute: () => AdminRoute,
+const UsedCarsInJamshedpurBrandRoute =
+  UsedCarsInJamshedpurBrandRouteImport.update({
+    id: '/$brand',
+    path: '/$brand',
+    getParentRoute: () => UsedCarsInJamshedpurRoute,
+  } as any)
+const CarUsedCarsInJamshedpurHondaAmaze2026Route =
+  CarUsedCarsInJamshedpurHondaAmaze2026RouteImport.update({
+    id: '/car/used-cars-in-jamshedpur-honda-amaze-2026',
+    path: '/car/used-cars-in-jamshedpur-honda-amaze-2026',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const CarIdRoute = CarIdRouteImport.update({
+  id: '/car/$id',
+  path: '/car/$id',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AdminCarsRoute = AdminCarsRouteImport.update({
-  id: '/cars',
-  path: '/cars',
-  getParentRoute: () => AdminRoute,
+const ApiGarageChatRoute = ApiGarageChatRouteImport.update({
+  id: '/api/garage-chat',
+  path: '/api/garage-chat',
+  getParentRoute: () => rootRouteImport,
 } as any)
-const AdminGarageRoute = AdminGarageRouteImport.update({
-  id: '/garage',
-  path: '/garage',
-  getParentRoute: () => AdminRoute,
-} as any)
-const AdminInspectionRoute = AdminInspectionRouteImport.update({
-  id: '/inspection',
-  path: '/inspection',
+const AdminMessagesRoute = AdminMessagesRouteImport.update({
+  id: '/messages',
+  path: '/messages',
   getParentRoute: () => AdminRoute,
 } as any)
 const AdminLeadsRoute = AdminLeadsRouteImport.update({
@@ -130,39 +143,26 @@ const AdminLeadsRoute = AdminLeadsRouteImport.update({
   path: '/leads',
   getParentRoute: () => AdminRoute,
 } as any)
-const AdminMessagesRoute = AdminMessagesRouteImport.update({
-  id: '/messages',
-  path: '/messages',
+const AdminInspectionRoute = AdminInspectionRouteImport.update({
+  id: '/inspection',
+  path: '/inspection',
   getParentRoute: () => AdminRoute,
 } as any)
-const ApiGarageChatRoute = ApiGarageChatRouteImport.update({
-  id: '/api/garage-chat',
-  path: '/api/garage-chat',
-  getParentRoute: () => rootRouteImport,
+const AdminGarageRoute = AdminGarageRouteImport.update({
+  id: '/garage',
+  path: '/garage',
+  getParentRoute: () => AdminRoute,
 } as any)
-const CarIdRoute = CarIdRouteImport.update({
-  id: '/car/$id',
-  path: '/car/$id',
-  getParentRoute: () => rootRouteImport,
+const AdminCarsRoute = AdminCarsRouteImport.update({
+  id: '/cars',
+  path: '/cars',
+  getParentRoute: () => AdminRoute,
 } as any)
-const CarUsedCarsInJamshedpurHondaAmaze2026Route =
-  CarUsedCarsInJamshedpurHondaAmaze2026RouteImport.update({
-    id: '/car/used-cars-in-jamshedpur-honda-amaze-2026',
-    path: '/car/used-cars-in-jamshedpur-honda-amaze-2026',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const UsedCarsInJamshedpurIndexRoute =
-  UsedCarsInJamshedpurIndexRouteImport.update({
-    id: '/',
-    path: '/',
-    getParentRoute: () => UsedCarsInJamshedpurRoute,
-  } as any)
-const UsedCarsInJamshedpurBrandRoute =
-  UsedCarsInJamshedpurBrandRouteImport.update({
-    id: '/$brand',
-    path: '/$brand',
-    getParentRoute: () => UsedCarsInJamshedpurRoute,
-  } as any)
+const AdminBookingsRoute = AdminBookingsRouteImport.update({
+  id: '/bookings',
+  path: '/bookings',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -347,81 +347,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin': {
-      id: '/admin'
-      path: '/admin'
-      fullPath: '/admin'
-      preLoaderRoute: typeof AdminRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/buy': {
-      id: '/buy'
-      path: '/buy'
-      fullPath: '/buy'
-      preLoaderRoute: typeof BuyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/garage': {
-      id: '/garage'
-      path: '/garage'
-      fullPath: '/garage'
-      preLoaderRoute: typeof GarageRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/how-it-works': {
-      id: '/how-it-works'
-      path: '/how-it-works'
-      fullPath: '/how-it-works'
-      preLoaderRoute: typeof HowItWorksRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/inventory': {
-      id: '/inventory'
-      path: '/inventory'
-      fullPath: '/inventory'
-      preLoaderRoute: typeof InventoryRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/login': {
-      id: '/login'
-      path: '/login'
-      fullPath: '/login'
-      preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sell': {
-      id: '/sell'
-      path: '/sell'
-      fullPath: '/sell'
-      preLoaderRoute: typeof SellRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sell-car-jamshedpur': {
-      id: '/sell-car-jamshedpur'
-      path: '/sell-car-jamshedpur'
-      fullPath: '/sell-car-jamshedpur'
-      preLoaderRoute: typeof SellCarJamshedpurRouteImport
+    '/used-cars-in-jamshedpur': {
+      id: '/used-cars-in-jamshedpur'
+      path: '/used-cars-in-jamshedpur'
+      fullPath: '/used-cars-in-jamshedpur'
+      preLoaderRoute: typeof UsedCarsInJamshedpurRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sitemap.xml': {
@@ -431,81 +361,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/used-cars-in-jamshedpur': {
-      id: '/used-cars-in-jamshedpur'
-      path: '/used-cars-in-jamshedpur'
-      fullPath: '/used-cars-in-jamshedpur'
-      preLoaderRoute: typeof UsedCarsInJamshedpurRouteImport
+    '/sell-car-jamshedpur': {
+      id: '/sell-car-jamshedpur'
+      path: '/sell-car-jamshedpur'
+      fullPath: '/sell-car-jamshedpur'
+      preLoaderRoute: typeof SellCarJamshedpurRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/': {
-      id: '/admin/'
-      path: '/'
-      fullPath: '/admin/'
-      preLoaderRoute: typeof AdminIndexRouteImport
-      parentRoute: typeof AdminRoute
+    '/sell': {
+      id: '/sell'
+      path: '/sell'
+      fullPath: '/sell'
+      preLoaderRoute: typeof SellRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/admin/bookings': {
-      id: '/admin/bookings'
-      path: '/bookings'
-      fullPath: '/admin/bookings'
-      preLoaderRoute: typeof AdminBookingsRouteImport
-      parentRoute: typeof AdminRoute
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/admin/cars': {
-      id: '/admin/cars'
-      path: '/cars'
-      fullPath: '/admin/cars'
-      preLoaderRoute: typeof AdminCarsRouteImport
-      parentRoute: typeof AdminRoute
+    '/inventory': {
+      id: '/inventory'
+      path: '/inventory'
+      fullPath: '/inventory'
+      preLoaderRoute: typeof InventoryRouteImport
+      parentRoute: typeof rootRouteImport
     }
-    '/admin/garage': {
-      id: '/admin/garage'
+    '/how-it-works': {
+      id: '/how-it-works'
+      path: '/how-it-works'
+      fullPath: '/how-it-works'
+      preLoaderRoute: typeof HowItWorksRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/garage': {
+      id: '/garage'
       path: '/garage'
-      fullPath: '/admin/garage'
-      preLoaderRoute: typeof AdminGarageRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/inspection': {
-      id: '/admin/inspection'
-      path: '/inspection'
-      fullPath: '/admin/inspection'
-      preLoaderRoute: typeof AdminInspectionRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/leads': {
-      id: '/admin/leads'
-      path: '/leads'
-      fullPath: '/admin/leads'
-      preLoaderRoute: typeof AdminLeadsRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/admin/messages': {
-      id: '/admin/messages'
-      path: '/messages'
-      fullPath: '/admin/messages'
-      preLoaderRoute: typeof AdminMessagesRouteImport
-      parentRoute: typeof AdminRoute
-    }
-    '/api/garage-chat': {
-      id: '/api/garage-chat'
-      path: '/api/garage-chat'
-      fullPath: '/api/garage-chat'
-      preLoaderRoute: typeof ApiGarageChatRouteImport
+      fullPath: '/garage'
+      preLoaderRoute: typeof GarageRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/car/$id': {
-      id: '/car/$id'
-      path: '/car/$id'
-      fullPath: '/car/$id'
-      preLoaderRoute: typeof CarIdRouteImport
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/car/used-cars-in-jamshedpur-honda-amaze-2026': {
-      id: '/car/used-cars-in-jamshedpur-honda-amaze-2026'
-      path: '/car/used-cars-in-jamshedpur-honda-amaze-2026'
-      fullPath: '/car/used-cars-in-jamshedpur-honda-amaze-2026'
-      preLoaderRoute: typeof CarUsedCarsInJamshedpurHondaAmaze2026RouteImport
+    '/buy': {
+      id: '/buy'
+      path: '/buy'
+      fullPath: '/buy'
+      preLoaderRoute: typeof BuyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/used-cars-in-jamshedpur/': {
@@ -515,12 +445,82 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsedCarsInJamshedpurIndexRouteImport
       parentRoute: typeof UsedCarsInJamshedpurRoute
     }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/used-cars-in-jamshedpur/$brand': {
       id: '/used-cars-in-jamshedpur/$brand'
       path: '/$brand'
       fullPath: '/used-cars-in-jamshedpur/$brand'
       preLoaderRoute: typeof UsedCarsInJamshedpurBrandRouteImport
       parentRoute: typeof UsedCarsInJamshedpurRoute
+    }
+    '/car/used-cars-in-jamshedpur-honda-amaze-2026': {
+      id: '/car/used-cars-in-jamshedpur-honda-amaze-2026'
+      path: '/car/used-cars-in-jamshedpur-honda-amaze-2026'
+      fullPath: '/car/used-cars-in-jamshedpur-honda-amaze-2026'
+      preLoaderRoute: typeof CarUsedCarsInJamshedpurHondaAmaze2026RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/car/$id': {
+      id: '/car/$id'
+      path: '/car/$id'
+      fullPath: '/car/$id'
+      preLoaderRoute: typeof CarIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/garage-chat': {
+      id: '/api/garage-chat'
+      path: '/api/garage-chat'
+      fullPath: '/api/garage-chat'
+      preLoaderRoute: typeof ApiGarageChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/messages': {
+      id: '/admin/messages'
+      path: '/messages'
+      fullPath: '/admin/messages'
+      preLoaderRoute: typeof AdminMessagesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/leads': {
+      id: '/admin/leads'
+      path: '/leads'
+      fullPath: '/admin/leads'
+      preLoaderRoute: typeof AdminLeadsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/inspection': {
+      id: '/admin/inspection'
+      path: '/inspection'
+      fullPath: '/admin/inspection'
+      preLoaderRoute: typeof AdminInspectionRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/garage': {
+      id: '/admin/garage'
+      path: '/garage'
+      fullPath: '/admin/garage'
+      preLoaderRoute: typeof AdminGarageRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/cars': {
+      id: '/admin/cars'
+      path: '/cars'
+      fullPath: '/admin/cars'
+      preLoaderRoute: typeof AdminCarsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/bookings': {
+      id: '/admin/bookings'
+      path: '/bookings'
+      fullPath: '/admin/bookings'
+      preLoaderRoute: typeof AdminBookingsRouteImport
+      parentRoute: typeof AdminRoute
     }
   }
 }
