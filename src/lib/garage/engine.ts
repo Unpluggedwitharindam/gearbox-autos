@@ -58,17 +58,16 @@ function eligibleAtLevel(target: VehicleProfile, listing: ComparableListing, lev
 }
 
 const RELAXATION: Record<Exclude<MatchLevel, 1>, string> = {
-  2: "Ownership was relaxed by up to one owner because exact-owner matches were limited.",
+  2: "Some listings have a different or unknown owner count.",
   3: "The kilometre range was expanded to ±30,000 km.",
   4: "The kilometre range was expanded to ±40,000 km.",
-  5: "Closely related variants were included because exact-variant matches were limited.",
+  5: "Other or unknown variants of this model were included.",
   6: "The search geography was expanded beyond nearby Jharkhand markets.",
 };
 
 export function rankComparables(target: VehicleProfile, input: ComparableListing[], limit = 100) {
   const deduped = deduplicateComparables(input);
   const selected = new Map<string, RankedComparable>();
-  const relaxations: string[] = [];
   for (let level = 1 as MatchLevel; level <= 6; level = (level + 1) as MatchLevel) {
     for (const listing of deduped) {
       if (!selected.has(listing.id) && eligibleAtLevel(target, listing, level)) {
@@ -81,10 +80,18 @@ export function rankComparables(target: VehicleProfile, input: ComparableListing
       }
     }
     if (selected.size >= limit) break;
-    if (level < 6 && selected.size < limit) relaxations.push(RELAXATION[(level + 1) as Exclude<MatchLevel, 1>]);
   }
+  const comparables = [...selected.values()].sort((a, b) => b.relevance - a.relevance).slice(0, limit);
+  const kmDifferences = comparables.map((listing) => target.km !== UNKNOWN && listing.km !== UNKNOWN ? Math.abs(target.km - listing.km) : 0);
+  const relaxations: string[] = [];
+  if (target.ownerCount !== UNKNOWN && comparables.some((listing) => listing.ownerCount !== target.ownerCount)) relaxations.push(RELAXATION[2]);
+  if (kmDifferences.some((difference) => difference > 20_000 && difference <= 30_000)) relaxations.push(RELAXATION[3]);
+  if (kmDifferences.some((difference) => difference > 30_000 && difference <= 40_000)) relaxations.push(RELAXATION[4]);
+  if (target.variant !== UNKNOWN && comparables.some((listing) => !same(target.variant, listing.variant))) relaxations.push(RELAXATION[5]);
+  if (comparables.some((listing) => listing.distanceTier > 2)) relaxations.push(RELAXATION[6]);
+  if (kmDifferences.some((difference) => difference > 40_000)) relaxations.push("The kilometre range was expanded to ±60,000 km.");
   return {
-    comparables: [...selected.values()].sort((a, b) => b.relevance - a.relevance).slice(0, limit),
+    comparables,
     relaxations,
   };
 }
@@ -158,9 +165,9 @@ export function calculateValuation(targetPrice: number | null, comparables: Rank
   const buyHigh = Math.round(statistics.median * 0.91);
   const listing = Math.round(statistics.median * 1.04);
   const closing = Math.round(statistics.median * 0.99);
-  const priceScore = targetPrice ? Math.max(0, Math.min(30, 15 + ((statistics.median - targetPrice) / statistics.median) * 100)) : 15;
-  const garageScore = Math.round(Math.min(100, priceScore + 15 + 10 + 10 + 8 + 7));
-  const label = garageScore >= 80 ? "Strong buy" : garageScore >= 60 ? "Fair deal" : garageScore >= 40 ? "Overpriced" : "Avoid";
+  const priceScore = targetPrice != null && targetPrice > 0 ? Math.max(0, Math.min(30, 15 + ((statistics.median - targetPrice) / statistics.median) * 100)) : null;
+  const garageScore = priceScore == null ? null : Math.round(Math.min(100, priceScore + 15 + 10 + 10 + 8 + 7));
+  const label = garageScore == null ? null : garageScore >= 80 ? "Strong buy" : garageScore >= 60 ? "Fair deal" : garageScore >= 40 ? "Overpriced" : "Avoid";
   return {
     status: "available",
     statistics,
@@ -169,6 +176,7 @@ export function calculateValuation(targetPrice: number | null, comparables: Rank
     recommendedSellingPrice: listing,
     expectedClosingPrice: closing,
     marginOpportunity: { low: closing - buyHigh, high: closing - buyLow },
+    targetPriceInr: targetPrice,
     garageScore,
     label,
   };
@@ -179,7 +187,7 @@ export function missingVehicleFields(vehicle: VehicleProfile) {
     .filter((key) => vehicle[key] === UNKNOWN);
 }
 
-export function buildAnalysis(vehicle: VehicleProfile, inventoryComparables: InventoryComparable[], external: ComparableListing[], providerConnected: boolean, sourceStatuses: GarageAnalysis["sourceStatuses"] = []): GarageAnalysis {
+export function buildAnalysis(vehicle: VehicleProfile, inventoryComparables: InventoryComparable[], external: ComparableListing[], providerConnected: boolean, sourceStatuses: GarageAnalysis["sourceStatuses"] = [], targetPrice: number | null = null): GarageAnalysis {
   const ranked = rankComparables(vehicle, external);
   return {
     vehicle,
@@ -187,7 +195,7 @@ export function buildAnalysis(vehicle: VehicleProfile, inventoryComparables: Inv
     inventoryComparables,
     externalComparables: ranked.comparables,
     relaxations: ranked.relaxations,
-    valuation: calculateValuation(null, ranked.comparables, providerConnected),
+    valuation: calculateValuation(targetPrice, ranked.comparables, providerConnected),
     providerStatus: providerConnected ? "connected" : "unavailable",
     sourceStatuses,
   };

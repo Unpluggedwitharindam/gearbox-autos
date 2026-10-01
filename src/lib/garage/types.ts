@@ -84,8 +84,9 @@ export type ValuationResult =
       recommendedSellingPrice: number;
       expectedClosingPrice: number;
       marginOpportunity: { low: number; high: number };
-      garageScore: number;
-      label: "Strong buy" | "Fair deal" | "Overpriced" | "Avoid";
+      targetPriceInr: number | null;
+      garageScore: number | null;
+      label: "Strong buy" | "Fair deal" | "Overpriced" | "Avoid" | null;
     }
   | {
       status: "unavailable";
