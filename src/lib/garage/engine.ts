@@ -82,10 +82,14 @@ export function rankComparables(target: VehicleProfile, input: ComparableListing
     if (selected.size >= limit) break;
   }
   const comparables = [...selected.values()].sort((a, b) => b.relevance - a.relevance).slice(0, limit);
-  const levels = new Set(comparables.map((listing) => listing.matchLevel));
-  const relaxations = ([2, 3, 4, 5] as const).filter((level) => levels.has(level)).map((level) => RELAXATION[level]);
-  if (comparables.some((listing) => listing.matchLevel === 6 && listing.distanceTier > 2)) relaxations.push(RELAXATION[6]);
-  if (comparables.some((listing) => listing.matchLevel === 6 && target.km !== UNKNOWN && listing.km !== UNKNOWN && Math.abs(target.km - listing.km) > 40_000)) relaxations.push("The kilometre range was expanded to ±60,000 km.");
+  const kmDifferences = comparables.map((listing) => target.km !== UNKNOWN && listing.km !== UNKNOWN ? Math.abs(target.km - listing.km) : 0);
+  const relaxations: string[] = [];
+  if (target.ownerCount !== UNKNOWN && comparables.some((listing) => listing.ownerCount !== target.ownerCount)) relaxations.push(RELAXATION[2]);
+  if (kmDifferences.some((difference) => difference > 20_000 && difference <= 30_000)) relaxations.push(RELAXATION[3]);
+  if (kmDifferences.some((difference) => difference > 30_000 && difference <= 40_000)) relaxations.push(RELAXATION[4]);
+  if (target.variant !== UNKNOWN && comparables.some((listing) => !same(target.variant, listing.variant))) relaxations.push(RELAXATION[5]);
+  if (comparables.some((listing) => listing.distanceTier > 2)) relaxations.push(RELAXATION[6]);
+  if (kmDifferences.some((difference) => difference > 40_000)) relaxations.push("The kilometre range was expanded to ±60,000 km.");
   return {
     comparables,
     relaxations,
