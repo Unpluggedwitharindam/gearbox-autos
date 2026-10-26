@@ -28,6 +28,7 @@ import { Route as AdminCarsRouteImport } from './routes/admin.cars'
 import { Route as AdminGarageRouteImport } from './routes/admin.garage'
 import { Route as AdminInspectionRouteImport } from './routes/admin.inspection'
 import { Route as AdminLeadsRouteImport } from './routes/admin.leads'
+import { Route as AdminLmsRouteImport } from './routes/admin.lms'
 import { Route as AdminMessagesRouteImport } from './routes/admin.messages'
 import { Route as ApiGarageChatRouteImport } from './routes/api.garage-chat'
 import { Route as CarIdRouteImport } from './routes/car.$id'
@@ -130,6 +131,11 @@ const AdminLeadsRoute = AdminLeadsRouteImport.update({
   path: '/leads',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminLmsRoute = AdminLmsRouteImport.update({
+  id: '/lms',
+  path: '/lms',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminMessagesRoute = AdminMessagesRouteImport.update({
   id: '/messages',
   path: '/messages',
@@ -183,6 +189,7 @@ export interface FileRoutesByFullPath {
   '/admin/garage': typeof AdminGarageRoute
   '/admin/inspection': typeof AdminInspectionRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/lms': typeof AdminLmsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/api/garage-chat': typeof ApiGarageChatRoute
   '/car/$id': typeof CarIdRoute
@@ -208,6 +215,7 @@ export interface FileRoutesByTo {
   '/admin/garage': typeof AdminGarageRoute
   '/admin/inspection': typeof AdminInspectionRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/lms': typeof AdminLmsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/api/garage-chat': typeof ApiGarageChatRoute
   '/car/$id': typeof CarIdRoute
@@ -236,6 +244,7 @@ export interface FileRoutesById {
   '/admin/garage': typeof AdminGarageRoute
   '/admin/inspection': typeof AdminInspectionRoute
   '/admin/leads': typeof AdminLeadsRoute
+  '/admin/lms': typeof AdminLmsRoute
   '/admin/messages': typeof AdminMessagesRoute
   '/api/garage-chat': typeof ApiGarageChatRoute
   '/car/$id': typeof CarIdRoute
@@ -265,6 +274,7 @@ export interface FileRouteTypes {
     | '/admin/garage'
     | '/admin/inspection'
     | '/admin/leads'
+    | '/admin/lms'
     | '/admin/messages'
     | '/api/garage-chat'
     | '/car/$id'
@@ -290,6 +300,7 @@ export interface FileRouteTypes {
     | '/admin/garage'
     | '/admin/inspection'
     | '/admin/leads'
+    | '/admin/lms'
     | '/admin/messages'
     | '/api/garage-chat'
     | '/car/$id'
@@ -317,6 +328,7 @@ export interface FileRouteTypes {
     | '/admin/garage'
     | '/admin/inspection'
     | '/admin/leads'
+    | '/admin/lms'
     | '/admin/messages'
     | '/api/garage-chat'
     | '/car/$id'
@@ -480,6 +492,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminLeadsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/lms': {
+      id: '/admin/lms'
+      path: '/lms'
+      fullPath: '/admin/lms'
+      preLoaderRoute: typeof AdminLmsRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin/messages': {
       id: '/admin/messages'
       path: '/messages'
@@ -531,6 +550,7 @@ interface AdminRouteChildren {
   AdminGarageRoute: typeof AdminGarageRoute
   AdminInspectionRoute: typeof AdminInspectionRoute
   AdminLeadsRoute: typeof AdminLeadsRoute
+  AdminLmsRoute: typeof AdminLmsRoute
   AdminMessagesRoute: typeof AdminMessagesRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
@@ -541,6 +561,7 @@ const AdminRouteChildren: AdminRouteChildren = {
   AdminGarageRoute: AdminGarageRoute,
   AdminInspectionRoute: AdminInspectionRoute,
   AdminLeadsRoute: AdminLeadsRoute,
+  AdminLmsRoute: AdminLmsRoute,
   AdminMessagesRoute: AdminMessagesRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
