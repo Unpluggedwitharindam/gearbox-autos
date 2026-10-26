@@ -9,6 +9,19 @@ function dbFail(scope: string, error: { message: string }): never {
 
 const phoneRe = /^[0-9+\-\s()]{7,20}$/;
 
+// Real-time team alert; never fail the public submission if email fails.
+async function notifyTeam(formType: string, name: string, fields: { label: string; value: string }[]) {
+  try {
+    const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
+    await sendTemplateEmail("new-inquiry-alert", "", {
+      templateData: { formType, name, fields },
+      idempotencyKey: `inquiry-${crypto.randomUUID()}`,
+    });
+  } catch (e) {
+    console.error("[Email:notifyTeam]", e instanceof Error ? e.message : e);
+  }
+}
+
 const sellSchema = z.object({
   full_name: z.string().trim().min(1).max(120),
   phone: z.string().trim().regex(phoneRe),
