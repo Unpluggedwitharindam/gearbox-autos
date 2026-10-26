@@ -2,7 +2,7 @@
   "meta": {
     "name": "gearbox autos",
     "package": "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558",
-    "version": "7.1.0",
+    "version": "7.2.0",
     "framework": "react",
     "css_framework": "tailwind",
     "starter_template": "custom_design_system",
@@ -236,7 +236,7 @@
       "src/routes/admin.index.tsx": "ea60998bb7dee9980fdbb714485dd94d",
       "src/routes/admin.inspection.tsx": "aedc75b949c04f55128c601fb93ce374",
       "src/routes/admin.leads.tsx": "104a170c9dc8225698aeca9b0b653b03",
-      "src/routes/admin.lms.tsx": "27bfbaa3ef51b568c49d14c0c1424cc7",
+      "src/routes/admin.lms.tsx": "c500ae267828288d8e9572f8a581cfd1",
       "src/routes/admin.messages.tsx": "2ed4f13e2ae8cf05b272fc9ee9dd99fb",
       "src/routes/admin.tsx": "be88f7da489d1eb48423935b95824d04",
       "src/routes/api.garage-chat.ts": "17fc91435098cdca0462a513c133a0ac",
