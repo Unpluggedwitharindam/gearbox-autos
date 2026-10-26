@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet, Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { LogOut, LayoutDashboard, Car, Inbox, Calendar, MessageSquare, ClipboardCheck, BrainCircuit } from "lucide-react";
+import { LogOut, LayoutDashboard, Car, Inbox, Calendar, MessageSquare, ClipboardCheck, BrainCircuit, Users } from "lucide-react";
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { checkIsAdmin } from "@/lib/admin.functions";
@@ -51,6 +51,7 @@ function AdminLayout() {
 
   const nav = [
     { to: "/admin", label: "Dashboard", Icon: LayoutDashboard, exact: true },
+    { to: "/admin/lms", label: "LMS / CRM", Icon: Users },
     { to: "/admin/cars", label: "Cars", Icon: Car },
     { to: "/admin/garage", label: "Garage Intelligence", Icon: BrainCircuit },
     { to: "/admin/leads", label: "Sell Leads", Icon: Inbox },
