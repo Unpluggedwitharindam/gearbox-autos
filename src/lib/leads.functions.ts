@@ -9,6 +9,19 @@ function dbFail(scope: string, error: { message: string }): never {
 
 const phoneRe = /^[0-9+\-\s()]{7,20}$/;
 
+// Real-time team alert; never fail the public submission if email fails.
+async function notifyTeam(formType: string, name: string, fields: { label: string; value: string }[]) {
+  try {
+    const { sendTemplateEmail } = await import("@/lib/email-templates/send-email");
+    await sendTemplateEmail("new-inquiry-alert", "", {
+      templateData: { formType, name, fields },
+      idempotencyKey: `inquiry-${crypto.randomUUID()}`,
+    });
+  } catch (e) {
+    console.error("[Email:notifyTeam]", e instanceof Error ? e.message : e);
+  }
+}
+
 const sellSchema = z.object({
   full_name: z.string().trim().min(1).max(120),
   phone: z.string().trim().regex(phoneRe),
@@ -40,6 +53,15 @@ export const submitSellLead = createServerFn({ method: "POST" })
       notes: `Sell request: ${data.car_model}${data.year ? ` (${data.year})` : ""}${data.km ? `, ${data.km.toLocaleString("en-IN")} km` : ""}`,
     });
     if (leadError) console.error("[DB Error:submitSellLead->leads]", leadError.message);
+    await notifyTeam("Sell Lead", data.full_name, [
+      { label: "Name", value: data.full_name },
+      { label: "Phone", value: data.phone },
+      { label: "Email", value: data.email || "" },
+      { label: "City", value: data.city },
+      { label: "Car", value: data.car_model },
+      { label: "Year", value: data.year ? String(data.year) : "" },
+      { label: "KM driven", value: data.km ? data.km.toLocaleString("en-IN") : "" },
+    ]);
     return { ok: true as const };
   });
 
@@ -80,6 +102,14 @@ export const submitTestDrive = createServerFn({ method: "POST" })
       notes: data.message || null,
     });
     if (leadError) console.error("[DB Error:submitTestDrive->leads]", leadError.message);
+    await notifyTeam("Test Drive Booking", data.full_name, [
+      { label: "Name", value: data.full_name },
+      { label: "Phone", value: data.phone },
+      { label: "Email", value: data.email || "" },
+      { label: "Car", value: data.car_name || "" },
+      { label: "Preferred date", value: data.preferred_date || "" },
+      { label: "Message", value: data.message || "" },
+    ]);
     return { ok: true as const };
   });
 
@@ -113,5 +143,12 @@ export const submitContact = createServerFn({ method: "POST" })
       notes: `${data.subject ? `${data.subject}: ` : ""}${data.message}`.slice(0, 2000),
     });
     if (leadError) console.error("[DB Error:submitContact->leads]", leadError.message);
+    await notifyTeam("Contact Us Message", data.full_name, [
+      { label: "Name", value: data.full_name },
+      { label: "Phone", value: data.phone || "" },
+      { label: "Email", value: data.email },
+      { label: "Subject", value: data.subject || "" },
+      { label: "Message", value: data.message },
+    ]);
     return { ok: true as const };
   });
