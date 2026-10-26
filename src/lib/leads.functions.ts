@@ -27,6 +27,19 @@ export const submitSellLead = createServerFn({ method: "POST" })
       email: data.email || null,
     });
     if (error) dbFail("submitSellLead", error);
+    // Flow into the LMS pipeline; never fail the public submission on this.
+    const { error: leadError } = await supabaseAdmin.from("leads").insert({
+      full_name: data.full_name,
+      phone: data.phone,
+      email: data.email || null,
+      city: data.city,
+      lead_type: "seller",
+      source: "sell_form",
+      status: "new",
+      car_name: data.car_model,
+      notes: `Sell request: ${data.car_model}${data.year ? ` (${data.year})` : ""}${data.km ? `, ${data.km.toLocaleString("en-IN")} km` : ""}`,
+    });
+    if (leadError) console.error("[DB Error:submitSellLead->leads]", leadError.message);
     return { ok: true as const };
   });
 
@@ -53,6 +66,20 @@ export const submitTestDrive = createServerFn({ method: "POST" })
       message: data.message || null,
     });
     if (error) dbFail("submitTestDrive", error);
+    // Flow into the LMS pipeline; never fail the public submission on this.
+    const { error: leadError } = await supabaseAdmin.from("leads").insert({
+      full_name: data.full_name,
+      phone: data.phone,
+      email: data.email || null,
+      lead_type: "buyer",
+      source: "test_drive_booking",
+      status: "test_drive",
+      car_id: data.car_id || null,
+      car_name: data.car_name || null,
+      follow_up_date: data.preferred_date || null,
+      notes: data.message || null,
+    });
+    if (leadError) console.error("[DB Error:submitTestDrive->leads]", leadError.message);
     return { ok: true as const };
   });
 
@@ -75,5 +102,16 @@ export const submitContact = createServerFn({ method: "POST" })
       message: data.message,
     });
     if (error) dbFail("submitContact", error);
+    // Flow into the LMS pipeline; never fail the public submission on this.
+    const { error: leadError } = await supabaseAdmin.from("leads").insert({
+      full_name: data.full_name,
+      phone: data.phone || "",
+      email: data.email,
+      lead_type: "general",
+      source: "website",
+      status: "new",
+      notes: `${data.subject ? `${data.subject}: ` : ""}${data.message}`.slice(0, 2000),
+    });
+    if (leadError) console.error("[DB Error:submitContact->leads]", leadError.message);
     return { ok: true as const };
   });

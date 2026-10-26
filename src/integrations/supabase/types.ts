@@ -287,6 +287,109 @@ export type Database = {
         }
         Relationships: []
       }
+      lead_notes: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          id: string
+          lead_id: string
+          note: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          lead_id: string
+          note: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          lead_id?: string
+          note?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "lead_notes_lead_id_fkey"
+            columns: ["lead_id"]
+            isOneToOne: false
+            referencedRelation: "leads"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      leads: {
+        Row: {
+          budget_inr: number | null
+          car_id: string | null
+          car_name: string | null
+          city: string | null
+          created_at: string
+          created_by: string | null
+          email: string | null
+          follow_up_date: string | null
+          full_name: string
+          id: string
+          lead_type: string
+          lost_reason: string | null
+          notes: string | null
+          phone: string
+          priority: string
+          source: string
+          status: string
+          updated_at: string
+        }
+        Insert: {
+          budget_inr?: number | null
+          car_id?: string | null
+          car_name?: string | null
+          city?: string | null
+          created_at?: string
+          created_by?: string | null
+          email?: string | null
+          follow_up_date?: string | null
+          full_name: string
+          id?: string
+          lead_type?: string
+          lost_reason?: string | null
+          notes?: string | null
+          phone: string
+          priority?: string
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Update: {
+          budget_inr?: number | null
+          car_id?: string | null
+          car_name?: string | null
+          city?: string | null
+          created_at?: string
+          created_by?: string | null
+          email?: string | null
+          follow_up_date?: string | null
+          full_name?: string
+          id?: string
+          lead_type?: string
+          lost_reason?: string | null
+          notes?: string | null
+          phone?: string
+          priority?: string
+          source?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "leads_car_id_fkey"
+            columns: ["car_id"]
+            isOneToOne: false
+            referencedRelation: "cars"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       sell_leads: {
         Row: {
           car_model: string

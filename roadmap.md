@@ -26,3 +26,13 @@
 - [x] Fix multi-turn vehicle parsing
 - [x] Show source-level average, median, trimmed range, and evidence counts
 - [x] Validate live marketplace pricing and Garage valuation output
+
+# LMS / CRM roadmap
+
+- [x] Create unified leads pipeline table with stages, types, sources, priority, follow-up dates
+- [x] Add timestamped lead notes history table
+- [x] Build /admin/lms with Kanban board, list view, quick-add, lead drawer, search/filters
+- [x] Add one-click WhatsApp template engine and click-to-call on every lead
+- [x] Flow website forms (sell, test drive, contact) into the LMS pipeline automatically
+- [x] Add sales funnel counters to the admin dashboard
+- [x] Verify LMS end-to-end in preview and publish
