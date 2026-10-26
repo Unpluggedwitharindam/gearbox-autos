@@ -121,6 +121,7 @@ const emptyForm = {
   source: "website",
   priority: "warm",
   car_id: "",
+  custom_car: "",
   budget_inr: "",
   follow_up_date: "",
   notes: "",
@@ -202,8 +203,8 @@ function Lms() {
       source: form.source as (typeof LEAD_SOURCES)[number],
       status: "new",
       priority: form.priority as (typeof LEAD_PRIORITIES)[number],
-      car_id: form.car_id || null,
-      car_name: selectedCar?.name || null,
+      car_id: form.car_id && form.car_id !== "__other" ? form.car_id : null,
+      car_name: form.car_id === "__other" ? form.custom_car.trim() || null : selectedCar?.name || null,
       budget_inr: form.budget_inr ? Number(form.budget_inr) : null,
       follow_up_date: form.follow_up_date || null,
       notes: form.notes || null,
@@ -245,7 +246,16 @@ function Lms() {
       </div>
 
       {showForm && (
-        <div className="surface p-5 mb-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4" role="dialog" aria-label="Quick add lead">
+          <button className="absolute inset-0 bg-black/60" onClick={() => setShowForm(false)} aria-label="Close" />
+          <div className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-card border border-border rounded-lg p-5">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-lg font-semibold">Quick Add Lead</h3>
+              <button onClick={() => setShowForm(false)} className="rounded-md border border-border p-2 hover:bg-background" aria-label="Close">
+                <X className="h-4 w-4" />
+              </button>
+            </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
           <div>
             <label className="text-xs text-muted-foreground">Full name *</label>
             <input value={form.full_name} onChange={(e) => setForm({ ...form, full_name: e.target.value })} className="mt-1 w-full rounded-md border border-border bg-background px-3 py-2 text-sm" placeholder="Customer name" />
@@ -293,7 +303,11 @@ function Lms() {
               {(cars as { id: string; name: string }[]).map((c) => (
                 <option key={c.id} value={c.id}>{c.name}</option>
               ))}
+              <option value="__other">Other / custom car (not in inventory)</option>
             </select>
+            {form.car_id === "__other" && (
+              <input value={form.custom_car} onChange={(e) => setForm({ ...form, custom_car: e.target.value })} className="mt-2 w-full rounded-md border border-border bg-background px-3 py-2 text-sm" placeholder="e.g. Hyundai Creta 2022, Honda City" autoFocus />
+            )}
           </div>
           <div>
             <label className="text-xs text-muted-foreground">Budget / expected price (₹)</label>
@@ -311,6 +325,8 @@ function Lms() {
             <button onClick={submit} disabled={createMut.isPending} className="btn-primary rounded-md py-2 px-5 text-sm font-semibold disabled:opacity-50">
               {createMut.isPending ? "Saving…" : "Save Lead"}
             </button>
+          </div>
+        </div>
           </div>
         </div>
       )}
@@ -334,21 +350,28 @@ function Lms() {
       </div>
 
       {view === "kanban" ? (
-        <div className="flex gap-3 overflow-x-auto pb-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 w-full pb-4">
           {LEAD_STATUSES.map((status) => (
-            <div key={status} className="min-w-[260px] w-[260px] shrink-0">
-              <div className={`rounded-t-md px-3 py-2 text-xs font-semibold flex items-center justify-between ${STATUS_COLORS[status]}`}>
-                <span>{STATUS_LABELS[status]}</span>
-                <span>{byStatus[status]?.length ?? 0}</span>
+            <div key={status} className="min-w-0 flex flex-col">
+              <div className={`rounded-t-md px-2.5 py-2 text-xs font-semibold flex items-center justify-between gap-1 ${STATUS_COLORS[status]}`}>
+                <span className="truncate">{STATUS_LABELS[status]}</span>
+                <span className="flex items-center gap-1">
+                  {byStatus[status]?.length ?? 0}
+                  {status === "new" && (
+                    <button onClick={() => setShowForm(true)} aria-label="Add new lead" className="rounded p-0.5 hover:bg-black/20">
+                      <Plus className="h-3.5 w-3.5" />
+                    </button>
+                  )}
+                </span>
               </div>
-              <div className="surface rounded-t-none p-2 grid gap-2 min-h-[120px]">
+              <div className="surface rounded-t-none p-1.5 grid content-start gap-1.5 min-h-[120px] max-h-[65vh] overflow-y-auto flex-1">
                 {(byStatus[status] ?? []).map((lead) => (
                   <button
                     key={lead.id}
                     onClick={() => setSelected(lead)}
-                    className="text-left rounded-md border border-border/60 bg-background p-3 hover:border-primary/50 transition-colors"
+                    className="text-left min-w-0 rounded-md border border-border/60 bg-background p-2.5 hover:border-primary/50 transition-colors"
                   >
-                    <div className="flex items-center justify-between gap-2">
+                    <div className="flex items-center justify-between gap-1.5 min-w-0">
                       <span className="font-medium text-sm truncate">{lead.full_name}</span>
                       <PriorityIcon priority={lead.priority} />
                     </div>
@@ -581,9 +604,22 @@ function LeadDrawer({
           )}
         </div>
 
-        {(lead.car_name || lead.budget_inr || lead.email) && (
+        <div className="mt-4">
+          <label className="text-xs text-muted-foreground">Interested car</label>
+          <input
+            key={lead.id + (lead.car_name ?? "")}
+            defaultValue={lead.car_name ?? ""}
+            onBlur={(e) => {
+              const v = e.target.value.trim();
+              if (v !== (lead.car_name ?? "")) onUpdate({ car_name: v || null, ...(v !== lead.car_name ? { car_id: null } : {}) });
+            }}
+            placeholder="e.g. Hyundai Creta 2022, Honda City"
+            className="mt-1 w-full rounded-md border border-border bg-background px-2 py-2 text-xs"
+          />
+        </div>
+
+        {(lead.budget_inr != null || lead.email) && (
           <div className="surface p-3 mt-4 text-sm grid gap-1">
-            {lead.car_name && <p><span className="text-muted-foreground text-xs">Car:</span> {lead.car_name}</p>}
             {lead.budget_inr != null && <p><span className="text-muted-foreground text-xs">Budget:</span> ₹{lead.budget_inr.toLocaleString("en-IN")}</p>}
             {lead.email && <p><span className="text-muted-foreground text-xs">Email:</span> {lead.email}</p>}
           </div>
