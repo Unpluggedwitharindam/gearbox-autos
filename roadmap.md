@@ -36,3 +36,6 @@
 - [x] Flow website forms (sell, test drive, contact) into the LMS pipeline automatically
 - [x] Add sales funnel counters to the admin dashboard
 - [x] Verify LMS end-to-end in preview and publish
+- [x] Connect external email service for four-recipient follow-up reminders
+- [ ] Implement and test daily 10 AM / 12 PM IST reminders — awaiting a verified Resend sender address; connected key permits sending but not reading domains
+- [ ] Activate reminder schedule after sender verification and deployment
