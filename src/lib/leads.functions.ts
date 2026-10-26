@@ -53,6 +53,15 @@ export const submitSellLead = createServerFn({ method: "POST" })
       notes: `Sell request: ${data.car_model}${data.year ? ` (${data.year})` : ""}${data.km ? `, ${data.km.toLocaleString("en-IN")} km` : ""}`,
     });
     if (leadError) console.error("[DB Error:submitSellLead->leads]", leadError.message);
+    await notifyTeam("Sell Lead", data.full_name, [
+      { label: "Name", value: data.full_name },
+      { label: "Phone", value: data.phone },
+      { label: "Email", value: data.email || "" },
+      { label: "City", value: data.city },
+      { label: "Car", value: data.car_model },
+      { label: "Year", value: data.year ? String(data.year) : "" },
+      { label: "KM driven", value: data.km ? data.km.toLocaleString("en-IN") : "" },
+    ]);
     return { ok: true as const };
   });
 
@@ -93,6 +102,14 @@ export const submitTestDrive = createServerFn({ method: "POST" })
       notes: data.message || null,
     });
     if (leadError) console.error("[DB Error:submitTestDrive->leads]", leadError.message);
+    await notifyTeam("Test Drive Booking", data.full_name, [
+      { label: "Name", value: data.full_name },
+      { label: "Phone", value: data.phone },
+      { label: "Email", value: data.email || "" },
+      { label: "Car", value: data.car_name || "" },
+      { label: "Preferred date", value: data.preferred_date || "" },
+      { label: "Message", value: data.message || "" },
+    ]);
     return { ok: true as const };
   });
 
@@ -126,5 +143,12 @@ export const submitContact = createServerFn({ method: "POST" })
       notes: `${data.subject ? `${data.subject}: ` : ""}${data.message}`.slice(0, 2000),
     });
     if (leadError) console.error("[DB Error:submitContact->leads]", leadError.message);
+    await notifyTeam("Contact Us Message", data.full_name, [
+      { label: "Name", value: data.full_name },
+      { label: "Phone", value: data.phone || "" },
+      { label: "Email", value: data.email },
+      { label: "Subject", value: data.subject || "" },
+      { label: "Message", value: data.message },
+    ]);
     return { ok: true as const };
   });
