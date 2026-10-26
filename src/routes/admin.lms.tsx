@@ -27,6 +27,8 @@ import {
   LEAD_SOURCES,
   LEAD_PRIORITIES,
   type LeadRecord,
+  type CreateLeadInput,
+  type UpdateLeadInput,
 } from "@/lib/lead.functions";
 import { adminListCars } from "@/lib/admin.functions";
 
@@ -139,7 +141,7 @@ function Lms() {
   const invalidate = () => qc.invalidateQueries({ queryKey: ["admin", "lms-leads"] });
 
   const createMut = useMutation({
-    mutationFn: (data: Parameters<typeof adminCreateLead>[0]["data"]) => adminCreateLead({ data }),
+    mutationFn: (data: CreateLeadInput) => adminCreateLead({ data }),
     onSuccess: () => {
       toast.success("Lead added");
       setShowForm(false);
@@ -150,7 +152,7 @@ function Lms() {
   });
 
   const updateMut = useMutation({
-    mutationFn: (data: Parameters<typeof adminUpdateLead>[0]["data"]) => adminUpdateLead({ data }),
+    mutationFn: (data: UpdateLeadInput) => adminUpdateLead({ data }),
     onSuccess: () => {
       toast.success("Lead updated");
       invalidate();

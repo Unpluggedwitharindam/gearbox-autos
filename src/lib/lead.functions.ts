@@ -2,6 +2,9 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { requireSupabaseAuth } from "@/integrations/supabase/auth-middleware";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
+import type { Database } from "@/integrations/supabase/types";
+
+type LeadUpdate = Database["public"]["Tables"]["leads"]["Update"];
 
 function dbFail(scope: string, error: { message: string }): never {
   console.error(`[DB Error:${scope}]`, error.message);
@@ -63,6 +66,11 @@ const leadSchema = z.object({
   lost_reason: z.string().trim().max(500).optional().nullable(),
   notes: z.string().trim().max(2000).optional().nullable(),
 });
+
+export type CreateLeadInput = z.input<typeof leadSchema>;
+
+const leadUpdateSchema = leadSchema.partial().extend({ id: z.string().uuid() });
+export type UpdateLeadInput = z.input<typeof leadUpdateSchema>;
 
 export type LeadRecord = {
   id: string;
@@ -131,37 +139,25 @@ export const adminCreateLead = createServerFn({ method: "POST" })
 
 export const adminUpdateLead = createServerFn({ method: "POST" })
   .middleware([requireSupabaseAuth])
-  .inputValidator((d) =>
-    leadSchema.partial().extend({ id: z.string().uuid() }).parse(d),
-  )
+  .inputValidator((d) => leadUpdateSchema.parse(d))
   .handler(async ({ data, context }) => {
     await assertAdmin(context.userId);
     const { id, ...fields } = data;
-    const update: Record<string, unknown> = {};
-    for (const key of [
-      "full_name",
-      "phone",
-      "city",
-      "lead_type",
-      "source",
-      "status",
-      "priority",
-      "car_name",
-      "budget_inr",
-      "follow_up_date",
-      "lost_reason",
-      "notes",
-    ] as const) {
-      if (fields[key] !== undefined) update[key] = fields[key] || null;
-    }
+    const update: LeadUpdate = {};
     if (fields.full_name !== undefined) update.full_name = fields.full_name;
     if (fields.phone !== undefined) update.phone = fields.phone;
+    if (fields.email !== undefined) update.email = fields.email || null;
+    if (fields.city !== undefined) update.city = fields.city || null;
     if (fields.lead_type !== undefined) update.lead_type = fields.lead_type;
     if (fields.source !== undefined) update.source = fields.source;
     if (fields.status !== undefined) update.status = fields.status;
     if (fields.priority !== undefined) update.priority = fields.priority;
-    if (fields.email !== undefined) update.email = fields.email || null;
     if (fields.car_id !== undefined) update.car_id = fields.car_id || null;
+    if (fields.car_name !== undefined) update.car_name = fields.car_name || null;
+    if (fields.budget_inr !== undefined) update.budget_inr = fields.budget_inr ?? null;
+    if (fields.follow_up_date !== undefined) update.follow_up_date = fields.follow_up_date || null;
+    if (fields.lost_reason !== undefined) update.lost_reason = fields.lost_reason || null;
+    if (fields.notes !== undefined) update.notes = fields.notes || null;
     const { error } = await supabaseAdmin.from("leads").update(update).eq("id", id);
     if (error) dbFail("adminUpdateLead", error);
     return { ok: true as const };
