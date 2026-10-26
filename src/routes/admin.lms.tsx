@@ -458,7 +458,7 @@ function LeadDrawer({
   lead: LeadRecord;
   onClose: () => void;
   onStatusChange: (status: string) => void;
-  onUpdate: (fields: Partial<Pick<LeadRecord, "priority" | "follow_up_date" | "lost_reason" | "notes">>) => void;
+  onUpdate: (fields: Omit<UpdateLeadInput, "id">) => void;
   onDelete: () => void;
 }) {
   const qc = useQueryClient();
@@ -563,7 +563,7 @@ function LeadDrawer({
           </div>
           <div>
             <label className="text-xs text-muted-foreground">Priority</label>
-            <select value={lead.priority} onChange={(e) => onUpdate({ priority: e.target.value })} className="mt-1 w-full rounded-md border border-border bg-background px-2 py-2 text-xs">
+            <select value={lead.priority} onChange={(e) => onUpdate({ priority: e.target.value as (typeof LEAD_PRIORITIES)[number] })} className="mt-1 w-full rounded-md border border-border bg-background px-2 py-2 text-xs">
               {LEAD_PRIORITIES.map((p) => (
                 <option key={p} value={p}>{p}</option>
               ))}
