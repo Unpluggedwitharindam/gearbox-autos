@@ -35,4 +35,4 @@
 - [x] Add one-click WhatsApp template engine and click-to-call on every lead
 - [x] Flow website forms (sell, test drive, contact) into the LMS pipeline automatically
 - [x] Add sales funnel counters to the admin dashboard
-- [ ] Verify LMS end-to-end in preview and publish
+- [x] Verify LMS end-to-end in preview and publish
