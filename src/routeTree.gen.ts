@@ -35,6 +35,7 @@ import { Route as CarIdRouteImport } from './routes/car.$id'
 import { Route as CarUsedCarsInJamshedpurHondaAmaze2026RouteImport } from './routes/car.used-cars-in-jamshedpur-honda-amaze-2026'
 import { Route as UsedCarsInJamshedpurIndexRouteImport } from './routes/used-cars-in-jamshedpur.index'
 import { Route as UsedCarsInJamshedpurBrandRouteImport } from './routes/used-cars-in-jamshedpur.$brand'
+import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -169,6 +170,12 @@ const UsedCarsInJamshedpurBrandRoute =
     path: '/$brand',
     getParentRoute: () => UsedCarsInJamshedpurRoute,
   } as any)
+const LovableEmailTransactionalPreviewRoute =
+  LovableEmailTransactionalPreviewRouteImport.update({
+    id: '/lovable/email/transactional/preview',
+    path: '/lovable/email/transactional/preview',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -197,6 +204,7 @@ export interface FileRoutesByFullPath {
   '/used-cars-in-jamshedpur/$brand': typeof UsedCarsInJamshedpurBrandRoute
   '/admin/': typeof AdminIndexRoute
   '/used-cars-in-jamshedpur/': typeof UsedCarsInJamshedpurIndexRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -223,6 +231,7 @@ export interface FileRoutesByTo {
   '/used-cars-in-jamshedpur/$brand': typeof UsedCarsInJamshedpurBrandRoute
   '/admin': typeof AdminIndexRoute
   '/used-cars-in-jamshedpur': typeof UsedCarsInJamshedpurIndexRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -252,6 +261,7 @@ export interface FileRoutesById {
   '/used-cars-in-jamshedpur/$brand': typeof UsedCarsInJamshedpurBrandRoute
   '/admin/': typeof AdminIndexRoute
   '/used-cars-in-jamshedpur/': typeof UsedCarsInJamshedpurIndexRoute
+  '/lovable/email/transactional/preview': typeof LovableEmailTransactionalPreviewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -282,6 +292,7 @@ export interface FileRouteTypes {
     | '/used-cars-in-jamshedpur/$brand'
     | '/admin/'
     | '/used-cars-in-jamshedpur/'
+    | '/lovable/email/transactional/preview'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -308,6 +319,7 @@ export interface FileRouteTypes {
     | '/used-cars-in-jamshedpur/$brand'
     | '/admin'
     | '/used-cars-in-jamshedpur'
+    | '/lovable/email/transactional/preview'
   id:
     | '__root__'
     | '/'
@@ -336,6 +348,7 @@ export interface FileRouteTypes {
     | '/used-cars-in-jamshedpur/$brand'
     | '/admin/'
     | '/used-cars-in-jamshedpur/'
+    | '/lovable/email/transactional/preview'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -355,6 +368,7 @@ export interface RootRouteChildren {
   ApiGarageChatRoute: typeof ApiGarageChatRoute
   CarIdRoute: typeof CarIdRoute
   CarUsedCarsInJamshedpurHondaAmaze2026Route: typeof CarUsedCarsInJamshedpurHondaAmaze2026Route
+  LovableEmailTransactionalPreviewRoute: typeof LovableEmailTransactionalPreviewRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -541,6 +555,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UsedCarsInJamshedpurBrandRouteImport
       parentRoute: typeof UsedCarsInJamshedpurRoute
     }
+    '/lovable/email/transactional/preview': {
+      id: '/lovable/email/transactional/preview'
+      path: '/lovable/email/transactional/preview'
+      fullPath: '/lovable/email/transactional/preview'
+      preLoaderRoute: typeof LovableEmailTransactionalPreviewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -599,6 +620,7 @@ const rootRouteChildren: RootRouteChildren = {
   CarIdRoute: CarIdRoute,
   CarUsedCarsInJamshedpurHondaAmaze2026Route:
     CarUsedCarsInJamshedpurHondaAmaze2026Route,
+  LovableEmailTransactionalPreviewRoute: LovableEmailTransactionalPreviewRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
