@@ -19,12 +19,12 @@ const config: CapacitorConfig = {
   ios: {
     contentInset: 'always',
     limitsNavigationsToAppBoundDomains: false,
-    backgroundColor: '#0a0a0a',
+    backgroundColor: '#111111',
   },
   plugins: {
     SplashScreen: {
       launchShowDuration: 1500,
-      backgroundColor: '#0a0a0a',
+      backgroundColor: '#111111',
       androidScaleType: 'CENTER_CROP',
       showSpinner: false,
       splashFullScreen: true,
@@ -32,7 +32,7 @@ const config: CapacitorConfig = {
     },
     StatusBar: {
       style: 'DARK',
-      backgroundColor: '#0a0a0a',
+      backgroundColor: '#111111',
     },
   },
 };
