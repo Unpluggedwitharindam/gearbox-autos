@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import heroAsset from "@/assets/showroom-hero.jpg.asset.json";
 const hero = heroAsset.url;
 import { CarCard } from "@/components/CarCard";
+import { InstallAppBanner } from "@/components/InstallAppBanner";
 import { listPublicCars } from "@/lib/cars.functions";
 
 export const Route = createFileRoute("/")({
@@ -57,6 +58,7 @@ function Index() {
 
   return (
     <div className="container-page py-8">
+      <InstallAppBanner />
       {/* Hero bento grid */}
       <div className="grid grid-cols-1 md:grid-cols-4 md:grid-rows-2 gap-4 h-auto md:h-[600px] mb-12">
         <div className="md:col-span-3 bg-card p-8 md:p-12 flex flex-col justify-center border-l-8 border-primary">
