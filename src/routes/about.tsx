@@ -29,6 +29,29 @@ export const Route = createFileRoute("/about")({
   component: About,
 });
 
+const teamMembers = [
+  {
+    name: "Arindam Banerjee",
+    role: "Head of Marketing",
+    initials: "AB",
+  },
+  {
+    name: "Vivek Kumar",
+    role: "Head of Sales",
+    initials: "VK",
+  },
+  {
+    name: "Ayush Sablok",
+    role: "Head of Finance",
+    initials: "AS",
+  },
+  {
+    name: "Anish Sablok",
+    role: "Head of Operations",
+    initials: "AS",
+  },
+];
+
 function About() {
   return (
     <section className="relative">
@@ -62,7 +85,45 @@ function About() {
         ))}
       </div>
 
-      <div className="container-page mt-12">
+      {/* Leadership Team */}
+      <div className="container-page mt-16">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+          <div>
+            <div className="eyebrow">Our Team</div>
+            <h2 className="display-h2 mt-2">The Leadership <span className="text-primary">Team</span></h2>
+          </div>
+          <p className="text-sm text-muted-foreground max-w-md">
+            The dedicated team driving transparency, fair deals, and seamless car ownership at Gearbox Autos.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {teamMembers.map((member) => (
+            <div
+              key={member.name}
+              className="surface p-6 flex flex-col justify-between group hover:border-primary/60 transition-all duration-300 border-l-4 border-l-primary/40 hover:border-l-primary"
+            >
+              <div>
+                <div className="w-12 h-12 rounded-sm bg-primary/10 border border-primary/20 text-primary font-head text-lg flex items-center justify-center mb-6 group-hover:bg-primary group-hover:text-primary-foreground transition-colors duration-300">
+                  {member.initials}
+                </div>
+                <h3 className="font-head text-xl tracking-wide text-foreground">
+                  {member.name}
+                </h3>
+                <p className="text-xs font-semibold uppercase tracking-widest text-primary mt-1.5">
+                  {member.role}
+                </p>
+              </div>
+              <div className="mt-6 pt-4 border-t border-border/50 flex items-center justify-between text-[10px] text-muted-foreground uppercase tracking-widest font-bold">
+                <span>Gearbox Autos</span>
+                <span className="text-primary">●</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="container-page mt-16">
         <div className="surface p-6">
           <div className="eyebrow mb-6">Gearbox Autos in Numbers</div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
