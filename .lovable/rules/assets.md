@@ -13,6 +13,7 @@ The full machine-readable catalog lives in this library's `design-system.json` (
 ## Logos
 
 - `@/design-system/{slug}/assets/gearbox-logo.png.asset.json` (png, R2 pointer)
+- `@/design-system/{slug}/assets/logos/gearbox-logo.png` (png)
 
 ## Images
 
