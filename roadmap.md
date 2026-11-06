@@ -44,5 +44,5 @@
 
 - [x] Apply the selected Android package ID and keep the short home-screen name
 - [x] Verify native Android compilation, signatures, unit tests, and bundled branded assets (device execution unavailable)
-- [ ] Create and securely deliver the first upload key for the confirmed new listing
-- [ ] Deliver and verify a signed Play Store AAB
+- [x] Create and deliver the first upload key in a private signing backup for the confirmed new listing
+- [x] Deliver and verify a signed Play Store AAB and a signed APK for device testing
