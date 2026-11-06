@@ -13,8 +13,9 @@
     "test": "vitest run",
     "app:setup": "cap add android",
     "app:icons": "capacitor-assets generate --android",
-    "app:sync": "node scripts/prepare-android.mjs && cap sync android",
-    "app:test": "node --test scripts/android-release.test.mjs",
+    "app:build": "vite build --config vite.capacitor.config.ts && node scripts/prepare-android.mjs",
+    "app:sync": "cap sync android",
+    "app:test": "node --test scripts/android-release.test.mjs scripts/android-local.test.mjs",
     "app:open": "cap open android"
   },
   "dependencies": {

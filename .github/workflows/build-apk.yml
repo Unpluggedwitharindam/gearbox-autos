@@ -13,6 +13,7 @@ jobs:
       - run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
       - run: npm install
       - run: npm run app:test
+      - run: npm run app:build
       - run: npm run app:sync
       - run: chmod +x gradlew && ./gradlew assembleDebug
         working-directory: android

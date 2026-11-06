@@ -5,11 +5,11 @@ export const isNativeApp = () => Capacitor.isNativePlatform();
 export const publicShareUrl = (path: string) => new URL(path, WEBSITE_ORIGIN).href;
 
 // TanStack supplies the serialized request; this adapter never constructs RPC payloads.
-export async function appServerFetch(url: string, init: RequestInit): Promise<Response> {
-  if (!isNativeApp()) return fetch(url, init);
+export async function appServerFetch(input: string | URL | Request, init: RequestInit = {}): Promise<Response> {
+  if (!isNativeApp()) return fetch(input, init);
   if (!navigator.onLine) throw new Error('No internet connection. Your request has not been submitted.');
   init.signal?.throwIfAborted();
-  const remote = new URL(url, WEBSITE_ORIGIN);
+  const remote = new URL(input instanceof Request ? input.url : String(input), WEBSITE_ORIGIN);
   if (remote.origin !== WEBSITE_ORIGIN) throw new Error('Unexpected app service address.');
   const headers = Object.fromEntries(new Headers(init.headers).entries());
   try {
@@ -31,7 +31,7 @@ export async function appServerFetch(url: string, init: RequestInit): Promise<Re
     // Capacitor parses JSON responses itself; framed/binary responses are base64.
     const body = contentType.includes('application/json')
       ? JSON.stringify(result.data)
-      : Uint8Array.from(atob(result.data), (char) => char.charCodeAt(0));
+      : result.status >= 400 ? String(result.data) : Uint8Array.from(atob(result.data), (char) => char.charCodeAt(0));
     return new Response(body, { status: result.status, headers: result.headers });
   } catch (error) {
     if (init.signal?.aborted) throw error;

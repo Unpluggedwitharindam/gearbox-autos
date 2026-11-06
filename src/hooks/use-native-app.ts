@@ -11,12 +11,13 @@ export function useNativeApp() {
   useEffect(() => {
     if (!isNativeApp()) return;
     const disconnected = () => setOffline(true);
+    const serviceRestored = () => setOffline(false);
     const restored = () => { setOffline(false); void router.invalidate(); };
     setOffline(!navigator.onLine);
     window.addEventListener('offline', disconnected);
     window.addEventListener('online', restored);
     window.addEventListener('gearbox:connection-error', disconnected);
-    window.addEventListener('gearbox:connection-restored', () => setOffline(false));
+    window.addEventListener('gearbox:connection-restored', serviceRestored);
     const external = (event: MouseEvent) => {
       const target = event.target;
       if (!(target instanceof Element)) return;
@@ -60,6 +61,7 @@ export function useNativeApp() {
       window.removeEventListener('offline', disconnected);
       window.removeEventListener('online', restored);
       window.removeEventListener('gearbox:connection-error', disconnected);
+      window.removeEventListener('gearbox:connection-restored', serviceRestored);
       document.removeEventListener('click', external);
       void back.then((handle) => handle.remove());
       void opened.then((handle) => handle.remove());

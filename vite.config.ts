@@ -13,6 +13,8 @@ import path from "node:path";
 const config = defineConfig({
   tanstackStart: {
     server: { entry: "server" },
+    // Produce an additional local app shell without replacing public SSR pages.
+    spa: { enabled: true, prerender: { outputPath: '/android-shell' } },
   },
   vite: {
     resolve: {
