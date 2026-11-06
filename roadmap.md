@@ -43,6 +43,6 @@
 # Google Play release
 
 - [x] Apply the selected Android package ID and keep the short home-screen name
-- [ ] Verify native Android build with the existing branded icon and splash screen
+- [x] Verify native Android compilation, signatures, unit tests, and bundled branded assets (device execution unavailable)
 - [ ] Create and securely deliver the first upload key for the confirmed new listing
 - [ ] Deliver and verify a signed Play Store AAB
