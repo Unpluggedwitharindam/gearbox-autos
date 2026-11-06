@@ -3,14 +3,11 @@ import type { CapacitorConfig } from '@capacitor/cli';
 const config: CapacitorConfig = {
   appId: 'in.gearboxautos.app',
   appName: 'Gearbox Autos',
-  // Live wrapper: app loads the published website directly.
-  // Only the local fallback is bundled; server functionality stays on the website.
+  // Full frontend copied from the production client build, never a website wrapper.
   webDir: 'android-web',
   server: {
-    url: 'https://www.gearboxautos.in',
     cleartext: false,
     androidScheme: 'https',
-    iosScheme: 'https',
   },
   android: {
     allowMixedContent: false,

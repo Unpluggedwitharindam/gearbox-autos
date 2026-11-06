@@ -2,6 +2,7 @@ import { createStart, createMiddleware } from "@tanstack/react-start";
 
 import { renderErrorPage } from "./lib/error-page";
 import { attachSupabaseAuth } from "@/integrations/supabase/auth-attacher";
+import { appServerFetch } from './lib/native-app';
 
 const errorMiddleware = createMiddleware().server(async ({ next, request }) => {
   if (new URL(request.url).pathname.startsWith("/lovable/")) return next();
@@ -22,4 +23,5 @@ const errorMiddleware = createMiddleware().server(async ({ next, request }) => {
 export const startInstance = createStart(() => ({
   requestMiddleware: [errorMiddleware],
   functionMiddleware: [attachSupabaseAuth],
+  serverFns: { fetch: appServerFetch },
 }));

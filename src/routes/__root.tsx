@@ -16,6 +16,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SocialFloat } from "@/components/SocialFloat";
 import { DEALER_SCHEMA } from "@/lib/seo";
+import { useNativeApp } from '@/hooks/use-native-app';
 
 function NotFoundComponent() {
   return (
@@ -211,11 +212,13 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const offline = useNativeApp();
 
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Header />
+        {offline && <div role="status" className="border-b border-border bg-card px-4 py-3 text-center text-sm text-foreground">No connection to online services. Saved listings may be out of date; enquiries require internet.</div>}
         <main className="min-h-screen">
           <Outlet />
         </main>

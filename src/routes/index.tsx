@@ -18,6 +18,8 @@ export const Route = createFileRoute("/")({
       { property: "og:url", content: "https://gearboxautos.in/" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:image", content: "https://www.gearboxautos.in" + hero },
+      { name: "twitter:image", content: "https://www.gearboxautos.in" + hero },
     ],
     links: [{ rel: "canonical", href: "https://gearboxautos.in/" }],
     scripts: [

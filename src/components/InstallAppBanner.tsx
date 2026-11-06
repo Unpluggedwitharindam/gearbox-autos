@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Download, X } from "lucide-react";
+import { isNativeApp } from '@/lib/native-app';
 
 type PromptEvent = Event & { prompt: () => Promise<void>; userChoice: Promise<{ outcome: string }> };
 
@@ -9,6 +10,7 @@ export function InstallAppBanner() {
   const [help, setHelp] = useState(false);
 
   useEffect(() => {
+    if (isNativeApp()) return;
     const standalone = window.matchMedia("(display-mode: standalone)").matches;
     if (standalone || sessionStorage.getItem("hideInstall")) return;
     setShow(true);
