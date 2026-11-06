@@ -8,15 +8,17 @@ export function cachedInventory(): Car[] {
 }
 
 // Only public reads may fall back. Mutations and protected data never do.
-export const nativeInventoryCache = createMiddleware({ type: 'function' }).client(async ({ next }) => {
+export const nativeInventoryCache = createMiddleware({ type: 'function' }).client(async (options) => {
+  const { next } = options;
   if (!isNativeApp()) return next();
-  const original = await next();
-  const out = original as typeof original & { error?: unknown; result?: unknown };
-  if (out.error) {
+  try {
+    const original = await next();
+    const out = original as typeof original & { result?: unknown };
+    try { localStorage.setItem(CACHE_KEY, JSON.stringify(out.result)); } catch { /* Storage can be full. */ }
+    window.dispatchEvent(new Event('gearbox:connection-restored'));
+    return original;
+  } catch {
     window.dispatchEvent(new Event('gearbox:connection-error'));
-    return { ...out, error: undefined, result: cachedInventory() };
+    return { ...options, 'use functions must return the result of next()': true as const, headers: {}, result: cachedInventory() };
   }
-  try { localStorage.setItem(CACHE_KEY, JSON.stringify(out.result)); } catch { /* Storage can be full. */ }
-  window.dispatchEvent(new Event('gearbox:connection-restored'));
-  return out;
 });

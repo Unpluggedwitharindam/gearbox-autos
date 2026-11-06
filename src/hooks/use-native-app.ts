@@ -4,6 +4,7 @@ import { App } from '@capacitor/app';
 import { Browser } from '@capacitor/browser';
 import { supabase } from '@/integrations/supabase/client';
 import { isNativeApp, WEBSITE_ORIGIN } from '@/lib/native-app';
+import { toast } from 'sonner';
 
 export function useNativeApp() {
   const router = useRouter();
@@ -50,10 +51,11 @@ export function useNativeApp() {
       const access_token = values.get('access_token');
       const refresh_token = values.get('refresh_token');
       if (!access_token || !refresh_token) return;
-      localStorage.removeItem('gearbox-app-auth-state');
       const result = await supabase.auth.setSession({ access_token, refresh_token });
+      if (result.error) { toast.error('Unable to finish sign-in. Check your connection and try again.'); return; }
+      localStorage.removeItem('gearbox-app-auth-state');
       await Browser.close().catch(() => {});
-      if (!result.error) router.history.replace('/admin');
+      router.history.replace('/admin');
     };
     const opened = App.addListener('appUrlOpen', ({ url }) => { void callback(url); });
     void App.getLaunchUrl().then((result) => { if (result?.url) void callback(result.url); });
