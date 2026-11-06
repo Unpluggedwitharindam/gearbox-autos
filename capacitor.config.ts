@@ -1,12 +1,11 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.gearboxautos.app',
+  appId: 'in.gearboxautos.app',
   appName: 'Gearbox Autos',
   // Live wrapper: app loads the published website directly.
-  // To switch to bundled offline mode, remove `server.url` and set
-  // `webDir: 'dist'` after running `npm run build`.
-  webDir: 'dist',
+  // Only the local fallback is bundled; server functionality stays on the website.
+  webDir: 'android-web',
   server: {
     url: 'https://www.gearboxautos.in',
     cleartext: false,

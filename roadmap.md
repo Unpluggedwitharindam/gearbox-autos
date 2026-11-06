@@ -39,3 +39,10 @@
 - [x] Connect external email service for four-recipient follow-up reminders
 - [ ] Implement and test daily 10 AM / 12 PM IST reminders — awaiting a verified Resend sender address; connected key permits sending but not reading domains
 - [ ] Activate reminder schedule after sender verification and deployment
+
+# Google Play release
+
+- [x] Apply the selected Android package ID and keep the short home-screen name
+- [x] Verify native Android compilation, signatures, unit tests, and bundled branded assets (device execution unavailable)
+- [x] Create and deliver the first upload key in a private signing backup for the confirmed new listing
+- [x] Deliver and verify a signed Play Store AAB and a signed APK for device testing
