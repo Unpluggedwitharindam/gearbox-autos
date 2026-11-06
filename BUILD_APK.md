@@ -5,10 +5,7 @@ in order. Total time: about 45–60 minutes (mostly waiting for downloads).
 
 ## What you are building
 
-An Android app called **Gearbox Autos** that opens your live website
-(**gearboxautos.in**) inside a real app. When you update the website on
-Lovable and publish, the app updates automatically — **you never need to
-rebuild the APK for website changes.**
+An Android app called **Gearbox Autos** that loads its existing frontend from packaged files. Inventory and forms use online services. Frontend changes now require a rebuilt app; inventory data changes do not.
 
 ---
 
@@ -70,6 +67,7 @@ npm install
 ### Step 7: Sync everything
 
 ```
+npm run app:build
 npm run app:sync
 ```
 
@@ -108,16 +106,13 @@ Wait 2–5 minutes. When a popup says "APK(s) generated successfully", click
 
 ## Updating the app later
 
-- **Website changes (text, cars, design):** just publish on Lovable.
-  The app shows the live site — no APK rebuild needed.
-- **Only rebuild** if you change the app icon, app name, or
-  `capacitor.config.ts`: run steps 9–11 again.
+- **Inventory data changes:** the existing online backend supplies updated listings.
+- **Frontend, icon, name or configuration changes:** build the frontend, sync Android, rebuild and distribute a new APK/AAB.
 
 ## Play Store (optional, later)
 
 In Android Studio: **Build → Generate Signed Bundle / APK → Android App
-Bundle (.aab)** — follow the wizard (it creates a "keystore" file — save that
-file and its passwords somewhere safe forever), then upload the .aab at
+Bundle (.aab)** — use the existing upload key and private environment settings described in `PLAY_STORE.md`; do not create a replacement key. Upload the .aab at
 https://play.google.com/console (one-time $25 Google developer account).
 
 ## Troubleshooting
@@ -129,4 +124,4 @@ https://play.google.com/console (one-time $25 Google developer account).
 | `git is not recognized` | Reinstall Git (Step 2), restart the command window. |
 | Android Studio shows errors on open | Wait — it's still downloading components. Look at the bottom progress bar. |
 | "SDK location not found" | In Android Studio: File → Settings → search "SDK" → install Android SDK, then try Step 9 again. |
-| App shows old website | The app loads the live site — publish your changes on Lovable and reopen the app. |
+| App shows old screens | Rebuild with `npm run app:build`, sync Android, and install the new APK. |

@@ -1,90 +1,54 @@
-# Gearbox Autos — Mobile Apps (Android + iOS)
+# Gearbox Autos — Locally bundled Android app
 
-This project is wired up with **Capacitor** to package the live website
-(`https://www.gearboxautos.in`) as native **Android (APK/AAB)** and
-**iOS (IPA)** apps.
+The Android app now packages the existing TanStack Start/Vite frontend locally. It does not fetch a website document to start. Inventory, enquiries, authentication, uploads and administration still use the existing online services.
 
-- App name: **Gearbox Autos**
-- Google Play title: **Gearbox Autos: Buy & Sell Cars** (30 characters)
-- Bundle / package ID: **in.gearboxautos.app**
-- Mode: **Live wrapper** — the app loads the published site, so anything
-  you publish on Lovable appears in the app instantly without rebuilding.
+- Package: `in.gearboxautos.app`
+- Launcher name: Gearbox Autos
+- Play title: Gearbox Autos: Buy & Sell Cars
+- Release: 1.1 / version code 2
+- Capacitor Android/core/CLI: unchanged at 8.3.4
+- Build prerequisites: Node 22+, JDK 21, Android SDK 36, build tools 36.0.0
 
-> Android builds require JDK 21 and Android SDK 36. Xcode requires macOS.
-> Only rebuild when changing icons, name, native config, or native dependencies.
-
-## One-time setup on your computer
-
-1. Install [Node.js 22+](https://nodejs.org/).
-   - Android: [Android Studio](https://developer.android.com/studio)
-   - iOS: macOS + [Xcode](https://developer.apple.com/xcode/) + CocoaPods (`sudo gem install cocoapods`)
-2. In Lovable, click **GitHub → Export to GitHub** and create a repository.
-3. Clone it locally and install dependencies:
-   ```bash
-   git clone <your-repo-url> gearbox-autos
-   cd gearbox-autos
-   npm install
-   ```
-4. Add the platforms you need:
-   ```bash
-   npx cap add android   # creates android/
-   npx cap add ios       # creates ios/  (macOS only)
-   ```
-
-## Build — Android
+## Build and sync
 
 ```bash
+npm install
+npm run app:test
+npm run app:build
 npm run app:sync
-npx cap open android
+npm run app:open
 ```
 
-In Android Studio:
+`app:build` runs `vite build --config vite.capacitor.config.ts`, producing `dist-capacitor/client/index.html` and its compiled assets. `scripts/prepare-android.mjs` copies the full client output into `android-web`, packages the original logo/showroom media referenced by the existing asset pointers, and validates JS/CSS. It fails rather than generating a placeholder. The server output is not copied.
 
-1. Wait for Gradle sync to finish.
-2. **Build → Build Bundle(s) / APK(s) → Build APK(s)**.
-3. Click **locate** — the APK is at
-   `android/app/build/outputs/apk/debug/app-debug.apk`.
-4. Transfer to your phone, allow "Install from unknown sources", install.
+`app:sync` runs `cap sync android`, copying `android-web` to `android/app/src/main/assets/public` and updating native plugins/configuration. Root-relative `/assets/` paths work on Capacitor's HTTPS localhost server; nested routes resolve through the packaged shell.
 
-Play Store: **Build → Generate Signed Bundle / APK → Android App Bundle
-(.aab)**, create a keystore the first time (keep the file + passwords
-safe), then upload to the [Play Console](https://play.google.com/console).
+## Android Studio
 
-## Build — iOS (macOS only)
+Open the existing `android/` project using `npm run app:open`. Wait for Gradle sync. Select an Android device/emulator and Run. For a debug APK, choose **Build → Build Bundle(s) / APK(s) → Build APK(s)**. Output: `android/app/build/outputs/apk/debug/app-debug.apk`.
+
+For release, supply the existing upload-key settings privately in the environment that launches Android Studio: `ANDROID_KEYSTORE_PATH`, `ANDROID_KEYSTORE_PASSWORD`, `ANDROID_KEY_ALIAS`, `ANDROID_KEY_PASSWORD`. Do not create a replacement key. Choose **Build → Generate Signed Bundle / APK → Android App Bundle**, select the existing keystore and alias, choose release, and finish. The Gradle release guard also requires those environment settings.
+
+Alternatively:
 
 ```bash
-npm run build
-npx cap sync ios
-npx cap open ios
+android/gradlew -p android bundleRelease assembleRelease
 ```
 
-In Xcode:
+On Windows use `android\gradlew.bat -p android bundleRelease assembleRelease`.
 
-1. Select the **App** target → **Signing & Capabilities**, choose your
-   Apple Developer team (a free account works for installing on your own
-   device; a paid $99/yr account is required for the App Store).
-2. Pick your connected iPhone (or a simulator) and press **Run** to install.
-3. For the App Store: **Product → Archive → Distribute App → App Store
-   Connect**, then submit in
-   [App Store Connect](https://appstoreconnect.apple.com).
+AAB: `android/app/build/outputs/bundle/release/app-release.aab`.
+Signed test APK: `android/app/build/outputs/apk/release/app-release.apk`.
 
-## Updating the apps later
+## Behaviour and limitations
 
-Because this is a **live wrapper**, you usually don't rebuild. Publish on
-Lovable and users see changes instantly.
+- Homepage and static screens render locally. Public inventory is cached on successful reads; connectivity errors show a warning and may show saved listings. No offline marketplace or offline enquiry queue is promised.
+- Enquiry mutations fail visibly when disconnected and retain their input. A timed-out submission can have an uncertain outcome; check LMS before retrying.
+- Car images uploaded to inventory still require connectivity unless the WebView has cached them. Local branded assets are packaged.
+- Native server-function transport preserves TanStack serialization and bearer headers; native HTTP avoids WebView cross-origin restrictions. No database credentials are packaged.
+- Back navigation uses app history, exiting only at the root. Internal pages stay local; external links use the platform/browser. WhatsApp uses native link handling.
+- Google sign-in uses the browser and the hosted public `/app-auth` page, then returns through `in.gearboxautos.app://auth` with state verification. Publish the new hosted callback before testing Google sign-in in the release. Physical-device OAuth and WhatsApp/back behaviour remain device-test requirements.
+- Inspection PDF export retains its existing online font/CDN dependencies.
+- Every frontend change now requires rebuilding and distributing a new APK/AAB. Updating inventory data does not require a new app release. Increase version code for each Play upload.
 
-Rebuild only when you change:
-- app icon, splash screen, or app name
-- `capacitor.config.ts`
-- native capabilities (camera, push notifications, etc.)
-
-```bash
-git pull && npm install && npm run app:sync
-npx cap sync android   # and/or: npx cap sync ios
-```
-
-## Switching to a bundled offline app
-
-Remove the `server` block from `capacitor.config.ts` (keep
-`webDir: 'dist'`), then `npm run build && npx cap sync` and rebuild.
-Every content change then needs a new app release.
+The website's normal hosted SSR rendering is preserved; its build additionally emits an Android shell. iOS device behaviour is not verified by this Android task.
