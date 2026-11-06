@@ -18,6 +18,7 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as InventoryRouteImport } from './routes/inventory'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as SellRouteImport } from './routes/sell'
 import { Route as SellCarJamshedpurRouteImport } from './routes/sell-car-jamshedpur'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -78,6 +79,11 @@ const InventoryRoute = InventoryRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SellRoute = SellRouteImport.update({
@@ -175,6 +181,7 @@ export interface FileRoutesByFullPath {
   '/how-it-works': typeof HowItWorksRoute
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/sell': typeof SellRoute
   '/sell-car-jamshedpur': typeof SellCarJamshedpurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -201,6 +208,7 @@ export interface FileRoutesByTo {
   '/how-it-works': typeof HowItWorksRoute
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/sell': typeof SellRoute
   '/sell-car-jamshedpur': typeof SellCarJamshedpurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -228,6 +236,7 @@ export interface FileRoutesById {
   '/how-it-works': typeof HowItWorksRoute
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/sell': typeof SellRoute
   '/sell-car-jamshedpur': typeof SellCarJamshedpurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -257,6 +266,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/inventory'
     | '/login'
+    | '/privacy-policy'
     | '/sell'
     | '/sell-car-jamshedpur'
     | '/sitemap.xml'
@@ -283,6 +293,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/inventory'
     | '/login'
+    | '/privacy-policy'
     | '/sell'
     | '/sell-car-jamshedpur'
     | '/sitemap.xml'
@@ -309,6 +320,7 @@ export interface FileRouteTypes {
     | '/how-it-works'
     | '/inventory'
     | '/login'
+    | '/privacy-policy'
     | '/sell'
     | '/sell-car-jamshedpur'
     | '/sitemap.xml'
@@ -337,6 +349,7 @@ export interface RootRouteChildren {
   HowItWorksRoute: typeof HowItWorksRoute
   InventoryRoute: typeof InventoryRoute
   LoginRoute: typeof LoginRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   SellRoute: typeof SellRoute
   SellCarJamshedpurRoute: typeof SellCarJamshedpurRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -409,6 +422,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sell': {
@@ -571,6 +591,7 @@ const rootRouteChildren: RootRouteChildren = {
   HowItWorksRoute: HowItWorksRoute,
   InventoryRoute: InventoryRoute,
   LoginRoute: LoginRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   SellRoute: SellRoute,
   SellCarJamshedpurRoute: SellCarJamshedpurRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
