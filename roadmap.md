@@ -44,4 +44,5 @@
 
 - [x] Apply the selected Android package ID and keep the short home-screen name
 - [ ] Verify native Android build with the existing branded icon and splash screen
-- [ ] Deliver a signed Play Store AAB — requires the owner's existing upload key or confirmation that this is a new listing
+- [ ] Create and securely deliver the first upload key for the confirmed new listing
+- [ ] Deliver and verify a signed Play Store AAB
