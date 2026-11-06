@@ -49,9 +49,11 @@
 
 # Locally bundled Android conversion
 
-- [ ] Build the existing frontend locally without a remote starting URL
-- [ ] Preserve hosted backend calls, authentication, and submissions
-- [ ] Add offline and Android navigation handling without redesign
-- [ ] Verify local startup, assets, routes, Android sync, and release packaging
-- [ ] Deliver updated configuration, commands, and signed-bundle instructions using the existing upload key
-- [ ] Verify signed AAB, test APK, unchanged private signing backup, and updated guide are downloadable in Files
+- [x] Build the existing frontend locally without a remote starting URL
+- [x] Preserve hosted backend calls and submissions; signed-in LMS verified with an injected session
+- [x] Add offline and Android navigation handling without redesign
+- [x] Verify local startup, assets, routes, Android sync, and signed release packaging in an isolated workspace
+- [x] Deliver updated configuration, commands, and signed-bundle instructions using the existing upload key
+- [x] Verify signed AAB, test APK, unchanged private signing backup, and updated guide are Ready in Files
+- [ ] Publish the new hosted /app-auth callback — awaits an explicit publish request
+- [ ] Verify Google browser callback, WhatsApp, Back, inspection export, and launch on an Android device — no emulator/physical device available
