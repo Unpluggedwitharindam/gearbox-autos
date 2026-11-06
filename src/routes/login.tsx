@@ -4,6 +4,9 @@ import { toast } from "sonner";
 import { lovable } from "@/integrations/lovable/index";
 import { supabase } from "@/integrations/supabase/client";
 import { ShieldCheck } from "lucide-react";
+import { Browser } from '@capacitor/browser';
+import { isNativeApp, WEBSITE_ORIGIN } from '@/lib/native-app';
+import { Button } from '@/components/ui/button';
 
 export const Route = createFileRoute("/login")({
   head: () => ({
@@ -11,6 +14,10 @@ export const Route = createFileRoute("/login")({
       { title: "Admin Login — Gearbox Autos" },
       { name: "description", content: "Secure sign-in for authorised Gearbox Autos administrators." },
       { name: "robots", content: "noindex, nofollow, noarchive" },
+      { property: 'og:title', content: 'Admin Login — Gearbox Autos' },
+      { property: 'og:description', content: 'Secure sign-in for authorised Gearbox Autos administrators.' },
+      { property: 'og:type', content: 'website' },
+      { name: 'twitter:card', content: 'summary_large_image' },
     ],
   }),
   component: Login,
@@ -28,8 +35,15 @@ function Login() {
 
   const signIn = async () => {
     setBusy(true);
+    if (isNativeApp()) {
+      const state = crypto.randomUUID();
+      localStorage.setItem('gearbox-app-auth-state', state);
+      await Browser.open({ url: `${WEBSITE_ORIGIN}/app-auth?state=${encodeURIComponent(state)}` });
+      setBusy(false);
+      return;
+    }
     const result = await lovable.auth.signInWithOAuth("google", {
-      redirect_uri: window.location.origin + "/admin",
+      redirect_uri: window.location.origin + "/login",
     });
     if (result.error) {
       toast.error("Sign in failed");
@@ -48,13 +62,13 @@ function Login() {
         <p className="text-sm text-muted-foreground mt-2">
           Sign in to manage inventory, leads, and bookings.
         </p>
-        <button
+        <Button
           onClick={signIn}
           disabled={busy}
           className="btn-primary mt-8 w-full rounded-md py-3 font-semibold disabled:opacity-60"
         >
           {busy ? "Redirecting…" : "Continue with Google"}
-        </button>
+        </Button>
       </div>
     </section>
   );

@@ -4,6 +4,7 @@ import { LogOut, LayoutDashboard, Car, Inbox, Calendar, MessageSquare, Clipboard
 import { useAuth } from "@/hooks/use-auth";
 import { supabase } from "@/integrations/supabase/client";
 import { checkIsAdmin } from "@/lib/admin.functions";
+import { Button } from '@/components/ui/button';
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -11,6 +12,10 @@ export const Route = createFileRoute("/admin")({
       { title: "Admin Dashboard — Gearbox Autos" },
       { name: "description", content: "Gearbox Autos admin dashboard. Manage used car inventory, sell leads, test drive bookings, and customer messages for the Jamshedpur dealership." },
       { name: "robots", content: "noindex, nofollow, noarchive" },
+      { property: 'og:title', content: 'Admin Dashboard — Gearbox Autos' },
+      { property: 'og:description', content: 'Manage Gearbox Autos inventory, leads and enquiries.' },
+      { property: 'og:type', content: 'website' },
+      { name: 'twitter:card', content: 'summary_large_image' },
     ],
   }),
   component: AdminLayout,
@@ -20,6 +25,8 @@ function AdminLayout() {
   const { session, loading } = useAuth();
   const navigate = useNavigate();
   const [isAdmin, setIsAdmin] = useState<boolean | null>(null);
+  const [accessError, setAccessError] = useState(false);
+  const [retry, setRetry] = useState(0);
   const path = useRouterState({ select: (s) => s.location.pathname });
 
   useEffect(() => {
@@ -28,8 +35,11 @@ function AdminLayout() {
       navigate({ to: "/login" });
       return;
     }
-    checkIsAdmin().then((r) => setIsAdmin(r.isAdmin)).catch(() => setIsAdmin(false));
-  }, [session, loading, navigate]);
+    setAccessError(false);
+    checkIsAdmin().then((r) => setIsAdmin(r.isAdmin)).catch(() => setAccessError(true));
+  }, [session, loading, navigate, retry]);
+
+  if (accessError) return <div className="container-page py-12"><p role="alert">Unable to verify access. Check your connection and try again.</p><Button onClick={() => setRetry((value) => value + 1)} className="mt-4">Try again</Button></div>;
 
   if (loading || isAdmin === null) {
     return <div className="container-page pt-12"><p className="text-muted-foreground">Loading…</p></div>;

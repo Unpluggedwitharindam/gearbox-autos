@@ -10,7 +10,8 @@ export function cachedInventory(): Car[] {
 // Only public reads may fall back. Mutations and protected data never do.
 export const nativeInventoryCache = createMiddleware({ type: 'function' }).client(async ({ next }) => {
   if (!isNativeApp()) return next();
-  const out = await next() as Awaited<ReturnType<typeof next>> & { error?: unknown; result?: unknown };
+  const original = await next();
+  const out = original as typeof original & { error?: unknown; result?: unknown };
   if (out.error) {
     window.dispatchEvent(new Event('gearbox:connection-error'));
     return { ...out, error: undefined, result: cachedInventory() };
