@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AppAuthRouteImport } from './routes/app-auth'
 import { Route as BuyRouteImport } from './routes/buy'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
@@ -47,6 +48,11 @@ const AboutRoute = AboutRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppAuthRoute = AppAuthRouteImport.update({
+  id: '/app-auth',
+  path: '/app-auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BuyRoute = BuyRouteImport.update({
@@ -163,6 +169,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
+  '/app-auth': typeof AppAuthRoute
   '/buy': typeof BuyRoute
   '/contact': typeof ContactRoute
   '/how-it-works': typeof HowItWorksRoute
@@ -188,6 +195,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/app-auth': typeof AppAuthRoute
   '/buy': typeof BuyRoute
   '/contact': typeof ContactRoute
   '/how-it-works': typeof HowItWorksRoute
@@ -214,6 +222,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRouteWithChildren
+  '/app-auth': typeof AppAuthRoute
   '/buy': typeof BuyRoute
   '/contact': typeof ContactRoute
   '/how-it-works': typeof HowItWorksRoute
@@ -242,6 +251,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/app-auth'
     | '/buy'
     | '/contact'
     | '/how-it-works'
@@ -267,6 +277,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/app-auth'
     | '/buy'
     | '/contact'
     | '/how-it-works'
@@ -292,6 +303,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
+    | '/app-auth'
     | '/buy'
     | '/contact'
     | '/how-it-works'
@@ -319,6 +331,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRouteWithChildren
+  AppAuthRoute: typeof AppAuthRoute
   BuyRoute: typeof BuyRoute
   ContactRoute: typeof ContactRoute
   HowItWorksRoute: typeof HowItWorksRoute
@@ -354,6 +367,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app-auth': {
+      id: '/app-auth'
+      path: '/app-auth'
+      fullPath: '/app-auth'
+      preLoaderRoute: typeof AppAuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/buy': {
@@ -545,6 +565,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRouteWithChildren,
+  AppAuthRoute: AppAuthRoute,
   BuyRoute: BuyRoute,
   ContactRoute: ContactRoute,
   HowItWorksRoute: HowItWorksRoute,

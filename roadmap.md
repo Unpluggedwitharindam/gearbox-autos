@@ -46,3 +46,14 @@
 - [x] Verify native Android compilation, signatures, unit tests, and bundled branded assets (device execution unavailable)
 - [x] Create and deliver the first upload key in a private signing backup for the confirmed new listing
 - [x] Deliver and verify a signed Play Store AAB and a signed APK for device testing
+
+# Locally bundled Android conversion
+
+- [x] Build the existing frontend locally without a remote starting URL
+- [x] Preserve hosted backend calls and submissions; signed-in LMS verified with an injected session
+- [x] Add offline and Android navigation handling without redesign
+- [x] Verify local startup, assets, routes, Android sync, and signed release packaging in an isolated workspace
+- [x] Deliver updated configuration, commands, and signed-bundle instructions using the existing upload key
+- [x] Verify signed AAB, test APK, unchanged private signing backup, and updated guide are Ready in Files
+- [ ] Publish the new hosted /app-auth callback — awaits an explicit publish request
+- [ ] Verify Google browser callback, WhatsApp, Back, inspection export, and launch on an Android device — no emulator/physical device available

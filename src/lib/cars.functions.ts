@@ -2,13 +2,14 @@ import { createServerFn } from "@tanstack/react-start";
 import { z } from "zod";
 import { supabaseAdmin } from "@/integrations/supabase/client.server";
 import { rowToCar, type CarRow, type Car } from "./cars";
+import { nativeInventoryCache } from './native-inventory';
 
 function dbFail(scope: string, error: { message: string }): never {
   console.error(`[DB Error:${scope}]`, error.message);
   throw new Error("Unable to load cars right now. Please try again.");
 }
 
-export const listPublicCars = createServerFn({ method: "GET" }).handler(
+export const listPublicCars = createServerFn({ method: "GET" }).middleware([nativeInventoryCache]).handler(
   async (): Promise<Car[]> => {
     const { data, error } = await supabaseAdmin
       .from("cars")

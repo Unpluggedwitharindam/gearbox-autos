@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Share2, Copy, Check, X, MessageCircle, Send, Facebook, Twitter, Mail, MessageSquare, Instagram } from "lucide-react";
 import { toast } from "sonner";
+import { isNativeApp, publicShareUrl } from '@/lib/native-app';
 
 type Props = {
   title: string;
@@ -16,7 +17,7 @@ export function ShareButton({ title, text, path, className = "", label = "Share"
   const [copied, setCopied] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
-  const url = typeof window !== "undefined" ? `${window.location.origin}${path}` : path;
+  const url = isNativeApp() ? publicShareUrl(path) : typeof window !== "undefined" ? `${window.location.origin}${path}` : path;
   const shareText = text ?? title;
   const enc = encodeURIComponent;
 

@@ -3,6 +3,7 @@ import { useServerFn } from "@tanstack/react-start";
 import { Loader2, MessageCircle, Copy, Check, X } from "lucide-react";
 import { toast } from "sonner";
 import { generateCarCaption } from "@/lib/social.functions";
+import { isNativeApp, WEBSITE_ORIGIN } from '@/lib/native-app';
 
 export function WhatsAppShareCarButton({ carId }: { carId: string }) {
   const generate = useServerFn(generateCarCaption);
@@ -16,7 +17,7 @@ export function WhatsAppShareCarButton({ carId }: { carId: string }) {
     setLoading(true);
     try {
       const out = await generate({ data: { carId } });
-      const origin = typeof window !== "undefined" ? window.location.origin : "";
+      const origin = isNativeApp() ? WEBSITE_ORIGIN : typeof window !== "undefined" ? window.location.origin : "";
       const link = `${origin}/car/${out.slug}`;
       const full = `${out.caption}\n\n${link}`;
       setCaption(full);
