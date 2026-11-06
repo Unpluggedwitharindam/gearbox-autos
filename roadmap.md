@@ -54,3 +54,4 @@
 - [ ] Add offline and Android navigation handling without redesign
 - [ ] Verify local startup, assets, routes, Android sync, and release packaging
 - [ ] Deliver updated configuration, commands, and signed-bundle instructions using the existing upload key
+- [ ] Verify signed AAB, test APK, unchanged private signing backup, and updated guide are downloadable in Files
