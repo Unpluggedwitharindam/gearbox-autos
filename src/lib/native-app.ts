@@ -9,6 +9,10 @@ export async function appServerFetch(input: string | URL | Request, init: Reques
   if (!isNativeApp()) return fetch(input, init);
   if (!navigator.onLine) throw new Error('No internet connection. Your request has not been submitted.');
   const remote = new URL(input instanceof Request ? input.url : String(input), WEBSITE_ORIGIN);
+  if (remote.origin === 'https://localhost') {
+    remote.protocol = 'https:';
+    remote.host = 'www.gearboxautos.in';
+  }
   if (remote.origin !== WEBSITE_ORIGIN) throw new Error('Unexpected app service address.');
   const request = input instanceof Request ? new Request(input, init) : new Request(remote, init);
   request.signal.throwIfAborted();
