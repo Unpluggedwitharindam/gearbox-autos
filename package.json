@@ -13,7 +13,8 @@
     "test": "vitest run",
     "app:setup": "cap add android",
     "app:icons": "capacitor-assets generate --android",
-    "app:sync": "npm run build && cap sync android",
+    "app:sync": "node scripts/prepare-android.mjs && cap sync android",
+    "app:test": "node --test scripts/android-release.test.mjs",
     "app:open": "cap open android"
   },
   "dependencies": {

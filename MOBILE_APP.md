@@ -5,7 +5,8 @@ This project is wired up with **Capacitor** to package the live website
 **iOS (IPA)** apps.
 
 - App name: **Gearbox Autos**
-- Bundle / package ID: **com.gearboxautos.app**
+- Google Play title: **Gearbox Autos: Buy & Sell Cars** (29 characters)
+- Bundle / package ID: **in.gearboxautos.app**
 - Mode: **Live wrapper** — the app loads the published site, so anything
   you publish on Lovable appears in the app instantly without rebuilding.
 
@@ -15,7 +16,7 @@ This project is wired up with **Capacitor** to package the live website
 
 ## One-time setup on your computer
 
-1. Install [Node.js 20+](https://nodejs.org/).
+1. Install [Node.js 22+](https://nodejs.org/).
    - Android: [Android Studio](https://developer.android.com/studio)
    - iOS: macOS + [Xcode](https://developer.apple.com/xcode/) + CocoaPods (`sudo gem install cocoapods`)
 2. In Lovable, click **GitHub → Export to GitHub** and create a repository.
@@ -34,8 +35,7 @@ This project is wired up with **Capacitor** to package the live website
 ## Build — Android
 
 ```bash
-npm run build
-npx cap sync android
+npm run app:sync
 npx cap open android
 ```
 
@@ -80,7 +80,7 @@ Rebuild only when you change:
 - native capabilities (camera, push notifications, etc.)
 
 ```bash
-git pull && npm install && npm run build
+git pull && npm install && npm run app:sync
 npx cap sync android   # and/or: npx cap sync ios
 ```
 
