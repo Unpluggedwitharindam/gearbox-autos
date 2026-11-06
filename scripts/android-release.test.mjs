@@ -15,7 +15,7 @@ test('Android application ID is in.gearboxautos.app across native configuration'
 });
 
 test('Play listing title stays within the 30-character limit', () => {
-  assert.equal('Gearbox Autos: Buy & Sell Cars'.length, 29);
+  assert.equal('Gearbox Autos: Buy & Sell Cars'.length, 30);
   assert.ok('Gearbox Autos: Buy & Sell Cars'.length <= 30);
 });
 

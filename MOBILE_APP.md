@@ -5,14 +5,13 @@ This project is wired up with **Capacitor** to package the live website
 **iOS (IPA)** apps.
 
 - App name: **Gearbox Autos**
-- Google Play title: **Gearbox Autos: Buy & Sell Cars** (29 characters)
+- Google Play title: **Gearbox Autos: Buy & Sell Cars** (30 characters)
 - Bundle / package ID: **in.gearboxautos.app**
 - Mode: **Live wrapper** — the app loads the published site, so anything
   you publish on Lovable appears in the app instantly without rebuilding.
 
-> Native builds cannot run inside Lovable's sandbox. Android Studio (any
-> OS) and Xcode (macOS only) run on your machine. Do the setup once; after
-> that you only rebuild when you change icons, name, or native config.
+> Android builds require JDK 21 and Android SDK 36. Xcode requires macOS.
+> Only rebuild when changing icons, name, native config, or native dependencies.
 
 ## One-time setup on your computer
 
