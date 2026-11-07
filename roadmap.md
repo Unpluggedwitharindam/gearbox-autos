@@ -60,7 +60,7 @@
 
 # Android live inventory release v1.2
 
-- [ ] Reproduce and fix the native inventory domain redirect; add regression coverage
-- [ ] Verify real live inventory through the locally packaged interface
-- [ ] Build and validate versionCode 3 AAB and APK using the unchanged upload key
-- [ ] Make the updated release and upload instructions available in Files
+- [x] Reproduce and fix the native inventory domain redirect; add regression coverage
+- [x] Verify real live inventory through the locally packaged interface (native bridge browser check)
+- [x] Build and validate versionCode 3 AAB and APK using the unchanged upload key
+- [x] Make the updated release and upload instructions available in Files
