@@ -1,6 +1,6 @@
 import { Capacitor, CapacitorHttp } from '@capacitor/core';
 
-export const WEBSITE_ORIGIN = 'https://www.gearboxautos.in';
+export const WEBSITE_ORIGIN = 'https://gearboxautos.in';
 export const isNativeApp = () => Capacitor.isNativePlatform();
 export const publicShareUrl = (path: string) => new URL(path, WEBSITE_ORIGIN).href;
 
@@ -11,7 +11,7 @@ export async function appServerFetch(input: string | URL | Request, init: Reques
   const remote = new URL(input instanceof Request ? input.url : String(input), WEBSITE_ORIGIN);
   if (remote.origin === 'https://localhost') {
     remote.protocol = 'https:';
-    remote.host = 'www.gearboxautos.in';
+    remote.host = new URL(WEBSITE_ORIGIN).host;
   }
   if (remote.origin !== WEBSITE_ORIGIN) throw new Error('Unexpected app service address.');
   const request = input instanceof Request ? new Request(input, init) : new Request(remote, init);
@@ -27,7 +27,7 @@ export async function appServerFetch(input: string | URL | Request, init: Reques
       responseType: 'arraybuffer',
       connectTimeout: 15000,
       readTimeout: 30000,
-      disableRedirects: true,
+      disableRedirects: false,
     });
     request.signal.throwIfAborted();
     if (result.status >= 300 && result.status < 400) {

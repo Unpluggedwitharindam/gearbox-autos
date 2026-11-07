@@ -20,7 +20,16 @@ describe('local Android transport', () => {
   it('directs relative service calls to the existing backend with the original payload', async () => {
     request.mockResolvedValue({ status: 200, headers: { 'content-type': 'application/json' }, data: { ok: true } });
     await appServerFetch('/_serverFn/example', { method: 'POST', headers: { authorization: 'Bearer test-token', 'content-type': 'application/json' }, body: '{"data":1}' });
-    expect(request).toHaveBeenCalledWith(expect.objectContaining({ url: 'https://www.gearboxautos.in/_serverFn/example', method: 'POST', data: '{"data":1}', headers: expect.objectContaining({ authorization: 'Bearer test-token' }) }));
+    expect(request).toHaveBeenCalledWith(expect.objectContaining({ url: 'https://gearboxautos.in/_serverFn/example', method: 'POST', data: '{"data":1}', headers: expect.objectContaining({ authorization: 'Bearer test-token' }) }));
+  });
+  it('maps local native requests directly to the canonical service without blocking redirects', async () => {
+    request.mockResolvedValue({ status: 200, headers: { 'content-type': 'application/json' }, data: [] });
+    await appServerFetch(new Request('https://localhost/_serverFn/inventory'));
+    expect(request).toHaveBeenCalledWith(expect.objectContaining({ url: 'https://gearboxautos.in/_serverFn/inventory', disableRedirects: false }));
+  });
+  it('rejects service calls to unrelated origins', async () => {
+    await expect(appServerFetch('https://example.com/_serverFn/inventory')).rejects.toThrow('Unexpected app service address');
+    expect(request).not.toHaveBeenCalled();
   });
   it('rejects offline submissions without invoking any server', async () => {
     vi.stubGlobal('navigator', { onLine: false });
@@ -34,6 +43,6 @@ describe('local Android transport', () => {
     expect(result.headers.get('x-tss-serialized')).toBe('true');
   });
   it('shares public car links, never the Android localhost origin', () => {
-    expect(publicShareUrl('/car/creta')).toBe('https://www.gearboxautos.in/car/creta');
+    expect(publicShareUrl('/car/creta')).toBe('https://gearboxautos.in/car/creta');
   });
 });
