@@ -57,3 +57,10 @@
 - [x] Verify signed AAB, test APK, unchanged private signing backup, and updated guide are Ready in Files
 - [ ] Publish the new hosted /app-auth callback — awaits an explicit publish request
 - [ ] Verify Google browser callback, WhatsApp, Back, inspection export, and launch on an Android device — no emulator/physical device available
+
+# Android live inventory release v1.2
+
+- [ ] Reproduce and fix the native inventory domain redirect; add regression coverage
+- [ ] Verify real live inventory through the locally packaged interface
+- [ ] Build and validate versionCode 3 AAB and APK using the unchanged upload key
+- [ ] Make the updated release and upload instructions available in Files
