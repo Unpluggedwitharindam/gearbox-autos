@@ -1,3 +1,9 @@
+# Public homepage redesign (preview only)
+
+- [x] Create an isolated editorial homepage with the official logo and current inventory
+- [x] Connect search, budget/make browsing, car details, and existing seller/contact paths
+- [x] Verify desktop/mobile layout and search-to-car flow; do not publish
+
 # SEO and AEO roadmap
 
 - [x] Audit live public routes and crawler behavior

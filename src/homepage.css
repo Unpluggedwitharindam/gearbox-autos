@@ -1,0 +1,40 @@
+.homepage {
+  --background: oklch(0.974 0.006 90);
+  --foreground: oklch(0.255 0.026 158);
+  --card: oklch(0.995 0.002 90);
+  --card-foreground: var(--foreground);
+  --primary: oklch(0.31 0.037 158);
+  --primary-foreground: oklch(0.985 0.004 90);
+  --secondary: oklch(0.938 0.012 90);
+  --secondary-foreground: var(--foreground);
+  --muted: var(--secondary);
+  --muted-foreground: oklch(0.49 0.015 158);
+  --accent: oklch(0.87 0.033 90);
+  --accent-foreground: var(--foreground);
+  --border: oklch(0.87 0.009 90);
+  --input: var(--border);
+  --ring: var(--primary);
+  --home-ink: oklch(0.20 0.025 158);
+  --home-metal: oklch(0.77 0.045 90);
+  background: var(--background);
+  color: var(--foreground);
+  letter-spacing: 0;
+}
+.homepage :is(h1,h2,h3) { letter-spacing: 0; }
+.homepage h1, .homepage h2 { font-family: 'Inter', var(--font-sans); }
+.homepage :is(a,button,select,summary):focus-visible { outline: 2px solid var(--ring); outline-offset: 4px; }
+.home-hero { background: var(--home-ink); color: var(--primary-foreground); }
+.home-hero-photo { object-position: center 58%; }
+.home-hero-shade { background: linear-gradient(90deg, var(--home-ink) 0%, color-mix(in oklab, var(--home-ink) 94%, transparent) 24%, color-mix(in oklab, var(--home-ink) 45%, transparent) 57%, transparent 100%); }
+.home-hero .home-overline { color: var(--home-metal); }
+.home-seller { background: var(--primary); color: var(--primary-foreground); }
+.home-search { box-shadow: 0 10px 30px color-mix(in oklab, var(--home-ink) 8%, transparent); }
+.home-seller .home-overline { color: var(--home-metal); }
+.home-logo { background: var(--home-ink); }
+@media (max-width: 767px) {
+  .home-hero-shade { background: linear-gradient(180deg, color-mix(in oklab, var(--home-ink) 20%, transparent), var(--home-ink) 58%); }
+  .home-hero-photo { object-position: center; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .homepage *, .homepage *::before, .homepage *::after { animation: none !important; scroll-behavior: auto !important; transition: none !important; }
+}
