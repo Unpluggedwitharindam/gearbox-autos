@@ -1,10 +1,10 @@
-# SEO and AEO roadmap
-
 # Public homepage redesign (preview only)
 
-- [ ] Create an isolated editorial homepage with the official logo and current inventory
-- [ ] Connect search, budget/make browsing, car details, and existing seller/contact paths
-- [ ] Verify desktop/mobile layout and search-to-car flow; do not publish
+- [x] Create an isolated editorial homepage with the official logo and current inventory
+- [x] Connect search, budget/make browsing, car details, and existing seller/contact paths
+- [x] Verify desktop/mobile layout and search-to-car flow; do not publish
+
+# SEO and AEO roadmap
 
 - [x] Audit live public routes and crawler behavior
 - [x] Consolidate dealership structured data

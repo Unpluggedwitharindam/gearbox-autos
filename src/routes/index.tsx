@@ -68,7 +68,7 @@ function Index() {
   const filtering = Object.values(filters).some(Boolean);
   const displayed = filtering ? results : results.slice(0, 6);
   const makes = [...new Set(cars.map(inventoryMake).filter(Boolean))].sort();
-  const transmissions = [...new Set(cars.map(car => car.transmission).filter(Boolean))];
+  const transmissions = [...new Set(cars.map(car => car.transmission.toLowerCase()).filter(Boolean))].map(value => value[0].toUpperCase() + value.slice(1));
   const scrollResults = () => requestAnimationFrame(() => document.getElementById('latest-cars')?.scrollIntoView({ block: 'start' }));
   const apply = async (next: HomepageFilters) => { await navigate({ search: next, resetScroll: false }); scrollResults(); };
   const clear = () => { setQuery(''); setBudget(''); void apply({}); };
@@ -96,17 +96,17 @@ function Index() {
       </header>
 
       <section className="home-hero relative overflow-hidden">
-        {heroCar && <img src={heroCar.image} alt={heroCar.name + ' — available at Gearbox Autos'} width="1600" height="1000" fetchPriority="high" className="home-hero-photo absolute right-0 top-0 w-full md:w-3/4 h-72 md:h-full object-cover" />}
+        {heroCar && <img src={heroCar.image} alt={heroCar.name + ' — available at Gearbox Autos'} width="1600" height="1000" fetchPriority="high" className="home-hero-photo absolute right-0 top-0 w-full md:w-3/4 h-48 md:h-full object-cover" />}
         <div className="home-hero-shade absolute inset-0" />
-        <div className="container-page relative pt-64 pb-10 md:pt-16 md:pb-16">
+        <div className="container-page relative pt-44 pb-7 md:pt-16 md:pb-16">
           <p className="home-overline text-xs font-semibold uppercase mb-5">A better way to buy & sell used cars</p>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.12] max-w-xl">The right car.<br />The right deal.<br /><span className="text-accent">Right here in<br className="hidden md:block" /> Jamshedpur.</span></h1>
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.12] max-w-xl">The right car.<br />The right deal.<br /><span className="text-accent">Right here in<br className="hidden md:block" /> Jamshedpur.</span></h1>
           <p className="mt-6 max-w-md text-sm md:text-base leading-relaxed opacity-85">Real cars. Direct owner conversations. A transparent process, with your local Gearbox Autos team by your side.</p>
           <div className="mt-7 flex flex-wrap gap-3">
             <Button asChild className="bg-accent text-accent-foreground hover:bg-accent/90 h-11"><Link to="/buy">Explore Cars <ArrowRight /></Link></Button>
             <Button asChild variant="ghost" className="text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground h-11"><Link to="/sell">Sell Your Car <ArrowUpRight /></Link></Button>
           </div>
-          {heroCar && <Link to="/car/$id" params={{ id: heroCar.slug }} className="mt-8 md:absolute md:right-8 md:bottom-12 inline-flex items-center gap-4 border-b border-primary-foreground/40 py-2 text-xs"><span><span className="block opacity-70 mb-1">IN THE COLLECTION</span>{heroCar.name} · {heroCar.price}</span><ArrowUpRight className="size-5 shrink-0" /></Link>}
+          {heroCar && <Link to="/car/$id" params={{ id: heroCar.slug }} className="mt-5 md:absolute md:right-8 md:bottom-12 inline-flex max-w-full md:max-w-xs items-center gap-4 border-b border-primary-foreground/40 py-2 text-xs"><span className="leading-relaxed"><span className="block opacity-70 mb-1">IN THE COLLECTION</span>{heroCar.name} · {heroCar.price}</span><ArrowUpRight className="size-5 shrink-0" /></Link>}
         </div>
       </section>
 

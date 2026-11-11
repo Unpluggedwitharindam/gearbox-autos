@@ -31,7 +31,7 @@ export function filterHomepageCars(cars: Car[], filters: HomepageFilters): Car[]
     (!keyword || `${car.name} ${car.fuel} ${car.transmission} ${car.location}`.toLowerCase().includes(keyword)) &&
     (!Number.isFinite(budget) || budget <= 0 || car.price_inr < budget) &&
     (!filters.make || inventoryMake(car) === filters.make) &&
-    (!filters.fuel || car.fuel === filters.fuel) &&
-    (!filters.transmission || car.transmission === filters.transmission)
+    (!filters.fuel || car.fuel.toLowerCase() === filters.fuel.toLowerCase()) &&
+    (!filters.transmission || car.transmission.toLowerCase() === filters.transmission.toLowerCase())
   );
 }

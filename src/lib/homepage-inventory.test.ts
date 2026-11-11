@@ -28,4 +28,7 @@ describe('homepage inventory filters', () => {
   it('returns no listings for an unmatched search', () => {
     expect(filterHomepageCars(cars, { q: 'not-a-listed-car' })).toEqual([]);
   });
+  it('matches transmission values regardless of inventory capitalisation', () => {
+    expect(filterHomepageCars(cars, { transmission: 'MANUAL' }).length).toBe(4);
+  });
 });
