@@ -1,5 +1,7 @@
 # Architecture rules
 
+- Resolve CRM vehicle shares on click through an admin-authenticated, fresh car lookup; only active in-stock slug URLs are shareable, never UUID or name-derived URLs.
+
 - Keep /buy filtering and its stored make/model projection page-specific with a separate query key; do not infer categories or alter shared homepage/native inventory contracts.
 
 - Load the library's core token fonts through local font-face CSS and assets under src/assets/fonts so file-copy attach preserves automatic typography loading.
