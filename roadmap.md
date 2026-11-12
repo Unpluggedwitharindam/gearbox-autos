@@ -4,9 +4,10 @@
 
 # Phase 1B — CRM vehicle links only
 
-- [ ] Resolve CRM car IDs to fresh, active in-stock public slugs; safely block unavailable/custom vehicles
-- [ ] Use the same fresh URL lookup for CRM WhatsApp and copy-link actions
-- [ ] Test sharing rules, clipboard failures, and authenticated CRM-to-public identity on desktop/mobile; no deployment or other phase
+- [x] Resolve CRM car IDs to fresh, active in-stock public slugs; safely block unavailable/custom vehicles
+- [x] Use the same fresh URL lookup for CRM WhatsApp and copy-link actions
+- [x] Test sharing/authorization rules and desktop/mobile fail-closed behavior; verify stored slug opens the matching vehicle
+- [ ] Complete successful real CRM WhatsApp/copy handoff — blocked by existing authenticated EXECUTE denial on has_role; permission repair requires user approval before migration
 
 - [x] Wire actual stored make/model, keyword, price, combined filters, sorting and reset on /buy
 - [x] Verify individual/combined filters, counts, invalid ranges and desktop/mobile; no publish or other phases
