@@ -18,11 +18,29 @@
   --market-radius: 8px;
   --market-action-radius: 18px;
   --market-search-radius: 24px;
+  --market-content-width: 1256px;
+  --market-section-gap: 24px;
   --radius: 8px;
   background: var(--background);
   color: var(--foreground);
   font-family: "Inter", var(--font-sans);
   letter-spacing: 0;
+}
+.homepage .container-page {
+  width: 92%;
+  max-width: var(--market-content-width);
+  padding-inline: 0;
+  margin-inline: auto;
+}
+.homepage .market-header nav[aria-label="Main navigation"] {
+  font-size: 14px;
+  gap: 28px;
+}
+.homepage #latest-cars {
+  padding-top: 4px;
+}
+.homepage #latest-cars > div:first-child {
+  margin-bottom: 16px;
 }
 .homepage :is(h1, h2, h3, p, a, button) {
   letter-spacing: 0;
@@ -45,6 +63,8 @@
 }
 .market-hero > .container-page {
   z-index: 1;
+  padding-top: 16px;
+  padding-bottom: 24px;
 }
 .market-hero-copy {
   max-width: 610px;
@@ -62,6 +82,7 @@
 }
 .market-search {
   margin-top: -12px;
+  padding: 10px 20px;
   border-radius: var(--market-search-radius);
   box-shadow: var(--market-shadow);
 }
@@ -76,6 +97,20 @@
 }
 .market-car {
   box-shadow: var(--market-shadow);
+}
+@media (min-width: 1024px) {
+  .homepage .market-header > .container-page {
+    padding-block: 8px;
+  }
+  .market-hero-copy {
+    width: 51%;
+  }
+  .market-hero-copy > p {
+    max-width: none;
+  }
+  .homepage nav[aria-label="Locality shortcuts"] {
+    gap: 12px;
+  }
 }
 .market-heading {
   font-size: 24px;
@@ -178,6 +213,12 @@
   }
 }
 @media (max-width: 639px) {
+  .homepage .container-page {
+    width: calc(100% - 32px);
+  }
+  .market-search {
+    padding: 12px;
+  }
   .market-hero {
     padding-top: 140px;
   }
