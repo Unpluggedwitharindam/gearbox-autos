@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { CalendarCheck, Users, MessagesSquare, Car as CarIcon, FileCheck, ShieldCheck, Handshake, ArrowRight } from "lucide-react";
+import { sellerPricingDisclosure } from "@/showcase/seller-pricing";
 
 export const Route = createFileRoute("/how-it-works")({
   head: () => ({
@@ -48,7 +49,7 @@ function HowItWorks() {
     <section className="container-page pt-12 pb-12">
       <div className="eyebrow">How it works</div>
       <h1 className="display-h1 mt-4">The Gearbox Autos Process<span className="text-primary">.</span></h1>
-      <p className="mt-5 text-muted-foreground max-w-2xl">We make buying and selling cars simple, transparent and fair for everyone.<br /> No hidden charges. No middlemen. Just great cars and honest deals.</p>
+      <p className="mt-5 text-muted-foreground max-w-2xl">We make buying and selling cars simple, transparent and fair for everyone.<br /> Seller assistance fees are based on the final vehicle selling price.</p>
 
       <div className="mt-12 grid gap-5 md:grid-cols-5 relative">
         {steps.map((s, i) => (
@@ -76,8 +77,8 @@ function HowItWorks() {
           <div>
             <span className="inline-block text-xs text-primary border border-primary/40 rounded px-2 py-0.5 mb-2">For Car Sellers</span>
             <div className="text-xl font-semibold">We Keep It Fair.</div>
-            <div className="text-xl text-primary font-semibold">Nominal Service Charge.</div>
-            <p className="text-sm text-muted-foreground mt-2">We charge the seller a nominal service charge only after the deal is successfully closed.</p>
+            <div className="text-xl text-primary font-semibold">Seller Assistance Fees.</div>
+            <p className="text-sm text-muted-foreground mt-2">{sellerPricingDisclosure}</p>
           </div>
         </div>
       </div>
@@ -85,7 +86,7 @@ function HowItWorks() {
       <div className="surface mt-6 p-6 flex flex-col md:flex-row md:items-center gap-4 justify-between">
         <div>
           <div className="font-semibold flex items-center gap-2"><ShieldCheck className="h-4 w-4 text-primary" /> Transparency is our promise.</div>
-          <div className="text-sm text-muted-foreground">No hidden charges, no surprises. Just a better way to buy and sell used cars.</div>
+          <div className="text-sm text-muted-foreground">Review the seller assistance fee schedule before submitting an enquiry.</div>
         </div>
         <div className="flex items-center gap-4">
           <div className="text-sm"><div className="font-semibold">Have questions?</div><div className="text-muted-foreground">We're here to help.</div></div>

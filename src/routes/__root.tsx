@@ -99,7 +99,7 @@ export const Route = createRootRouteWithContext<{
       {
         name: "description",
         content:
-          "Buy and sell second hand cars in Jamshedpur at 0% commission. Verified used cars, direct owner deals and free RC transfer help.",
+          "Buy and sell second hand cars in Jamshedpur with Gearbox Autos. Seller assistance fees are based on the final vehicle selling price.",
       },
       {
         name: "author",

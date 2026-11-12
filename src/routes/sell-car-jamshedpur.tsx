@@ -1,14 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BadgePercent, Camera, FileCheck, PhoneCall, ShieldCheck, Users } from "lucide-react";
 import { NEARBY_AREAS } from "@/lib/seo-areas";
+import { sellerPricingHeading, sellerPricingBands, sellerPricingExample, sellerPricingSummary } from "@/showcase/seller-pricing";
 
 export const Route = createFileRoute("/sell-car-jamshedpur")({
   head: () => ({
     meta: [
-      { title: "Sell Your Car in Jamshedpur — Free Listing, 0% Commission | Gearbox Autos" },
-      { name: "description", content: "Sell your used car in Jamshedpur fast and at the best price. Free listing, genuine verified buyers, 0% commission and free JH-05 RC transfer help from Gearbox Autos, Sonari." },
+      { title: "Seller Assistance Fees & Selling Guide — Jamshedpur | Gearbox Autos" },
+      { name: "description", content: `Understand selling a used car in Jamshedpur. ${sellerPricingSummary}` },
       { property: "og:title", content: "Sell Your Car in Jamshedpur — Gearbox Autos" },
-      { property: "og:description", content: "List your car free, meet verified buyers directly and pay 0% commission." },
+      { property: "og:description", content: sellerPricingSummary },
       { property: "og:url", content: "https://gearboxautos.in/sell-car-jamshedpur" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -37,7 +38,7 @@ export const Route = createFileRoute("/sell-car-jamshedpur")({
 
 const steps = [
   { icon: PhoneCall, title: "Share your car details", text: "Fill the listing form or WhatsApp us your car's model, year, KMs and photos." },
-  { icon: Camera, title: "We verify & list it free", text: "We inspect the car, verify documents and publish it to buyers across Jamshedpur." },
+  { icon: Camera, title: "Discuss listing and assistance", text: "Ask our team about listing your car and review the seller assistance fee schedule." },
   { icon: Users, title: "Meet genuine buyers", text: "Buyers contact you directly — no brokers, no lowball dealer offers." },
   { icon: FileCheck, title: "We help close & transfer", text: "We assist with the sale paperwork and RC transfer at the Jamshedpur (JH-05) RTO." },
 ];
@@ -50,14 +51,19 @@ function SellCarJamshedpur() {
         Sell your car in <span className="text-primary">Jamshedpur</span>
       </h1>
       <p className="mt-5 text-muted-foreground max-w-2xl leading-relaxed">
-        Gearbox Autos helps car owners in Jamshedpur sell directly to verified local buyers — with a{" "}
-        <strong className="text-foreground">free listing</strong>,{" "}
-        <strong className="text-foreground">0% commission</strong> and full paperwork support. You keep 100% of the
-        sale price.
+        Gearbox Autos helps car owners in Jamshedpur with seller assistance.
+        Fees are based on the final vehicle selling price. Review the fee schedule before submitting an enquiry.
       </p>
+      <div className="mt-6 max-w-2xl border-y border-border py-5">
+        <h2 className="text-lg font-semibold">{sellerPricingHeading}</h2>
+        <ul className="mt-3 list-disc pl-5 space-y-2 text-sm">
+          {sellerPricingBands.map((band) => <li key={band}>{band}</li>)}
+        </ul>
+        <p className="mt-3 text-sm">{sellerPricingExample}</p>
+      </div>
       <div className="mt-8 flex flex-wrap gap-4">
         <Link to="/sell" className="btn-primary px-10 py-4 inline-flex items-center gap-2">
-          List your car free <ArrowRight className="h-4 w-4" />
+          Submit your car details <ArrowRight className="h-4 w-4" />
         </Link>
         <a href="https://wa.me/919065591253" target="_blank" rel="noopener noreferrer" className="border border-border hover:border-primary px-10 py-4 font-head text-lg tracking-wide transition-all">
           WhatsApp your car details
@@ -83,8 +89,8 @@ function SellCarJamshedpur() {
       <div className="mt-16 grid gap-4 sm:grid-cols-3">
         <div className="bg-card p-6">
           <BadgePercent className="h-6 w-6 text-primary mb-3" />
-          <h3 className="font-head text-xl">0% commission, forever</h3>
-          <p className="text-sm text-muted-foreground mt-2">Dealers typically take 5–10% off your price. With us, the buyer's offer is your price.</p>
+          <h3 className="font-head text-xl">Seller assistance pricing</h3>
+          <p className="text-sm text-muted-foreground mt-2">Fees are based on the final vehicle selling price. See the fee schedule above.</p>
         </div>
         <div className="bg-card p-6">
           <ShieldCheck className="h-6 w-6 text-primary mb-3" />

@@ -1,5 +1,7 @@
 # Architecture rules
 
+- Keep seller pricing data and disclosure text in one preview-only module reused by public pages; derive fee calculations from that data to prevent conflicting thresholds without coupling pricing to lead submission.
+
 - Keep CRM vehicle-sharing behaviour identical to the published baseline in this release; the unfinished fresh-lookup and copy-link implementation is excluded because its authorization cannot succeed with current live permissions.
 
 - Keep /buy filtering and its stored make/model projection page-specific with a separate query key; do not infer categories or alter shared homepage/native inventory contracts.

@@ -33,6 +33,7 @@ import {
 } from "@/showcase/marketplace";
 import { images } from "@/showcase/marketplace-assets";
 import homeCss from "../homepage.css?url";
+import { sellerPricingDisclosure, sellerPricingSummary } from "@/showcase/seller-pricing";
 const carsQuery = queryOptions({ queryKey: ["cars", "public"], queryFn: () => listPublicCars() });
 const faq = [
   [
@@ -45,7 +46,11 @@ const faq = [
   ],
   [
     "Do you charge any commission from buyers?",
-    "No. Buyers pay Gearbox Autos 0% commission. Applicable RC transfer fees are paid to the RTO. Sellers pay a nominal service charge only after a successful deal.",
+    "No. Buyers pay Gearbox Autos 0% commission. Applicable RC transfer fees are paid to the RTO.",
+  ],
+  [
+    "What are the seller assistance fees?",
+    sellerPricingDisclosure,
   ],
   [
     "How do I book a car inspection or test drive?",
@@ -483,9 +488,9 @@ function Index() {
             ))}
           </div>
           <p className="mt-3 text-xs text-muted-foreground">
-            Sellers pay a nominal service charge after a successful deal.{" "}
-            <Link to="/how-it-works" className="underline">
-              See the full process
+            {sellerPricingSummary}{" "}
+            <Link to="/sell-car-jamshedpur" className="underline">
+              See seller assistance fees
             </Link>
             .
           </p>
