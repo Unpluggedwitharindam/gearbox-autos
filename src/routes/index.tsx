@@ -134,7 +134,7 @@ function Index() {
             <p className="text-sm text-muted-foreground mt-3 max-w-lg">
               Buy or sell quality cars with trust, transparency and local support.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 max-w-[520px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4">
               {(
                 [
                   {
@@ -168,8 +168,8 @@ function Index() {
                     className="absolute right-0 bottom-0 h-full w-[46%] object-cover object-right"
                   />
                   <div className="relative w-[73%]">
-                    <h2 className="flex items-center gap-2 text-lg font-extrabold whitespace-nowrap">
-                      <Icon className="size-5 shrink-0" />
+                    <h2 className="flex items-center gap-2 text-xl font-extrabold whitespace-nowrap">
+                      <Icon className="size-6 shrink-0" />
                       {title}
                     </h2>
                     <p className="mt-2 text-xs max-w-32 leading-snug">{text}</p>

@@ -16,6 +16,8 @@
   --ring: #102b21;
   --market-shadow: 0 5px 18px color-mix(in srgb, var(--foreground) 9%, transparent);
   --market-radius: 8px;
+  --market-action-radius: 18px;
+  --market-search-radius: 24px;
   --radius: 8px;
   background: var(--background);
   color: var(--foreground);
@@ -30,29 +32,28 @@
   outline-offset: 3px;
 }
 .market-hero {
-  min-height: 320px;
+  min-height: 330px;
   background: var(--background);
 }
 .market-hero-photo {
   width: 100%;
-  object-position: center;
+  object-position: right bottom;
+  mask-image: linear-gradient(to right, transparent 25%, black 56%);
 }
 .market-hero::after {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 45%;
-  background: color-mix(in srgb, var(--background) 94%, transparent);
-  pointer-events: none;
+  display: none;
 }
 .market-hero > .container-page {
   z-index: 1;
 }
 .market-hero-copy {
-  max-width: 600px;
+  max-width: 610px;
+  width: 52%;
 }
 .market-action {
-  min-height: 136px;
+  min-height: 150px;
+  border: 3px solid var(--background);
+  border-radius: var(--market-action-radius);
   box-shadow: var(--market-shadow);
   transition: transform 0.2s;
 }
@@ -60,7 +61,8 @@
   transform: translateY(-2px);
 }
 .market-search {
-  margin-top: -7px;
+  margin-top: -12px;
+  border-radius: var(--market-search-radius);
   box-shadow: var(--market-shadow);
 }
 .market-select {
@@ -122,7 +124,40 @@
 .homepage a.text-primary {
   color: var(--foreground);
 }
-@media (max-width: 1023px) {
+@media (min-width: 700px) and (max-width: 1023px) {
+  .market-hero-photo {
+    height: auto;
+    top: auto;
+    bottom: 0;
+    mask-image: linear-gradient(to right, transparent 40%, black 65%);
+  }
+  .market-search {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+    gap: 4px;
+  }
+  .market-search input,
+  .market-select {
+    font-size: 12px;
+  }
+  .market-search button {
+    padding-inline: 12px;
+    font-size: 12px;
+  }
+  .market-hero-copy {
+    width: 57%;
+  }
+  .market-hero-copy h1 {
+    font-size: 30px;
+  }
+  .market-action {
+    padding: 12px;
+  }
+  .market-action h2 {
+    font-size: 16px;
+    gap: 5px;
+  }
+}
+@media (max-width: 699px) {
   .market-hero {
     padding-top: 195px;
   }
@@ -131,6 +166,7 @@
   }
   .market-hero-copy {
     max-width: 600px;
+    width: 100%;
   }
   .market-hero-photo {
     width: 100%;
@@ -138,6 +174,7 @@
     opacity: 1;
     object-fit: cover;
     object-position: right center;
+    mask-image: none;
   }
 }
 @media (max-width: 639px) {
