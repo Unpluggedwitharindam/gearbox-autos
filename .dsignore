@@ -1,2 +1,4 @@
 src/homepage.css
 src/lib/homepage-inventory.ts
+src/showcase/**
+src/lib/marketplace-areas.ts
