@@ -124,7 +124,7 @@ function Index() {
           fetchPriority="high"
           className="market-hero-photo absolute right-0 top-0 h-full object-cover"
         />
-        <div className="container-page relative py-7 md:py-9">
+        <div className="container-page relative py-5 md:py-6">
           <div className="market-hero-copy">
             <span className="market-slash" />
             <h1 className="text-3xl sm:text-4xl lg:text-[42px] font-extrabold leading-[1.1]">
@@ -134,7 +134,7 @@ function Index() {
             <p className="text-sm text-muted-foreground mt-3 max-w-lg">
               Buy or sell quality cars with trust, transparency and local support.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5 max-w-[520px]">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 max-w-[520px]">
               {(
                 [
                   {
