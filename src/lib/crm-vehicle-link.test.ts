@@ -12,4 +12,7 @@ describe('CRM public vehicle sharing', () => {
   it('never substitutes another vehicle identity', () => expect(resolveCrmVehicleLink('another-id', car)).toBeNull());
   it('never puts an internal UUID in the public route', () => expect(resolveCrmVehicleLink(id, { ...car, slug: id })).toBeNull());
   it.each(['','../admin','https://example.com'])('blocks invalid slug %s', slug => expect(resolveCrmVehicleLink(id, { ...car, slug })).toBeNull());
+  it('blocks a missing slug', () => expect(resolveCrmVehicleLink(id, { ...car, slug: null } as unknown as ShareableVehicle)).toBeNull());
+  it('blocks slugs the public lookup cannot accept', () => expect(resolveCrmVehicleLink(id, { ...car, slug: 'a'.repeat(101) })).toBeNull());
+  it('uses a changed stored slug without guessing from the name', () => expect(resolveCrmVehicleLink(id, { ...car, slug: 'actual-new-slug', name: 'Unrelated lead description' })?.url).toBe('https://gearboxautos.in/car/actual-new-slug'));
 });
