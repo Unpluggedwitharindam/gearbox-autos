@@ -1,8 +1,95 @@
-import { createFileRoute, Link } from '@tanstack/react-router';
-import { Wrench, Settings, ShieldCheck, Users, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { MarketplaceHeader, MarketplaceFooter } from '@/showcase/marketplace';
-import { images } from '@/showcase/marketplace-assets';
-import homeCss from '../homepage.css?url';
-export const Route=createFileRoute('/gbx-motor-club')({head:()=>({meta:[{title:'GBX Motor Club — Car Owner Benefits | Gearbox Autos'},{name:'description',content:'Ask Gearbox Autos about GBX Motor Club membership, six-monthly car health checks, servicing benefits and ownership assistance in Jamshedpur.'},{property:'og:title',content:'GBX Motor Club — Gearbox Autos Jamshedpur'},{property:'og:description',content:'Local car-owner benefits, health checks, servicing and documentation assistance. Contact the team for membership terms.'},{property:'og:type',content:'website'},{name:'twitter:card',content:'summary_large_image'}],links:[{rel:'canonical',href:'https://gearboxautos.in/gbx-motor-club'},{rel:'stylesheet',href:homeCss}]}),component:Club});
-function Club(){return <div className="homepage"><MarketplaceHeader/><section className="relative bg-accent text-accent-foreground overflow-hidden"><img src={images.club} alt="" width="745" height="124" className="absolute inset-0 w-full h-full object-cover"/><div className="container-page relative py-12"><nav aria-label="Breadcrumb" className="text-xs mb-6"><Link to="/">Home</Link> / GBX Motor Club</nav><h1 className="text-4xl font-extrabold">GBX Motor Club</h1><p className="mt-4">A community for car owners in Jamshedpur.</p><Button asChild className="mt-6"><Link to="/contact">Enquire about membership<ArrowRight/></Link></Button></div></section><section className="container-page py-10"><h2 className="market-heading">Membership Benefits</h2><div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-7">{[{Icon:Wrench,title:'Free car health check-up',text:'Every six months.'},{Icon:Settings,title:'Servicing & detailing benefits',text:'Ask the team about eligible services and offers.'},{Icon:ShieldCheck,title:'Insurance, PUC & RC assistance',text:'Support with vehicle ownership documentation.'},{Icon:Users,title:'Member-only deals & events',text:'Stay connected with the local car-owner community.'}].map(({Icon,title,text})=><div key={title}><Icon className="size-8 mb-4"/><h3 className="font-bold">{title}</h3><p className="text-sm text-muted-foreground mt-3">{text}</p></div>)}</div><p className="mt-10 text-sm text-muted-foreground">Contact Gearbox Autos to confirm membership availability, fees, eligibility and benefit terms before joining. Your enquiry uses the existing Contact Us form; no payment or membership is created automatically.</p></section><MarketplaceFooter/></div>}
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { Wrench, Settings, ShieldCheck, Users, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { MarketplaceHeader, MarketplaceFooter } from "@/showcase/marketplace";
+import { images } from "@/showcase/marketplace-assets";
+import homeCss from "../homepage.css?url";
+export const Route = createFileRoute("/gbx-motor-club")({
+  head: () => ({
+    meta: [
+      { title: "GBX Motor Club — Car Owner Benefits | Gearbox Autos" },
+      {
+        name: "description",
+        content:
+          "Ask Gearbox Autos about GBX Motor Club membership, six-monthly car health checks, servicing benefits and ownership assistance in Jamshedpur.",
+      },
+      { property: "og:title", content: "GBX Motor Club — Gearbox Autos Jamshedpur" },
+      {
+        property: "og:description",
+        content:
+          "Local car-owner benefits, health checks, servicing and documentation assistance. Contact the team for membership terms.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    links: [
+      { rel: "canonical", href: "https://gearboxautos.in/gbx-motor-club" },
+      { rel: "stylesheet", href: homeCss },
+    ],
+  }),
+  component: Club,
+});
+function Club() {
+  return (
+    <div className="homepage">
+      <MarketplaceHeader />
+      <section className="relative bg-accent text-accent-foreground overflow-hidden">
+        <img
+          src={images.club}
+          alt=""
+          width="745"
+          height="124"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="container-page relative py-12">
+          <nav aria-label="Breadcrumb" className="text-xs mb-6">
+            <Link to="/">Home</Link> / GBX Motor Club
+          </nav>
+          <h1 className="text-4xl font-extrabold">GBX Motor Club</h1>
+          <p className="mt-4">A community for car owners in Jamshedpur.</p>
+          <Button asChild className="mt-6">
+            <Link to="/contact">
+              Enquire about membership
+              <ArrowRight />
+            </Link>
+          </Button>
+        </div>
+      </section>
+      <section className="container-page py-10">
+        <h2 className="market-heading">Membership Benefits</h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mt-7">
+          {[
+            { Icon: Wrench, title: "Free car health check-up", text: "Every six months." },
+            {
+              Icon: Settings,
+              title: "Servicing & detailing benefits",
+              text: "Ask the team about eligible services and offers.",
+            },
+            {
+              Icon: ShieldCheck,
+              title: "Insurance, PUC & RC assistance",
+              text: "Support with vehicle ownership documentation.",
+            },
+            {
+              Icon: Users,
+              title: "Member-only deals & events",
+              text: "Stay connected with the local car-owner community.",
+            },
+          ].map(({ Icon, title, text }) => (
+            <div key={title}>
+              <Icon className="size-8 mb-4" />
+              <h3 className="font-bold">{title}</h3>
+              <p className="text-sm text-muted-foreground mt-3">{text}</p>
+            </div>
+          ))}
+        </div>
+        <p className="mt-10 text-sm text-muted-foreground">
+          Contact Gearbox Autos to confirm membership availability, fees, eligibility and benefit
+          terms before joining. Your enquiry uses the existing Contact Us form; no payment or
+          membership is created automatically.
+        </p>
+      </section>
+      <MarketplaceFooter />
+    </div>
+  );
+}
