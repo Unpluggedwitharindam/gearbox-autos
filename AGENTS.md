@@ -1,6 +1,6 @@
 # Architecture rules
 
-- Resolve CRM vehicle shares on click through an admin-authenticated, fresh car lookup; only active in-stock slug URLs are shareable, never UUID or name-derived URLs.
+- Resolve CRM WhatsApp shares and copy-link actions through the same on-click admin-authenticated, fresh car lookup; only active in-stock slug URLs are shareable, never UUID or name-derived URLs, to preserve public vehicle identity.
 
 - Keep /buy filtering and its stored make/model projection page-specific with a separate query key; do not infer categories or alter shared homepage/native inventory contracts.
 

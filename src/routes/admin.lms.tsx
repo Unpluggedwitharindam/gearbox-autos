@@ -13,6 +13,7 @@ import {
   Snowflake,
   Thermometer,
   CalendarClock,
+  Copy,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -499,14 +500,14 @@ function LeadDrawer({
   const [newNote, setNewNote] = useState("");
   const [waOpen, setWaOpen] = useState(false);
   const [customMsg, setCustomMsg] = useState("");
-  const [sharingVehicle, setSharingVehicle] = useState(false);
+  const [sharingVehicle, setSharingVehicle] = useState<'whatsapp' | 'copy' | null>(null);
   const checkVehicleLink = useServerFn(getCrmVehicleLink);
-  const shareVehicle = async () => {
+  const shareVehicle = async (action: 'whatsapp' | 'copy') => {
     if (!lead.car_id || sharingVehicle) return;
     // Open on the click gesture; do not send a cached link while availability is checked.
-    const popup = window.open('about:blank', '_blank');
+    const popup = action === 'whatsapp' ? window.open('about:blank', '_blank') : null;
     if (popup) popup.opener = null;
-    setSharingVehicle(true);
+    setSharingVehicle(action);
     try {
       const vehicle = await checkVehicleLink({ data: { carId: lead.car_id } });
       if (!vehicle) {
@@ -514,14 +515,23 @@ function LeadDrawer({
         toast.error('This vehicle is no longer available for sharing.');
         return;
       }
-      const message = `Hi ${lead.full_name}, here's the ${vehicle.name} you asked about: ${vehicle.url}`;
-      if (popup) popup.location.href = `https://wa.me/${waNumber(lead.phone)}?text=${encodeURIComponent(message)}`;
-      else toast.error('Allow pop-ups to share the vehicle on WhatsApp.');
+      if (action === 'copy') {
+        try {
+          await navigator.clipboard.writeText(vehicle.url);
+          toast.success('Vehicle link copied');
+        } catch {
+          toast.error('Unable to copy the link. Allow clipboard access and try again.');
+        }
+      } else {
+        const message = `Hi ${lead.full_name}, here's the ${vehicle.name} you asked about: ${vehicle.url}`;
+        if (popup) popup.location.href = `https://wa.me/${waNumber(lead.phone)}?text=${encodeURIComponent(message)}`;
+        else toast.error('Allow pop-ups to share the vehicle on WhatsApp.');
+      }
     } catch (error) {
       popup?.close();
       toast.error(error instanceof Error ? error.message : 'Unable to check vehicle availability.');
     } finally {
-      setSharingVehicle(false);
+      setSharingVehicle(null);
     }
   };
 
@@ -582,15 +592,27 @@ function LeadDrawer({
               </button>
             ))}
             {lead.car_id && (
+              <>
               <Button
                 variant="outline"
-                disabled={sharingVehicle}
-                onClick={shareVehicle}
+                disabled={sharingVehicle !== null}
+                onClick={() => shareVehicle('whatsapp')}
                 className="h-auto block whitespace-normal text-left rounded-md border border-border/60 px-3 py-2 text-xs hover:border-primary/50"
               >
-                <span className="font-medium">{sharingVehicle ? 'Checking availability…' : 'Send inventory link'}</span>
+                <span className="font-medium">{sharingVehicle === 'whatsapp' ? 'Checking availability…' : 'Send inventory link'}</span>
                 <span className="block text-muted-foreground mt-0.5">Share the live listing page for {lead.car_name}</span>
               </Button>
+              <Button
+                variant="outline"
+                size="sm"
+                disabled={sharingVehicle !== null}
+                onClick={() => shareVehicle('copy')}
+                className="justify-start text-xs"
+              >
+                <Copy aria-hidden="true" />
+                {sharingVehicle === 'copy' ? 'Checking availability…' : 'Copy vehicle link'}
+              </Button>
+              </>
             )}
             <div className="flex gap-2 mt-1">
               <input

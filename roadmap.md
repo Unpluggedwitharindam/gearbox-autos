@@ -5,7 +5,8 @@
 # Phase 1B — CRM vehicle links only
 
 - [ ] Resolve CRM car IDs to fresh, active in-stock public slugs; safely block unavailable/custom vehicles
-- [ ] Test sharing rules and authenticated CRM-to-public identity; no deployment or other phase
+- [ ] Use the same fresh URL lookup for CRM WhatsApp and copy-link actions
+- [ ] Test sharing rules, clipboard failures, and authenticated CRM-to-public identity on desktop/mobile; no deployment or other phase
 
 - [x] Wire actual stored make/model, keyword, price, combined filters, sorting and reset on /buy
 - [x] Verify individual/combined filters, counts, invalid ranges and desktop/mobile; no publish or other phases
