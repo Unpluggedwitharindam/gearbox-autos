@@ -2,6 +2,11 @@
 
 # Phase 1A — Buy inventory filters only
 
+# Phase 1B — CRM vehicle links only
+
+- [ ] Resolve CRM car IDs to fresh, active in-stock public slugs; safely block unavailable/custom vehicles
+- [ ] Test sharing rules and authenticated CRM-to-public identity; no deployment or other phase
+
 - [x] Wire actual stored make/model, keyword, price, combined filters, sorting and reset on /buy
 - [x] Verify individual/combined filters, counts, invalid ranges and desktop/mobile; no publish or other phases
 

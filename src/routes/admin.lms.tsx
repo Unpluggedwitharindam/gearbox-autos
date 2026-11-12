@@ -31,6 +31,9 @@ import {
   type UpdateLeadInput,
 } from "@/lib/lead.functions";
 import { adminListCars } from "@/lib/admin.functions";
+import { useServerFn } from "@tanstack/react-start";
+import { getCrmVehicleLink } from "@/lib/crm-vehicle-link.functions";
+import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/admin/lms")({
   head: () => ({
@@ -496,6 +499,31 @@ function LeadDrawer({
   const [newNote, setNewNote] = useState("");
   const [waOpen, setWaOpen] = useState(false);
   const [customMsg, setCustomMsg] = useState("");
+  const [sharingVehicle, setSharingVehicle] = useState(false);
+  const checkVehicleLink = useServerFn(getCrmVehicleLink);
+  const shareVehicle = async () => {
+    if (!lead.car_id || sharingVehicle) return;
+    // Open on the click gesture; do not send a cached link while availability is checked.
+    const popup = window.open('about:blank', '_blank');
+    if (popup) popup.opener = null;
+    setSharingVehicle(true);
+    try {
+      const vehicle = await checkVehicleLink({ data: { carId: lead.car_id } });
+      if (!vehicle) {
+        popup?.close();
+        toast.error('This vehicle is no longer available for sharing.');
+        return;
+      }
+      const message = `Hi ${lead.full_name}, here's the ${vehicle.name} you asked about: ${vehicle.url}`;
+      if (popup) popup.location.href = `https://wa.me/${waNumber(lead.phone)}?text=${encodeURIComponent(message)}`;
+      else toast.error('Allow pop-ups to share the vehicle on WhatsApp.');
+    } catch (error) {
+      popup?.close();
+      toast.error(error instanceof Error ? error.message : 'Unable to check vehicle availability.');
+    } finally {
+      setSharingVehicle(false);
+    }
+  };
 
   const noteMut = useMutation({
     mutationFn: (note: string) => adminAddLeadNote({ data: { lead_id: lead.id, note } }),
@@ -554,13 +582,15 @@ function LeadDrawer({
               </button>
             ))}
             {lead.car_id && (
-              <button
-                onClick={() => openWa(`Hi ${lead.full_name}, here's the ${lead.car_name ?? "car"} you asked about: https://gearboxautos.in/car/${lead.car_id}`)}
-                className="text-left rounded-md border border-border/60 px-3 py-2 text-xs hover:border-primary/50"
+              <Button
+                variant="outline"
+                disabled={sharingVehicle}
+                onClick={shareVehicle}
+                className="h-auto block whitespace-normal text-left rounded-md border border-border/60 px-3 py-2 text-xs hover:border-primary/50"
               >
-                <span className="font-medium">Send inventory link</span>
+                <span className="font-medium">{sharingVehicle ? 'Checking availability…' : 'Send inventory link'}</span>
                 <span className="block text-muted-foreground mt-0.5">Share the live listing page for {lead.car_name}</span>
-              </button>
+              </Button>
             )}
             <div className="flex gap-2 mt-1">
               <input

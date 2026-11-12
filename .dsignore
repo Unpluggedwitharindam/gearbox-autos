@@ -3,3 +3,4 @@ src/lib/homepage-inventory.ts
 src/showcase/**
 src/lib/marketplace-areas.ts
 src/lib/buy-inventory*
+src/lib/crm-vehicle-link*
