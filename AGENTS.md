@@ -1,7 +1,6 @@
 # Architecture rules
 
-- Resolve CRM WhatsApp shares and copy-link actions through the same on-click admin-authenticated, fresh car lookup; only active in-stock slug URLs are shareable, never UUID or name-derived URLs, to preserve public vehicle identity.
-- Run CRM handler unit tests with vitest.crm.config.ts so TanStack's RPC transform does not replace the tested handler with an SSR stub.
+- Keep CRM vehicle-sharing behaviour identical to the published baseline in this release; the unfinished fresh-lookup and copy-link implementation is excluded because its authorization cannot succeed with current live permissions.
 
 - Keep /buy filtering and its stored make/model projection page-specific with a separate query key; do not infer categories or alter shared homepage/native inventory contracts.
 

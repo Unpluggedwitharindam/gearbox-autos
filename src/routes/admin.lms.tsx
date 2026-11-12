@@ -13,7 +13,6 @@ import {
   Snowflake,
   Thermometer,
   CalendarClock,
-  Copy,
 } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -32,9 +31,6 @@ import {
   type UpdateLeadInput,
 } from "@/lib/lead.functions";
 import { adminListCars } from "@/lib/admin.functions";
-import { useServerFn } from "@tanstack/react-start";
-import { getCrmVehicleLink } from "@/lib/crm-vehicle-link.functions";
-import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/admin/lms")({
   head: () => ({
@@ -500,40 +496,6 @@ function LeadDrawer({
   const [newNote, setNewNote] = useState("");
   const [waOpen, setWaOpen] = useState(false);
   const [customMsg, setCustomMsg] = useState("");
-  const [sharingVehicle, setSharingVehicle] = useState<'whatsapp' | 'copy' | null>(null);
-  const checkVehicleLink = useServerFn(getCrmVehicleLink);
-  const shareVehicle = async (action: 'whatsapp' | 'copy') => {
-    if (!lead.car_id || sharingVehicle) return;
-    // Open on the click gesture; do not send a cached link while availability is checked.
-    const popup = action === 'whatsapp' ? window.open('about:blank', '_blank') : null;
-    if (popup) popup.opener = null;
-    setSharingVehicle(action);
-    try {
-      const vehicle = await checkVehicleLink({ data: { carId: lead.car_id } });
-      if (!vehicle) {
-        popup?.close();
-        toast.error('This vehicle is no longer available for sharing.');
-        return;
-      }
-      if (action === 'copy') {
-        try {
-          await navigator.clipboard.writeText(vehicle.url);
-          toast.success('Vehicle link copied');
-        } catch {
-          toast.error('Unable to copy the link. Allow clipboard access and try again.');
-        }
-      } else {
-        const message = `Hi ${lead.full_name}, here's the ${vehicle.name} you asked about: ${vehicle.url}`;
-        if (popup) popup.location.href = `https://wa.me/${waNumber(lead.phone)}?text=${encodeURIComponent(message)}`;
-        else toast.error('Allow pop-ups to share the vehicle on WhatsApp.');
-      }
-    } catch (error) {
-      popup?.close();
-      toast.error(error instanceof Error ? error.message : 'Unable to check vehicle availability.');
-    } finally {
-      setSharingVehicle(null);
-    }
-  };
 
   const noteMut = useMutation({
     mutationFn: (note: string) => adminAddLeadNote({ data: { lead_id: lead.id, note } }),
@@ -592,27 +554,13 @@ function LeadDrawer({
               </button>
             ))}
             {lead.car_id && (
-              <>
-              <Button
-                variant="outline"
-                disabled={sharingVehicle !== null}
-                onClick={() => shareVehicle('whatsapp')}
-                className="h-auto block whitespace-normal text-left rounded-md border border-border/60 px-3 py-2 text-xs hover:border-primary/50"
+              <button
+                onClick={() => openWa(`Hi ${lead.full_name}, here's the ${lead.car_name ?? "car"} you asked about: https://gearboxautos.in/car/${lead.car_id}`)}
+                className="text-left rounded-md border border-border/60 px-3 py-2 text-xs hover:border-primary/50"
               >
-                <span className="font-medium">{sharingVehicle === 'whatsapp' ? 'Checking availability…' : 'Send inventory link'}</span>
+                <span className="font-medium">Send inventory link</span>
                 <span className="block text-muted-foreground mt-0.5">Share the live listing page for {lead.car_name}</span>
-              </Button>
-              <Button
-                variant="outline"
-                size="sm"
-                disabled={sharingVehicle !== null}
-                onClick={() => shareVehicle('copy')}
-                className="justify-start text-xs"
-              >
-                <Copy aria-hidden="true" />
-                {sharingVehicle === 'copy' ? 'Checking availability…' : 'Copy vehicle link'}
-              </Button>
-              </>
+              </button>
             )}
             <div className="flex gap-2 mt-1">
               <input

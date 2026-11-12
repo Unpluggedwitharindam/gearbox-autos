@@ -4,10 +4,7 @@
 
 # Phase 1B — CRM vehicle links only
 
-- [x] Resolve CRM car IDs to fresh, active in-stock public slugs; safely block unavailable/custom vehicles
-- [x] Use the same fresh URL lookup for CRM WhatsApp and copy-link actions
-- [x] Test sharing/authorization rules and desktop/mobile fail-closed behavior; verify stored slug opens the matching vehicle
-- [ ] Complete successful real CRM WhatsApp/copy handoff — blocked by existing authenticated EXECUTE denial on has_role; permission repair requires user approval before migration
+- Deferred outside this release: fresh public-slug lookup, copy-link and own-user authorization remain in the unaccepted Phase 1B draft. The candidate restores the entire LMS page byte-for-byte to the published baseline; no CRM permission repair is included.
 
 - [x] Wire actual stored make/model, keyword, price, combined filters, sorting and reset on /buy
 - [x] Verify individual/combined filters, counts, invalid ranges and desktop/mobile; no publish or other phases
@@ -90,13 +87,13 @@
 - [x] Build and validate versionCode 3 AAB and APK using the unchanged upload key
 - [x] Make the updated release and upload instructions available in Files
 
-## Phase 1 security hardening: public car data (draft only, pending production review)
+## Phase 1 security hardening: public car data (accepted; application release pending approval)
 - [x] Column-level read-only grants on approved public car fields; all client writes revoked
 - [x] Public visibility limited to active in-stock cars (database rule + public queries)
 - [x] Public car queries use approved fields via the publishable-key server client
-- [ ] Production apply: awaiting explicit approval (migration number collides with Phase 1B draft's 0002)
+- [x] Production migrations 0002 and 0003 are already applied in order; Phase 1B migration is absent
 - [x] Explicit per-privilege column revokes (0003) and exact rollback plan (docs/security/cars-public-access-rollback.md)
-- [ ] Production apply: also re-capture live permissions first
+- [x] Read-only production permission comparison confirms approved column grants and active/in-stock policy
 
 ## Future: security review of other tables (separate task)
 - [ ] Leads, contact messages, sell requests, test drives, user roles: remove broad visitor/signed-in permissions
@@ -105,5 +102,13 @@
 - [ ] Make Variant, Sold price, Sold date and other optional fields optional; require sold fields only when status is Sold
 
 ## Outstanding verification
-- [ ] CRM vehicle sharing (Phase 1B draft, own-user admin check) not yet accepted
+- Deferred: CRM vehicle sharing (Phase 1B draft, own-user admin check) not yet accepted and excluded from this release
 - [ ] Android physical-device check of in-stock-only inventory
+
+## Revised release candidate — without unfinished CRM vehicle sharing
+- [x] Preserve Security Hardening v2 code, migrations, tests and rollback documentation and Phase 1A filters
+- [x] Restore published LMS page; remove unfinished CRM lookup, copy-link, associated tests and test-only configuration
+- [x] Verify live public inventory and Buy search/price/reset/sort; 39 relevant existing unit tests pass
+- [x] Verify signed-in CRM leads, drawer, locally captured message, no copy-link, quick-add and list; verify live admin inventory and editor open/cancel without database writes
+- [x] Confirm published byte-equivalence of LMS route, lead handlers, admin handlers/editor and social handlers; no unfinished CRM implementation or helper remains
+- [x] Record release comparison and limitations in docs/security/revised-release-without-crm.md; stop for approval without publication
