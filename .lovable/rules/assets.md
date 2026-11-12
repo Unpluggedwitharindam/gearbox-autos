@@ -34,6 +34,19 @@ The full machine-readable catalog lives in this library's `design-system.json` (
 - `@/design-system/{slug}/assets/photography/sell-car-card.webp` (webp)
 - `@/design-system/{slug}/assets/photography/suv.webp` (webp)
 
+## Fonts
+
+- `@/design-system/{slug}/assets/fonts/anton-400.ttf` (ttf)
+- `@/design-system/{slug}/assets/fonts/montserrat-400.ttf` (ttf)
+- `@/design-system/{slug}/assets/fonts/montserrat-500.ttf` (ttf)
+- `@/design-system/{slug}/assets/fonts/montserrat-600.ttf` (ttf)
+- `@/design-system/{slug}/assets/fonts/montserrat-700.ttf` (ttf)
+- `@/design-system/{slug}/assets/fonts/montserrat-800.ttf` (ttf)
+- `@/design-system/{slug}/assets/fonts/oswald-400.ttf` (ttf)
+- `@/design-system/{slug}/assets/fonts/oswald-500.ttf` (ttf)
+- `@/design-system/{slug}/assets/fonts/oswald-600.ttf` (ttf)
+- `@/design-system/{slug}/assets/fonts/oswald-700.ttf` (ttf)
+
 ## Images
 
 - `@/design-system/{slug}/assets/about-jsr.png` (png)

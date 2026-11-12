@@ -2,7 +2,7 @@
   "meta": {
     "name": "gearbox autos",
     "package": "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558",
-    "version": "7.10.0",
+    "version": "7.11.0",
     "framework": "react",
     "css_framework": "tailwind",
     "starter_template": "custom_design_system",
@@ -25,10 +25,10 @@
       ".lovable/plan/restore-gearbox-garage-on-the-live-website-2026-09-12.md": "b66aaffa2fbf263885ee70cf499d47f8",
       ".lovable/project.json": "b60a4e3c0d4cde0e87e00b1d1b82a55b",
       ".lovable/sources.yaml": "5fd6523c145638df3f2fcfd110718f4d",
-      ".lovable/system.md": "d98284b8a4716eba9d2924e4b0f8c569",
+      ".lovable/system.md": "31dcda34d7bc8db3f4e14b22c9950084",
       ".prettierignore": "7279a476f196a2da5f7edd18db568dc6",
       ".prettierrc": "185ef0234746ab738ac1ab6cec5e2bd9",
-      "AGENTS.md": "d628d84b832277efdea6a90a06f242f5",
+      "AGENTS.md": "4ac2cf9fdd36ff9ba63f17c899918541",
       "ARCHITECTURE_REDESIGN.md": "3ab1c2fd265497a58717fb917397ec27",
       "BUILD_APK.md": "031ddfafd56dcaac509c05da219d6f69",
       "MOBILE_APP.md": "c76c961902143e60587d928fc31aa694",
@@ -216,6 +216,17 @@
       "src/assets/car-fortuner.jpg": "44790e67da3ca490fca59636350fa3d0",
       "src/assets/car-xuv500.jpg": "52b0701e64f7a85067a6bf1e406af587",
       "src/assets/contact-creta.png": "6882bcaca45dcb90fb8b744e0a53c4e8",
+      "src/assets/fonts/anton-400.ttf": "bdbc086d4e486ab275cf5a4fc78ed591",
+      "src/assets/fonts/fonts.css": "4b46b1f7391d4e792fa5d063c065fbcc",
+      "src/assets/fonts/montserrat-400.ttf": "6133d7c8d5fdd8fe64037534b7bb99e0",
+      "src/assets/fonts/montserrat-500.ttf": "af37bf893061c3cdadab069f65420975",
+      "src/assets/fonts/montserrat-600.ttf": "bef57ba1c2f4d8e08058e9e3377af8fb",
+      "src/assets/fonts/montserrat-700.ttf": "cf3a2eaec658aed131fe6a8cc3cb19ca",
+      "src/assets/fonts/montserrat-800.ttf": "171fa2772645ee97739d3d2143cdefcd",
+      "src/assets/fonts/oswald-400.ttf": "fe08f6aefd0aa154f23a92988b4a600d",
+      "src/assets/fonts/oswald-500.ttf": "14d22a5c584c91a7edb6742231c00300",
+      "src/assets/fonts/oswald-600.ttf": "1ce8c8709229009f72aea8aabb233449",
+      "src/assets/fonts/oswald-700.ttf": "8175fd72227fb116e6f7ae299bcc5cfa",
       "src/assets/gearbox-logo.png.asset.json": "267bfd1025ac935876e021dac154e87a",
       "src/assets/hero-bmw-x5.jpg": "7b3d6203421d0acfd5fea82704937f2c",
       "src/assets/hero-defender.png": "1723b1d15aa75b1019cf595db8966fe7",
@@ -296,7 +307,7 @@
       "src/components/ui/toggle-group.tsx": "ac26383acf721d116ca8e3ab5c5355d5",
       "src/components/ui/toggle.tsx": "ee8c5adac74e7242b85b544db1a8fbad",
       "src/components/ui/tooltip.tsx": "67d71db5a1ab935695d1def497f5b8a6",
-      "src/homepage.css": "de67c41d616d46ae711c2b5e5ededb3d",
+      "src/homepage.css": "9fa11ba7792e5b0f5c39bec02299d52c",
       "src/hooks/use-auth.ts": "905c6e6415997c64a4a4050c57596da0",
       "src/hooks/use-mobile.tsx": "c0a0bdd4638c391a1dd06ac82074e60b",
       "src/hooks/use-native-app.ts": "40c3c00f260a73030287381ef1d636c9",
@@ -372,7 +383,7 @@
       "src/showcase/marketplace-assets.ts": "47e9e2e3c1aef36d7c79d8b591ecda0c",
       "src/showcase/marketplace.tsx": "97f019be86851acbdd5c3b8be21f1e30",
       "src/start.ts": "cfea04dd0bcb20e83d1dabab1ff519a4",
-      "src/styles.css": "607525ad65da95f2dc3fc0ab9f34d12c",
+      "src/styles.css": "53ac96c480d6219f4b9b36b1baf89cd7",
       "supabase/config.toml": "fc44f59026fb9d10b0a4fe3df3ff4319",
       "supabase/migrations/20260526071915_3f243e14-6d97-48e6-9094-2ea0c6b801cc.sql": "7461b1617c3b0aed49de8ba9b17a58b8",
       "supabase/migrations/20260526072004_eec22fa9-2c80-402e-926d-2d4fdfcfa71b.sql": "1f0e9e5072059d6f85defcd61b92fb33",
@@ -1989,6 +2000,56 @@
       "file": "src/assets/contact-creta.png",
       "kind": "image",
       "format": "png"
+    },
+    {
+      "file": "src/assets/fonts/anton-400.ttf",
+      "kind": "font",
+      "format": "ttf"
+    },
+    {
+      "file": "src/assets/fonts/montserrat-400.ttf",
+      "kind": "font",
+      "format": "ttf"
+    },
+    {
+      "file": "src/assets/fonts/montserrat-500.ttf",
+      "kind": "font",
+      "format": "ttf"
+    },
+    {
+      "file": "src/assets/fonts/montserrat-600.ttf",
+      "kind": "font",
+      "format": "ttf"
+    },
+    {
+      "file": "src/assets/fonts/montserrat-700.ttf",
+      "kind": "font",
+      "format": "ttf"
+    },
+    {
+      "file": "src/assets/fonts/montserrat-800.ttf",
+      "kind": "font",
+      "format": "ttf"
+    },
+    {
+      "file": "src/assets/fonts/oswald-400.ttf",
+      "kind": "font",
+      "format": "ttf"
+    },
+    {
+      "file": "src/assets/fonts/oswald-500.ttf",
+      "kind": "font",
+      "format": "ttf"
+    },
+    {
+      "file": "src/assets/fonts/oswald-600.ttf",
+      "kind": "font",
+      "format": "ttf"
+    },
+    {
+      "file": "src/assets/fonts/oswald-700.ttf",
+      "kind": "font",
+      "format": "ttf"
     },
     {
       "file": "src/assets/gearbox-logo.png.asset.json",
