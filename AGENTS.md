@@ -1,5 +1,7 @@
 # Architecture rules
 
+- Load the library's core token fonts through local font-face CSS and assets under src/assets/fonts so file-copy attach preserves automatic typography loading.
+
 - Keep the homepage visual theme and its header/footer isolated from the shared site shell; homepage search filters the existing public inventory via URL state without changing other inventory routes or business logic.
 - Keep reference-led marketplace presentation and locality content in preview-only modules excluded from library attach; reuse the existing public inventory query and form routes. Body categories use an explicit model map and leave unknown models uncategorised because inventory has no body-type field.
 

@@ -12,16 +12,16 @@ Build premium automotive experiences with strong contrast, concise copy, and cle
 
 ## Typography
 
-The library uses Anton and Oswald for display typography and Montserrat for body copy. Caveat is reserved for occasional handwritten editorial accents, while Inter supports clean marketplace typography. Consumer applications must load these fonts through document-head stylesheet links; never use remote `@import` statements in CSS.
+The library uses Anton and Oswald for display typography and Montserrat for body copy. These three token families load automatically through the canonical theme's local `@font-face` stylesheet and bundled assets. Never use remote `@import` statements in CSS.
 
-Attaching this library copies its theme stylesheet but not the preview application's root route. Importing the library entry therefore registers font-family tokens without loading the font files. Add the following entries to the consumer's root route `head().links`, preserving its existing links and avoiding duplicate font requests:
+Attaching this library copies its theme and font assets, not the preview application's root route. No Google Fonts link is required for the three core token families. Optional Caveat editorial accents and Inter marketplace typography still require a document-head stylesheet link when used:
 
 ```tsx
 { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
 { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
 {
   rel: 'stylesheet',
-  href: 'https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;600&family=Inter:wght@400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap',
+  href: 'https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Inter:wght@400;500;600;700;800&display=swap',
 },
 ```
 
