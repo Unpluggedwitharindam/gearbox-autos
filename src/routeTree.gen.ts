@@ -15,10 +15,19 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AppAuthRouteImport } from './routes/app-auth'
 import { Route as BuyRouteImport } from './routes/buy'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as GbxMotorClubRouteImport } from './routes/gbx-motor-club'
 import { Route as HowItWorksRouteImport } from './routes/how-it-works'
 import { Route as InventoryRouteImport } from './routes/inventory'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
+import { Route as SecondHandCarsInAdityapurRouteImport } from './routes/second-hand-cars-in-adityapur'
+import { Route as SecondHandCarsInBistupurRouteImport } from './routes/second-hand-cars-in-bistupur'
+import { Route as SecondHandCarsInJamshedpurRouteImport } from './routes/second-hand-cars-in-jamshedpur'
+import { Route as SecondHandCarsInKadmaRouteImport } from './routes/second-hand-cars-in-kadma'
+import { Route as SecondHandCarsInMangoRouteImport } from './routes/second-hand-cars-in-mango'
+import { Route as SecondHandCarsInSakchiRouteImport } from './routes/second-hand-cars-in-sakchi'
+import { Route as SecondHandCarsInSonariRouteImport } from './routes/second-hand-cars-in-sonari'
+import { Route as SecondHandCarsInTelcoRouteImport } from './routes/second-hand-cars-in-telco'
 import { Route as SellRouteImport } from './routes/sell'
 import { Route as SellCarJamshedpurRouteImport } from './routes/sell-car-jamshedpur'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
@@ -66,6 +75,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const GbxMotorClubRoute = GbxMotorClubRouteImport.update({
+  id: '/gbx-motor-club',
+  path: '/gbx-motor-club',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HowItWorksRoute = HowItWorksRouteImport.update({
   id: '/how-it-works',
   path: '/how-it-works',
@@ -84,6 +98,49 @@ const LoginRoute = LoginRouteImport.update({
 const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
   id: '/privacy-policy',
   path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecondHandCarsInAdityapurRoute =
+  SecondHandCarsInAdityapurRouteImport.update({
+    id: '/second-hand-cars-in-adityapur',
+    path: '/second-hand-cars-in-adityapur',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SecondHandCarsInBistupurRoute =
+  SecondHandCarsInBistupurRouteImport.update({
+    id: '/second-hand-cars-in-bistupur',
+    path: '/second-hand-cars-in-bistupur',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SecondHandCarsInJamshedpurRoute =
+  SecondHandCarsInJamshedpurRouteImport.update({
+    id: '/second-hand-cars-in-jamshedpur',
+    path: '/second-hand-cars-in-jamshedpur',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SecondHandCarsInKadmaRoute = SecondHandCarsInKadmaRouteImport.update({
+  id: '/second-hand-cars-in-kadma',
+  path: '/second-hand-cars-in-kadma',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecondHandCarsInMangoRoute = SecondHandCarsInMangoRouteImport.update({
+  id: '/second-hand-cars-in-mango',
+  path: '/second-hand-cars-in-mango',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecondHandCarsInSakchiRoute = SecondHandCarsInSakchiRouteImport.update({
+  id: '/second-hand-cars-in-sakchi',
+  path: '/second-hand-cars-in-sakchi',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecondHandCarsInSonariRoute = SecondHandCarsInSonariRouteImport.update({
+  id: '/second-hand-cars-in-sonari',
+  path: '/second-hand-cars-in-sonari',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecondHandCarsInTelcoRoute = SecondHandCarsInTelcoRouteImport.update({
+  id: '/second-hand-cars-in-telco',
+  path: '/second-hand-cars-in-telco',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SellRoute = SellRouteImport.update({
@@ -178,10 +235,19 @@ export interface FileRoutesByFullPath {
   '/app-auth': typeof AppAuthRoute
   '/buy': typeof BuyRoute
   '/contact': typeof ContactRoute
+  '/gbx-motor-club': typeof GbxMotorClubRoute
   '/how-it-works': typeof HowItWorksRoute
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/second-hand-cars-in-adityapur': typeof SecondHandCarsInAdityapurRoute
+  '/second-hand-cars-in-bistupur': typeof SecondHandCarsInBistupurRoute
+  '/second-hand-cars-in-jamshedpur': typeof SecondHandCarsInJamshedpurRoute
+  '/second-hand-cars-in-kadma': typeof SecondHandCarsInKadmaRoute
+  '/second-hand-cars-in-mango': typeof SecondHandCarsInMangoRoute
+  '/second-hand-cars-in-sakchi': typeof SecondHandCarsInSakchiRoute
+  '/second-hand-cars-in-sonari': typeof SecondHandCarsInSonariRoute
+  '/second-hand-cars-in-telco': typeof SecondHandCarsInTelcoRoute
   '/sell': typeof SellRoute
   '/sell-car-jamshedpur': typeof SellCarJamshedpurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -205,10 +271,19 @@ export interface FileRoutesByTo {
   '/app-auth': typeof AppAuthRoute
   '/buy': typeof BuyRoute
   '/contact': typeof ContactRoute
+  '/gbx-motor-club': typeof GbxMotorClubRoute
   '/how-it-works': typeof HowItWorksRoute
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/second-hand-cars-in-adityapur': typeof SecondHandCarsInAdityapurRoute
+  '/second-hand-cars-in-bistupur': typeof SecondHandCarsInBistupurRoute
+  '/second-hand-cars-in-jamshedpur': typeof SecondHandCarsInJamshedpurRoute
+  '/second-hand-cars-in-kadma': typeof SecondHandCarsInKadmaRoute
+  '/second-hand-cars-in-mango': typeof SecondHandCarsInMangoRoute
+  '/second-hand-cars-in-sakchi': typeof SecondHandCarsInSakchiRoute
+  '/second-hand-cars-in-sonari': typeof SecondHandCarsInSonariRoute
+  '/second-hand-cars-in-telco': typeof SecondHandCarsInTelcoRoute
   '/sell': typeof SellRoute
   '/sell-car-jamshedpur': typeof SellCarJamshedpurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -233,10 +308,19 @@ export interface FileRoutesById {
   '/app-auth': typeof AppAuthRoute
   '/buy': typeof BuyRoute
   '/contact': typeof ContactRoute
+  '/gbx-motor-club': typeof GbxMotorClubRoute
   '/how-it-works': typeof HowItWorksRoute
   '/inventory': typeof InventoryRoute
   '/login': typeof LoginRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
+  '/second-hand-cars-in-adityapur': typeof SecondHandCarsInAdityapurRoute
+  '/second-hand-cars-in-bistupur': typeof SecondHandCarsInBistupurRoute
+  '/second-hand-cars-in-jamshedpur': typeof SecondHandCarsInJamshedpurRoute
+  '/second-hand-cars-in-kadma': typeof SecondHandCarsInKadmaRoute
+  '/second-hand-cars-in-mango': typeof SecondHandCarsInMangoRoute
+  '/second-hand-cars-in-sakchi': typeof SecondHandCarsInSakchiRoute
+  '/second-hand-cars-in-sonari': typeof SecondHandCarsInSonariRoute
+  '/second-hand-cars-in-telco': typeof SecondHandCarsInTelcoRoute
   '/sell': typeof SellRoute
   '/sell-car-jamshedpur': typeof SellCarJamshedpurRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
@@ -263,10 +347,19 @@ export interface FileRouteTypes {
     | '/app-auth'
     | '/buy'
     | '/contact'
+    | '/gbx-motor-club'
     | '/how-it-works'
     | '/inventory'
     | '/login'
     | '/privacy-policy'
+    | '/second-hand-cars-in-adityapur'
+    | '/second-hand-cars-in-bistupur'
+    | '/second-hand-cars-in-jamshedpur'
+    | '/second-hand-cars-in-kadma'
+    | '/second-hand-cars-in-mango'
+    | '/second-hand-cars-in-sakchi'
+    | '/second-hand-cars-in-sonari'
+    | '/second-hand-cars-in-telco'
     | '/sell'
     | '/sell-car-jamshedpur'
     | '/sitemap.xml'
@@ -290,10 +383,19 @@ export interface FileRouteTypes {
     | '/app-auth'
     | '/buy'
     | '/contact'
+    | '/gbx-motor-club'
     | '/how-it-works'
     | '/inventory'
     | '/login'
     | '/privacy-policy'
+    | '/second-hand-cars-in-adityapur'
+    | '/second-hand-cars-in-bistupur'
+    | '/second-hand-cars-in-jamshedpur'
+    | '/second-hand-cars-in-kadma'
+    | '/second-hand-cars-in-mango'
+    | '/second-hand-cars-in-sakchi'
+    | '/second-hand-cars-in-sonari'
+    | '/second-hand-cars-in-telco'
     | '/sell'
     | '/sell-car-jamshedpur'
     | '/sitemap.xml'
@@ -317,10 +419,19 @@ export interface FileRouteTypes {
     | '/app-auth'
     | '/buy'
     | '/contact'
+    | '/gbx-motor-club'
     | '/how-it-works'
     | '/inventory'
     | '/login'
     | '/privacy-policy'
+    | '/second-hand-cars-in-adityapur'
+    | '/second-hand-cars-in-bistupur'
+    | '/second-hand-cars-in-jamshedpur'
+    | '/second-hand-cars-in-kadma'
+    | '/second-hand-cars-in-mango'
+    | '/second-hand-cars-in-sakchi'
+    | '/second-hand-cars-in-sonari'
+    | '/second-hand-cars-in-telco'
     | '/sell'
     | '/sell-car-jamshedpur'
     | '/sitemap.xml'
@@ -346,10 +457,19 @@ export interface RootRouteChildren {
   AppAuthRoute: typeof AppAuthRoute
   BuyRoute: typeof BuyRoute
   ContactRoute: typeof ContactRoute
+  GbxMotorClubRoute: typeof GbxMotorClubRoute
   HowItWorksRoute: typeof HowItWorksRoute
   InventoryRoute: typeof InventoryRoute
   LoginRoute: typeof LoginRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
+  SecondHandCarsInAdityapurRoute: typeof SecondHandCarsInAdityapurRoute
+  SecondHandCarsInBistupurRoute: typeof SecondHandCarsInBistupurRoute
+  SecondHandCarsInJamshedpurRoute: typeof SecondHandCarsInJamshedpurRoute
+  SecondHandCarsInKadmaRoute: typeof SecondHandCarsInKadmaRoute
+  SecondHandCarsInMangoRoute: typeof SecondHandCarsInMangoRoute
+  SecondHandCarsInSakchiRoute: typeof SecondHandCarsInSakchiRoute
+  SecondHandCarsInSonariRoute: typeof SecondHandCarsInSonariRoute
+  SecondHandCarsInTelcoRoute: typeof SecondHandCarsInTelcoRoute
   SellRoute: typeof SellRoute
   SellCarJamshedpurRoute: typeof SellCarJamshedpurRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
@@ -403,6 +523,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/gbx-motor-club': {
+      id: '/gbx-motor-club'
+      path: '/gbx-motor-club'
+      fullPath: '/gbx-motor-club'
+      preLoaderRoute: typeof GbxMotorClubRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/how-it-works': {
       id: '/how-it-works'
       path: '/how-it-works'
@@ -429,6 +556,62 @@ declare module '@tanstack/react-router' {
       path: '/privacy-policy'
       fullPath: '/privacy-policy'
       preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/second-hand-cars-in-adityapur': {
+      id: '/second-hand-cars-in-adityapur'
+      path: '/second-hand-cars-in-adityapur'
+      fullPath: '/second-hand-cars-in-adityapur'
+      preLoaderRoute: typeof SecondHandCarsInAdityapurRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/second-hand-cars-in-bistupur': {
+      id: '/second-hand-cars-in-bistupur'
+      path: '/second-hand-cars-in-bistupur'
+      fullPath: '/second-hand-cars-in-bistupur'
+      preLoaderRoute: typeof SecondHandCarsInBistupurRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/second-hand-cars-in-jamshedpur': {
+      id: '/second-hand-cars-in-jamshedpur'
+      path: '/second-hand-cars-in-jamshedpur'
+      fullPath: '/second-hand-cars-in-jamshedpur'
+      preLoaderRoute: typeof SecondHandCarsInJamshedpurRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/second-hand-cars-in-kadma': {
+      id: '/second-hand-cars-in-kadma'
+      path: '/second-hand-cars-in-kadma'
+      fullPath: '/second-hand-cars-in-kadma'
+      preLoaderRoute: typeof SecondHandCarsInKadmaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/second-hand-cars-in-mango': {
+      id: '/second-hand-cars-in-mango'
+      path: '/second-hand-cars-in-mango'
+      fullPath: '/second-hand-cars-in-mango'
+      preLoaderRoute: typeof SecondHandCarsInMangoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/second-hand-cars-in-sakchi': {
+      id: '/second-hand-cars-in-sakchi'
+      path: '/second-hand-cars-in-sakchi'
+      fullPath: '/second-hand-cars-in-sakchi'
+      preLoaderRoute: typeof SecondHandCarsInSakchiRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/second-hand-cars-in-sonari': {
+      id: '/second-hand-cars-in-sonari'
+      path: '/second-hand-cars-in-sonari'
+      fullPath: '/second-hand-cars-in-sonari'
+      preLoaderRoute: typeof SecondHandCarsInSonariRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/second-hand-cars-in-telco': {
+      id: '/second-hand-cars-in-telco'
+      path: '/second-hand-cars-in-telco'
+      fullPath: '/second-hand-cars-in-telco'
+      preLoaderRoute: typeof SecondHandCarsInTelcoRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/sell': {
@@ -588,10 +771,19 @@ const rootRouteChildren: RootRouteChildren = {
   AppAuthRoute: AppAuthRoute,
   BuyRoute: BuyRoute,
   ContactRoute: ContactRoute,
+  GbxMotorClubRoute: GbxMotorClubRoute,
   HowItWorksRoute: HowItWorksRoute,
   InventoryRoute: InventoryRoute,
   LoginRoute: LoginRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
+  SecondHandCarsInAdityapurRoute: SecondHandCarsInAdityapurRoute,
+  SecondHandCarsInBistupurRoute: SecondHandCarsInBistupurRoute,
+  SecondHandCarsInJamshedpurRoute: SecondHandCarsInJamshedpurRoute,
+  SecondHandCarsInKadmaRoute: SecondHandCarsInKadmaRoute,
+  SecondHandCarsInMangoRoute: SecondHandCarsInMangoRoute,
+  SecondHandCarsInSakchiRoute: SecondHandCarsInSakchiRoute,
+  SecondHandCarsInSonariRoute: SecondHandCarsInSonariRoute,
+  SecondHandCarsInTelcoRoute: SecondHandCarsInTelcoRoute,
   SellRoute: SellRoute,
   SellCarJamshedpurRoute: SellCarJamshedpurRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
