@@ -1,5 +1,10 @@
 # Reference-led marketplace redesign (preview only)
 
+# Phase 1A — Buy inventory filters only
+
+- [ ] Wire actual stored make/model, keyword, price, combined filters, sorting and reset on /buy
+- [ ] Verify individual/combined filters, counts, invalid ranges and desktop/mobile; no publish or other phases
+
 - [x] Match supplied homepage references and use the uploaded automotive asset pack
 - [x] Connect budget/body filters, wishlist, locality links, and existing buyer/seller forms
 - [x] Add eight useful locality pages and a GBX Motor Club enquiry page without changing backend workflows
