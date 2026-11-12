@@ -68,19 +68,21 @@ function Sell() {
     <section className="relative min-h-screen">
       <img src={sellBg} alt="" className="absolute inset-0 h-full w-full object-cover opacity-60" />
       <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
-      <div className="relative container-page pt-12 pb-20 grid lg:grid-cols-2 gap-10 items-start">
+      <div className="relative container-page pt-12 pb-20">
         <div>
           <div className="eyebrow">Sell your car</div>
           <h1 className="display-h1 mt-4">Get the best value <br /> for your car<span className="text-primary">.</span></h1>
           <p className="mt-5 text-muted-foreground max-w-md">Fill in the details below and our experts will get in touch with you for the best offer.</p>
-          <div className="mt-6 max-w-2xl border-y border-border py-5">
+          <div className="mt-6 border-y border-border py-5">
             <h2 className="text-lg font-semibold">{sellerPricingHeading}</h2>
             <ul className="mt-3 list-disc pl-5 space-y-2 text-sm">
               {sellerPricingBands.map((band) => <li key={band}>{band}</li>)}
             </ul>
             <p className="mt-3 text-sm">{sellerPricingExample}</p>
           </div>
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl">
+        </div>
+        <div className="mt-8 grid lg:grid-cols-2 gap-10 items-start">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-2 gap-6 max-w-2xl">
             {[
               ["Seller Assistance Fees","Based on the final vehicle selling price."],
               ["Review the Fee Schedule","See the pricing disclosure above."],
@@ -94,8 +96,6 @@ function Sell() {
               </div>
             ))}
           </div>
-        </div>
-
         <form onSubmit={(e) => { e.preventDefault(); mut.mutate(); }} className="surface p-8 space-y-4">
           <div>
             <h2 className="font-head text-3xl tracking-wide">Tell us about your car</h2>
@@ -123,6 +123,7 @@ function Sell() {
           </button>
           <p className="text-xs text-muted-foreground text-center">🔒 Your information is safe with us and will never be shared.</p>
         </form>
+        </div>
       </div>
     </section>
   );

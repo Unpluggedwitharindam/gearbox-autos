@@ -19,9 +19,9 @@ export const Route = createFileRoute("/used-cars-in-jamshedpur/$brand")({
     return {
       meta: [
         { title: `Used ${label} Cars in Jamshedpur — Second Hand ${label} | Gearbox Autos` },
-        { name: "description", content: `Verified second hand ${label} cars for sale in Jamshedpur at 0% commission. Compare prices and KMs, inspect the car yourself, and book a free test drive with Gearbox Autos.` },
+        { name: "description", content: `Current second hand ${label} cars for sale in Jamshedpur at 0% commission. Compare prices and KMs, inspect the car yourself, and book a free test drive with Gearbox Autos.` },
         { property: "og:title", content: `Used ${label} Cars in Jamshedpur — Gearbox Autos` },
-        { property: "og:description", content: `Second hand ${label} cars for sale in Jamshedpur, fully verified at 0% commission.` },
+        { property: "og:description", content: `Current second hand ${label} cars for sale in Jamshedpur at 0% commission.` },
         { property: "og:url", content: `https://gearboxautos.in/used-cars-in-jamshedpur/${params.brand}` },
         { property: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
@@ -80,8 +80,8 @@ function BrandPage() {
         Used <span className="text-primary">{label}</span> cars in Jamshedpur
       </h1>
       <p className="mt-5 text-muted-foreground max-w-2xl leading-relaxed">
-        {cars.length} verified second hand {label} {cars.length === 1 ? "car" : "cars"} available in Jamshedpur right
-        now. Every listing is inspected, priced directly by the owner, and sold at{" "}
+        {cars.length} current second hand {label} {cars.length === 1 ? "car" : "cars"} available in Jamshedpur right
+        now. Ask for available condition and document information. Listings are priced directly by the owner and sold at{" "}
         <strong className="text-foreground">0% commission</strong> — with free RC transfer assistance at the
         Jamshedpur RTO.
       </p>

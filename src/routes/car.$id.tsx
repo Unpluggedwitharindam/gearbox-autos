@@ -19,7 +19,7 @@ export const Route = createFileRoute("/car/$id")({
       return {
         meta: [
           { title: "Car Not Found — Gearbox Autos" },
-          { name: "description", content: "This car listing is no longer available. Browse the latest verified used cars in Jamshedpur." },
+          { name: "description", content: "This car listing is no longer available. Browse the latest available used cars in Jamshedpur." },
           { name: "robots", content: "noindex, follow" },
         ],
         links: [{ rel: "canonical", href: url }],

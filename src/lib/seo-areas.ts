@@ -42,7 +42,7 @@ export function brandLabel(brand: string): string {
 }
 
 export const NEARBY_AREAS = [
-  { name: "Adityapur", note: "Industrial hub next to Jamshedpur — we regularly inspect and list cars from Adityapur and the NH-33 belt." },
+  { name: "Adityapur", note: "Contact our team about car listing and viewing arrangements for Adityapur and nearby areas." },
   { name: "Sonari", note: "Our showroom is in Sonari, near Golden Town, opposite BSS School in Adarsh Nagar. Walk in to see any listed car in person." },
   { name: "Bistupur & Sakchi", note: "Central Jamshedpur buyers can book a test drive and we bring the car to a convenient spot." },
   { name: "Ghatshila", note: "Sellers in Ghatshila can list remotely — we handle photography guidance and buyer meetings." },
