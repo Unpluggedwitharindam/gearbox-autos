@@ -2,7 +2,7 @@
   "meta": {
     "name": "gearbox autos",
     "package": "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558",
-    "version": "7.11.0",
+    "version": "8.0.0",
     "framework": "react",
     "css_framework": "tailwind",
     "starter_template": "custom_design_system",
@@ -15,7 +15,7 @@
       ".dsignore": "a48da8a067ecff18d1c03bc525cd2f87",
       ".github/workflows/build-apk.yml": "87fa09676079331a56d7373f12e53483",
       ".gitignore": "6d9e901a692b46a83707c245fb03bc91",
-      ".lovable/meta.yaml": "86a17ac0d6b10fddfde4cdc325cb93a7",
+      ".lovable/meta.yaml": "8794970d6049858cc148d2b86f7a2b22",
       ".lovable/north-star/north-star.md": "b71aaa405873cc52a78076e184d6369f",
       ".lovable/plan/build-garage-used-car-intelligence-2026-09-12.md": "324830919b2d11257868abc62a36a95f",
       ".lovable/plan/connect-garage-to-live-indian-car-listings-without-manual-ap-2026-09-12.md": "7b0d6d45fbcec45c2aeeb891419198f2",
