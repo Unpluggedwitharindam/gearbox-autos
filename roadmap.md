@@ -1,8 +1,8 @@
 # Reference-led marketplace redesign (preview only)
 
 ## Controlled seller pricing disclosure — preview only
-- [ ] Align seller fee disclosures, shared wording, metadata and seller FAQs without changing forms or policies outside this scope
-- [ ] Verify five fee boundaries, affected metadata and desktop/mobile layouts; report exact diff without publication
+- [x] Align seller fee disclosures, shared wording, metadata and seller FAQs without changing forms or policies outside this scope
+- [x] Verify five fee boundaries, affected metadata and desktop/mobile layouts; report exact diff without publication
 
 # Phase 1A — Buy inventory filters only
 
