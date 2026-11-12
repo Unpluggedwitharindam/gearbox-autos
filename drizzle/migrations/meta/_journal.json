@@ -22,6 +22,13 @@
       "when": 1794490605563,
       "tag": "0002_restrict_public_cars_access",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1794491403396,
+      "tag": "0003_explicit_cars_column_revokes",
+      "breakpoints": true
     }
   ]
 }

@@ -1,0 +1,13 @@
+-- Explicit, per-privilege column-level revokes for public.cars. Each privilege
+-- carries its own column list so none is interpreted as table-level. Idempotent:
+-- safe whether or not column-level grants exist beforehand.
+REVOKE ALL ON TABLE public.cars FROM PUBLIC, anon, authenticated;
+
+REVOKE SELECT (id, slug, name, price_inr, year, km, rto, location, fuel, transmission, image_url, features, description, is_active, created_at, updated_at, images, make, model, variant, manufacturing_year, registration_year, owner_count, seller_type, registration_state, accident_history, service_history, insurance_status, condition_notes, acquisition_price_inr, acquisition_date, listed_at, inventory_status, sold_at, sold_price_inr) ON TABLE public.cars FROM PUBLIC, anon, authenticated;
+REVOKE INSERT (id, slug, name, price_inr, year, km, rto, location, fuel, transmission, image_url, features, description, is_active, created_at, updated_at, images, make, model, variant, manufacturing_year, registration_year, owner_count, seller_type, registration_state, accident_history, service_history, insurance_status, condition_notes, acquisition_price_inr, acquisition_date, listed_at, inventory_status, sold_at, sold_price_inr) ON TABLE public.cars FROM PUBLIC, anon, authenticated;
+REVOKE UPDATE (id, slug, name, price_inr, year, km, rto, location, fuel, transmission, image_url, features, description, is_active, created_at, updated_at, images, make, model, variant, manufacturing_year, registration_year, owner_count, seller_type, registration_state, accident_history, service_history, insurance_status, condition_notes, acquisition_price_inr, acquisition_date, listed_at, inventory_status, sold_at, sold_price_inr) ON TABLE public.cars FROM PUBLIC, anon, authenticated;
+REVOKE REFERENCES (id, slug, name, price_inr, year, km, rto, location, fuel, transmission, image_url, features, description, is_active, created_at, updated_at, images, make, model, variant, manufacturing_year, registration_year, owner_count, seller_type, registration_state, accident_history, service_history, insurance_status, condition_notes, acquisition_price_inr, acquisition_date, listed_at, inventory_status, sold_at, sold_price_inr) ON TABLE public.cars FROM PUBLIC, anon, authenticated;
+
+GRANT SELECT (id, slug, name, price_inr, year, km, rto, location, fuel, transmission, image_url, images, features, description, make, model, is_active, inventory_status, created_at, updated_at) ON TABLE public.cars TO anon, authenticated;
+
+GRANT ALL ON TABLE public.cars TO service_role;

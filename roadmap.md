@@ -95,4 +95,15 @@
 - [x] Public visibility limited to active in-stock cars (database rule + public queries)
 - [x] Public car queries use approved fields via the publishable-key server client
 - [ ] Production apply: awaiting explicit approval (migration number collides with Phase 1B draft's 0002)
-- [ ] Same tightening for leads, contact messages, sell leads, test drives, user roles and other wide-open tables
+- [x] Explicit per-privilege column revokes (0003) and exact rollback plan (docs/security/cars-public-access-rollback.md)
+- [ ] Production apply: also re-capture live permissions first
+
+## Future: security review of other tables (separate task)
+- [ ] Leads, contact messages, sell requests, test drives, user roles: remove broad visitor/signed-in permissions
+
+## Future: admin car form (separate task)
+- [ ] Make Variant, Sold price, Sold date and other optional fields optional; require sold fields only when status is Sold
+
+## Outstanding verification
+- [ ] CRM vehicle sharing (Phase 1B draft, own-user admin check) not yet accepted
+- [ ] Android physical-device check of in-stock-only inventory
