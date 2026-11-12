@@ -100,7 +100,7 @@ function SellCarJamshedpur() {
         <div className="bg-card p-6">
           <FileCheck className="h-6 w-6 text-primary mb-3" />
           <h3 className="font-head text-xl">RC transfer done right</h3>
-          <p className="text-sm text-muted-foreground mt-2">We guide the ownership transfer at the JH-05 RTO so there's no liability left on you.</p>
+          <p className="text-sm text-muted-foreground mt-2">Discuss ownership-transfer requirements and completion status with our team and the RTO.</p>
         </div>
       </div>
 
