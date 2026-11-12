@@ -14,6 +14,25 @@ The full machine-readable catalog lives in this library's `design-system.json` (
 
 - `@/design-system/{slug}/assets/gearbox-logo.png.asset.json` (png, R2 pointer)
 - `@/design-system/{slug}/assets/logos/gearbox-logo.png` (png)
+- `@/design-system/{slug}/assets/logos/gearbox-official.png` (png)
+
+## Photography
+
+- `@/design-system/{slug}/assets/photography/budget-3-5lakh.webp` (webp)
+- `@/design-system/{slug}/assets/photography/budget-5-8lakh.webp` (webp)
+- `@/design-system/{slug}/assets/photography/budget-8-12lakh.webp` (webp)
+- `@/design-system/{slug}/assets/photography/budget-above-12lakh.webp` (webp)
+- `@/design-system/{slug}/assets/photography/budget-under-3lakh.webp` (webp)
+- `@/design-system/{slug}/assets/photography/buy-car-card.webp` (webp)
+- `@/design-system/{slug}/assets/photography/compact-suv.webp` (webp)
+- `@/design-system/{slug}/assets/photography/cta-banner.webp` (webp)
+- `@/design-system/{slug}/assets/photography/hatchback.webp` (webp)
+- `@/design-system/{slug}/assets/photography/hero-car.webp` (webp)
+- `@/design-system/{slug}/assets/photography/motor-club-bg.webp` (webp)
+- `@/design-system/{slug}/assets/photography/muv.webp` (webp)
+- `@/design-system/{slug}/assets/photography/sedan.webp` (webp)
+- `@/design-system/{slug}/assets/photography/sell-car-card.webp` (webp)
+- `@/design-system/{slug}/assets/photography/suv.webp` (webp)
 
 ## Images
 
