@@ -20,7 +20,7 @@ export const listBuyCars = createServerFn({ method: 'GET' }).handler(async (): P
   });
   const { data, error } = await client.from('cars')
     .select('id,slug,name,price_inr,year,km,rto,location,fuel,transmission,image_url,images,features,description,updated_at,make,model,created_at')
-    .eq('is_active', true).order('created_at', { ascending: false });
+    .eq('is_active', true).eq('inventory_status', 'in_stock').order('created_at', { ascending: false });
   if (error) {
     console.error('[buy inventory]', error.message);
     throw new Error('Unable to load cars right now. Please try again.');

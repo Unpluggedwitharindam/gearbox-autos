@@ -89,3 +89,10 @@
 - [x] Verify real live inventory through the locally packaged interface (native bridge browser check)
 - [x] Build and validate versionCode 3 AAB and APK using the unchanged upload key
 - [x] Make the updated release and upload instructions available in Files
+
+## Phase 1 security hardening: public car data (draft only, pending production review)
+- [x] Column-level read-only grants on approved public car fields; all client writes revoked
+- [x] Public visibility limited to active in-stock cars (database rule + public queries)
+- [x] Public car queries use approved fields via the publishable-key server client
+- [ ] Production apply: awaiting explicit approval (migration number collides with Phase 1B draft's 0002)
+- [ ] Same tightening for leads, contact messages, sell leads, test drives, user roles and other wide-open tables
