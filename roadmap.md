@@ -1,7 +1,7 @@
 # Reference-led marketplace redesign (preview only)
 
 ## Controlled seller pricing disclosure — preview only
-- [ ] Replace unsupported public vehicle-verification claims and move complete Sell fee disclosure ahead of the form; verify without publication
+- [x] Replace unsupported public vehicle-verification claims and move complete Sell fee disclosure ahead of the form; 44 tests and desktop/mobile checks pass; no publication
 - [x] Align seller fee disclosures, shared wording, metadata and seller FAQs without changing forms or policies outside this scope
 - [x] Verify five fee boundaries, affected metadata and desktop/mobile layouts; report exact diff without publication
 
