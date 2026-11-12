@@ -2,7 +2,7 @@ export function TrustBar() {
   const items = [
     { title: "0% Commission", desc: "Buy your dream car without any extra fees." },
     { title: "No Hidden Charges", desc: "What you see is what you pay." },
-    { title: "Quality Assured", desc: "Every car is verified for quality and performance." },
+    { title: "Vehicle Information", desc: "Ask for available condition and document information." },
     { title: "Hassle Free Process", desc: "Smooth and transparent from start to finish." },
   ];
   return (

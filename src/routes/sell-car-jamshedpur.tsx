@@ -21,7 +21,7 @@ export const Route = createFileRoute("/sell-car-jamshedpur")({
         "@context": "https://schema.org",
         "@type": "HowTo",
         name: "How to sell your car in Jamshedpur",
-        description: "List, verify, meet buyers, and complete the sale with RC transfer assistance.",
+        description: "Discuss listing, meet buyers, and complete the sale with RC transfer assistance.",
         step: steps.map((step, index) => ({
           "@type": "HowToStep",
           position: index + 1,
@@ -94,8 +94,8 @@ function SellCarJamshedpur() {
         </div>
         <div className="bg-card p-6">
           <ShieldCheck className="h-6 w-6 text-primary mb-3" />
-          <h3 className="font-head text-xl">Verified buyers only</h3>
-          <p className="text-sm text-muted-foreground mt-2">We screen enquiries so you spend time only with serious, genuine buyers.</p>
+          <h3 className="font-head text-xl">Buyer enquiries</h3>
+          <p className="text-sm text-muted-foreground mt-2">Discuss buyer enquiries and meeting arrangements with our team.</p>
         </div>
         <div className="bg-card p-6">
           <FileCheck className="h-6 w-6 text-primary mb-3" />

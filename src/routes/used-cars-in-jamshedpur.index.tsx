@@ -15,10 +15,10 @@ export const Route = createFileRoute("/used-cars-in-jamshedpur/")({
     const cars = (loaderData as unknown as Car[] | undefined) ?? [];
     return {
     meta: [
-      { title: "Used Cars in Jamshedpur — Verified Second Hand Cars | Gearbox Autos" },
-      { name: "description", content: "Buy verified second hand cars in Jamshedpur at 0% commission. Compare prices, KMs, fuel & RTO (JH-05), inspect the car yourself, and get free RC transfer help from Gearbox Autos, Sonari." },
+      { title: "Used Cars in Jamshedpur — Second Hand Cars | Gearbox Autos" },
+      { name: "description", content: "Buy current second hand cars in Jamshedpur at 0% commission. Compare prices, KMs, fuel & RTO (JH-05), inspect the car yourself, and get free RC transfer help from Gearbox Autos, Sonari." },
       { property: "og:title", content: "Used Cars in Jamshedpur — Gearbox Autos" },
-      { property: "og:description", content: "Verified second hand cars for sale in Jamshedpur at 0% commission. Book a free test drive today." },
+      { property: "og:description", content: "Current second hand cars for sale in Jamshedpur at 0% commission. Book a free test drive today." },
       { property: "og:url", content: "https://gearboxautos.in/used-cars-in-jamshedpur" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -47,7 +47,7 @@ export const Route = createFileRoute("/used-cars-in-jamshedpur/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "ItemList",
-          name: "Verified used cars in Jamshedpur",
+          name: "Used car listings in Jamshedpur",
           numberOfItems: cars.length,
           itemListElement: cars.map((car, index) => ({
             "@type": "ListItem",
@@ -76,8 +76,8 @@ function UsedCarsJamshedpur() {
         Used cars in <span className="text-primary">Jamshedpur</span>
       </h1>
       <p className="mt-5 text-muted-foreground max-w-2xl leading-relaxed">
-        Looking to buy a second hand car in Jamshedpur? Gearbox Autos lists fully verified used cars from local
-        owners — every vehicle is inspected, documents are checked, and you deal directly with the owner at{" "}
+        Looking to buy a second hand car in Jamshedpur? Gearbox Autos lists current used cars from local
+        owners. Ask for available vehicle and document information, and deal directly with the owner at{" "}
         <strong className="text-foreground">0% commission</strong>. Visit our showroom near Golden Town, opp. BSS School, Adarsh Nagar, Sonari, or
         book a free test drive on any listing below.
       </p>
@@ -85,8 +85,8 @@ function UsedCarsJamshedpur() {
       <div className="mt-10 grid gap-4 sm:grid-cols-3">
         <div className="bg-card p-6 border-l-4 border-primary">
           <ShieldCheck className="h-6 w-6 text-primary mb-3" />
-          <h2 className="font-head text-xl">Verified Listings</h2>
-          <p className="text-sm text-muted-foreground mt-2">Every car is physically inspected and papers verified before it goes live.</p>
+          <h2 className="font-head text-xl">Vehicle Information</h2>
+          <p className="text-sm text-muted-foreground mt-2">Ask for available condition and document information for your chosen car.</p>
         </div>
         <div className="bg-card p-6 border-l-4 border-primary">
           <BadgePercent className="h-6 w-6 text-primary mb-3" />

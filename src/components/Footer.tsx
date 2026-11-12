@@ -10,7 +10,7 @@ export function Footer() {
           <div className="md:col-span-2">
             <Logo className="text-4xl" />
             <p className="mt-6 text-sm text-muted-foreground max-w-md leading-relaxed">
-              Gearbox Autos is Jamshedpur's trusted marketplace for verified pre-owned cars. We connect buyers and
+              Gearbox Autos is a local marketplace for pre-owned cars in Jamshedpur. We connect buyers and
               sellers directly. Seller assistance fees are based on the final vehicle selling price.
             </p>
             <div className="mt-6 flex items-center gap-3">
