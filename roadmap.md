@@ -108,5 +108,7 @@
 ## Revised release candidate — without unfinished CRM vehicle sharing
 - [x] Preserve Security Hardening v2 code, migrations, tests and rollback documentation and Phase 1A filters
 - [x] Restore published LMS page; remove unfinished CRM lookup, copy-link, associated tests and test-only configuration
-- [ ] Verify live public inventory, Buy filters, unchanged CRM and admin readers without database writes
-- [ ] Record final candidate identifier and release comparison; stop for approval without publication
+- [x] Verify live public inventory and Buy search/price/reset/sort; 39 relevant existing unit tests pass
+- [x] Verify signed-in CRM leads, drawer, locally captured message, no copy-link, quick-add and list; verify live admin inventory and editor open/cancel without database writes
+- [x] Confirm published byte-equivalence of LMS route, lead handlers, admin handlers/editor and social handlers; no unfinished CRM implementation or helper remains
+- [x] Record release comparison and limitations in docs/security/revised-release-without-crm.md; stop for approval without publication
