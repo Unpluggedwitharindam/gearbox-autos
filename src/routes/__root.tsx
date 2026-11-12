@@ -214,7 +214,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const offline = useNativeApp();
-  const isHomepage = useRouterState({ select: (state) => state.location.pathname === '/' });
+  const isHomepage = useRouterState({ select: (state) => state.location.pathname === '/' || state.location.pathname.startsWith('/second-hand-cars-in-') || state.location.pathname === '/gbx-motor-club' });
 
   return (
     <QueryClientProvider client={queryClient}>

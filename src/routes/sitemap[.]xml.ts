@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import type {} from "@tanstack/react-start";
 import { listPublicCars } from "@/lib/cars.functions";
 import { brandOf } from "@/lib/seo-areas";
+import { marketplaceAreas } from "@/lib/marketplace-areas";
 
 const BASE_URL = "https://gearboxautos.in";
 
@@ -34,6 +35,8 @@ export const Route = createFileRoute("/sitemap.xml")({
           { path: "/about", changefreq: "monthly", priority: "0.5" },
           { path: "/contact", changefreq: "monthly", priority: "0.6" },
           { path: "/privacy-policy", changefreq: "yearly", priority: "0.3" },
+          { path: "/gbx-motor-club", changefreq: "monthly", priority: "0.6" },
+          ...marketplaceAreas.map(area => ({ path: `/second-hand-cars-in-${area.slug}`, changefreq: "weekly" as const, priority: "0.8" })),
         ];
 
         try {
