@@ -1,9 +1,9 @@
 # Reference-led marketplace redesign (preview only)
 
-- [ ] Match supplied homepage references and use the uploaded automotive asset pack
-- [ ] Connect budget/body filters, wishlist, locality links, and existing buyer/seller forms
-- [ ] Add eight useful locality pages and a GBX Motor Club enquiry page without changing backend workflows
-- [ ] Extend sitemap and verify desktop/mobile, real inventory, navigation, and SEO; do not publish
+- [x] Match supplied homepage references and use the uploaded automotive asset pack
+- [x] Connect budget/body filters, wishlist, locality links, and existing buyer/seller forms
+- [x] Add eight useful locality pages and a GBX Motor Club enquiry page without changing backend workflows
+- [x] Extend sitemap and verify desktop/mobile, real inventory, navigation, and SEO; do not publish
 
 # Public homepage redesign (preview only)
 
