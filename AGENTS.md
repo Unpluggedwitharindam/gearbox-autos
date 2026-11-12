@@ -1,5 +1,7 @@
 # Architecture rules
 
+- Keep /buy filtering and its stored make/model projection page-specific with a separate query key; do not infer categories or alter shared homepage/native inventory contracts.
+
 - Load the library's core token fonts through local font-face CSS and assets under src/assets/fonts so file-copy attach preserves automatic typography loading.
 
 - Keep the homepage visual theme and its header/footer isolated from the shared site shell; homepage search filters the existing public inventory via URL state without changing other inventory routes or business logic.

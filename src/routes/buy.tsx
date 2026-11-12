@@ -1,11 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Search, SlidersHorizontal, ChevronDown, ArrowDown } from "lucide-react";
+import { Search, SlidersHorizontal, RotateCcw, ArrowDown } from "lucide-react";
 import { useMemo, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import hero from "@/assets/car-creta-front.jpg";
 import { CarCard } from "@/components/CarCard";
 import { TrustBar } from "@/components/TrustBar";
-import { listPublicCars } from "@/lib/cars.functions";
+import { listBuyCars } from "@/lib/buy-inventory.functions";
+import { buyOptions, emptyBuyFilters, filterBuyCars, type BuyFilters } from "@/lib/buy-inventory";
+import { Button } from "@/components/ui/button";
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from "@/components/ui/select";
 import type { Car as CarListing } from "@/lib/cars";
 
 export const Route = createFileRoute("/buy")({
@@ -43,21 +46,27 @@ export const Route = createFileRoute("/buy")({
   component: Buy,
   loader: async ({ context }) =>
     context.queryClient.ensureQueryData({
-      queryKey: ["cars", "public"],
-      queryFn: () => listPublicCars(),
+      queryKey: ["cars", "buy"],
+      queryFn: () => listBuyCars(),
     }),
 });
 
 function Buy() {
   const initialCars = Route.useLoaderData();
-  const { data: cars = [] } = useQuery({ queryKey: ["cars", "public"], queryFn: () => listPublicCars(), initialData: initialCars });
-  const [q, setQ] = useState("");
-
-  const filtered = useMemo(() => {
-    const s = q.trim().toLowerCase();
-    if (!s) return cars;
-    return cars.filter((c) => c.name.toLowerCase().includes(s) || c.fuel.toLowerCase().includes(s));
-  }, [cars, q]);
+  const { data: cars = [] } = useQuery({ queryKey: ["cars", "buy"], queryFn: () => listBuyCars(), initialData: initialCars });
+  const [filters, setFilters] = useState<BuyFilters>({ ...emptyBuyFilters });
+  const [expanded, setExpanded] = useState(false);
+  const { cars: filtered, error } = useMemo(() => filterBuyCars(cars, filters), [cars, filters]);
+  const update = (key: keyof BuyFilters, value: string) => setFilters(previous => ({ ...previous, [key]: value, ...(key === 'make' ? { model: '' } : {}) }));
+  const reset = () => { setFilters({ ...emptyBuyFilters }); setExpanded(false); };
+  const selector = (field: 'make' | 'model' | 'fuel' | 'transmission', label: string) => (
+    <Select value={filters[field] || '__all'} onValueChange={value => update(field, value === '__all' ? '' : value)}>
+      <SelectTrigger aria-label={label} className="h-10 min-w-0 border-0 bg-input/60 text-muted-foreground"><SelectValue /></SelectTrigger>
+      <SelectContent><SelectItem value="__all">All {label === 'Make' ? 'Makes' : label === 'Model' ? 'Models' : label === 'Fuel' ? 'Fuels' : 'Transmissions'}</SelectItem>
+        {buyOptions(cars, field, field === 'model' ? filters.make : '').map(([key, text]) => <SelectItem key={key} value={key}>{text}</SelectItem>)}
+      </SelectContent>
+    </Select>
+  );
 
   return (
     <section className="relative">
@@ -68,24 +77,31 @@ function Buy() {
         <p className="mt-5 text-muted-foreground max-w-md">Explore a wide range of quality used cars at the best value.</p>
 
         <div className="surface mt-10 p-3 grid gap-2 md:grid-cols-[1.5fr_repeat(4,1fr)_auto]">
-          <div className="flex items-center gap-2 px-3 py-2.5 rounded-md bg-input/60">
+          <div className="flex min-w-0 items-center gap-2 px-3 py-2.5 rounded-md bg-input/60">
             <Search className="h-4 w-4 text-muted-foreground" />
-            <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search make, model or type..." className="bg-transparent outline-none text-sm flex-1" />
+            <input aria-label="Search inventory" value={filters.q} onChange={(e) => update('q', e.target.value)} placeholder="Search make, model or type..." className="bg-transparent outline-none focus-visible:ring-1 focus-visible:ring-ring text-sm flex-1 min-w-0" />
           </div>
-          {["All Makes", "All Models", "Min Price", "Max Price"].map((p) => (
-            <button key={p} className="flex items-center justify-between rounded-md bg-input/60 px-3 py-2.5 text-sm">
-              <span className="text-muted-foreground">{p}</span><ChevronDown className="h-4 w-4" />
-            </button>
-          ))}
-          <button className="flex items-center gap-2 rounded-md bg-input/60 px-4 py-2.5 text-sm">
+          {selector('make', 'Make')}
+          {selector('model', 'Model')}
+          {(['min', 'max'] as const).map(key => <input key={key} type="number" min="0" step="1" inputMode="numeric" aria-label={`${key === 'min' ? 'Minimum' : 'Maximum'} price in rupees`} aria-invalid={Boolean(error)} aria-describedby={error ? 'buy-price-error' : undefined} value={filters[key]} onChange={e => update(key, e.target.value)} placeholder={`${key === 'min' ? 'Min' : 'Max'} Price (₹)`} className="min-w-0 w-full rounded-md bg-input/60 px-3 py-2.5 text-sm outline-none focus-visible:ring-1 focus-visible:ring-ring" />)}
+          <Button variant="ghost" onClick={() => setExpanded(value => !value)} aria-expanded={expanded} aria-controls="buy-extra-filters" className="h-10 bg-input/60">
             <SlidersHorizontal className="h-4 w-4" /> Filters
-          </button>
+          </Button>
         </div>
+        {expanded && <div id="buy-extra-filters" className="mt-2 grid gap-2 sm:grid-cols-2">{selector('fuel', 'Fuel')}{selector('transmission', 'Transmission')}</div>}
+        {error && <p id="buy-price-error" role="alert" className="mt-3 text-sm text-destructive">{error}</p>}
 
-        <div className="mt-8 flex items-center justify-between">
-          <div className="text-sm text-muted-foreground"><span className="text-foreground font-semibold">{filtered.length}</span> Cars Available</div>
-          <div className="text-sm flex items-center gap-2 text-muted-foreground">Sort by: <button className="flex items-center gap-1 rounded-md bg-input/60 px-3 py-1.5">Latest Added <ChevronDown className="h-3 w-3" /></button></div>
+        <div className="mt-8 flex flex-wrap gap-3 items-center justify-between">
+          <div aria-live="polite" data-testid="inventory-count" className="text-sm text-muted-foreground"><span className="text-foreground font-semibold">{filtered.length}</span> Cars Available</div>
+          <div className="text-sm flex flex-wrap items-center gap-2 text-muted-foreground">
+            <Button variant="ghost" size="sm" onClick={reset}><RotateCcw />Reset Filters</Button>
+            <span>Sort by:</span><Select value={filters.sort} onValueChange={value => update('sort', value)}>
+              <SelectTrigger aria-label="Sort inventory" className="w-auto min-w-0 border-0 bg-input/60"><SelectValue /></SelectTrigger>
+              <SelectContent>{[['latest','Latest Added'],['price-low','Price: Low to High'],['price-high','Price: High to Low'],['year-new','Year: Newest First'],['km-low','Kilometres: Low to High']].map(([value, label]) => <SelectItem key={value} value={value}>{label}</SelectItem>)}</SelectContent>
+            </Select>
+          </div>
         </div>
+        {!filtered.length && !error && <p role="status" className="py-8 text-center text-muted-foreground">No cars match your filters.</p>}
 
         <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {filtered.map((c) => <CarCard key={c.id} car={c} />)}
