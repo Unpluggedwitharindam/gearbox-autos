@@ -1,6 +1,7 @@
 # Architecture rules
 
 - Keep the homepage visual theme and its header/footer isolated from the shared site shell; homepage search filters the existing public inventory via URL state without changing other inventory routes or business logic.
+- Keep reference-led marketplace presentation and locality content in preview-only modules excluded from library attach; reuse the existing public inventory query and form routes. Body categories use an explicit model map and leave unknown models uncategorised because inventory has no body-type field.
 
 - Send app emails only from feature-specific server code through `src/lib/email-templates/send-email.ts`; managed delivery owns retries, suppression, and unsubscribe handling, so do not introduce queue-era infrastructure or browser send endpoints.
 - Preserve the shared Vite configuration's VITE_-only client injection; load private environment values into process.env only and resolve email renderer entities imports to the hoisted compatible package to avoid SSR failures.
