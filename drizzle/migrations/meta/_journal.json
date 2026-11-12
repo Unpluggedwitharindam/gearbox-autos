@@ -15,6 +15,13 @@
       "when": 1793004186390,
       "tag": "0001_extend_leads_crm_fields",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794490605563,
+      "tag": "0002_restrict_public_cars_access",
+      "breakpoints": true
     }
   ]
 }
