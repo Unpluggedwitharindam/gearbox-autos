@@ -134,7 +134,7 @@ function Index() {
             <p className="text-sm text-muted-foreground mt-3 max-w-lg">
               Buy or sell quality cars with trust, transparency and local support.
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-5 max-w-[520px]">
               {(
                 [
                   {
@@ -158,7 +158,7 @@ function Index() {
                 <Link
                   to={to}
                   key={to}
-                  className={`market-action relative overflow-hidden rounded-lg border border-border p-5 ${buy ? "bg-primary" : "bg-secondary"}`}
+                  className={`market-action relative overflow-hidden rounded-lg border border-border p-4 ${buy ? "bg-primary" : "bg-secondary"}`}
                 >
                   <img
                     src={image}
@@ -168,15 +168,15 @@ function Index() {
                     className="absolute right-0 bottom-0 h-full w-[46%] object-cover object-right"
                   />
                   <div className="relative w-[73%]">
-                    <h2 className="flex items-center gap-2 text-xl font-extrabold whitespace-nowrap">
-                      <Icon className="size-7 shrink-0" />
+                    <h2 className="flex items-center gap-2 text-lg font-extrabold whitespace-nowrap">
+                      <Icon className="size-5 shrink-0" />
                       {title}
                     </h2>
-                    <p className="mt-3 text-sm max-w-36 leading-snug">{text}</p>
+                    <p className="mt-2 text-xs max-w-32 leading-snug">{text}</p>
                     <span
-                      className={`mt-4 inline-grid size-9 place-items-center rounded-full ${buy ? "bg-background" : "bg-primary"}`}
+                      className={`mt-3 inline-grid size-7 place-items-center rounded-full ${buy ? "bg-background" : "bg-primary"}`}
                     >
-                      <ArrowRight className="size-5" />
+                      <ArrowRight className="size-4" />
                     </span>
                   </div>
                 </Link>
