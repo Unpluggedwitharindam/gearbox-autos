@@ -6,9 +6,9 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About Gearbox Autos — Trusted Used Car Marketplace in Jamshedpur" },
-      { name: "description", content: "Gearbox Autos is a Jamshedpur-based used car marketplace connecting buyers and sellers directly with transparent, zero-commission deals." },
+      { name: "description", content: "Gearbox Autos connects used-car buyers and sellers in Jamshedpur with local support. Seller assistance fees are based on the final vehicle selling price." },
       { property: "og:title", content: "About Gearbox Autos — Jamshedpur" },
-      { property: "og:description", content: "Driven by trust, built on transparency — used cars in Jamshedpur." },
+      { property: "og:description", content: "Used-car buying and selling support in Jamshedpur. Seller assistance fees apply based on the final vehicle selling price." },
       { property: "og:url", content: "https://gearboxautos.in/about" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -73,7 +73,7 @@ function About() {
           <p className="mt-4 text-sm text-muted-foreground">To create a trustworthy and transparent platform for buying and selling used cars, where people deal directly and drive away happy.</p>
         </div>
         {[
-          { Icon: Eye, title: "Transparency First", desc: "We believe in complete transparency at every step. No hidden fees, no surprises." },
+          { Icon: Eye, title: "Transparency First", desc: "Seller assistance fees are based on the final vehicle selling price. Review the published fee schedule before submitting an enquiry." },
           { Icon: Handshake, title: "Direct & Fair Deals", desc: "Buyers meet sellers directly, ensuring fair negotiations and the best prices." },
           { Icon: ShieldCheck, title: "Simple & Hassle-Free", desc: "From test drive to RC transfer, we make the process smooth, safe and stress-free." },
         ].map((b) => (

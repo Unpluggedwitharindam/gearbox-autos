@@ -110,8 +110,8 @@ function Contact() {
       <div className="surface mt-6 p-5 flex items-center gap-4">
         <ShieldCheck className="h-7 w-7 text-primary" />
         <div>
-          <div className="font-semibold">100% Transparent. 0% Commission.</div>
-          <div className="text-sm text-muted-foreground">No hidden charges. No surprises. Just great cars and honest deals.</div>
+          <div className="font-semibold">Seller assistance fees apply.</div>
+          <div className="text-sm text-muted-foreground">Fees are based on the final vehicle selling price. Review the fee schedule on the Sell page before submitting an enquiry.</div>
         </div>
       </div>
     </section>

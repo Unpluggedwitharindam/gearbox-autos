@@ -149,7 +149,7 @@ function UsedCarsJamshedpur() {
       <div className="mt-16 bg-card p-8 md:p-10 border-l-8 border-primary flex flex-col md:flex-row md:items-center gap-6 justify-between">
         <div>
           <h2 className="display-h2">Selling your car instead?</h2>
-          <p className="text-muted-foreground mt-2 max-w-lg">List it free with Gearbox Autos and reach genuine buyers across Jamshedpur — still 0% commission.</p>
+          <p className="text-muted-foreground mt-2 max-w-lg">Seller assistance fees are based on the final vehicle selling price. Review the fee schedule on the Sell page before submitting an enquiry.</p>
         </div>
         <Link to="/sell" className="btn-primary px-8 py-4 inline-flex items-center gap-2 shrink-0">
           Sell your car <ArrowRight className="h-4 w-4" />

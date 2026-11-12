@@ -5,14 +5,15 @@ import { toast } from "sonner";
 import { User, Phone, MapPin, Car as CarIcon, Calendar, Gauge, ArrowRight, ChevronDown, Mail } from "lucide-react";
 import sellBg from "@/assets/car-amaze-brown.jpg";
 import { submitSellLead } from "@/lib/leads.functions";
+import { sellerPricingHeading, sellerPricingBands, sellerPricingExample, sellerPricingSummary } from "@/showcase/seller-pricing";
 
 export const Route = createFileRoute("/sell")({
   head: () => ({
     meta: [
-      { title: "Sell Your Car in Jamshedpur — Best Price, 0% Commission | Gearbox Autos" },
-      { name: "description", content: "Sell your used car in Jamshedpur at the best price. Share your car details and our team calls you back — free listing, 0% commission, RC transfer help." },
+      { title: "Sell Your Car in Jamshedpur — Seller Assistance | Gearbox Autos" },
+      { name: "description", content: `Submit your car details to Gearbox Autos in Jamshedpur. ${sellerPricingSummary}` },
       { property: "og:title", content: "Sell Your Used Car in Jamshedpur — Gearbox Autos" },
-      { property: "og:description", content: "Get the best value for your car in Jamshedpur with zero commission." },
+      { property: "og:description", content: sellerPricingSummary },
       { property: "og:url", content: "https://gearboxautos.in/sell" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -72,10 +73,17 @@ function Sell() {
           <div className="eyebrow">Sell your car</div>
           <h1 className="display-h1 mt-4">Get the best value <br /> for your car<span className="text-primary">.</span></h1>
           <p className="mt-5 text-muted-foreground max-w-md">Fill in the details below and our experts will get in touch with you for the best offer.</p>
+          <div className="mt-6 max-w-2xl border-y border-border py-5">
+            <h2 className="text-lg font-semibold">{sellerPricingHeading}</h2>
+            <ul className="mt-3 list-disc pl-5 space-y-2 text-sm">
+              {sellerPricingBands.map((band) => <li key={band}>{band}</li>)}
+            </ul>
+            <p className="mt-3 text-sm">{sellerPricingExample}</p>
+          </div>
           <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-2xl">
             {[
-              ["0% Commission","You keep 100% of your money."],
-              ["No Hidden Charges","What you see is what you get."],
+              ["Seller Assistance Fees","Based on the final vehicle selling price."],
+              ["Review the Fee Schedule","See the pricing disclosure above."],
               ["Quick & Hassle Free","Smooth process from start to finish."],
               ["Best Market Value","Get the most competitive offer."],
             ].map(([t,d]) => (

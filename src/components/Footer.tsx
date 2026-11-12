@@ -11,7 +11,7 @@ export function Footer() {
             <Logo className="text-4xl" />
             <p className="mt-6 text-sm text-muted-foreground max-w-md leading-relaxed">
               Gearbox Autos is Jamshedpur's trusted marketplace for verified pre-owned cars. We connect buyers and
-              sellers directly with a 0% commission model that puts you first.
+              sellers directly. Seller assistance fees are based on the final vehicle selling price.
             </p>
             <div className="mt-6 flex items-center gap-3">
               <a href="https://www.instagram.com/gearbox_autos_usedcars/" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="h-10 w-10 border border-border grid place-items-center hover:border-primary hover:text-primary transition-colors">
@@ -48,7 +48,7 @@ export function Footer() {
           <span>© {new Date().getFullYear()} Gearbox Autos. All rights reserved.</span>
           <div className="flex items-center gap-4">
             <Link to="/privacy-policy" className="hover:text-primary">Privacy Policy</Link>
-            <span>100% Transparent · 0% Commission</span>
+            <span>Seller assistance fees apply</span>
           </div>
         </div>
       </div>

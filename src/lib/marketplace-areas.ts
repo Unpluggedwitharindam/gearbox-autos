@@ -1,3 +1,5 @@
+import { sellerPricingDisclosure } from "@/showcase/seller-pricing";
+
 export const marketplaceAreas = [
   {
     slug: "jamshedpur",
@@ -80,7 +82,11 @@ export function localityFaq(name: string) {
     ],
     [
       "Do buyers pay commission?",
-      "Gearbox Autos charges buyers 0% commission. Applicable RC transfer charges are paid to the RTO. Sellers pay a nominal service charge after a successful deal.",
+      "Gearbox Autos charges buyers 0% commission. Applicable RC transfer charges are paid to the RTO.",
+    ],
+    [
+      "What are the seller assistance fees?",
+      sellerPricingDisclosure,
     ],
   ];
 }
