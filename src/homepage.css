@@ -125,6 +125,24 @@
   color: var(--foreground);
 }
 @media (min-width: 700px) and (max-width: 1023px) {
+  .market-hero-photo {
+    height: auto;
+    top: auto;
+    bottom: 0;
+    mask-image: linear-gradient(to right, transparent 40%, black 65%);
+  }
+  .market-search {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+    gap: 4px;
+  }
+  .market-search input,
+  .market-select {
+    font-size: 12px;
+  }
+  .market-search button {
+    padding-inline: 12px;
+    font-size: 12px;
+  }
   .market-hero-copy {
     width: 57%;
   }
