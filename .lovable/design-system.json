@@ -2,7 +2,7 @@
   "meta": {
     "name": "gearbox autos",
     "package": "@ws-fbnsxmjeiapi8qlhmbew/1406dad9-9280-43ae-8894-1eb8be55a558",
-    "version": "8.4.0",
+    "version": "8.5.0",
     "framework": "react",
     "css_framework": "tailwind",
     "starter_template": "custom_design_system",
@@ -212,7 +212,7 @@
       "public/llms.txt": "e9c7bd27bda2e9a758ffb0bd90f64061",
       "public/manifest.webmanifest": "8ea39f81ad2a85901314c6585d043c12",
       "public/robots.txt": "68c309344b77bf111c74792ca17efd56",
-      "roadmap.md": "12a8276054c9507e8dddc261e5671873",
+      "roadmap.md": "c759353f00a16108152487edaee0e181",
       "scripts/android-local.test.mjs": "4169ea9740ec15335a7fa7d648836619",
       "scripts/android-release.test.mjs": "71624d3cdb72c1996dd92b6e33704f03",
       "scripts/prepare-android.mjs": "fb293fc09139a6b0df8a3201af125092",
