@@ -1,5 +1,10 @@
 # Reference-led marketplace redesign (preview only)
 
+## Sold Out workflow and monitoring fixes — isolated draft
+- [ ] Implement admin mark/restore, exact 10-day deadline, public price/CTA safeguards and daily safe cleanup; verify with disposable fixtures only, then await review before acceptance or publication.
+- [ ] Repair page-specific Android Buy offline caching and verify the existing native install-banner guard.
+- [ ] Repair and verify inquiry alert delivery to all four approved team recipients without changing customer form or CRM behavior.
+
 ## WhatsApp Google Ads conversion — draft only
 - [x] Add regional consent choices, one gated Google loader, and dealership-only WhatsApp click conversion; 30 tests and desktop/mobile browser checks pass; Google receipt/account ownership unverified; not published.
 
