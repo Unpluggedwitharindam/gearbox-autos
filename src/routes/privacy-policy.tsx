@@ -34,7 +34,7 @@ function PrivacyPolicy() {
       <div className="eyebrow flex items-center gap-2"><ShieldCheck className="h-4 w-4" /> Legal</div>
       <h1 className="display-h1 mt-4">Privacy Policy<span className="text-primary">.</span></h1>
       <p className="mt-4 text-sm text-muted-foreground">
-        Effective date: {EFFECTIVE_DATE} · Last updated: {EFFECTIVE_DATE}
+        Effective date: {EFFECTIVE_DATE} · Last updated: 21 November 2026
       </p>
 
       <Section title="1. Who we are">
@@ -67,10 +67,12 @@ function PrivacyPolicy() {
           <li><strong className="text-foreground">Account information</strong> — if you sign in (for example with Google), we receive your name, email address and profile identifier from the sign-in provider.</li>
         </ul>
         <p>
-          We do <strong className="text-foreground">not</strong> run advertising trackers or third-party analytics on
-          the website, and we do not collect precise GPS location, contacts, or device files. Standard technical
-          information (such as IP address and browser type) is processed by our hosting provider only as needed to
-          deliver and secure the Services.
+          We use Lovable’s cookie-free visitor analytics to measure visits, page performance and errors.
+          Optional click measurement follows your analytics choices. Google advertising tags may process
+          page URLs, browser and device information, advertising identifiers and clicks on our WhatsApp contact
+          links for advertising measurement, optimisation and personalisation. A tracked WhatsApp click does
+          not tell us whether you sent a message. We do not send form contact details as part of this conversion event.
+          We do not collect precise GPS location, contacts, or device files through these features.
         </p>
       </Section>
 
@@ -92,11 +94,12 @@ function PrivacyPolicy() {
           <li><strong className="text-foreground">Cloud database, hosting and authentication (Lovable Cloud / Supabase)</strong> — stores your form submissions, listings and account data and processes sign-ins on our behalf.</li>
           <li><strong className="text-foreground">Email delivery providers (Resend and Lovable's managed email service)</strong> — deliver enquiry notifications and follow-up reminders to our team; your submitted contact details are included in those notifications.</li>
           <li><strong className="text-foreground">Google</strong> — if you choose "Sign in with Google", Google processes the sign-in and shares your basic profile details with us.</li>
+          <li><strong className="text-foreground">Google Ads</strong> — receives permitted advertising activity and may use cookies and advertising identifiers for measurement, optimisation and personalisation. See <a href="https://business.safety.google/privacy/" className="text-primary underline" target="_blank" rel="noopener noreferrer">Google’s advertising privacy information</a>.</li>
           <li><strong className="text-foreground">WhatsApp and Instagram (Meta)</strong> — when you tap a WhatsApp or Instagram link, you leave our Services and Meta's own privacy policy applies to that interaction.</li>
         </ul>
         <p>
-          We may also disclose information if required by law or to protect our rights. We do not share your
-          information with advertisers or data brokers.
+          We may also disclose information if required by law or to protect our rights. Advertising activity is
+          shared with Google as described above; we do not sell your personal information.
         </p>
       </Section>
 
@@ -123,6 +126,13 @@ function PrivacyPolicy() {
       </Section>
 
       <Section title="7. Your rights and consent">
+        <p>
+          Cookie settings lets you accept or reject analytics and advertising separately and change your choices
+          at any time. The banner appears in the EU/EEA, UK, Switzerland and Canada, and where location is unknown.
+          Optional advertising stays off there until accepted. Elsewhere it may run unless you reject it.
+          Global Privacy Control blocks optional tracking. Rejection applies immediately; blocked WhatsApp
+          clicks are not replayed later. Basic cookie-free visits, performance and errors remain counted.
+        </p>
         <p>
           By submitting a form or signing in, you consent to the collection and use of your information as described
           in this policy. You may withdraw consent, request a copy of your data, ask for corrections, or request

@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useEffect } from "react";
 import {
   Outlet,
   Link,
@@ -18,6 +19,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { SocialFloat } from "@/components/SocialFloat";
 import { DEALER_SCHEMA } from "@/lib/seo";
 import { useNativeApp } from '@/hooks/use-native-app';
+import consentDefaults from '@/showcase/consent-defaults.js?raw';
+import { installSiteAdvertising } from '@/lib/site-advertising';
+import { SitePrivacyControls } from '@/showcase/site-privacy-controls';
 
 function NotFoundComponent() {
   return (
@@ -159,31 +163,8 @@ export const Route = createRootRouteWithContext<{
     ],
 
     scripts: [
-      // Google Ads Global Site Tag
-      {
-        src: "https://www.googletagmanager.com/gtag/js?id=AW-18092790399",
-        async: true,
-      },
-      {
-        children: `
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', 'AW-18092790399');
-        `,
-      },
-
-      // Existing Gearbox Autos Schema
-      {
-        src: "https://www.googletagmanager.com/gtag/js?id=AW-18444054806",
-        async: true,
-      },
-      {
-        children: `window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'AW-18444054806');`,
-      },
+      // Defaults and saved choices precede tags; the client reuses one consent-gated loader.
+      { children: consentDefaults },
       {
         type: "application/ld+json",
         children: JSON.stringify(DEALER_SCHEMA),
@@ -212,6 +193,7 @@ function RootShell({ children }: { children: React.ReactNode }) {
 }
 
 function RootComponent() {
+  useEffect(() => installSiteAdvertising(), []);
   const { queryClient } = Route.useRouteContext();
   const offline = useNativeApp();
   const isHomepage = useRouterState({ select: (state) => state.location.pathname === '/' || state.location.pathname.startsWith('/second-hand-cars-in-') || state.location.pathname === '/gbx-motor-club' });
@@ -225,6 +207,7 @@ function RootComponent() {
           <Outlet />
         </main>
         {!isHomepage && <Footer />}
+        <SitePrivacyControls />
         <SocialFloat />
         <Toaster />
       </TooltipProvider>

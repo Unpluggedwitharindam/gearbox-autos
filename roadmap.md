@@ -1,5 +1,8 @@
 # Reference-led marketplace redesign (preview only)
 
+## WhatsApp Google Ads conversion — draft only
+- [x] Add regional consent choices, one gated Google loader, and dealership-only WhatsApp click conversion; 30 tests and desktop/mobile browser checks pass; Google receipt/account ownership unverified; not published.
+
 ## Controlled seller pricing disclosure — preview only
 - [x] Replace unsupported public vehicle-verification claims and move complete Sell fee disclosure ahead of the form; 44 tests and desktop/mobile checks pass; no publication
 - [x] Align seller fee disclosures, shared wording, metadata and seller FAQs without changing forms or policies outside this scope

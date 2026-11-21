@@ -1,5 +1,7 @@
 # Architecture rules
 
+- Keep website advertising behind the shared per-purpose consent reader and one root-installed delegated WhatsApp handler; match only the dealership's exact HTTPS contact URL to avoid duplicate conversions and CRM/share-link tracking.
+
 - Keep seller pricing data and disclosure text in one preview-only module reused by public pages; derive fee calculations from that data to prevent conflicting thresholds without coupling pricing to lead submission.
 
 - Keep CRM vehicle-sharing behaviour identical to the published baseline in this release; the unfinished fresh-lookup and copy-link implementation is excluded because its authorization cannot succeed with current live permissions.

@@ -3,3 +3,6 @@ src/lib/homepage-inventory.ts
 src/showcase/**
 src/lib/marketplace-areas.ts
 src/lib/buy-inventory*
+src/lib/consent.ts
+src/lib/whatsapp-conversion.ts
+src/lib/site-advertising.ts
